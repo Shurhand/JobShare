@@ -10,15 +10,12 @@
 
 package domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 
 @Access(AccessType.PROPERTY)
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@TableGenerator(name = "tab")
 public abstract class DomainEntity {
 
 	// Constructors -----------------------------------------------------------

@@ -22,13 +22,13 @@ import java.util.Collection;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
-public class Autoridad implements GrantedAuthority {
+public class Rol implements GrantedAuthority {
    
    // Constructors -----------------------------------------------------------
    
    private static final long serialVersionUID = 1L;
    
-   public Autoridad() {
+   public Rol() {
       super();
    }
    
@@ -54,21 +54,21 @@ public class Autoridad implements GrantedAuthority {
       this.authority = authority;
    }
    
-   public static Collection<Autoridad> listAuthorities() {
-      Collection<Autoridad> result;
-      Autoridad autoridad;
+   public static Collection<Rol> listAuthorities() {
+      Collection<Rol> result;
+      Rol autoridad;
       
-      result = new ArrayList<Autoridad>();
+      result = new ArrayList<Rol>();
       
-      autoridad = new Autoridad();
+      autoridad = new Rol();
       autoridad.setAuthority(ADMIN);
       result.add(autoridad);
       
-      autoridad = new Autoridad();
+      autoridad = new Rol();
       autoridad.setAuthority(USUARIO);
       result.add(autoridad);
       
-      autoridad = new Autoridad();
+      autoridad = new Rol();
       autoridad.setAuthority(PROFESIONAL);
       result.add(autoridad);
       
@@ -93,7 +93,7 @@ public class Autoridad implements GrantedAuthority {
       else if (! this.getClass().isInstance(other))
          result = false;
       else
-         result = (this.getAuthority().equals(((Autoridad) other).getAuthority()));
+         result = (this.getAuthority().equals(((Rol) other).getAuthority()));
       
       return result;
    }
