@@ -26,71 +26,70 @@ import java.util.Date;
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
-
-	// Constructors -----------------------------------------------------------
-	
-	public WelcomeController() {
-		super();
-	}
-		
-	// Index ------------------------------------------------------------------		
-
-	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required=false, defaultValue="JobShare") String name, @Valid @ModelAttribute Credenciales credenciales, BindingResult bindingResult, @RequestParam(required = false) boolean showError) {
-		ModelAndView result;
-		SimpleDateFormat formatter;
-		String moment;
-		Assert.notNull(credenciales);
-		Assert.notNull(bindingResult);
-		
-		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		moment = formatter.format(new Date());
-				
-		result = new ModelAndView("welcome/index");
-		result.addObject("name", name);
-		result.addObject("moment", moment);
-		result.addObject("credentials", credenciales);
-		result.addObject("showError", showError);
-
-		return result;
-	}
-	
-	@RequestMapping(value = "/about")
-	public ModelAndView about() {
-		ModelAndView result;
-		SimpleDateFormat formatter;
-		String moment;
-			
-		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		moment = formatter.format(new Date());
-			
-		result = new ModelAndView("welcome/index/about");
-		result.addObject("moment", moment);
-
-
-		return result;
-	}
-	
-	@RequestMapping(value = "/tips")
-	public ModelAndView tips() {
-		ModelAndView result;
-		SimpleDateFormat formatter;
-		String moment;
-			
-		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		moment = formatter.format(new Date());
-			
-		result = new ModelAndView("welcome/index/tips");
-		result.addObject("moment", moment);
-
-
-		return result;
-	}
-	
-	
-	
+   
+   // Constructors -----------------------------------------------------------
+   
+   public WelcomeController() {
+      super();
+   }
+   
+   // Index ------------------------------------------------------------------
+   
+   @RequestMapping(value = "/index")
+   public ModelAndView index(@RequestParam(required = false, defaultValue = "JobShare") String name, @Valid @ModelAttribute Credenciales credenciales, BindingResult bindingResult, @RequestParam(required = false) boolean showError) {
+      ModelAndView result;
+      SimpleDateFormat formatter;
+      String moment;
+      Assert.notNull(credenciales);
+      Assert.notNull(bindingResult);
+      
+      formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+      moment = formatter.format(new Date());
+      
+      result = new ModelAndView("welcome/index");
+      result.addObject("name", name);
+      result.addObject("moment", moment);
+      result.addObject("credentials", credenciales);
+      result.addObject("showError", showError);
+      
+      return result;
+   }
+   
+   @RequestMapping(value = "/about")
+   public ModelAndView about() {
+      ModelAndView result;
+      SimpleDateFormat formatter;
+      String moment;
+      
+      formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+      moment = formatter.format(new Date());
+      
+      result = new ModelAndView("welcome/index/about");
+      result.addObject("moment", moment);
+      
+      
+      return result;
+   }
+   
+   @RequestMapping(value = "/tips")
+   public ModelAndView tips() {
+      ModelAndView result;
+      SimpleDateFormat formatter;
+      String moment;
+      
+      formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+      moment = formatter.format(new Date());
+      
+      result = new ModelAndView("welcome/index/tips");
+      result.addObject("moment", moment);
+      
+      
+      return result;
+   }
+   
+   
 }
-	
+
 //	@RequestMapping("/index")
 //	public ModelAndView login(
 //			@Valid @ModelAttribute Credenciales credenciales,

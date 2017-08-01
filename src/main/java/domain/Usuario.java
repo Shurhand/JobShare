@@ -2,9 +2,8 @@ package domain;
 
 import lombok.Data;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
@@ -13,8 +12,13 @@ import java.util.Collection;
 public class Usuario extends Actor {
 
    // Relaciones
-
+   
+   @NotNull
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
    private Collection<Peticion> peticiones;
+   
+   @NotNull
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
    private Collection<Pago> pagos;
 
 }

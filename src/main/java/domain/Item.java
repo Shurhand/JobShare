@@ -54,4 +54,9 @@ public class Item extends  DomainEntity {
    @ManyToOne(optional = false)
    private Peticion peticion;
    
+   @NotNull
+   @Valid
+   @ManyToOne(optional = false)
+   private Pago pago;
+   
 }

@@ -48,7 +48,7 @@ public class Peticion extends DomainEntity {
    
    @NotNull
    @Valid
-   @OneToOne(optional = false)
+   @ManyToOne(optional = false)
    private Usuario usuario;
    
    @NotNull

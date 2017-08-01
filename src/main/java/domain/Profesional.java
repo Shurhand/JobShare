@@ -16,6 +16,7 @@ public class Profesional extends Usuario {
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
    private Collection<Oferta> ofertas;
+   
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
    private Collection<Trabajo> trabajos;
