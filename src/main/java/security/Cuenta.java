@@ -42,6 +42,7 @@ public class Cuenta extends DomainEntity implements UserDetails {
    private String username;
    private String password;
    private Collection<Rol> authorities;
+   private boolean isActivated;
    
    @Size(min = 5, max = 32)
    @Column(unique = true)
@@ -112,7 +113,15 @@ public class Cuenta extends DomainEntity implements UserDetails {
    @Transient
    @Override
    public boolean isEnabled() {
-      return true;
+      return isActivated;
+   }
+   
+   public boolean getIsActivated() {
+      return isActivated;
+   }
+   
+   public void setIsActivated(boolean isActivated) {
+      this.isActivated = isActivated;
    }
    
 }

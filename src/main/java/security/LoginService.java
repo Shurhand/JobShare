@@ -41,6 +41,7 @@ public class LoginService implements UserDetailsService {
       result = userRepository.findByUsername(username);
       Assert.notNull(result);
       // WARNING: The following sentences prevent lazy initialisation problems!
+      Assert.isTrue(result.isEnabled() == true);
       Assert.notNull(result.getAuthorities());
       result.getAuthorities().size();
       
