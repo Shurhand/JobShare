@@ -1,44 +1,45 @@
 body {
-  //min-height: 2000px;
+/ / min-height: 2000 px;
 }
 
 .navbar-sinmargen {
-  *position: relative;
-  *z-index: 2;
-  margin-bottom: 0px;
-  overflow: visible;
+    *position: relative;
+    *z-index: 2;
+    margin-bottom: 0px;
+    overflow: visible;
 }
+
 .navbar-static-top {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .navbar .brand2 {
-  display: block;
-  float: left;
-  padding: 10px 20px 10px;
-  margin-left: -20px;
-  font-size: 20px;
-  font-weight: 200;
-  color: #777777;
-  text-shadow: 0 1px 0 #ffffff;
+    display: block;
+    float: left;
+    padding: 10px 20px 10px;
+    margin-left: -20px;
+    font-size: 20px;
+    font-weight: 200;
+    color: #777777;
+    text-shadow: 0 1px 0 #ffffff;
 }
 
 .navbar-right2 {
-  position: absolute;
-  right: 27%;
-  top: 30%;
-   
-  font-family: inherit;
-  line-height: ;
-  color: inherit;
-  text-rendering: optimizelegibility;
+    position: absolute;
+    right: 27%;
+    top: 30%;
+
+    font-family: inherit;
+    line-height:;
+    color: inherit;
+    text-rendering: optimizelegibility;
 }
 
-.padding-f{
-	background-color: grey;
-	padding: 1em 0;
-	color: white;
-	bottom: 0;
-	position: relative;
+.padding-f {
+    background-color: grey;
+    padding: 1em 0;
+    color: white;
+    bottom: 0;
+    position: relative;
 
 }

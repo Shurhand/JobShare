@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CuentaRepository extends JpaRepository<Cuenta, Integer> {
-
-	Cuenta findByUsername(String username);
-
+   
+   Cuenta findByUsername(String username);
+   
 }

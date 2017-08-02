@@ -8,27 +8,26 @@
  * 
  */
 .error {
-	color: red;
-	font-weight: bolder;
+    color: red;
+    font-weight: bolder;
 }
 
 .error2 {
-	color: red;
-	font-weight: bolder;
-	position: fixed;
-	top: 2%;
-	right: 24%;
+    color: red;
+    font-weight: bolder;
+    position: fixed;
+    top: 2%;
+    right: 24%;
 }
 
 .error2 {
-	color: red;
-	font-weight: bolder;
-	position: fixed;
-	
-	
+    color: red;
+    font-weight: bolder;
+    position: fixed;
+
 }
 
 .message {
-	color: red;
-	font-weight: bolder;
+    color: red;
+    font-weight: bolder;
 }

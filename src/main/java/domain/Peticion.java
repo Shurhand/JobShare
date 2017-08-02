@@ -56,5 +56,5 @@ public class Peticion extends DomainEntity {
    @Valid
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "peticion")
    private Collection<Item> items;
- 
+   
 }

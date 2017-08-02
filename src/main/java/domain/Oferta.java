@@ -60,5 +60,5 @@ public class Oferta extends DomainEntity {
    @Valid
    @OneToOne(optional = false)
    private Item item;
- 
+   
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Access(AccessType.PROPERTY)
 @Data
-public class Trabajo extends  DomainEntity {
+public class Trabajo extends DomainEntity {
    
    @NotBlank
    @SafeHtml

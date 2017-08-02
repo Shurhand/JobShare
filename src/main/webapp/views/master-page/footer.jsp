@@ -9,14 +9,14 @@
  --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+        pageEncoding="ISO-8859-1" %>
 
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="date" class="java.util.Date" />
+<jsp:useBean id="date" class="java.util.Date"/>
 
-<hr />
+<hr/>
 
-<p class="text-center strong">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" />
-	JobShare Co., Inc.</p>
+<p class="text-center strong">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy"/>
+    JobShare Co., Inc.</p>
 

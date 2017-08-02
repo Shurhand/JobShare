@@ -24,4 +24,8 @@ public class Profesional extends Usuario {
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
    private Collection<Estudio> estudios;
+   
+   @NotNull
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
+   private Collection<Valoracion> valoraciones;
 }

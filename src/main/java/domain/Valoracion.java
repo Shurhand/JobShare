@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -29,4 +30,15 @@ public class Valoracion extends DomainEntity {
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCreacion;
    
+   // Relaciones
+   
+   @NotNull
+   @Valid
+   @OneToOne(optional = false)
+   private Oferta oferta;
+   
+   @NotNull
+   @Valid
+   @ManyToOne(optional = false)
+   private Profesional profesional;
 }

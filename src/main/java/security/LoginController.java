@@ -25,51 +25,51 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/security")
 public class LoginController extends AbstractController {
-
-	// Supporting services ----------------------------------------------------
-	
-	@Autowired
-	LoginService service;
-	
-	// Constructors -----------------------------------------------------------
-	
-	public LoginController() {
-		super();
-	}
-	
-	// Login ------------------------------------------------------------------
-
-	@RequestMapping("/login")
-	public ModelAndView login(
-			@Valid @ModelAttribute Credenciales credenciales,
-			BindingResult bindingResult,
-			@RequestParam(required = false) boolean showError) {
-		Assert.notNull(credenciales);
-		Assert.notNull(bindingResult);
-		
-		ModelAndView result;
-
-		result = new ModelAndView("welcome/index");
-		result.addObject("credentials", credenciales);
-		result.addObject("showError", showError);
-
-		return result;
-	}
-	
-	// LoginFailure -----------------------------------------------------------
-
-	@RequestMapping("/loginFailure")
-	public ModelAndView failure(@Valid @ModelAttribute Credenciales credenciales,
-			BindingResult bindingResult,
-			@RequestParam(required = false) boolean showError) {
-		ModelAndView result;
-		Assert.notNull(credenciales);
-		Assert.notNull(bindingResult);
-		
-		result = new ModelAndView("redirect:login.do?showError=true");
-		result.addObject("credentials", credenciales);
-		
-		return result;
-	}
-
+   
+   // Supporting services ----------------------------------------------------
+   
+   @Autowired
+   LoginService service;
+   
+   // Constructors -----------------------------------------------------------
+   
+   public LoginController() {
+      super();
+   }
+   
+   // Login ------------------------------------------------------------------
+   
+   @RequestMapping("/login")
+   public ModelAndView login(
+                               @Valid @ModelAttribute Credenciales credenciales,
+                               BindingResult bindingResult,
+                               @RequestParam(required = false) boolean showError) {
+      Assert.notNull(credenciales);
+      Assert.notNull(bindingResult);
+      
+      ModelAndView result;
+      
+      result = new ModelAndView("welcome/index");
+      result.addObject("credentials", credenciales);
+      result.addObject("showError", showError);
+      
+      return result;
+   }
+   
+   // LoginFailure -----------------------------------------------------------
+   
+   @RequestMapping("/loginFailure")
+   public ModelAndView failure(@Valid @ModelAttribute Credenciales credenciales,
+                               BindingResult bindingResult,
+                               @RequestParam(required = false) boolean showError) {
+      ModelAndView result;
+      Assert.notNull(credenciales);
+      Assert.notNull(bindingResult);
+      
+      result = new ModelAndView("redirect:login.do?showError=true");
+      result.addObject("credentials", credenciales);
+      
+      return result;
+   }
+   
 }

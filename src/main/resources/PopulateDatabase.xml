@@ -5,60 +5,60 @@
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 
-	<!-- User accounts -->
+    <!-- User accounts -->
 
-	<bean id="userAccount1" class="security.Cuenta">
-		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Rol">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-
-	<bean id="userAccount2" class="security.Cuenta">
-		<property name="username" value="usuario1" />
-		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Rol">
-					<property name="authority" value="USUARIO" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount4" class="security.Cuenta">
-		<property name="username" value="usuario2" />
-		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Rol">
-					<property name="authority" value="USUARIO" />
-				</bean>
-			</list>
-		</property>
-	</bean>
+    <bean id="userAccount1" class="security.Cuenta">
+        <property name="username" value="admin"/>
+        <property name="password" value="21232f297a57a5a743894a0e4a801fc3"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Rol">
+                    <property name="authority" value="ADMIN"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
 
-	<bean id="userAccount3" class="security.Cuenta">
-		<property name="username" value="profesiona1" />
-		<property name="password" value="df655f976f7c9d3263815bd981225cd9" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Rol">
-					<property name="authority" value="PROFESIONAL" />
-				</bean>
-			</list>
-		</property>
-	</bean>
+    <bean id="userAccount2" class="security.Cuenta">
+        <property name="username" value="usuario1"/>
+        <property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Rol">
+                    <property name="authority" value="USUARIO"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userAccount4" class="security.Cuenta">
+        <property name="username" value="usuario2"/>
+        <property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Rol">
+                    <property name="authority" value="USUARIO"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="userAccount3" class="security.Cuenta">
+        <property name="username" value="profesiona1"/>
+        <property name="password" value="df655f976f7c9d3263815bd981225cd9"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Rol">
+                    <property name="authority" value="PROFESIONAL"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 </beans>

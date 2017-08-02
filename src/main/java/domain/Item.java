@@ -16,7 +16,7 @@ import java.util.Collection;
 @Entity
 @Access(AccessType.PROPERTY)
 @Data
-public class Item extends  DomainEntity {
+public class Item extends DomainEntity {
    
    @NotBlank
    @SafeHtml
@@ -45,8 +45,8 @@ public class Item extends  DomainEntity {
    
    @NotNull
    @NotEmpty
-   @ManyToMany(cascade = { CascadeType.DETACH,CascadeType.MERGE,
-   CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "items")
+   @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                            CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "items")
    private Collection<Etiqueta> etiquetas;
    
    @NotNull

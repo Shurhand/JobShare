@@ -10,7 +10,7 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 @Data
 public class Usuario extends Actor {
-
+   
    // Relaciones
    
    @NotNull
@@ -20,5 +20,5 @@ public class Usuario extends Actor {
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
    private Collection<Pago> pagos;
-
+   
 }

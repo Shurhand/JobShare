@@ -15,7 +15,7 @@ import java.net.URL;
 @Entity
 @Access(AccessType.PROPERTY)
 @Data
-public abstract class Actor extends DomainEntity {
+public class Actor extends DomainEntity {
    
    // Atributos
    
@@ -60,5 +60,5 @@ public abstract class Actor extends DomainEntity {
    @Valid
    @OneToOne(cascade = CascadeType.ALL, optional = false)
    private Cuenta cuenta;
-
+   
 }
