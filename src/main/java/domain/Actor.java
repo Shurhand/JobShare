@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 import java.net.URL;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Actor extends DomainEntity {
    

@@ -12,13 +12,12 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Pago extends DomainEntity {
    
    @NotBlank
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCreacion;
    

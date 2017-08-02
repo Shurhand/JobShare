@@ -17,6 +17,16 @@
         <value>/views/misc/messages</value>
         <value>/views/security/messages</value>
         <value>/views/welcome/messages</value>
+        <value>/views/admin/messages</value>
+        <value>/views/usuario/messages</value>
+        <value>/views/profesional/messages</value>
+        <value>/views/estudio/messages</value>
+        <value>/views/trabajo/messages</value>
+        <value>/views/peticion/messages</value>
+        <value>/views/oferta/messages</value>
+        <value>/views/pago/messages</value>
+        <value>/views/etiqueta/messages</value>
+        <value>/views/valoracion/messages</value>
     </util:list>
 
 </beans>

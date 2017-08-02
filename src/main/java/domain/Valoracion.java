@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Valoracion extends DomainEntity {
    
@@ -26,7 +26,6 @@ public class Valoracion extends DomainEntity {
    private String comentario;
    
    @NotNull
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCreacion;
    

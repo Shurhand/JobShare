@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Profesional extends Usuario {
    

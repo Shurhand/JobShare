@@ -31,8 +31,8 @@ public class Cuenta extends DomainEntity implements UserDetails {
    
    public Cuenta() {
       super();
-      
-      this.authorities = new ArrayList<Rol>();
+   
+      this.authorities = new ArrayList<>();
    }
    
    // Attributes -------------------------------------------------------------

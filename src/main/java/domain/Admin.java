@@ -7,7 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Admin extends Actor {
 

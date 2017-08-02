@@ -15,7 +15,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Data

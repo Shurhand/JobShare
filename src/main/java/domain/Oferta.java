@@ -13,7 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Oferta extends DomainEntity {
    
@@ -28,13 +28,11 @@ public class Oferta extends DomainEntity {
    
    @NotNull
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCreacion;
    
    @NotNull
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCaducidad;
    

@@ -4,14 +4,17 @@ import lombok.Data;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Trabajo extends DomainEntity {
    
@@ -25,13 +28,11 @@ public class Trabajo extends DomainEntity {
    
    @NotNull
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaInicio;
    
    @NotNull
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaFin;
    

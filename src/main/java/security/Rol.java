@@ -57,8 +57,8 @@ public class Rol implements GrantedAuthority {
    public static Collection<Rol> listAuthorities() {
       Collection<Rol> result;
       Rol autoridad;
-      
-      result = new ArrayList<Rol>();
+   
+      result = new ArrayList<>();
       
       autoridad = new Rol();
       autoridad.setAuthority(ADMIN);

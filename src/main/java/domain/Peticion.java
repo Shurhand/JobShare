@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 @Data
 public class Peticion extends DomainEntity {
    
@@ -28,13 +28,11 @@ public class Peticion extends DomainEntity {
    
    @NotNull
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCreacion;
    
    @NotNull
    @SafeHtml
-   @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private LocalDate fechaCaducidad;
    
