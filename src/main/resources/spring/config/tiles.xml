@@ -17,6 +17,16 @@
         <value>/views/misc/tiles.xml</value>
         <value>/views/security/tiles.xml</value>
         <value>/views/welcome/tiles.xml</value>
+        <value>/views/admin/tiles.xml</value>
+        <value>/views/usuario/tiles.xml</value>
+        <value>/views/profesional/tiles.xml</value>
+        <value>/views/estudio/tiles.xml</value>
+        <value>/views/trabajo/tiles.xml</value>
+        <value>/views/peticion/tiles.xml</value>
+        <value>/views/oferta/tiles.xml</value>
+        <value>/views/pago/tiles.xml</value>
+        <value>/views/etiqueta/tiles.xml</value>
+        <value>/views/valoracion/tiles.xml</value>
     </util:list>
 
 </beans>
