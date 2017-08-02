@@ -13,6 +13,42 @@
 
     <util:list id="converters">
 
+        <bean class="converters.ActorToStringConverter"></bean>
+        <bean class="converters.StringToActorConverter"></bean>
+
+        <bean class="converters.AdminToStringConverter"></bean>
+        <bean class="converters.StringToAdminConverter"></bean>
+
+        <bean class="converters.EstudioToStringConverter"></bean>
+        <bean class="converters.StringToEstudioConverter"></bean>
+
+        <bean class="converters.EtiquetaToStringConverter"></bean>
+        <bean class="converters.StringToEtiquetaConverter"></bean>
+
+        <bean class="converters.ItemToStringConverter"></bean>
+        <bean class="converters.StringToItemConverter"></bean>
+
+        <bean class="converters.OfertaToStringConverter"></bean>
+        <bean class="converters.StringToOfertaConverter"></bean>
+
+        <bean class="converters.PagoToStringConverter"></bean>
+        <bean class="converters.StringToPagoConverter"></bean>
+
+        <bean class="converters.PeticionToStringConverter"></bean>
+        <bean class="converters.StringToPeticionConverter"></bean>
+
+        <bean class="converters.ProfesionalToStringConverter"></bean>
+        <bean class="converters.StringToProfesionalConverter"></bean>
+
+        <bean class="converters.RolToStringConverter"></bean>
+        <bean class="converters.StringToRolConverter"></bean>
+
+        <bean class="converters.TrabajoToStringConverter"></bean>
+        <bean class="converters.StringToTrabajoConverter"></bean>
+
+        <bean class="converters.ValoracionToStringConverter"></bean>
+        <bean class="converters.StringToValoracionConverter"></bean>
+
 
     </util:list>
 

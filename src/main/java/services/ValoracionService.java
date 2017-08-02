@@ -3,7 +3,7 @@ package services;
 import domain.Valoracion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.ValoracionReporsitory;
+import repositories.ValoracionRepository;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
@@ -16,7 +16,7 @@ import java.util.Collection;
 public class ValoracionService implements AbstractService<Valoracion> {
    
    @Autowired
-   private ValoracionReporsitory valoracionReporsitory;
+   private ValoracionRepository valoracionReporsitory;
    
    @Override
    public Valoracion create() {

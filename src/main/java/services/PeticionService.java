@@ -1,5 +1,6 @@
 package services;
 
+import domain.Estado;
 import domain.Item;
 import domain.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,12 @@ public class PeticionService implements AbstractService<Peticion> {
    public Peticion create() {
       Collection<Item> items = new ArrayList<>();
       LocalDate fechaCreacion = LocalDate.now();
+      Estado estado = Estado.ACTIVA;
       Peticion peticion = new Peticion();
       
       peticion.setFechaCreacion(fechaCreacion);
       peticion.setItems(items);
+      peticion.setEstado(estado);
       
       return peticion;
    }
