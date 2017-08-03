@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.UsuarioRepository;
+import security.Autoridad;
 import security.LoginService;
-import security.Rol;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
@@ -73,10 +73,10 @@ public class UsuarioService implements AbstractService<Usuario> {
    
    public void checkIfUsuario() {
       boolean usuario = false;
-      Collection<Rol> roles;
+      Collection<Autoridad> roles;
       roles = LoginService.getPrincipal().getAuthorities();
-      for (Rol a : roles) {
-         if (a.getAuthority().equals(Rol.USUARIO)) {
+      for (Autoridad a : roles) {
+         if (a.getAuthority().equals(Autoridad.USUARIO)) {
             usuario = true;
          }
       }

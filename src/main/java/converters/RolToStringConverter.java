@@ -3,20 +3,20 @@ package converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import security.Rol;
+import security.Autoridad;
 
 @Component
 @Transactional
-public class RolToStringConverter implements Converter<Rol, String> {
+public class RolToStringConverter implements Converter<Autoridad, String> {
    
    @Override
-   public String convert(Rol authority) {
+   public String convert(Autoridad autoridad) {
       String result;
-      
-      if (authority == null)
+   
+      if (autoridad == null)
          result = null;
       else
-         result = String.valueOf(authority.getAuthority());
+         result = String.valueOf(autoridad.getAuthority());
       
       
       return result;

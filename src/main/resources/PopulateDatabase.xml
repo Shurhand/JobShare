@@ -15,9 +15,10 @@
     <bean id="cuenta1" class="security.Cuenta">
         <property name="username" value="admin"/>
         <property name="password" value="21232f297a57a5a743894a0e4a801fc3"/>
+        <property name="isActivated" value="true"/>
         <property name="authorities">
             <list>
-                <bean class="security.Rol">
+                <bean class="security.Autoridad">
                     <property name="authority" value="ADMIN"/>
                 </bean>
             </list>
@@ -28,9 +29,10 @@
     <bean id="cuenta2" class="security.Cuenta">
         <property name="username" value="usuario1"/>
         <property name="password" value="122b738600a0f74f7c331c0ef59bc34c"/>
+        <property name="isActivated" value="true"/>
         <property name="authorities">
             <list>
-                <bean class="security.Rol">
+                <bean class="security.Autoridad">
                     <property name="authority" value="USUARIO"/>
                 </bean>
             </list>
@@ -40,9 +42,10 @@
     <bean id="cuenta3" class="security.Cuenta">
         <property name="username" value="usuario2"/>
         <property name="password" value="2fb6c8d2f3842a5ceaa9bf320e649ff0"/>
+        <property name="isActivated" value="true"/>
         <property name="authorities">
             <list>
-                <bean class="security.Rol">
+                <bean class="security.Autoridad">
                     <property name="authority" value="USUARIO"/>
                 </bean>
             </list>
@@ -53,12 +56,68 @@
     <bean id="cuenta4" class="security.Cuenta">
         <property name="username" value="profesiona1"/>
         <property name="password" value="473deb90997d416b6af80aa585e128af"/>
+        <property name="isActivated" value="true"/>
         <property name="authorities">
             <list>
-                <bean class="security.Rol">
+                <bean class="security.Autoridad">
                     <property name="authority" value="PROFESIONAL"/>
                 </bean>
             </list>
         </property>
     </bean>
+
+    <!-- Admins -->
+    <bean id="admin1" class="domain.Admin">
+        <property name="nombre" value="Aitor"/>
+        <property name="apellidos" value="Tilla"/>
+        <property name="cp" value="41010"/>
+        <property name="localidad" value="Shangri-la"/>
+        <property name="DNI" value="48820088N"/>
+        <property name="email" value="aitortilladepatatas@gmail.com"/>
+        <property name="telefono" value="673923829"/>
+        <property name="cuenta" ref="cuenta1"/>
+    </bean>
+
+    <bean id="usuario1" class="domain.Usuario">
+        <property name="nombre" value="Chuck"/>
+        <property name="apellidos" value="Norris"/>
+        <property name="cp" value="41010"/>
+        <property name="localidad" value="Shangri-la"/>
+        <property name="DNI" value="asdasd"/>
+        <property name="email" value="chucknNorris@gmail.com"/>
+        <property name="telefono" value="675048498"/>
+        <property name="cuenta" ref="cuenta2"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+        <property name="pagos">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profesional1" class="domain.Profesional">
+        <property name="nombre" value="Bruce"/>
+        <property name="apellidos" value="Lee"/>
+        <property name="cp" value="41010"/>
+        <property name="localidad" value="Shangri-la"/>
+        <property name="DNI" value="48820088N"/>
+        <property name="email" value="chucknNorris@gmail.com"/>
+        <property name="telefono" value="675048498"/>
+        <property name="cuenta" ref="cuenta2"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+        <property name="pagos">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
 </beans>

@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.ProfesionalRepository;
+import security.Autoridad;
 import security.LoginService;
-import security.Rol;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
@@ -63,10 +63,10 @@ public class ProfesionalService implements AbstractService<Profesional> {
    
    public void checkIfProfesional() {
       boolean profesional = false;
-      Collection<Rol> roles;
+      Collection<Autoridad> roles;
       roles = LoginService.getPrincipal().getAuthorities();
-      for (Rol a : roles) {
-         if (a.getAuthority().equals(Rol.PROFESIONAL)) {
+      for (Autoridad a : roles) {
+         if (a.getAuthority().equals(Autoridad.PROFESIONAL)) {
             profesional = true;
          }
       }

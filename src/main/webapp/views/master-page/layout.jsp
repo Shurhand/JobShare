@@ -1,16 +1,5 @@
-<%--
- * layout.jsp
- *
- * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
-
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-        pageEncoding="ISO-8859-1" %>
-
+<%@page language="java" contentType="text/html; charset=UTF-8"
+        pageEncoding="UTF-8" %>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
@@ -19,15 +8,20 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="windows-1252">
+    <title>Jobshare - Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+
+    <link href="/styles/base1.css" rel="stylesheet">
 
     <base
         href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <link rel="shortcut icon" href="favicon.ico"/>
 
@@ -50,8 +44,8 @@
     <link rel="stylesheet" href="styles/about.css" type="text/css">
     <link rel="stylesheet" href="styles/jmenu.css" media="screen"
           type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css">
     <link rel="stylesheet"

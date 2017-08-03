@@ -118,8 +118,8 @@ public class DatabaseUtil {
       String[] statements;
       
       databaseScript = new ArrayList<String>();
-      databaseScript.add(String.format("drop database `jobshare`"));
-      databaseScript.add(String.format("create database `jobshare`"));
+      databaseScript.add(String.format("drop database `JobShare`"));
+      databaseScript.add(String.format("create database `JobShare`"));
       databaseScript.add(String.format("use `JobShare`"));
       executeScript(databaseScript);
       

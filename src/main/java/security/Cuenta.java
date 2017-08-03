@@ -41,7 +41,7 @@ public class Cuenta extends DomainEntity implements UserDetails {
    
    private String username;
    private String password;
-   private Collection<Rol> authorities;
+   private Collection<Autoridad> authorities;
    private boolean isActivated;
    
    @Size(min = 5, max = 32)
@@ -69,23 +69,23 @@ public class Cuenta extends DomainEntity implements UserDetails {
    @Valid
    @ElementCollection
    @Override
-   public Collection<Rol> getAuthorities() {
+   public Collection<Autoridad> getAuthorities() {
       // WARNING: Should return an unmodifiable copy, but it's not possible with hibernate!
       return authorities;
    }
    
-   public void setAuthorities(Collection<Rol> authorities) {
+   public void setAuthorities(Collection<Autoridad> authorities) {
       this.authorities = authorities;
    }
    
-   public void addAuthority(Rol autoridad) {
+   public void addAuthority(Autoridad autoridad) {
       Assert.notNull(autoridad);
       Assert.isTrue(! authorities.contains(autoridad));
       
       authorities.add(autoridad);
    }
    
-   public void removeAuthority(Rol autoridad) {
+   public void removeAuthority(Autoridad autoridad) {
       Assert.notNull(autoridad);
       Assert.isTrue(authorities.contains(autoridad));
       

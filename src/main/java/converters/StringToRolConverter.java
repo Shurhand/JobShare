@@ -3,17 +3,17 @@ package converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import security.Rol;
+import security.Autoridad;
 
 @Component
 @Transactional
-public class StringToRolConverter implements Converter<String, Rol> {
+public class StringToRolConverter implements Converter<String, Autoridad> {
    
    @Override
-   public Rol convert(String text) {
-      Rol result;
+   public Autoridad convert(String text) {
+      Autoridad result;
       try {
-         result = new Rol();
+         result = new Autoridad();
          result.setAuthority(text);
       } catch (Throwable oops) {
          throw new IllegalArgumentException(oops);
