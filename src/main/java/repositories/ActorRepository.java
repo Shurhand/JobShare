@@ -6,11 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import security.Cuenta;
 
-
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
-   
-   
    @Query("select a from Actor a where a.cuenta = ?1")
    Actor findActor(Cuenta cuenta);
    

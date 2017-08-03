@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class PagoToStringConverter implements Converter<Pago, String> {
-   
    @Override
    public String convert(Pago pago) {
       String res;

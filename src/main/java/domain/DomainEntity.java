@@ -7,27 +7,65 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package domain;
-
-import lombok.Data;
 
 import javax.persistence.*;
 
-
-@Access(AccessType.FIELD)
 @Entity
+@Access(AccessType.PROPERTY)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Data
 public abstract class DomainEntity {
+   // Constructors -----------------------------------------------------------
+   // Identification ---------------------------------------------------------
+   private int id;
+   private int version;
+   
+   public DomainEntity() {
+      super();
+   }
    
    @Id
    @GeneratedValue(strategy = GenerationType.TABLE)
-   private long id;
+   public int getId() {
+      return id;
+   }
+   
+   public void setId(int id) {
+      this.id = id;
+   }
    
    @Version
-   private long version;
+   public int getVersion() {
+      return version;
+   }
    
-   private long hibernate;
- 
+   public void setVersion(int version) {
+      this.version = version;
+   }
+   
+   // Equality ---------------------------------------------------------------
+   
+   @Override
+   public int hashCode() {
+      return this.getId();
+   }
+   
+   @Override
+   public boolean equals(Object other) {
+      boolean result;
+      
+      if (this == other)
+         result = true;
+      else if (other == null)
+         result = false;
+      else if (other instanceof Integer)
+         result = (this.getId() == (Integer) other);
+      else if (! this.getClass().isInstance(other))
+         result = false;
+      else
+         result = (this.getId() == ((DomainEntity) other).getId());
+      
+      return result;
+   }
+   
 }

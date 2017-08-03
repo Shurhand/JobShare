@@ -15,9 +15,7 @@ import java.util.Collection;
 @Service
 @Transactional
 public class ActorService implements AbstractService<Actor> {
-   
    // Dependencias
-   
    @Autowired
    private ActorRepository actorRepository;
    
@@ -61,7 +59,6 @@ public class ActorService implements AbstractService<Actor> {
    public Actor findOne(@NotNull @Min(1) Integer id) {
       return actorRepository.findOne(id);
    }
-   
    
    @NotNull
    public Actor findPrincipal() {

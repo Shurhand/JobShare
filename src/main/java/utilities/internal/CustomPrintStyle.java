@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities.internal;
 
 import domain.DomainEntity;
@@ -15,7 +14,6 @@ import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class CustomPrintStyle extends ToStringStyle {
-   
    private static final long serialVersionUID = - 7153302077570861674L;
    
    CustomPrintStyle() {

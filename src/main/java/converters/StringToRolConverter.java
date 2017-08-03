@@ -8,7 +8,6 @@ import security.Autoridad;
 @Component
 @Transactional
 public class StringToRolConverter implements Converter<String, Autoridad> {
-   
    @Override
    public Autoridad convert(String text) {
       Autoridad result;

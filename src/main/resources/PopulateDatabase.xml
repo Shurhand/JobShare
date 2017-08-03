@@ -4,8 +4,8 @@
 	* * The use of this project is hereby constrained to the conditions of the 
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
@@ -68,13 +68,14 @@
 
     <!-- Admins -->
     <bean id="admin1" class="domain.Admin">
-        <property name="nombre" value="Aitor"/>
-        <property name="apellidos" value="Tilla"/>
+        <property name="nombre" value="Chuck"/>
+        <property name="apellidos" value="Norris"/>
         <property name="cp" value="41010"/>
         <property name="localidad" value="Shangri-la"/>
         <property name="DNI" value="48820088N"/>
-        <property name="email" value="aitortilladepatatas@gmail.com"/>
-        <property name="telefono" value="673923829"/>
+        <property name="email" value="chucknNorris@gmail.com"/>
+        <property name="telefono" value="675048498"/>
+
         <property name="cuenta" ref="cuenta1"/>
     </bean>
 
@@ -83,7 +84,7 @@
         <property name="apellidos" value="Norris"/>
         <property name="cp" value="41010"/>
         <property name="localidad" value="Shangri-la"/>
-        <property name="DNI" value="asdasd"/>
+        <property name="DNI" value="48820088N"/>
         <property name="email" value="chucknNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta2"/>
@@ -114,6 +115,26 @@
             </list>
         </property>
         <property name="pagos">
+            <list>
+
+            </list>
+        </property>
+        <property name="valoraciones">
+            <list>
+
+            </list>
+        </property>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
+        <property name="estudios">
+            <list>
+
+            </list>
+        </property>
+        <property name="trabajos">
             <list>
 
             </list>

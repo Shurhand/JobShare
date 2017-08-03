@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package security;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,35 +22,17 @@ import java.util.Collection;
 @Embeddable
 @Access(AccessType.PROPERTY)
 public class Autoridad implements GrantedAuthority {
-   
-   // Constructors -----------------------------------------------------------
-   
-   private static final long serialVersionUID = 1L;
-   
-   public Autoridad() {
-      super();
-   }
-   
    // Values -----------------------------------------------------------------
-   
    public static final String ADMIN = "ADMIN";
    public static final String USUARIO = "USUARIO";
    public static final String PROFESIONAL = "PROFESIONAL";
-   
-   
+   // Constructors -----------------------------------------------------------
+   private static final long serialVersionUID = 1L;
    // Attributes -------------------------------------------------------------
-   
    private String authority;
    
-   @NotBlank
-   @Pattern(regexp = "^" + ADMIN + "|" + USUARIO + "|" + PROFESIONAL + "$")
-   @Override
-   public String getAuthority() {
-      return authority;
-   }
-   
-   public void setAuthority(String authority) {
-      this.authority = authority;
+   public Autoridad() {
+      super();
    }
    
    public static Collection<Autoridad> listAuthorities() {
@@ -73,6 +54,17 @@ public class Autoridad implements GrantedAuthority {
       result.add(authority);
       
       return result;
+   }
+   
+   @NotBlank
+   @Pattern(regexp = "^" + ADMIN + "|" + USUARIO + "|" + PROFESIONAL + "$")
+   @Override
+   public String getAuthority() {
+      return authority;
+   }
+   
+   public void setAuthority(String authority) {
+      this.authority = authority;
    }
    
    // Equality ---------------------------------------------------------------

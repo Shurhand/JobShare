@@ -19,7 +19,6 @@ import java.util.Collection;
 @Service
 @Transactional
 public class UsuarioService implements AbstractService<Usuario> {
-   
    @Autowired
    private UsuarioRepository usuarioRepository;
    

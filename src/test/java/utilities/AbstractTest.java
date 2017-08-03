@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities;
 
 import org.junit.After;
@@ -20,9 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import security.LoginService;
 
 public abstract class AbstractTest {
-   
    // Supporting services --------------------------------
-   
    @Autowired
    private LoginService loginService;
    
@@ -58,5 +55,5 @@ public abstract class AbstractTest {
    public void unauthenticate() {
       authenticate(null);
    }
-
+   
 }

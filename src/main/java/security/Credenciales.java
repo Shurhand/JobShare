@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package security;
 
 import javax.validation.constraints.Size;
@@ -15,15 +14,13 @@ import javax.validation.constraints.Size;
 public class Credenciales {
    
    // Constructors -----------------------------------------------------------
+   // Attributes -------------------------------------------------------------
+   private String username;
+   private String password;
    
    public Credenciales() {
       super();
    }
-   
-   // Attributes -------------------------------------------------------------
-   
-   private String username;
-   private String password;
    
    @Size(min = 5, max = 32)
    public String getUsername() {

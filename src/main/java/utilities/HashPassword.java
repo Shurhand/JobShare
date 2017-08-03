@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities;
 
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -16,7 +15,6 @@ import utilities.internal.ConsoleReader;
 import java.io.IOException;
 
 public class HashPassword {
-   
    public static void main(String[] args) throws IOException {
       Md5PasswordEncoder encoder;
       ConsoleReader reader;

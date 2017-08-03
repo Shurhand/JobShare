@@ -17,7 +17,6 @@ import java.util.Collection;
 @Service
 @Transactional
 public class PeticionService implements AbstractService<Peticion> {
-   
    @Autowired
    private PeticionRepository peticionRepository;
    

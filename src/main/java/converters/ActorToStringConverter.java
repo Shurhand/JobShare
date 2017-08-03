@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class ActorToStringConverter implements Converter<Actor, String> {
-   
    @Override
    public String convert(Actor actor) {
       String res;

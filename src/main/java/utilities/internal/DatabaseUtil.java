@@ -1,13 +1,12 @@
 /* DatabaseUtilities.java
  *
  * Copyright (C) 2014 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
+ *
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
- * 
+ *
  */
-
 package utilities.internal;
 
 import domain.DomainEntity;
@@ -37,29 +36,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class DatabaseUtil {
-   
-   public DatabaseUtil() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-      // Due to a bug in Hibernate 4.3.0.Final, the old Hibernate persistence provider's selected
-      // by default, which causes a deprecation warning to be output to the console. That means that
-      // we shouldn't use Persistence to create the entity manager factory.
-      // entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceUnit);
-      entityManagerFactory = Persistence.createEntityManagerFactory(DatabaseConfig.PersistenceUnit);
-      persistenceProvider = new HibernatePersistenceProvider();
-//		entityManagerFactory = persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit, null);
-      entityManager = entityManagerFactory.createEntityManager();
-      entityTransaction = entityManager.getTransaction();
-      
-      properties = entityManagerFactory.getProperties();
-      databaseUrl = findProperty("hibernate.connection.url");
-      databaseName = StringUtils.substringAfterLast(databaseUrl, "/");
-      databaseDialectName = findProperty("hibernate.dialect");
-      databaseDialect = (Dialect) ReflectHelper.classForName(databaseDialectName).newInstance();
-
-//		configuration = buildConfiguration();
-      metadataSources = buildMetadata();
-      
-   }
-   
    private HibernatePersistenceProvider persistenceProvider;
    private EntityManagerFactory entityManagerFactory;
    private EntityManager entityManager;
@@ -71,6 +47,28 @@ public class DatabaseUtil {
    private Configuration configuration;
    private EntityTransaction entityTransaction;
    private MetadataSources metadataSources;
+
+   public DatabaseUtil() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+      // Due to a bug in Hibernate 4.3.0.Final, the old Hibernate persistence provider's selected
+      // by default, which causes a deprecation warning to be output to the console. That means that
+      // we shouldn't use Persistence to create the entity manager factory.
+      // entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceUnit);
+      entityManagerFactory = Persistence.createEntityManagerFactory(DatabaseConfig.PersistenceUnit);
+      persistenceProvider = new HibernatePersistenceProvider();
+//		entityManagerFactory = persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit, null);
+      entityManager = entityManagerFactory.createEntityManager();
+      entityTransaction = entityManager.getTransaction();
+   
+      properties = entityManagerFactory.getProperties();
+      databaseUrl = findProperty("hibernate.connection.url");
+      databaseName = StringUtils.substringAfterLast(databaseUrl, "/");
+      databaseDialectName = findProperty("hibernate.dialect");
+      databaseDialect = (Dialect) ReflectHelper.classForName(databaseDialectName).newInstance();
+
+//		configuration = buildConfiguration();
+      metadataSources = buildMetadata();
+   
+   }
    
    public HibernatePersistenceProvider getPersistenceProvider() {
       return persistenceProvider;
@@ -147,7 +145,7 @@ public class DatabaseUtil {
          @Override
          public void execute(Connection connection) throws SQLException {
             Statement statement;
-            
+   
             statement = connection.createStatement();
             for (String line : script) {
                statement.execute(line);
@@ -182,7 +180,6 @@ public class DatabaseUtil {
       if (entityManagerFactory.isOpen())
          entityManagerFactory.close();
    }
-   
    
    private MetadataSources buildMetadata() throws SQLException {
 //		MetadataSources metadata;

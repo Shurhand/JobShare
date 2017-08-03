@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +23,11 @@ import org.springframework.util.Assert;
 @Service
 @Transactional
 public class LoginService implements UserDetailsService {
-   
    // Managed repository -----------------------------------------------------
-   
    @Autowired
    CuentaRepository userRepository;
    
    // Business methods -------------------------------------------------------
-   
-   public UserDetails loadUserByUsername(String username)
-      throws UsernameNotFoundException {
-      Assert.notNull(username);
-      
-      UserDetails result;
-      
-      result = userRepository.findByUsername(username);
-      Assert.notNull(result);
-      // WARNING: The following sentences prevent lazy initialisation problems!
-      Assert.isTrue(result.isEnabled() == true);
-      Assert.notNull(result.getAuthorities());
-      result.getAuthorities().size();
-      
-      return result;
-   }
    
    public static Cuenta getPrincipal() {
       Cuenta result;
@@ -70,6 +51,22 @@ public class LoginService implements UserDetailsService {
       result = (Cuenta) principal;
       Assert.notNull(result);
       Assert.isTrue(result.getId() != 0);
+      
+      return result;
+   }
+   
+   public UserDetails loadUserByUsername(String username)
+      throws UsernameNotFoundException {
+      Assert.notNull(username);
+      
+      UserDetails result;
+      
+      result = userRepository.findByUsername(username);
+      Assert.notNull(result);
+      // WARNING: The following sentences prevent lazy initialisation problems!
+      Assert.isTrue(result.isEnabled() == true);
+      Assert.notNull(result.getAuthorities());
+      result.getAuthorities().size();
       
       return result;
    }

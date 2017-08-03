@@ -13,7 +13,6 @@ import java.util.Collection;
 @Service
 @Transactional
 public class EstudioService implements AbstractService<Estudio> {
-   
    @Autowired
    private EstudioRepository estudioRepository;
    

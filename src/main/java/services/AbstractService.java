@@ -10,7 +10,6 @@ import java.util.Collection;
 @Service
 @Transactional
 public interface AbstractService<T> {
-   
    T create();
    
    void save(@NotNull T t);

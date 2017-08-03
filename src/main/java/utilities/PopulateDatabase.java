@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities;
 
 import domain.DomainEntity;
@@ -19,8 +18,6 @@ import javax.persistence.Entity;
 import java.util.Map.Entry;
 
 public class PopulateDatabase {
-   
-   
    public static void main(String[] args) {
       ApplicationContext populationContext;
       DatabaseUtil databaseUtil;

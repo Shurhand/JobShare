@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package security;
 
 import controllers.AbstractController;
@@ -25,9 +24,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/security")
 public class LoginController extends AbstractController {
-   
    // Supporting services ----------------------------------------------------
-   
    @Autowired
    LoginService service;
    

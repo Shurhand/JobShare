@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities.internal;
 
 import org.apache.commons.lang3.StringUtils;

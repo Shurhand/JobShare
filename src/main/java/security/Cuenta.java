@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package security;
 
 import domain.DomainEntity;
@@ -24,25 +23,20 @@ import java.util.Collection;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Cuenta extends DomainEntity implements UserDetails {
-   
    // Constructors -----------------------------------------------------------
-   
    private static final long serialVersionUID = 7254823034213841482L;
-   
-   public Cuenta() {
-      super();
-   
-      this.authorities = new ArrayList<>();
-   }
-   
-   // Attributes -------------------------------------------------------------
-   
    // UserDetails interface --------------------------------------------------
-   
    private String username;
+   // Attributes -------------------------------------------------------------
    private String password;
    private Collection<Autoridad> authorities;
    private boolean isActivated;
+   
+   public Cuenta() {
+      super();
+      
+      this.authorities = new ArrayList<>();
+   }
    
    @Size(min = 5, max = 32)
    @Column(unique = true)

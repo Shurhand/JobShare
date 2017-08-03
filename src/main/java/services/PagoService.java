@@ -15,7 +15,6 @@ import java.util.Collection;
 @Service
 @Transactional
 public class PagoService implements AbstractService<Pago> {
-   
    @Autowired
    private PagoRepository pagoRepository;
    

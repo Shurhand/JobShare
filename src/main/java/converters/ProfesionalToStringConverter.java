@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class ProfesionalToStringConverter implements Converter<Profesional, String> {
-   
    @Override
    public String convert(Profesional profesional) {
       String res;

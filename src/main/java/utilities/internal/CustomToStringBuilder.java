@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities.internal;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -18,14 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomToStringBuilder extends ReflectionToStringBuilder {
-   
-   public CustomToStringBuilder(Object object) {
-      super(object);
-   }
+   private static CustomPrintStyle customQueryStyle = new CustomPrintStyle();
 
 //	public CustomToStringBuilder(Object object, ToStringStyle style, StringBuffer buffer, boolean outputTransients, boolean outputStatics) {
 //		super(object, style, buffer, outputTransients, outputStatics);
 //	}
+   
+   public CustomToStringBuilder(Object object) {
+      super(object);
+   }
    
    public CustomToStringBuilder(Object object, ToStringStyle style) {
       super(object, style);
@@ -40,8 +40,6 @@ public class CustomToStringBuilder extends ReflectionToStringBuilder {
       this.setUpToClass(reflectUpToClass);
       this.setAppendTransients(outputTransients);
    }
-   
-   private static CustomPrintStyle customQueryStyle = new CustomPrintStyle();
    
    public static String toString(Object obj) {
       String result;
@@ -59,6 +57,15 @@ public class CustomToStringBuilder extends ReflectionToStringBuilder {
          stringBuilder = new CustomToStringBuilder(obj, customQueryStyle, null, StringBuffer.class, true);
          result = stringBuilder.toString();
       }
+      
+      return result;
+   }
+   
+   private static boolean isPrimitive(Object obj) {
+      boolean result;
+      
+      result = (obj instanceof String || obj instanceof Number || obj instanceof Character || obj instanceof Boolean ||
+                   obj instanceof java.util.Date || obj instanceof java.sql.Date || obj instanceof Timestamp);
       
       return result;
    }
@@ -100,16 +107,6 @@ public class CustomToStringBuilder extends ReflectionToStringBuilder {
          clazz = superClazzes.get(i);
          this.appendFieldsIn(clazz);
       }
-   }
-   
-   
-   private static boolean isPrimitive(Object obj) {
-      boolean result;
-      
-      result = (obj instanceof String || obj instanceof Number || obj instanceof Character || obj instanceof Boolean ||
-                   obj instanceof java.util.Date || obj instanceof java.sql.Date || obj instanceof Timestamp);
-      
-      return result;
    }
    
 }

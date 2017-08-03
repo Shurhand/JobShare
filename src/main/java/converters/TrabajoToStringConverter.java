@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class TrabajoToStringConverter implements Converter<Trabajo, String> {
-   
    @Override
    public String convert(Trabajo trabajo) {
       String res;

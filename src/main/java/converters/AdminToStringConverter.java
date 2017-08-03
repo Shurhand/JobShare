@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class AdminToStringConverter implements Converter<Admin, String> {
-   
    @Override
    public String convert(Admin admin) {
       String res;

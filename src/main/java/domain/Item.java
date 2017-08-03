@@ -1,61 +1,114 @@
 package domain;
 
-import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
 
 @Entity
-@Access(AccessType.FIELD)
-@Data
+@Access(AccessType.PROPERTY)
 public class Item extends DomainEntity {
-   
-   @NotBlank
-   @SafeHtml
    private String nombre;
+   private String descripcion;
+   private Double presupuesto;
+   private LocalDate fechaCreacion;
+   private Estado estado;
    
    @NotBlank
    @SafeHtml
-   private String descripcion;
+   public String getNombre() {
+      return nombre;
+   }
+   
+   public void setNombre(String nombre) {
+      this.nombre = nombre;
+   }
+   
+   @NotBlank
+   @SafeHtml
+   public String getDescripcion() {
+      return descripcion;
+   }
+   
+   public void setDescripcion(String descripcion) {
+      this.descripcion = descripcion;
+   }
    
    @NotNull
    @SafeHtml
    @Range(min = 1, max = 10000)
-   private Double presupuesto;
+   public Double getPresupuesto() {
+      return presupuesto;
+   }
+   
+   public void setPresupuesto(Double presupuesto) {
+      this.presupuesto = presupuesto;
+   }
    
    @NotNull
    @SafeHtml
    @DateTimeFormat(pattern = "dd/MM/yyyy")
-   private LocalDate fechaCreacion;
+   public LocalDate getFechaCreacion() {
+      return fechaCreacion;
+   }
    
-   @NotNull
+   public void setFechaCreacion(LocalDate fechaCreacion) {
+      this.fechaCreacion = fechaCreacion;
+   }
+   
    @Enumerated
-   private Estado estado;
+   @NotNull
+   public Estado getEstado() {
+      return estado;
+   }
    
-   // Relaciones
+   public void setEstado(Estado estado) {
+      this.estado = estado;
+   }
    
    @NotNull
    @NotEmpty
    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
                             CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "items")
+   public Collection<Etiqueta> getEtiquetas() {
+      return etiquetas;
+   }
+   
+   public void setEtiquetas(Collection<Etiqueta> etiquetas) {
+      this.etiquetas = etiquetas;
+   }
+   
+   // Relaciones
    private Collection<Etiqueta> etiquetas;
-   
-   @NotNull
-   @Valid
-   @ManyToOne(optional = false)
    private Peticion peticion;
-   
-   @NotNull
-   @Valid
-   @ManyToOne(optional = false)
    private Pago pago;
    
+   @NotNull
+   @Valid
+   @ManyToOne(optional = false)
+   public Peticion getPeticion() {
+      return peticion;
+   }
+   
+   public void setPeticion(Peticion peticion) {
+      this.peticion = peticion;
+   }
+   
+   @NotNull
+   @Valid
+   @ManyToOne(optional = false)
+   public Pago getPago() {
+      return pago;
+   }
+   
+   public void setPago(Pago pago) {
+      this.pago = pago;
+   }
 }

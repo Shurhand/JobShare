@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class EtiquetaToStringConverter implements Converter<Etiqueta, String> {
-   
    @Override
    public String convert(Etiqueta etiqueta) {
       String res;

@@ -7,7 +7,6 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
-
 package utilities;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +17,6 @@ import utilities.internal.DatabaseUtil;
 import java.util.List;
 
 public class QueryDatabase {
-   
    public static void main(String[] args) throws Throwable {
       DatabaseUtil databaseUtil;
       ConsoleReader reader;
