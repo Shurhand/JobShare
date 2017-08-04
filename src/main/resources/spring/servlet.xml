@@ -16,7 +16,7 @@
 	    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 
 	    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-	    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+	    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
 	    http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
 
     <!-- Context -->
@@ -62,10 +62,10 @@
         <property name="databasePlatform" ref="sqlDialect"/>
     </bean>
 
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean id="sessionFactory"-->
+    <!--class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
     <bean id="openEntityManagerInViewInterceptor"
           class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor"/>
@@ -84,7 +84,7 @@
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames" ref="messages"/>
-        <property name="defaultEncoding" value="ISO-8859-1"/>
+        <property name="defaultEncoding" value="UTF-8"/>
         <property name="fallbackToSystemLocale" value="false"/>
     </bean>
 
@@ -137,14 +137,14 @@
     <import resource="config/tiles.xml"/>
 
     <bean id="tilesConfigurer"
-          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions" ref="tiles"/>
     </bean>
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass"
-                  value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+                  value="org.springframework.web.servlet.view.tiles3.TilesView"/>
     </bean>
 
     <!-- Cache -->

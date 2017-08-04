@@ -37,6 +37,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
 
     <link rel="stylesheet" href="styles/common.css" type="text/css">
+
     <link rel="stylesheet" href="styles/bootstrap-duallistbox.css" type="text/css">
     <link rel="stylesheet" href="styles/carousel.css" type="text/css">
     <link rel="stylesheet" href="styles/bootstrap-timepicker.css" type="text/css">

@@ -6,6 +6,8 @@
 <%@taglib prefix="security"
           uri="http://www.springframework.org/security/tags" %>
 
+<link rel="stylesheet" href="styles/custom.css" type="text/css">
+
 <!DOCTYPE html>
 <html>
 <header class="main-header">
@@ -26,9 +28,11 @@
                     <a class="title" href="/"> <img src="/static/images/logo2.png" height="45px"/></a>
                 </div>
 
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+
 
                         <li><a href="/faq"><span class="glyphicon glyphicon-info-sign"></span> Ayuda</a></li>
 
@@ -45,54 +49,111 @@
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="hidden-sm hidden-md hidden-lg" data-toggle="dropdown">Iniciar sesión
-                                <span class="caret hidden-sm hidden-md hidden-lg"></span></a>
-                            <a class="hidden-xs" data-toggle="dropdown" href="#"><span
-                                class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
-                            <ul id="login-dp" class="dropdown-menu box main-dp">
-                                <li>
-                                    <div class="row">
+                        <security:authorize access="isAnonymous()">
+                            <li class="modal">
+                                <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#myModal"
+                                   data-toggle="modal">Iniciar sesión
+                                    <span class="caret hidden-sm hidden-md hidden-lg"></span></a>
+                                <a class="hidden-xs" data-target="#myModal" data-toggle="modal" href="#"><span
+                                    class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
                                         <div class="col-md-12">
-
-                                            <security:authorize access="isAnonymous()">
-                                                <div id="navbar" class="navbar-collapse collapse">
-                                                    <form:form class="navbar-form navbar-right" action="login"
-                                                               modelAttribute="credenciales">
-                                                        <div class="form-group">
-                                                            <form:input path="username" class="form-control"/>
-                                                            <form:errors class="error2" path="username"/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <form:password path="password" class="form-control"/>
-                                                            <form:errors class="error2" path="password"/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <jstl:if test="${showError == true}">
-                                                                <div class="error2">
-                                                                    <spring:message code="security.login.failed"/>
-                                                                </div>
-                                                            </jstl:if>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <input type="submit" class="btn btn-primary"
-                                                                   value="<spring:message code="master.page.login" />"/>
-                                                            <a href="customer/create.do" class="btn btn-primary">
-                                                                <spring:message code="master.page.register"/></a>
-                                                        </div>
-                                                    </form:form>
+                                            <div class="modal-content text-center">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">Inicio de sesión</h4>
                                                 </div>
-                                            </security:authorize>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-md-offset-3">
+                                                            <div class="row">
+                                                                <button type="button"
+                                                                        class="btn btn-primary btn-lg btn-block">
+                                                                    Acceso con Google
+                                                                </button>
+                                                            </div>
+                                                            <div class="row">
+                                                                <button type="button"
+                                                                        class="btn btn-primary btn-lg btn-block">
+                                                                    Acceso con Facebook
+                                                                </button>
+                                                            </div>
+                                                        </div>
 
-                                        </div>
-                                        <div class="bottom text-center">
-                                            ¿No tienes cuenta todavía? <a href="/customer/register/"><b>Registro</b></a>
+
+                                                        <div class="col-md-6 col-md-offset-3 ">
+                                                            <form:form action="login"
+                                                                       modelAttribute="credenciales">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i
+                                                                        class="fa fa-user fa"
+                                                                        aria-hidden="true"></i></span>
+                                                                    <form:input placeholder="Usuario" path="username"
+                                                                                class="form-control"/>
+                                                                    <form:errors class="error2" path="username"/>
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i
+                                                                        class="fa fa-lock fa"
+                                                                        aria-hidden="true"></i></span>
+                                                                    <form:password placeholder="Contraseña"
+                                                                                   path="password"
+                                                                                   class="form-control"/>
+                                                                    <form:errors class="error2" path="password"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <jstl:if test="${showError == true}">
+                                                                        <div class="error2">
+                                                                            <spring:message
+                                                                                code="security.login.failed"/>
+                                                                        </div>
+                                                                    </jstl:if>
+                                                                </div>
+                                                                <div id="remember" class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" value="remember-me">
+                                                                        Remember
+                                                                        me
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="submit"
+                                                                           class="btn btn-primary btn-block"
+                                                                           style="margin-bottom: 2%"
+                                                                           value="<spring:message code="master.page.login" />"/>
+                                                                </div>
+                                                                <a href="#" class="forgot-password">
+                                                                    ¿Contraseña olvidada?
+                                                                </a>
+                                                            </form:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
-                        </li>
 
+                                </div>
+                            </li>
+                        </security:authorize>
+                        <security:authorize access="isAuthenticated()">
+                            <div>
+                                <form:form>
+                                    <div class="form-group">
+                                        <p><spring:message code="master.page.salute"/>&nbsp&nbsp
+                                            <security:authentication property="principal.username"/></p>
+                                        <a class="btn btn-primary" href="logout"><spring:message
+                                            code="master.page.logout"/></a>
+                                    </div>
+                                </form:form>
+                            </div>
+                        </security:authorize>
                     </ul>
                 </div>
             </div>
