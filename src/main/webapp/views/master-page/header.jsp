@@ -15,40 +15,52 @@
         <div class="navbar-collapse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-
-
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
                     <a class="title" href="/"> <img src="/static/images/logo2.png" height="45px"/></a>
                 </div>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="usuario/convertirse.do">¡Conviértete en profesional!</a></li>
 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-globe"></span> Idioma</a>
+                        <ul class="dropdown-menu box main-dp">
+                            <li>
+                                <a href="?language=en"><img src="images/icon_id_en.png"></a>
+                            </li>
+                            <li>
+                                <a href="?language=es"><img src="images/icon_id_es.png"></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-
-
-                        <li><a href="/faq"><span class="glyphicon glyphicon-info-sign"></span> Ayuda</a></li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                                class="glyphicon glyphicon-globe"></span> Idioma</a>
-                            <ul class="dropdown-menu box main-dp">
-                                <li>
-                                    <a href="?language=en"><img src="images/icon_id_en.png"></a>
-                                </li>
-                                <li>
-                                    <a href="?language=es"><img src="images/icon_id_es.png"></a>
-                                </li>
-                            </ul>
-                        </li>
-
+                        <security:authorize access="isAuthenticated()">
+                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> Ver etiquetas</a>
+                            </li>
+                        </security:authorize>
+                        <security:authorize access="hasAuthority('USUARIO')">
+                            <li><a href="usuario/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i> Mis
+                                peticiones</a></li>
+                        </security:authorize>
+                        <security:authorize access="hasAuthority('PROFESIONAL')">
+                            <li><a href="profesional/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i> Mis
+                                peticiones</a></li>
+                            <li><a href="profesional/MisOfertas.do"><i class="fa fa-briefcase" aria-hidden="true"></i>
+                                Mis ofertas</a></li>
+                        </security:authorize>
+                        <security:authorize access="hasAuthority('ADMIN')">
+                            <li><a href="admin/listaUsuarios.do"><i class="fa fa-users" aria-hidden="true"></i> Lista de
+                                usuarios</a></li>
+                        </security:authorize>
                         <security:authorize access="isAnonymous()">
+                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> Ver etiquetas</a>
+                            </li>
+                            <li><a href="registrarse.do"><span
+                                class="glyphicon glyphicon-log-in"></span> Registrarse</a></li>
+
                             <li class="modal">
                                 <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#myModal"
                                    data-toggle="modal">Iniciar sesión
@@ -142,16 +154,22 @@
                             </li>
                         </security:authorize>
                         <security:authorize access="isAuthenticated()">
-                            <div>
-                                <form:form>
-                                    <div class="form-group">
-                                        <p><spring:message code="master.page.salute"/>&nbsp&nbsp
-                                            <security:authentication property="principal.username"/></p>
-                                        <a class="btn btn-primary" href="logout"><spring:message
-                                            code="master.page.logout"/></a>
-                                    </div>
-                                </form:form>
-                            </div>
+                            <li class="dropdown">
+
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                    class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                    <spring:message code="master.page.salute"/>
+                                    <security:authentication property="principal.username"/></a>
+                                <ul class="dropdown-menu box main-dp">
+                                    <li>
+                                        <a href="perfil"><i class="fa fa-user" aria-hidden="true"></i> Ver perfil</a>
+                                    </li>
+                                    <li>
+                                        <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
+                                    </li>
+                                </ul>
+                            </li>
+
                         </security:authorize>
                     </ul>
                 </div>

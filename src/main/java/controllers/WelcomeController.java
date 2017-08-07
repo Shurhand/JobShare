@@ -48,7 +48,7 @@ public class WelcomeController extends AbstractController {
       result = new ModelAndView("welcome/index");
       result.addObject("name", name);
       result.addObject("moment", moment);
-      result.addObject("credentials", credenciales);
+      result.addObject("credentiales", credenciales);
       result.addObject("showError", showError);
       
       return result;

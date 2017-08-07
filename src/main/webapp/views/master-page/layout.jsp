@@ -11,12 +11,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="windows-1252">
+    <meta charset="UTF-8">
     <title>Jobshare - Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
-
-    <link href="/styles/base1.css" rel="stylesheet">
 
     <base
         href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>

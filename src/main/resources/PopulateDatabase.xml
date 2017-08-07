@@ -54,7 +54,7 @@
 
 
     <bean id="cuenta4" class="security.Cuenta">
-        <property name="username" value="profesiona1"/>
+        <property name="username" value="profesional1"/>
         <property name="password" value="473deb90997d416b6af80aa585e128af"/>
         <property name="isActivated" value="true"/>
         <property name="authorities">
