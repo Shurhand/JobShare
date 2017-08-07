@@ -6,7 +6,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security"
           uri="http://www.springframework.org/security/tags" %>
-
+<link rel="stylesheet" href="styles/common.css" type="text/css">
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -68,18 +68,18 @@
 </div>
 <!-- /.carousel -->
 
-<div class="container">
+<%--<div class="container">--%>
 
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1 align="center"><spring:message code="index.message_trip"/></h1>
-        <p align="center"><spring:message code="index.message_trip2"/></p>
+<%--<!-- Main component for a primary marketing message or call to action -->--%>
+<%--<div class="jumbotron">--%>
+<%--<h1 align="center"><spring:message code="index.message_trip"/></h1>--%>
+<%--<p align="center"><spring:message code="index.message_trip2"/></p>--%>
 
-        <p align="center">
-            <a class="btn btn-lg btn-primary " href="route/create.do" role="button"><spring:message
-                code="index.trip"/></a>
-        </p>
-    </div>
+<%--<p align="center">--%>
+<%--<a class="btn btn-lg btn-primary " href="route/create.do" role="button"><spring:message--%>
+<%--code="index.trip"/></a>--%>
+<%--</p>--%>
+<%--</div>--%>
 
-</div>
+<%--</div>--%>
 <!-- /container -->

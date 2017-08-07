@@ -14,7 +14,6 @@
     <div class="container">
         <div class="navbar-collapse" role="navigation">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
 
 
@@ -162,8 +161,6 @@
 
     </div>
 </header>
-
-</div>
 
 </html>
 

@@ -9,6 +9,8 @@
  */
 package security;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.Size;
 
 public class Credenciales {
@@ -22,6 +24,7 @@ public class Credenciales {
       super();
    }
    
+   @NotBlank
    @Size(min = 5, max = 32)
    public String getUsername() {
       return username;
@@ -31,6 +34,7 @@ public class Credenciales {
       this.username = username;
    }
    
+   @NotBlank
    @Size(min = 5, max = 32)
    public String getPassword() {
       return password;
