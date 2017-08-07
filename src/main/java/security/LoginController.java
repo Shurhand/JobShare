@@ -64,7 +64,7 @@ public class LoginController extends AbstractController {
       Assert.notNull(bindingResult);
       
       result = new ModelAndView("redirect:login.do?showError=true");
-      result.addObject("credentials", credenciales);
+      result.addObject("credenciales", credenciales);
       
       return result;
    }

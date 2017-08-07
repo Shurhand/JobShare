@@ -1,20 +1,19 @@
-package domain;
+package forms;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
-import security.Cuenta;
 
-import javax.persistence.*;
-import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.net.URL;
 
-@Entity
-@Access(AccessType.PROPERTY)
-public class Actor extends DomainEntity {
-   // Atributos
+public class UsuarioForm {
+   public UsuarioForm() {
+      super();
+   }
+   
    private String nombre;
    private String telefono;
    private String apellidos;
@@ -22,6 +21,10 @@ public class Actor extends DomainEntity {
    private String cp;
    private String email;
    private String provincia;
+   private String username;
+   private String password;
+   private String confirmarPassword;
+   private boolean checkTerminos;
    private URL picture;
    
    @NotBlank
@@ -34,7 +37,6 @@ public class Actor extends DomainEntity {
       this.nombre = nombre;
    }
    
-
    @SafeHtml
    public String getTelefono() {
       return telefono;
@@ -54,11 +56,9 @@ public class Actor extends DomainEntity {
       this.apellidos = apellidos;
    }
    
-   
    @NotBlank
    @SafeHtml
    @Pattern(regexp = "^(\\d{8}([A-Z]|[a-z]{1}))$")
-   @Column(unique = true, updatable = false)
    public String getDNI() {
       return DNI;
    }
@@ -67,7 +67,6 @@ public class Actor extends DomainEntity {
       this.DNI = DNI;
    }
    
-
    @SafeHtml
    public String getCp() {
       return cp;
@@ -88,7 +87,7 @@ public class Actor extends DomainEntity {
       this.email = email;
    }
    
-
+   @NotBlank
    @SafeHtml
    public String getProvincia() {
       return provincia;
@@ -98,25 +97,50 @@ public class Actor extends DomainEntity {
       this.provincia = provincia;
    }
    
+   @NotBlank
+   @Size(min = 5, max = 32)
+   public String getUsername() {
+      return username;
+   }
+   
+   public void setUsername(String username) {
+      this.username = username;
+   }
+   
+   @NotBlank
+   @Size(min = 5, max = 32)
+   public String getPassword() {
+      return password;
+   }
+   
+   public void setPassword(String password) {
+      this.password = password;
+   }
+   
+   @NotBlank
+   @Size(min = 5, max = 32)
+   public String getConfirmarPassword() {
+      return confirmarPassword;
+   }
+   
+   public void setConfirmarPassword(String confirmarPassword) {
+      this.confirmarPassword = confirmarPassword;
+   }
+   
+   @AssertTrue
+   public boolean isCheckTerminos() {
+      return checkTerminos;
+   }
+   
+   public void setCheckTerminos(boolean checkTerminos) {
+      this.checkTerminos = checkTerminos;
+   }
+   
    public URL getPicture() {
       return picture;
    }
    
    public void setPicture(URL picture) {
       this.picture = picture;
-   }
-   
-   // Relaciones
-   private Cuenta cuenta;
-   
-   @NotNull
-   @Valid
-   @OneToOne(cascade = CascadeType.ALL, optional = false)
-   public Cuenta getCuenta() {
-      return cuenta;
-   }
-   
-   public void setCuenta(Cuenta cuenta) {
-      this.cuenta = cuenta;
    }
 }

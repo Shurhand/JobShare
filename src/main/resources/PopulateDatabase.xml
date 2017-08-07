@@ -71,11 +71,10 @@
         <property name="nombre" value="Chuck"/>
         <property name="apellidos" value="Norris"/>
         <property name="cp" value="41010"/>
-        <property name="localidad" value="Shangri-la"/>
+        <property name="provincia" value="Shangri-la"/>
         <property name="DNI" value="48820088N"/>
         <property name="email" value="chucknNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
-
         <property name="cuenta" ref="cuenta1"/>
     </bean>
 
@@ -83,7 +82,7 @@
         <property name="nombre" value="Chuck"/>
         <property name="apellidos" value="Norris"/>
         <property name="cp" value="41010"/>
-        <property name="localidad" value="Shangri-la"/>
+        <property name="provincia" value="Shangri-la"/>
         <property name="DNI" value="48820088N"/>
         <property name="email" value="chucknNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
@@ -104,11 +103,11 @@
         <property name="nombre" value="Bruce"/>
         <property name="apellidos" value="Lee"/>
         <property name="cp" value="41010"/>
-        <property name="localidad" value="Shangri-la"/>
+        <property name="provincia" value="Shangri-la"/>
         <property name="DNI" value="48820088N"/>
         <property name="email" value="chucknNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
-        <property name="cuenta" ref="cuenta2"/>
+        <property name="cuenta" ref="cuenta4"/>
         <property name="peticiones">
             <list>
 

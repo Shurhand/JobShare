@@ -9,17 +9,18 @@
 <link rel="stylesheet" href="styles/custom.css" type="text/css">
 
 <!DOCTYPE html>
-<html>
+
 <header class="main-header">
-    <div class="container">
+    <div class="container navbar-custom">
         <div class="navbar-collapse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="title" href="/"> <img src="/static/images/logo2.png" height="45px"/></a>
+                    <a class="title" href="/"> <img src="images/Logo.png" height="45px"/></a>
                 </div>
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="usuario/convertirse.do">¡Conviértete en profesional!</a></li>
-
+                <ul class="nav navbar-nav navbar-left ">
+                    <security:authorize access="hasAuthority('USUARIO')">
+                        <li><a href="usuario/convertirse.do">¡Conviértete en profesional!</a></li>
+                    </security:authorize>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                             class="glyphicon glyphicon-globe"></span> Idioma</a>
@@ -58,8 +59,8 @@
                         <security:authorize access="isAnonymous()">
                             <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> Ver etiquetas</a>
                             </li>
-                            <li><a href="registrarse.do"><span
-                                class="glyphicon glyphicon-log-in"></span> Registrarse</a></li>
+                            <li><a href="usuario/registro.do"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                                Registrarse</a></li>
 
                             <li class="modal">
                                 <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#myModal"
@@ -155,7 +156,6 @@
                         </security:authorize>
                         <security:authorize access="isAuthenticated()">
                             <li class="dropdown">
-
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                     class="fa fa-user-circle-o" aria-hidden="true"></i>
                                     <spring:message code="master.page.salute"/>
@@ -179,7 +179,5 @@
 
     </div>
 </header>
-
-</html>
 
 

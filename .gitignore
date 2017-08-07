@@ -187,9 +187,5 @@ local.properties
 .editorconfig
 /.editorconfig
 /src/main/webapp/styles/base.css
-src/main/java/controllers/admin/
-src/main/java/controllers/profesional/
-src/main/java/controllers/usuario/
-src/main/java/forms/
 src/main/java/utilities/internal/DatabaseUtil3.java
 src/main/webapp/WEB-INF/tags/

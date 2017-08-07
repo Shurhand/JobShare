@@ -18,12 +18,23 @@
     width: 100%;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /*margin: 0 0 50px 0; !* bottom = footer height *!*/
+    padding: 0 0 50px 0;
+}
+
 /* Footer
 ------------------------------------------------------------*/
 footer {
     position: absolute;
+    left: 0;
     bottom: 0;
-    /*padding-top: 4px;*/
+    height: 4.5%;
     width: 100%;
     background-color: #298fc2;
     color: #fff;
@@ -69,3 +80,15 @@ footer a {
 footer a:hover {
     color: #fff;
 }
+
+/* Nav bar
+-----------------------------------------------------------*/
+.navbar-custom {
+
+    width: 100%;
+    margin: 0 0px 0 0;
+    /*border-bottom-color: #5a74a0;*/
+    border-bottom: 1px solid #5a74a0;
+
+}
+

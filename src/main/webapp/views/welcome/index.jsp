@@ -24,7 +24,7 @@
                     <div class="carousel-p">
                         <h1><spring:message code="index.banner1_1"/></h1>
                         <p><spring:message code="index.banner1_2"/></p>
-                        <p><a class="btn btn-lg btn-primary" href="customer/create.do" role="button"><spring:message
+                        <p><a class="btn btn-lg btn-primary" href="usuario/create.do" role="button"><spring:message
                             code="index.button_banner1"/></a></p>
                     </div>
                 </div>

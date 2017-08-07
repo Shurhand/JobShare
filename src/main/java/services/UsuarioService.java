@@ -3,11 +3,14 @@ package services;
 import domain.Pago;
 import domain.Peticion;
 import domain.Usuario;
+import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.UsuarioRepository;
 import security.Autoridad;
+import security.Cuenta;
 import security.LoginService;
 
 import javax.transaction.Transactional;
@@ -80,6 +83,39 @@ public class UsuarioService implements AbstractService<Usuario> {
          }
       }
       Assert.isTrue(usuario, "No es un usuario");
+      
+   }
+   
+   public void registrarUsuario(UsuarioForm usuarioForm) {
+      Usuario usuario = this.create();
+      Cuenta cuenta = new Cuenta();
+      Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+      
+      usuario.setNombre(usuarioForm.getNombre());
+      usuario.setApellidos(usuarioForm.getApellidos());
+      usuario.setCp(usuarioForm.getCp());
+      usuario.setDNI(usuarioForm.getDNI());
+      usuario.setTelefono(usuarioForm.getTelefono());
+      usuario.setEmail(usuarioForm.getEmail());
+      usuario.setPicture(usuarioForm.getPicture());
+      usuario.setProvincia(usuarioForm.getProvincia());
+      
+      cuenta.setIsActivated(true);
+      cuenta.setUsername(usuarioForm.getUsername());
+      String password = md5PassWordEncoder.encodePassword(usuarioForm.getPassword(), null);
+      cuenta.setPassword(password);
+      
+      Collection<Autoridad> auths = new ArrayList<>();
+      Autoridad auth = new Autoridad();
+      auth.setAuthority("USUARIO");
+      auths.add(auth);
+      
+      cuenta.setAuthorities(auths);
+      
+      usuario.setCuenta(cuenta);
+      
+      this.save(usuario);
+      
       
    }
 }
