@@ -80,6 +80,7 @@ public class Actor extends DomainEntity {
    @NotBlank
    @SafeHtml
    @Email
+   @Column(unique = true)
    public String getEmail() {
       return email;
    }

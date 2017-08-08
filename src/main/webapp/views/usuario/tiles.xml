@@ -7,8 +7,13 @@
 <tiles-definitions>
 
     <definition name="usuario/create" extends="master.page">
-        <put-attribute name="title" value="ASDSADD"/>
+        <put-attribute name="title" value="Registro"/>
         <put-attribute name="body" value="/views/usuario/create.jsp"/>
+    </definition>
+
+    <definition name="usuario/admin/listaUsuarios" extends="master.page">
+        <put-attribute name="title" value="List users"/>
+        <put-attribute name="body" value="/views/usuario/list.jsp"/>
     </definition>
 
 

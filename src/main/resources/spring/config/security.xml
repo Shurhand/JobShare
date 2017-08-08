@@ -20,6 +20,9 @@
 
     <security:http auto-config="true" use-expressions="true">
         <security:csrf disabled="true"/>
+
+        <!-- ******************* TODOS ************************************ -->
+
         <security:intercept-url pattern="/" access="permitAll"/>
 
         <security:intercept-url pattern="/favicon.ico"
@@ -34,20 +37,35 @@
         <security:intercept-url pattern="/views/misc/index.jsp"
                                 access="permitAll"/>
 
-        <security:intercept-url pattern="/security/login.do"
-                                access="permitAll"/>
-        <security:intercept-url pattern="/security/loginFailure.do"
-                                access="permitAll"/>
-
-        <security:intercept-url pattern="/usuario/create.do" access="isAnonymous()"/>
-
 
         <security:intercept-url pattern="/welcome/index.do"
                                 access="permitAll"/>
 
+        <!-- ******************* ANÓNIMO ************************************ -->
+        <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
+
+        <!--<security:intercept-url pattern="/welcome/logear.do" access="isAnonymous()"/>-->
+
+        <security:intercept-url pattern="/security/login.do"
+                                access="isAnonymous()"/>
+
+        <!-- ******************* AUTENTICADO ************************************ -->
+
+        <security:intercept-url pattern="/security/loginFailure.do"
+                                access="isAuthenticated()"/>
+
+        <!-- ******************** ADMIN ************************************** -->
+        <security:intercept-url pattern="/usuario/admin/listaUsuarios.do" access="hasAuthority('ADMIN')"/>
+
+        <!-- ******************** USUARIO ************************************** -->
+
+        <security:intercept-url pattern="/usuario/convertirse.do" access="hasAuthority('USUARIO')"/>
+
+        <!-- ******************** PROFESIONAL ************************************** -->
+
 
         <security:intercept-url pattern="/**"
-                                access="permitAll"/>
+                                access="hasAuthority('NONE')"/>
 
         <security:form-login login-page="/security/login.do"
                              password-parameter="password" username-parameter="username"

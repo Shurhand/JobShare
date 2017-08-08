@@ -1,11 +1,15 @@
 package services;
 
+import domain.Actor;
 import domain.Pago;
 import domain.Peticion;
 import domain.Usuario;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.UsuarioRepository;
@@ -24,6 +28,10 @@ import java.util.Collection;
 public class UsuarioService extends AbstractServiceImpl implements AbstractService<Usuario> {
    @Autowired
    private UsuarioRepository usuarioRepository;
+   @Autowired
+   private ActorService actorService;
+   @Autowired
+   private LoginService loginService;
    
    @Override
    public Usuario create() {
@@ -90,6 +98,8 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       Usuario usuario = this.create();
       Cuenta cuenta = new Cuenta();
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+   
+      Assert.isTrue(usuarioForm.getPassword().equals(usuarioForm.getConfirmarPassword()), "usuario.coincidenciaPasswords");
       
       usuario.setNombre(usuarioForm.getNombre());
       usuario.setApellidos(usuarioForm.getApellidos());
@@ -115,7 +125,35 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       usuario.setCuenta(cuenta);
       
       this.save(usuario);
+   
+   }
+   
+   public void convertirse() {
+      this.checkIfUsuario();
+      Collection<Autoridad> res = new ArrayList<>();
+      Autoridad autoridad = new Autoridad();
+      autoridad.setAuthority("PROFESIONAL");
+      res.add(autoridad);
       
+      Actor actor = actorService.findPrincipal();
+      Cuenta miCuenta = actor.getCuenta();
+      miCuenta.getAuthorities().clear();
+      miCuenta.setAuthorities(res);
+      
+      logOFF();
+      logON();
       
    }
+   
+   private void logON() {
+      Actor a = actorService.findPrincipal();
+      Cuenta cuenta = (Cuenta) loginService.loadUserByUsername(a.getCuenta().getUsername());
+      Authentication authentication = new UsernamePasswordAuthenticationToken(cuenta, null, cuenta.getAuthorities());
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+   }
+   
+   private void logOFF() {
+      SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+   }
+  
 }

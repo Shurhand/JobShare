@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8" %>
-<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security"
@@ -21,6 +21,7 @@
                     <security:authorize access="hasAuthority('USUARIO')">
                         <li><a href="usuario/convertirse.do">¡Conviértete en profesional!</a></li>
                     </security:authorize>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                             class="glyphicon glyphicon-globe"></span> Idioma</a>
@@ -53,7 +54,8 @@
                                 Mis ofertas</a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('ADMIN')">
-                            <li><a href="admin/listaUsuarios.do"><i class="fa fa-users" aria-hidden="true"></i> Lista de
+                            <li><a href="usuario/admin/listaUsuarios.do"><i class="fa fa-users" aria-hidden="true"></i>
+                                Lista de
                                 usuarios</a></li>
                         </security:authorize>
                         <security:authorize access="isAnonymous()">
