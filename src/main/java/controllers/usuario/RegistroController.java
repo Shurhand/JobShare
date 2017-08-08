@@ -14,6 +14,7 @@ import security.Credenciales;
 import services.UsuarioService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/usuario")
@@ -57,12 +58,15 @@ public class RegistroController extends AbstractController {
       
       if (binding.hasErrors()) {
          result = createEditModelAndView(usuarioForm);
+         List<String> errores = usuarioService.getListaErrores(binding);
+         result.addObject("errores", errores);
       } else {
          try {
             usuarioService.registrarUsuario(usuarioForm);
-            result = new ModelAndView("redirect:/security/login.do");
+            result = new ModelAndView("redirect:/");
          } catch (Throwable oops) {
-            result = createEditModelAndView(usuarioForm, "usuario.commit.error");
+            result = createEditModelAndView(usuarioForm);
+           
          }
       }
       return result;

@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class ItemService implements AbstractService<Item> {
+public class ItemService extends AbstractServiceImpl implements AbstractService<Item> {
    @Autowired
    private ItemRepository itemRepository;
    

@@ -1,10 +1,10 @@
 package forms;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.net.URL;
@@ -25,7 +25,7 @@ public class UsuarioForm {
    private String password;
    private String confirmarPassword;
    private boolean checkTerminos;
-   private URL picture;
+   private URL foto;
    
    @NotBlank
    @SafeHtml
@@ -97,7 +97,7 @@ public class UsuarioForm {
       this.provincia = provincia;
    }
    
-   @NotBlank
+   @SafeHtml
    @Size(min = 5, max = 32)
    public String getUsername() {
       return username;
@@ -107,7 +107,7 @@ public class UsuarioForm {
       this.username = username;
    }
    
-   @NotBlank
+   @SafeHtml
    @Size(min = 5, max = 32)
    public String getPassword() {
       return password;
@@ -117,7 +117,7 @@ public class UsuarioForm {
       this.password = password;
    }
    
-   @NotBlank
+   @SafeHtml
    @Size(min = 5, max = 32)
    public String getConfirmarPassword() {
       return confirmarPassword;
@@ -136,11 +136,11 @@ public class UsuarioForm {
       this.checkTerminos = checkTerminos;
    }
    
-   public URL getPicture() {
-      return picture;
+   public URL getFoto() {
+      return foto;
    }
    
-   public void setPicture(URL picture) {
-      this.picture = picture;
+   public void setFoto(URL foto) {
+      this.foto = foto;
    }
 }

@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class ValoracionService implements AbstractService<Valoracion> {
+public class ValoracionService extends AbstractServiceImpl implements AbstractService<Valoracion> {
    @Autowired
    private ValoracionRepository valoracionReporsitory;
    

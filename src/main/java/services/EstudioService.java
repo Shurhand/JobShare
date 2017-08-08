@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class EstudioService implements AbstractService<Estudio> {
+public class EstudioService extends AbstractServiceImpl implements AbstractService<Estudio> {
    @Autowired
    private EstudioRepository estudioRepository;
    

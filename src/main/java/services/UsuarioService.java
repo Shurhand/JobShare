@@ -21,7 +21,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class UsuarioService implements AbstractService<Usuario> {
+public class UsuarioService extends AbstractServiceImpl implements AbstractService<Usuario> {
    @Autowired
    private UsuarioRepository usuarioRepository;
    
@@ -97,7 +97,7 @@ public class UsuarioService implements AbstractService<Usuario> {
       usuario.setDNI(usuarioForm.getDNI());
       usuario.setTelefono(usuarioForm.getTelefono());
       usuario.setEmail(usuarioForm.getEmail());
-      usuario.setPicture(usuarioForm.getPicture());
+      usuario.setFoto(usuarioForm.getFoto());
       usuario.setProvincia(usuarioForm.getProvincia());
       
       cuenta.setIsActivated(true);

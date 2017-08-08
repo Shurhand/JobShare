@@ -15,7 +15,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class EtiquetaService implements AbstractService<Etiqueta> {
+public class EtiquetaService extends AbstractServiceImpl implements AbstractService<Etiqueta> {
    @Autowired
    private EtiquetaRepository etiquetaRepository;
    

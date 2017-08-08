@@ -15,7 +15,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class ProfesionalService implements AbstractService<Profesional> {
+public class ProfesionalService extends AbstractServiceImpl implements AbstractService<Profesional> {
    @Autowired
    private ProfesionalRepository profesionalRepository;
    

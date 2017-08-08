@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Service
 @Transactional
-public class ActorService implements AbstractService<Actor> {
+public class ActorService extends AbstractServiceImpl implements AbstractService<Actor> {
    // Dependencias
    @Autowired
    private ActorRepository actorRepository;

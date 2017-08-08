@@ -1,12 +1,12 @@
 package domain;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import security.Cuenta;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.net.URL;
@@ -22,7 +22,7 @@ public class Actor extends DomainEntity {
    private String cp;
    private String email;
    private String provincia;
-   private URL picture;
+   private URL foto;
    
    @NotBlank
    @SafeHtml
@@ -98,12 +98,12 @@ public class Actor extends DomainEntity {
       this.provincia = provincia;
    }
    
-   public URL getPicture() {
-      return picture;
+   public URL getFoto() {
+      return foto;
    }
    
-   public void setPicture(URL picture) {
-      this.picture = picture;
+   public void setFoto(URL picture) {
+      this.foto = picture;
    }
    
    // Relaciones
