@@ -160,6 +160,11 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    private void logOFF() {
       SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
    }
+   
+   public List<String> getListaProvincias(){
+       Collection<String> provincias = new ArrayList<>();
+       return provincias;
+   }
   
 }
 

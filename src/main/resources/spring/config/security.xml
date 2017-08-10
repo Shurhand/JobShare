@@ -44,8 +44,7 @@
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 
-        <!--<security:intercept-url pattern="/welcome/logear.do" access="isAnonymous()"/>-->
-
+       
         <security:intercept-url pattern="/security/login.do"
                                 access="isAnonymous()"/>
 
@@ -63,9 +62,12 @@
         <!-- ******************** USUARIO ************************************** -->
 
         <security:intercept-url pattern="/usuario/convertirse.do" access="hasAuthority('USUARIO')"/>
+        <security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('USUARIO')"/>
 
         <!-- ******************** PROFESIONAL ************************************** -->
 
+        <security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('PROFESIONAL')"/>
+        <security:intercept-url pattern="/peticion/profesional/*" access="hasAuthority('PROFESIONAL')"/>
 
         <security:intercept-url pattern="/**"
                                 access="hasAuthority('NONE')"/>

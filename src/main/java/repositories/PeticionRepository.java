@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PeticionRepository extends JpaRepository<Peticion, Integer> {
+    
+    @Query("select p from Peticiones p where p.usuario = ?1")
+    Collection<Peticion> getPeticionesPorUsuario(Usuario u);
 }

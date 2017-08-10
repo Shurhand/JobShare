@@ -88,4 +88,24 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       a.getCuenta().setIsActivated(false);
       actorRepository.save(a);
    }
+   
+  public void checkIfUsuarioOProfesional() {
+      boolean usuarioOProfesional = false;
+      Collection<Autoridad> roles;
+      roles = LoginService.getPrincipal().getAuthorities();
+      for (Autoridad a : roles) {
+         if (a.getAuthority().equals(Autoridad.USUARIO) || a.getAuthority().equals(Autoridad.PROFESIONAL)) {
+            usuarioOProfesional = true;
+         }
+      }
+      Assert.isTrue(usuario, "No es un usuario o profesional");
+      
+   }
+   
+    public void checkIfAutenticado() {
+      boolean autenticado = false;
+      autenticado = SecurityContextHolder.getContext().getAuthentication();
+      Assert.isTrue(autenticado, "No está autenticado");
+      
+   }
 }

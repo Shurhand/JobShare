@@ -19,9 +19,14 @@ import java.util.Collection;
 public class PeticionService extends AbstractServiceImpl implements AbstractService<Peticion> {
    @Autowired
    private PeticionRepository peticionRepository;
+    @Autowired
+   private ActorService actorService;
+    @Autowired
+   private UsuarioService usuarioService;
    
    @Override
    public Peticion create() {
+      actorService.checkIfUsuarioOProfesional();
       Collection<Item> items = new ArrayList<>();
       LocalDate fechaCreacion = LocalDate.now();
       Estado estado = Estado.ACTIVA;
@@ -36,26 +41,31 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    
    @Override
    public void save(@NotNull Peticion peticion) {
+      actorService.checkIfUsuarioOProfesional();
       peticionRepository.save(peticion);
    }
    
    @Override
    public void saveAll(@NotNull Iterable<Peticion> peticiones) {
+      actorService.checkIfUsuarioOProfesional();
       peticionRepository.save(peticiones);
    }
    
    @Override
    public Peticion saveWithReturn(@NotNull Peticion peticion) {
+      actorService.checkIfUsuarioOProfesional();
       return peticionRepository.save(peticion);
    }
    
    @Override
    public void delete(@NotNull Peticion peticion) {
+      actorService.checkIfUsuarioOProfesional();
       peticionRepository.delete(peticion);
    }
    
    @Override
    public void deleteAll(@NotNull Iterable<Peticion> peticiones) {
+      actorService.checkIfUsuarioOProfesional();
       peticionRepository.delete(peticiones);
    }
    
@@ -68,5 +78,9 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    @NotNull
    public Peticion findOne(@NotNull @Min(1) Integer peticionID) {
       return peticionRepository.findOne(peticionID);
+   }
+   
+   public Collection<Peticion> getMisPeticiones(Usuario usuario){
+       return peticionRepository.getMisPeticiones(usuario)
    }
 }
