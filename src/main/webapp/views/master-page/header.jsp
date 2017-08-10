@@ -25,7 +25,7 @@
                                data-toggle="modal">¡Conviértete en profesional!
                                 <span class="caret hidden-sm hidden-md hidden-lg"></span></a>
                             <a class="hidden-xs" data-target="#modalProfesional" data-toggle="modal" href="#"><span
-                                class="fa fa-user-md"></span> ¡Conviértete en profesional!</a>
+                                class="fa fa-user-md"></span> <spring:message code="master.page.convertirse"/></a>
 
                             <!-- Modal -->
                             <div class="modal fade" id="modalProfesional" tabindex="-1" role="dialog"
@@ -37,8 +37,8 @@
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close"><span aria-hidden="true">&times;</span>
                                                 </button>
-                                                <h4 class="modal-title" id="myModalLabel2">Convertirse en
-                                                    profesional</h4>
+                                                <h4 class="modal-title" id="myModalLabel2"><spring:message
+                                                    code="master.page.convertirse"/></h4>
                                             </div>
                                             <div class="modal-body">
                                                 <p><spring:message code="usuario.convertirse"/></p>
@@ -80,36 +80,38 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <security:authorize access="isAuthenticated()">
-                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> Ver etiquetas</a>
+                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> <spring:message
+                                code="master.page.verEtiquetas"/></a>
                             </li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('USUARIO')">
-                            <li><a href="usuario/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i> Mis
-                                peticiones</a></li>
+                            <li><a href="usuario/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i>
+                                <spring:message code="master.page.misPeticiones"/></a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('PROFESIONAL')">
-                            <li><a href="profesional/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i> Mis
-                                peticiones</a></li>
+                            <li><a href="profesional/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i>
+                                <spring:message code="master.page.misPeticiones"/></a></li>
                             <li><a href="profesional/MisOfertas.do"><i class="fa fa-briefcase" aria-hidden="true"></i>
-                                Mis ofertas</a></li>
+                                <spring:message code="master.page.misOfertas"/></a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('ADMIN')">
                             <li><a href="usuario/admin/listaUsuarios.do"><i class="fa fa-users" aria-hidden="true"></i>
-                                Lista de
-                                usuarios</a></li>
+                                <spring:message code="master.page.listaUsuarios"/></a></li>
                         </security:authorize>
                         <security:authorize access="isAnonymous()">
-                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> Ver etiquetas</a>
+                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> <spring:message
+                                code="master.page.verEtiquetas"/></a>
                             </li>
                             <li><a href="usuario/registro.do"><i class="fa fa-user-plus" aria-hidden="true"></i>
-                                Registrarse</a></li>
+                                <spring:message code="master.page.signUp"/></a></li>
 
                             <li class="modal">
                                 <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#myModal"
-                                   data-toggle="modal">Iniciar sesión
+                                   data-toggle="modal"><spring:message code="master.page.signIn"/>
                                     <span class="caret hidden-sm hidden-md hidden-lg"></span></a>
                                 <a class="hidden-xs" data-target="#myModal" data-toggle="modal" href="#"><span
-                                    class="glyphicon glyphicon-log-in"></span> Iniciar sesión</a>
+                                    class="glyphicon glyphicon-log-in"></span> <spring:message
+                                    code="master.page.signIn"/></a>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -121,7 +123,8 @@
                                                     <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close"><span aria-hidden="true">&times;</span>
                                                     </button>
-                                                    <h4 class="modal-title" id="myModalLabel">Inicio de sesión</h4>
+                                                    <h4 class="modal-title" id="myModalLabel"><spring:message
+                                                        code="master.page.signIn"/></h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
@@ -172,8 +175,7 @@
                                                                 <div id="remember" class="checkbox">
                                                                     <label>
                                                                         <input type="checkbox" name="remember-me">
-                                                                        Remember
-                                                                        me
+                                                                        <spring:message code="master.page.rememberMe"/>
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-group">
