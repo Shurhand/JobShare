@@ -5,6 +5,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="security"
           uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="styles/custom.css" type="text/css">
 
@@ -19,7 +20,46 @@
                 </div>
                 <ul class="nav navbar-nav navbar-left ">
                     <security:authorize access="hasAuthority('USUARIO')">
-                        <li><a href="usuario/convertirse.do">¡Conviértete en profesional!</a></li>
+                        <%--<li><a href="usuario/convertirse.do"></a></li>--%>
+                        <li class="modal">
+                            <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#modalProfesional"
+                               data-toggle="modal">¡Conviértete en profesional!
+                                <span class="caret hidden-sm hidden-md hidden-lg"></span></a>
+                            <a class="hidden-xs" data-target="#modalProfesional" data-toggle="modal" href="#"><span
+                                class="fa fa-user-md"></span> ¡Conviértete en profesional!</a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalProfesional" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel2">
+                                <div class="modal-dialog" role="document">
+                                    <div class="col-md-12">
+                                        <div class="modal-content text-center">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel2">Convertirse en
+                                                    profesional</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><spring:message code="usuario.convertirse"/></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="form-group text-center">
+                                                    <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal"><spring:message
+                                                        code="cancelar"/></button>
+                                                    <a class="btn btn-primary" href="usuario/convertirse.do"
+                                                       role="button"><spring:message code="aceptar"/></a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
                     </security:authorize>
 
                     <li class="dropdown">
@@ -131,7 +171,7 @@
                                                                 </div>
                                                                 <div id="remember" class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" value="remember-me">
+                                                                        <input type="checkbox" name="remember-me">
                                                                         Remember
                                                                         me
                                                                     </label>
@@ -164,7 +204,8 @@
                                     <security:authentication property="principal.username"/></a>
                                 <ul class="dropdown-menu box main-dp">
                                     <li>
-                                        <a href="perfil"><i class="fa fa-user" aria-hidden="true"></i> Ver perfil</a>
+                                        <a href="actor/perfil.do"><i class="fa fa-user" aria-hidden="true"></i> Ver
+                                            perfil</a>
                                     </li>
                                     <li>
                                         <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>

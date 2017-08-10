@@ -13,6 +13,7 @@
         <value>/views/misc/tiles.xml</value>
         <value>/views/security/tiles.xml</value>
         <value>/views/welcome/tiles.xml</value>
+        <value>/views/actor/tiles.xml</value>
         <value>/views/admin/tiles.xml</value>
         <value>/views/usuario/tiles.xml</value>
         <value>/views/profesional/tiles.xml</value>

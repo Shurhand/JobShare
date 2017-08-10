@@ -10,7 +10,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,6 +22,23 @@ public class Item extends DomainEntity {
    private Double presupuesto;
    private LocalDate fechaCreacion;
    private Estado estado;
+   
+   public Item() {
+      super();
+   }
+   
+   public Item(String nombre, String descripcion, Double presupuesto, String fechaCreacion, Estado estado) {
+      this.nombre = nombre;
+      this.descripcion = descripcion;
+      this.presupuesto = presupuesto;
+      
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
+      this.estado = estado;
+   }
    
    @NotBlank
    @SafeHtml

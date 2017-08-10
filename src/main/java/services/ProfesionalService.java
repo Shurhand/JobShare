@@ -1,5 +1,6 @@
 package services;
 
+import domain.Actor;
 import domain.Profesional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import java.util.Collection;
 public class ProfesionalService extends AbstractServiceImpl implements AbstractService<Profesional> {
    @Autowired
    private ProfesionalRepository profesionalRepository;
+   @Autowired
+   private ActorService actorService;
    
    @Override
    public Profesional create() {
@@ -71,5 +74,10 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
       }
       Assert.isTrue(profesional, "No es un profesional");
       
+   }
+   
+   public Profesional findProfesional() {
+      Actor a = actorService.findPrincipal();
+      return profesionalRepository.findProfesional(a.getCuenta());
    }
 }

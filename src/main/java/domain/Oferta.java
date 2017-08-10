@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -19,6 +21,25 @@ public class Oferta extends DomainEntity {
    private LocalDate fechaCaducidad;
    private URL foto;
    private Estado estado;
+   
+   public Oferta() {
+      super();
+   }
+   
+   public Oferta(Double precio, String comentario, String fechaCreacion, String fechaCaducidad, URL foto, Estado estado) {
+      this.precio = precio;
+      this.comentario = comentario;
+      
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
+      this.fechaCaducidad = LocalDate.parse(fechaCaducidad, formatter);
+      
+      this.foto = foto;
+      this.estado = estado;
+   }
    
    @NotNull
    @SafeHtml

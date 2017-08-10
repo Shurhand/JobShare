@@ -8,6 +8,9 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 
 public class Usuario extends Actor {
+   public Usuario() {
+      super();
+   }
    
    // Relaciones
    private Collection<Peticion> peticiones;

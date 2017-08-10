@@ -8,4 +8,7 @@ import javax.persistence.Entity;
 @Access(AccessType.PROPERTY)
 
 public class Admin extends Actor {
+   public Admin() {
+      super();
+   }
 }

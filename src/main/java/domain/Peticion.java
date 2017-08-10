@@ -10,7 +10,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,6 +23,24 @@ public class Peticion extends DomainEntity {
    private LocalDate fechaCaducidad;
    private URL foto;
    private Estado estado;
+   
+   public Peticion() {
+      super();
+   }
+   
+   public Peticion(String titulo, String descripcion, String fechaCreacion, String fechaCaducidad, URL foto, Estado estado) {
+      this.titulo = titulo;
+      this.descripcion = descripcion;
+      
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
+      this.fechaCaducidad = LocalDate.parse(fechaCaducidad, formatter);
+      this.foto = foto;
+      this.estado = estado;
+   }
    
    @NotBlank
    @SafeHtml

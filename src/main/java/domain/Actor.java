@@ -22,7 +22,12 @@ public class Actor extends DomainEntity {
    private String cp;
    private String email;
    private String provincia;
+   private String descripcion;
    private URL foto;
+   
+   public Actor() {
+      super();
+   }
    
    @NotBlank
    @SafeHtml
@@ -105,6 +110,15 @@ public class Actor extends DomainEntity {
    
    public void setFoto(URL picture) {
       this.foto = picture;
+   }
+   
+   @SafeHtml
+   public String getDescripcion() {
+      return descripcion;
+   }
+   
+   public void setDescripcion(String descripcion) {
+      this.descripcion = descripcion;
    }
    
    // Relaciones

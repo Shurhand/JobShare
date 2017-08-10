@@ -15,6 +15,10 @@ import java.util.Collection;
 public class Pago extends DomainEntity {
    private LocalDate fechaCreacion;
    
+   public Pago() {
+      super();
+   }
+   
    @NotNull
    @SafeHtml
    @DateTimeFormat(pattern = "dd/MM/yyyy")

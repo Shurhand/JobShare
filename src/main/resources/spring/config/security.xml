@@ -54,8 +54,11 @@
         <security:intercept-url pattern="/security/loginFailure.do"
                                 access="isAuthenticated()"/>
 
+        <security:intercept-url pattern="/actor/perfil.do"
+                                access="isAuthenticated()"/>
+
         <!-- ******************** ADMIN ************************************** -->
-        <security:intercept-url pattern="/usuario/admin/listaUsuarios.do" access="hasAuthority('ADMIN')"/>
+        <security:intercept-url pattern="/usuario/admin/*" access="hasAuthority('ADMIN')"/>
 
         <!-- ******************** USUARIO ************************************** -->
 
@@ -72,7 +75,11 @@
                              authentication-failure-url="/security/loginFailure.do"/>
 
         <security:logout logout-success-url="/"
-                         invalidate-session="true"/>
+                         invalidate-session="true"
+                         delete-cookies="JSSESIONID"/>
+
+
+        <!--<security:remember-me key="uniqueAndSecret" token-validity-seconds="60"/>-->
     </security:http>
 
 </beans>

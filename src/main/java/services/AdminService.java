@@ -1,6 +1,7 @@
 package services;
 
 import domain.Admin;
+import domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -72,6 +73,16 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
          }
       }
       Assert.isTrue(admin, "No es un admin");
+      
+   }
+   
+   public void bloquear(Usuario u) {
+      this.checkIfAdmin();
+      if (u.getCuenta().getIsActivated()) {
+         u.getCuenta().setIsActivated(false);
+      } else {
+         u.getCuenta().setIsActivated(true);
+      }
       
    }
 }

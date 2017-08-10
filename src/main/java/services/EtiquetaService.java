@@ -27,7 +27,6 @@ public class EtiquetaService extends AbstractServiceImpl implements AbstractServ
       
       Etiqueta etiqueta = new Etiqueta();
       etiqueta.setItems(items);
-      etiqueta.setFechaCreacion(fechaCreacion);
       
       return etiqueta;
    }

@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -17,6 +19,21 @@ public class Valoracion extends DomainEntity {
    private Double puntuacion;
    private String comentario;
    private LocalDate fechaCreacion;
+   
+   public Valoracion() {
+      super();
+   }
+   
+   public Valoracion(Double puntuacion, String comentario, String fechaCreacion, Oferta oferta) {
+      this.puntuacion = puntuacion;
+      this.comentario = comentario;
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
+      this.oferta = oferta;
+   }
    
    @NotNull
    @SafeHtml

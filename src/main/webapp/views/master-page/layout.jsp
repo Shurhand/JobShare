@@ -18,7 +18,8 @@
 
     <base
         href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/"/>
-
+    <spring:message code="idioma" var="idioma"/>
+    <div hidden="true" id="idioma">${idioma}</div>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <link rel="shortcut icon" href="favicon.ico"/>

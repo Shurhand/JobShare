@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,6 +22,24 @@ public class Estudio extends DomainEntity {
    private String titulacion;
    private LocalDate fechaInicio;
    private LocalDate fechaFin;
+   
+   public Estudio() {
+      super();
+   }
+   
+   public Estudio(String centro, String titulacion, String fechaInicio, String fechaFin) {
+      this.centro = centro;
+      this.titulacion = titulacion;
+      
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaInicio = LocalDate.parse(fechaInicio, formatter);
+      this.fechaFin = LocalDate.parse(fechaFin, formatter);
+      
+      
+   }
    
    @NotBlank
    @SafeHtml

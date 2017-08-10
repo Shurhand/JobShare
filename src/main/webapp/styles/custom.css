@@ -95,6 +95,29 @@ footer a:hover {
 /* Datatable
 -----------------------------------------------------------*/
 .dataTable-custom {
-    margin-top: 30px;
+    margin: 30px 10% 0px 10%;
 }
 
+.tabla-custom {
+
+}
+
+.white {
+    background-color: white !important
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align: center;
+}
+
+.col-centered {
+    text-align: center;
+    /*float:none;*/
+    /* reset the text-align */
+    /* inline-block space fix */
+}
+
+.img-circle {
+    border-radius: 50%;
+}

@@ -38,7 +38,7 @@
     <bean id="cuenta3" class="security.Cuenta">
         <property name="username" value="usuario2"/>
         <property name="password" value="2fb6c8d2f3842a5ceaa9bf320e649ff0"/>
-        <property name="isActivated" value="true"/>
+        <property name="isActivated" value="false"/>
         <property name="authorities">
             <list>
                 <bean class="security.Autoridad">
@@ -62,7 +62,7 @@
         </property>
     </bean>
 
-    <!-- Admins -->
+    <!-- Admin -->
     <bean id="admin1" class="domain.Admin">
         <property name="nombre" value="Chuck"/>
         <property name="apellidos" value="Norris"/>
@@ -83,6 +83,30 @@
         <property name="email" value="chucknNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta2"/>
+        <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
+        <property name="descripcion"
+                  value="Experto en montaje de ordenadores y sistemas, muchos años de cacharreo entre ordenadores"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+        <property name="pagos">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="usuario2" class="domain.Usuario">
+        <property name="nombre" value="William"/>
+        <property name="apellidos" value="Wallace"/>
+        <property name="cp" value="41010"/>
+        <property name="provincia" value="Escocia"/>
+        <property name="DNI" value="48820087B"/>
+        <property name="email" value="ww@gmail.com"/>
+        <property name="telefono" value="675048498"/>
+        <property name="cuenta" ref="cuenta3"/>
         <property name="peticiones">
             <list>
 
@@ -126,7 +150,7 @@
         </property>
         <property name="estudios">
             <list>
-
+                <ref bean="estudio1"/>
             </list>
         </property>
         <property name="trabajos">
@@ -135,5 +159,26 @@
             </list>
         </property>
     </bean>
+
+    <!-- ****************** Estudios ************* -->
+
+    <bean id="estudio1" class="domain.Estudio">
+        <constructor-arg index="0" type="java.lang.String" name="centro" value="Vicente Aleixandre"/>
+        <constructor-arg index="1" type="java.lang.String" name="titulacion" value="FP Informática"/>
+        <constructor-arg index="2" type="java.lang.String" name="fechaInicio" value="10/10/2010"/>
+        <constructor-arg index="3" type="java.lang.String" name="fechaFin" value="10/10/2012"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
+
+    <!--<bean id="estudio2" class="domain.Estudio">-->
+    <!--<property name="titulacion" value="Ingeniería Informática"/>-->
+    <!--<property name="centro" value="ETSII"/>-->
+    <!--&lt;!&ndash;<property name="fechaInicio" value="21/09/2013"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="fechaFin" value="21/06/2017"/>&ndash;&gt;-->
+    <!--<property name="profesional" ref="profesional1" />-->
+    <!--</bean>-->
+
+
+    <!-- ****************** Trabajos ************* -->
 
 </beans>

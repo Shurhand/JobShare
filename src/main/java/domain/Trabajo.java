@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,6 +22,23 @@ public class Trabajo extends DomainEntity {
    private String puesto;
    private LocalDate fechaInicio;
    private LocalDate fechaFin;
+   
+   public Trabajo() {
+      super();
+   }
+   
+   public Trabajo(String empresa, String puesto, String fechaInicio, String fechaFin) {
+      this.empresa = empresa;
+      this.puesto = puesto;
+      
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaInicio = LocalDate.parse(fechaInicio, formatter);
+      this.fechaFin = LocalDate.parse(fechaFin, formatter);
+   }
+   
    // Relaciones
    private Profesional profesional;
    

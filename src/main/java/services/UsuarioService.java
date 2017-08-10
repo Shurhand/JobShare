@@ -128,6 +128,11 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    
    }
    
+   public Usuario findUsuario() {
+      Actor a = actorService.findPrincipal();
+      return usuarioRepository.findUsuario(a.getCuenta());
+   }
+   
    public void convertirse() {
       this.checkIfUsuario();
       Collection<Autoridad> res = new ArrayList<>();
@@ -157,3 +162,4 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    }
   
 }
+
