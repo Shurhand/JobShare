@@ -34,24 +34,24 @@ footer {
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 35px;
     width: 100%;
     background-color: #298fc2;
     color: #fff;
-
+    right: 0;
+    padding: 0.3em;
 }
 
 footer ul {
-    display: inline-flex;
-    flex-direction: row;
-    /* Below sets up your display method, ex: flex-start|flex-end|space-between|space-around */
-    justify-content: flex-start;
-    /* Below removes bullets and cleans white-space */
-    list-style: none;
-    padding: 0 1% 0 1%;
-    margin: 10px 0 0 0;
-    /* Bonus: forces no word-wrap */
-    white-space: nowrap;
+    /*display: inline-flex;*/
+    /*flex-direction: row;*/
+    /*!* Below sets up your display method, ex: flex-start|flex-end|space-between|space-around *!*/
+    /*justify-content: flex-start;*/
+    /*!* Below removes bullets and cleans white-space *!*/
+    /*list-style: none;*/
+    /*padding: 0 1% 0 1%;*/
+    /*margin: 10px 0 0 0;*/
+    /*!* Bonus: forces no word-wrap *!*/
+    /*white-space: nowrap;*/
 }
 
 footer ul li {
@@ -59,15 +59,12 @@ footer ul li {
 }
 
 footer .social {
-    margin: -4px 60% 0 45%;
     text-align: center;
 }
 
 footer .social > a {
-    font-size: 26px;
-    width: 80%;
-    display: inline-flex;
-    opacity: 0.85;
+    font-size: 18px;
+    opacity: 0.9;
 
 }
 

@@ -8,13 +8,13 @@
 <%--<p class="text-center strong">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy"/>--%>
 <%--JobShare Co., Inc.</p>--%>
 
-
+<div class="row">
 <footer class="footer">
-    <ul>
-        <li>
+    <div>
+        <div style="margin-top: 0.2em" class="text-left col-md-4 col-lg-4 col-xs-4 col-sm-4">
             <spring:message code="footer.derechos"/>
-        </li>
-        <li class="social">
+        </div>
+        <div class="social col-md-4 col-lg-4 col-xs-4 col-sm-4">
             <a href="">
                 <span class="fa-twitter fa"/>
             </a>
@@ -24,11 +24,12 @@
             <a href="">
                 <span class="fa-google-plus fa"/>
             </a>
-        </li>
-        <li>
+        </div>
+        <div style="margin-top: 0.2em" class="text-right col-md-4 col-lg-4 col-xs-4 col-sm-4">
             <a href="/contacto.do"><spring:message code="footer.contacto"/></a> |
             <a href="/terminos.do"><spring:message code="footer.terminosYcondiciones"/></a> |
             <a href="/about.do"><spring:message code="footer.sobreNosotros"/></a>
-        </li>
-    </ul>
+        </div>
+    </div>
 </footer>
+</div>
