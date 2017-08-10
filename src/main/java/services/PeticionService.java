@@ -3,6 +3,7 @@ package services;
 import domain.Estado;
 import domain.Item;
 import domain.Peticion;
+import domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.PeticionRepository;
@@ -27,12 +28,14 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    @Override
    public Peticion create() {
       actorService.checkIfUsuarioOProfesional();
+      Usuario usuario = usuarioService.findUsuario();
       Collection<Item> items = new ArrayList<>();
       LocalDate fechaCreacion = LocalDate.now();
       Estado estado = Estado.ACTIVA;
       Peticion peticion = new Peticion();
       
       peticion.setFechaCreacion(fechaCreacion);
+      peticion.setUsuario(usuario);
       peticion.setItems(items);
       peticion.setEstado(estado);
       
@@ -80,7 +83,7 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       return peticionRepository.findOne(peticionID);
    }
    
-   public Collection<Peticion> getMisPeticiones(Usuario usuario){
-       return peticionRepository.getMisPeticiones(usuario)
+   public Collection<Peticion> getPeticionesPorUsuario(Usuario usuario) {
+      return peticionRepository.getPeticionesPorUsuario(usuario);
    }
 }

@@ -201,7 +201,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                     class="fa fa-user-circle-o" aria-hidden="true"></i>
                                     <spring:message code="master.page.salute"/>
-                                    <security:authentication property="principal.username"/></a>
+                                    <security:authentication property="principal.username"/>!</a>
                                 <ul class="dropdown-menu box main-dp">
                                     <li>
                                         <a href="actor/perfil.do"><i class="fa fa-user" aria-hidden="true"></i> Ver

@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -83,6 +84,7 @@ public class Valoracion extends DomainEntity {
    }
    
    @NotNull
+   @JsonBackReference
    @Valid
    @ManyToOne(optional = false)
    public Profesional getProfesional() {

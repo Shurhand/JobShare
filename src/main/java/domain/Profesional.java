@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -20,6 +22,7 @@ public class Profesional extends Usuario {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
+   @JsonManagedReference
    public Collection<Oferta> getOfertas() {
       return ofertas;
    }
@@ -30,6 +33,7 @@ public class Profesional extends Usuario {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
+   @JsonManagedReference
    public Collection<Trabajo> getTrabajos() {
       return trabajos;
    }
@@ -40,6 +44,7 @@ public class Profesional extends Usuario {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
+   @JsonManagedReference
    public Collection<Estudio> getEstudios() {
       return estudios;
    }
@@ -50,6 +55,7 @@ public class Profesional extends Usuario {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
+   @JsonManagedReference
    public Collection<Valoracion> getValoraciones() {
       return valoraciones;
    }

@@ -1,26 +1,26 @@
 package controllers.usuario;
 
 import controllers.AbstractController;
-import forms.UsuarioForm;
+import domain.Peticion;
+import domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.PeticionService;
 import services.UsuarioService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
 @RequestMapping("/peticion/usuario/")
-public class IndexUsuarioController extends AbstractController {
-   public IndexUsuarioController() {
+public class PeticionUsuarioController extends AbstractController {
+   public PeticionUsuarioController() {
       super();
    }
    
@@ -48,14 +48,14 @@ public class IndexUsuarioController extends AbstractController {
 
    @GetMapping("/crear")
    public ModelAndView create() {
-
-      ModelAndView result;
+   
+      ModelAndView res;
       Peticion peticion = peticionService.create();
 
       res = new ModelAndView("peticion/usuario/crear");
       res.addObject("peticion", peticion);
-
-      return result;
+   
+      return res;
    }
    
     @GetMapping("/editar")
@@ -112,9 +112,11 @@ public class IndexUsuarioController extends AbstractController {
     @GetMapping("/borrar")
     public ModelAndView delete(@RequestParam int peticionID) {
         ModelAndView result;
-        Peticion peticion = peticionService.delete(peticionID);
-
-        result = new ModelAndView(redirect:/peticion/usuario/MisPeticiones.do);
+   
+       Peticion peticion = peticionService.findOne(peticionID);
+       peticionService.delete(peticion);
+   
+       result = new ModelAndView("redirect:/peticion/usuario/MisPeticiones.do");
 
         return result;
    }

@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -109,6 +110,7 @@ public class Peticion extends DomainEntity {
    @NotNull
    @Valid
    @ManyToOne(optional = false)
+   @JsonBackReference
    public Usuario getUsuario() {
       return usuario;
    }

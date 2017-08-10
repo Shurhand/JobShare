@@ -22,11 +22,11 @@
                     </div>
                 </c:if>
                 <form:form action="peticion/usuario/create.do" modelAttribute="peticion" acceptCharset="UTF-8">
-                    <form:hidden path=id" />
-                    <form:hidden path=version" />
-                    <form:hidden path=usuario" />
-                    <form:hidden path=estado" />
-                    <form:hidden path=fechaCreacion" />
+                    <form:hidden path="id"/>
+                    <form:hidden path="version"/>
+                    <form:hidden path="usuario"/>
+                    <form:hidden path="estado"/>
+                    <form:hidden path="fechaCreacion"/>
                     <div
                         class="form-group ${errores.contains('titulo') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="peticion.titulo" var="peticion.titulo" />
@@ -57,8 +57,9 @@
 
                     <div class="form-group text-center">
                         <br>
-                        <a href="peticion/usuario/misPeticiones.do" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message code="volver" /></a>
-                        <button type="submit" name="saveForm" class="btn btn-primary"><i class="fa fa-check"></i>
+                        <a href="peticion/usuario/misPeticiones.do" class="btn btn-primary"><i
+                            class="fa fa-arrow-left"></i> <spring:message code="volver"/></a>
+                        <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i>
                             <spring:message code="guardar" />
                         </button>
                     </div>

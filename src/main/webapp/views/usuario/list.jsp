@@ -43,6 +43,7 @@
         var data = ${usuarios};
         var tabla = $('#usuarios').DataTable({
             'responsive': true,
+            'autoWidth': true,
             "aaData": data,
             "aoColumns": [
                 {"mData": "nombre"},

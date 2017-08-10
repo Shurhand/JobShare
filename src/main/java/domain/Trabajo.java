@@ -1,8 +1,13 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
+import utilities.LocalDateDeserializer;
+import utilities.internal.LocalDateSerializer;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -65,6 +70,8 @@ public class Trabajo extends DomainEntity {
    @NotNull
    @SafeHtml
    @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @JsonDeserialize(using = LocalDateDeserializer.class)
+   @JsonSerialize(using = LocalDateSerializer.class)
    public LocalDate getFechaInicio() {
       return fechaInicio;
    }
@@ -76,6 +83,8 @@ public class Trabajo extends DomainEntity {
    @NotNull
    @SafeHtml
    @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @JsonDeserialize(using = LocalDateDeserializer.class)
+   @JsonSerialize(using = LocalDateSerializer.class)
    public LocalDate getFechaFin() {
       return fechaFin;
    }
@@ -87,6 +96,7 @@ public class Trabajo extends DomainEntity {
    @NotNull
    @Valid
    @ManyToOne(optional = false)
+   @JsonBackReference
    public Profesional getProfesional() {
       return profesional;
    }

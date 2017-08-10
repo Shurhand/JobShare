@@ -15,6 +15,7 @@ import services.UsuarioService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -116,12 +117,14 @@ public class IndexUsuarioController extends AbstractController {
    
    protected ModelAndView createEditModelAndView(UsuarioForm usuarioForm, String message) {
       ModelAndView res;
-      
+   
+      Collection<String> provincias = usuarioService.getListaProvincias();
       Credenciales credenciales = new Credenciales();
       
       res = new ModelAndView("usuario/create");
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
+      res.addObject("provincias", provincias);
       
       return res;
    }

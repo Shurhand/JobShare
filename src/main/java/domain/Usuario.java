@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -18,6 +20,7 @@ public class Usuario extends Actor {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+   @JsonManagedReference
    public Collection<Peticion> getPeticiones() {
       return peticiones;
    }
@@ -28,6 +31,7 @@ public class Usuario extends Actor {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+   @JsonManagedReference
    public Collection<Pago> getPagos() {
       return pagos;
    }

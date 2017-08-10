@@ -2,8 +2,11 @@ package services;
 
 import domain.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import repositories.ActorRepository;
+import security.Autoridad;
 import security.Cuenta;
 import security.LoginService;
 
@@ -78,16 +81,7 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       Integer numeroDni = new Integer(dni.substring(0, 8));
       return dni.charAt(8) == letras.charAt(numeroDni % 23);
    }
-   
-   public void enable(Actor a) {
-      a.getCuenta().setIsActivated(true);
-      actorRepository.save(a);
-   }
-   
-   public void disable(Actor a) {
-      a.getCuenta().setIsActivated(false);
-      actorRepository.save(a);
-   }
+
    
   public void checkIfUsuarioOProfesional() {
       boolean usuarioOProfesional = false;
@@ -98,13 +92,13 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
             usuarioOProfesional = true;
          }
       }
-      Assert.isTrue(usuario, "No es un usuario o profesional");
+     Assert.isTrue(usuarioOProfesional, "No es un usuario o profesional");
       
    }
    
     public void checkIfAutenticado() {
-      boolean autenticado = false;
-      autenticado = SecurityContextHolder.getContext().getAuthentication();
+       boolean autenticado;
+       autenticado = SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
       Assert.isTrue(autenticado, "No está autenticado");
       
    }

@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -107,6 +108,7 @@ public class Oferta extends DomainEntity {
    private Valoracion valoracion;
    private Item item;
    
+   @JsonBackReference
    @NotNull
    @Valid
    @ManyToOne(optional = false)

@@ -1,8 +1,13 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
+import utilities.LocalDateDeserializer;
+import utilities.internal.LocalDateSerializer;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -16,7 +21,6 @@ import java.util.Locale;
 
 @Entity
 @Access(AccessType.PROPERTY)
-
 public class Estudio extends DomainEntity {
    private String centro;
    private String titulacion;
@@ -64,6 +68,8 @@ public class Estudio extends DomainEntity {
    @NotNull
    @SafeHtml
    @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @JsonDeserialize(using = LocalDateDeserializer.class)
+   @JsonSerialize(using = LocalDateSerializer.class)
    public LocalDate getFechaInicio() {
       return fechaInicio;
    }
@@ -75,6 +81,8 @@ public class Estudio extends DomainEntity {
    @NotNull
    @SafeHtml
    @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @JsonDeserialize(using = LocalDateDeserializer.class)
+   @JsonSerialize(using = LocalDateSerializer.class)
    public LocalDate getFechaFin() {
       return fechaFin;
    }
@@ -87,6 +95,7 @@ public class Estudio extends DomainEntity {
    private Profesional profesional;
    
    @NotNull
+   @JsonBackReference
    @Valid
    @ManyToOne(optional = false)
    public Profesional getProfesional() {

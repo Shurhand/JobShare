@@ -121,3 +121,9 @@ footer a:hover {
 .img-circle {
     border-radius: 50%;
 }
+
+/* Celdas centradas Datatables */
+.centrar {
+    margin: 50px;
+    padding-top: 30px;
+}

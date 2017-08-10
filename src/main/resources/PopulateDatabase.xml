@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 
-    <!-- User accounts -->
+    <!-- ****************** Cuentas ************* -->
 
     <bean id="cuenta1" class="security.Cuenta">
         <property name="username" value="admin"/>
@@ -62,7 +62,8 @@
         </property>
     </bean>
 
-    <!-- Admin -->
+    <!-- ****************** Admin ************* -->
+
     <bean id="admin1" class="domain.Admin">
         <property name="nombre" value="Chuck"/>
         <property name="apellidos" value="Norris"/>
@@ -73,6 +74,8 @@
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta1"/>
     </bean>
+
+    <!-- ****************** Usuarios ************* -->
 
     <bean id="usuario1" class="domain.Usuario">
         <property name="nombre" value="Chuck"/>
@@ -119,6 +122,8 @@
         </property>
     </bean>
 
+    <!-- ****************** Profesionales ************* -->
+
     <bean id="profesional1" class="domain.Profesional">
         <property name="nombre" value="Bruce"/>
         <property name="apellidos" value="Lee"/>
@@ -151,11 +156,13 @@
         <property name="estudios">
             <list>
                 <ref bean="estudio1"/>
+                <ref bean="estudio2"/>
             </list>
         </property>
         <property name="trabajos">
             <list>
-
+                <ref bean="trabajo1"/>
+                <ref bean="trabajo1"/>
             </list>
         </property>
     </bean>
@@ -163,22 +170,47 @@
     <!-- ****************** Estudios ************* -->
 
     <bean id="estudio1" class="domain.Estudio">
-        <constructor-arg index="0" type="java.lang.String" name="centro" value="Vicente Aleixandre"/>
-        <constructor-arg index="1" type="java.lang.String" name="titulacion" value="FP Informática"/>
-        <constructor-arg index="2" type="java.lang.String" name="fechaInicio" value="10/10/2010"/>
-        <constructor-arg index="3" type="java.lang.String" name="fechaFin" value="10/10/2012"/>
+        <constructor-arg index="0" name="centro" value="Vicente Aleixandre"/>
+        <constructor-arg index="1" name="titulacion" value="FP Informática"/>
+        <constructor-arg index="2" name="fechaInicio" value="10/10/2010"/>
+        <constructor-arg index="3" name="fechaFin" value="01/09/2012"/>
         <property name="profesional" ref="profesional1"/>
     </bean>
 
-    <!--<bean id="estudio2" class="domain.Estudio">-->
-    <!--<property name="titulacion" value="Ingeniería Informática"/>-->
-    <!--<property name="centro" value="ETSII"/>-->
-    <!--&lt;!&ndash;<property name="fechaInicio" value="21/09/2013"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;<property name="fechaFin" value="21/06/2017"/>&ndash;&gt;-->
-    <!--<property name="profesional" ref="profesional1" />-->
-    <!--</bean>-->
+    <bean id="estudio2" class="domain.Estudio">
+        <constructor-arg index="0" name="centro" value="ETSII"/>
+        <constructor-arg index="1" name="titulacion" value="Ingeniería Informática"/>
+        <constructor-arg index="2" name="fechaInicio" value="09/09/2012"/>
+        <constructor-arg index="3" name="fechaFin" value="26/06/2017"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
 
 
     <!-- ****************** Trabajos ************* -->
+
+    <bean id="trabajo1" class="domain.Trabajo">
+        <constructor-arg index="0" name="empresa" value="Google"/>
+        <constructor-arg index="1" name="puesto" value="Programador"/>
+        <constructor-arg index="2" name="fechaInicio" value="05/12/2016"/>
+        <constructor-arg index="3" name="fechaFin" value="25/09/2017"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
+
+    <bean id="trabajo2" class="domain.Trabajo">
+        <constructor-arg index="0" name="empresa" value="Microsoft"/>
+        <constructor-arg index="1" name="puesto" value="Analista"/>
+        <constructor-arg index="2" name="fechaInicio" value="12/11/2015"/>
+        <constructor-arg index="3" name="fechaFin" value="21/06/2016"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
+
+    <!-- ****************** Peticiones ************* -->
+
+    <!-- ****************** Items ************* -->
+
+    <!-- ****************** Ofertas ************* -->
+
+    <!-- ****************** Valoraciones ************* -->
+
 
 </beans>

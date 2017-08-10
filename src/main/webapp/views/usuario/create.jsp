@@ -12,7 +12,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 style="text-align: center"><spring:message code="usuario.nuevo"/></h2>
             <div class="well">
-                <c:if test="${!erroresCheck.isEmpty()}">
+                <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
                     <div class="alert alert-danger alert-dismissable alert-link">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
                         <c:forEach var="e" items="${erroresCheck}">
@@ -24,72 +24,74 @@
 
                     <div
                         class="form-group ${errores.contains('username') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.usuario" var="usuario.usuario" />
-                        <form:label class="control-label" path="username">${usuario.usuario}</form:label>
-                        <form:input class="form-control" path="username" placeholder="${usuario.usuario}"/>
+                        <spring:message code="usuario.usuario" var="usuario"/>
+                        <form:label class="control-label" path="username">${usuario}</form:label>
+                        <form:input class="form-control" path="username" placeholder="${usuario}"/>
                         <form:errors class="help-block" path="username"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('password') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.contraseña" var="usuario.contraseña" />
-                        <form:label class="control-label" path="password">${usuario.contraseña}</form:label>
-                        <form:password class="form-control" path="password" placeholder="${usuario.contraseña}"/>
+                        <spring:message code="usuario.contraseña" var="contraseña"/>
+                        <form:label class="control-label" path="password">${contraseña}</form:label>
+                        <form:password class="form-control" path="password" placeholder="${contraseña}"/>
                         <form:errors class="help-block" path="password"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('confirmarPassword') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.confirmar" var="usuario.confirmar" />
-                        <form:label class="control-label" path="confirmarPassword">${usuario.confirmar}</form:label>
-                        <form:password class="form-control" path="confirmarPassword" placeholder="${usuario.confirmar}"/>
+                        <spring:message code="usuario.confirmar" var="confirmar"/>
+                        <form:label class="control-label" path="confirmarPassword">${confirmar}</form:label>
+                        <form:password class="form-control" path="confirmarPassword" placeholder="${confirmar}"/>
                         <form:errors class="help-block" path="confirmarPassword"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('nombre') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.nombre" var="usuario.nombre" />
-                        <form:label class="control-label" path="nombre">${usuario.nombre}</form:label>
-                        <form:input class="form-control" path="nombre" placeholder="${usuario.nombre}"/>
+                        <spring:message code="usuario.nombre" var="nombre"/>
+                        <form:label class="control-label" path="nombre">${nombre}</form:label>
+                        <form:input class="form-control" path="nombre" placeholder="${nombre}"/>
                         <form:errors class="help-block" path="nombre"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('apellidos') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.apellidos" var="usuario.apellidos" />
-                        <form:label class="control-label" path="apellidos">${usuario.apellidos}</form:label>
-                        <form:input class="form-control" path="apellidos" placeholder="${usuario.apellidos}"/>
+                        <spring:message code="usuario.apellidos" var="apellidos"/>
+                        <form:label class="control-label" path="apellidos">${apellidos}</form:label>
+                        <form:input class="form-control" path="apellidos" placeholder="${apellidos}"/>
                         <form:errors class="help-block" path="apellidos"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('email') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.email" var="usuario.email" />
-                        <form:label class="control-label" path="email">${usuario.email}</form:label>
-                        <form:input type="email" class="form-control" path="email" placeholder="${usuario.email}"/>
+                        <spring:message code="usuario.email" var="email"/>
+                        <form:label class="control-label" path="email">${email}</form:label>
+                        <form:input type="email" class="form-control" path="email" placeholder="${email}"/>
                         <form:errors class="help-block" path="email"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('DNI') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.dni" var="usuario.dni" />
-                        <form:label class="control-label" path="DNI">${usuario.dni}</form:label>
-                        <form:input class="form-control" path="DNI" placeholder="${usuario.dni}"/>
+                        <spring:message code="usuario.dni" var="dni"/>
+                        <form:label class="control-label" path="DNI">${dni}</form:label>
+                        <form:input class="form-control" path="DNI" placeholder="${dni}"/>
                         <form:errors class="help-block" path="DNI"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('provincia') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.provincia" var="usuario.provincia" />
-                        <form:label class="control-label" path="provincia">${usuario.provincia}</form:label>
-                        <form:input class="form-control" path="provincia" placeholder="${usuario.provincia}"/>
+                        <spring:message code="usuario.provincia" var="provincia"/>
+                        <form:label class="control-label" path="provincia">${provincia}</form:label>
+                        <form:select class="form-control" path="provincia" placeholder="${provincia}">
+                            <form:options items="${provincias}"/>
+                        </form:select>
                         <form:errors class="help-block" path="provincia"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('cp') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.cp" var="usuario.cp" />
-                        <form:label class="control-label" path="cp">${usuario.cp}</form:label>
-                        <form:input class="form-control" path="cp" placeholder="${usuario.cp}"/>
+                        <spring:message code="usuario.cp" var="cp"/>
+                        <form:label class="control-label" path="cp">${cp}</form:label>
+                        <form:input class="form-control" path="cp" placeholder="${cp}"/>
                         <form:errors class="help-block" path="cp"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('telefono') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.telefono" var="usuario.telefono" />
-                        <form:label class="control-label" path="telefono">${usuario.telefono}</form:label>
-                        <form:input class="form-control" path="telefono" placeholder="${usuario.telefono}"/>
+                        <spring:message code="usuario.telefono" var="telefono"/>
+                        <form:label class="control-label" path="telefono">${telefono}</form:label>
+                        <form:input class="form-control" path="telefono" placeholder="${telefono}"/>
                         <form:errors class="help-block" path="telefono"/>
                     </div>
                     <div class="form-group ${errores != null ? 'has-success has-feedback' : ''}">
@@ -109,8 +111,9 @@
                     </div>
                     <div class="form-group text-center">
                         <br>
-                        <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message code="volver" />"</a>
-                        <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i>
+                        <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message
+                            code="volver"/></a>
+                        <button type="submit" name="saveForm" class="btn btn-primary"><i class="fa fa-check"></i>
                             <spring:message code="guardar" />
                         </button>
                     </div>
