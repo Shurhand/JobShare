@@ -100,7 +100,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       Cuenta cuenta = new Cuenta();
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
    
-      Assert.isTrue(usuarioForm.getPassword().equals(usuarioForm.getConfirmarPassword()), "usuario.coincidenciaPasswords");
+      Assert.isTrue(checkPassword(usuarioForm), "usuario.coincidenciaPasswords");
       
       usuario.setNombre(usuarioForm.getNombre());
       usuario.setApellidos(usuarioForm.getApellidos());
@@ -166,6 +166,11 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       return Arrays.asList("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
 
    }
-  
+   
+   public Boolean checkPassword(UsuarioForm usuarioForm) {
+      return usuarioForm.getPassword().equals(usuarioForm.getConfirmarPassword());
+   }
+   
+   
 }
 

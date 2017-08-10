@@ -27,8 +27,8 @@ public class UsuarioForm {
    private boolean checkTerminos;
    private URL foto;
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getNombre() {
       return nombre;
    }
@@ -37,7 +37,7 @@ public class UsuarioForm {
       this.nombre = nombre;
    }
    
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getTelefono() {
       return telefono;
    }
@@ -46,8 +46,8 @@ public class UsuarioForm {
       this.telefono = telefono;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getApellidos() {
       return apellidos;
    }
@@ -56,8 +56,8 @@ public class UsuarioForm {
       this.apellidos = apellidos;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Pattern(regexp = "^(\\d{8}([A-Z]|[a-z]{1}))$")
    public String getDNI() {
       return DNI;
@@ -67,7 +67,7 @@ public class UsuarioForm {
       this.DNI = DNI;
    }
    
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getCp() {
       return cp;
    }
@@ -76,8 +76,8 @@ public class UsuarioForm {
       this.cp = cp;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Email
    public String getEmail() {
       return email;
@@ -87,8 +87,8 @@ public class UsuarioForm {
       this.email = email;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getProvincia() {
       return provincia;
    }
@@ -97,7 +97,7 @@ public class UsuarioForm {
       this.provincia = provincia;
    }
    
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Size(min = 5, max = 32)
    public String getUsername() {
       return username;
@@ -107,7 +107,7 @@ public class UsuarioForm {
       this.username = username;
    }
    
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Size(min = 5, max = 32)
    public String getPassword() {
       return password;
@@ -117,7 +117,7 @@ public class UsuarioForm {
       this.password = password;
    }
    
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Size(min = 5, max = 32)
    public String getConfirmarPassword() {
       return confirmarPassword;

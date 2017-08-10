@@ -74,16 +74,21 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       return result;
    }
    
+   public Boolean checkDni(String dni) {
+      return checkDniCaracteres(dni) && checkDniLetra(dni);
+   }
+   
+   private Boolean checkDniCaracteres(String dni) {
+      return dni.length() == 9 && Character.isDigit(dni.charAt(0)) && Character.isDigit(dni.charAt(1)) && Character.isDigit(dni.charAt(2)) && Character.isDigit(dni.charAt(3)) && Character.isDigit(dni.charAt(4)) && Character.isDigit(dni.charAt(5)) && Character.isDigit(dni.charAt(6)) && Character.isDigit(dni.charAt(7)) && Character.isLetter(dni.charAt(8));
+   }
+   
    private Boolean checkDniLetra(String dni) {
-      // Precondicion: se ha comprobado previamente que dni tiene 8 digitos y
-      // una letra
       String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
       Integer numeroDni = new Integer(dni.substring(0, 8));
       return dni.charAt(8) == letras.charAt(numeroDni % 23);
    }
-
    
-  public void checkIfUsuarioOProfesional() {
+   public void checkIfUsuarioOProfesional() {
       boolean usuarioOProfesional = false;
       Collection<Autoridad> roles;
       roles = LoginService.getPrincipal().getAuthorities();
@@ -92,14 +97,25 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
             usuarioOProfesional = true;
          }
       }
-     Assert.isTrue(usuarioOProfesional, "No es un usuario o profesional");
+      Assert.isTrue(usuarioOProfesional, "No es un usuario o profesional");
       
    }
    
-    public void checkIfAutenticado() {
-       boolean autenticado;
-       autenticado = SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+   public void checkIfAutenticado() {
+      boolean autenticado;
+      autenticado = SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
       Assert.isTrue(autenticado, "No está autenticado");
-      
+   }
+   
+   public Actor findActorPorUsername(String username) {
+      return actorRepository.findActorPorUsername(username);
+   }
+   
+   public Actor findActorPorEmail(String email) {
+      return actorRepository.findActorPorEmail(email);
+   }
+   
+   public Actor findActorPorDNI(String DNI) {
+      return actorRepository.findActorPorDNI(DNI);
    }
 }

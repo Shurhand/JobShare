@@ -45,8 +45,8 @@ public class Estudio extends DomainEntity {
       
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getCentro() {
       return centro;
    }
@@ -55,8 +55,8 @@ public class Estudio extends DomainEntity {
       this.centro = centro;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getTitulacion() {
       return titulacion;
    }
@@ -66,7 +66,7 @@ public class Estudio extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    @JsonDeserialize(using = LocalDateDeserializer.class)
    @JsonSerialize(using = LocalDateSerializer.class)
@@ -79,7 +79,7 @@ public class Estudio extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    @JsonDeserialize(using = LocalDateDeserializer.class)
    @JsonSerialize(using = LocalDateSerializer.class)

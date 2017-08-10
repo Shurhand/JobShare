@@ -43,8 +43,8 @@ public class Peticion extends DomainEntity {
       this.estado = estado;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getTitulo() {
       return titulo;
    }
@@ -53,8 +53,8 @@ public class Peticion extends DomainEntity {
       this.titulo = titulo;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getDescripcion() {
       return descripcion;
    }
@@ -64,7 +64,7 @@ public class Peticion extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCreacion() {
       return fechaCreacion;
@@ -75,7 +75,7 @@ public class Peticion extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCaducidad() {
       return fechaCaducidad;

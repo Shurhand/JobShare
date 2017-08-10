@@ -69,8 +69,8 @@
         <property name="apellidos" value="Norris"/>
         <property name="cp" value="41010"/>
         <property name="provincia" value="Shangri-la"/>
-        <property name="DNI" value="48820088N"/>
-        <property name="email" value="chucknNorris@gmail.com"/>
+        <property name="DNI" value="51301302D"/>
+        <property name="email" value="chuckNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta1"/>
     </bean>
@@ -83,7 +83,7 @@
         <property name="cp" value="41010"/>
         <property name="provincia" value="Shangri-la"/>
         <property name="DNI" value="48820088N"/>
-        <property name="email" value="chucknNorris@gmail.com"/>
+        <property name="email" value="equecrates@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta2"/>
         <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
@@ -106,7 +106,7 @@
         <property name="apellidos" value="Wallace"/>
         <property name="cp" value="41010"/>
         <property name="provincia" value="Escocia"/>
-        <property name="DNI" value="48820087B"/>
+        <property name="DNI" value="76817054K"/>
         <property name="email" value="ww@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta3"/>
@@ -129,8 +129,8 @@
         <property name="apellidos" value="Lee"/>
         <property name="cp" value="41010"/>
         <property name="provincia" value="Shangri-la"/>
-        <property name="DNI" value="48820088N"/>
-        <property name="email" value="chucknNorris@gmail.com"/>
+        <property name="DNI" value="17883990H"/>
+        <property name="email" value="BruceLee@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta4"/>
         <property name="peticiones">

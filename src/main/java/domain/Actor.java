@@ -29,8 +29,8 @@ public class Actor extends DomainEntity {
       super();
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getNombre() {
       return nombre;
    }
@@ -39,8 +39,7 @@ public class Actor extends DomainEntity {
       this.nombre = nombre;
    }
    
-
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getTelefono() {
       return telefono;
    }
@@ -49,8 +48,8 @@ public class Actor extends DomainEntity {
       this.telefono = telefono;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getApellidos() {
       return apellidos;
    }
@@ -59,9 +58,8 @@ public class Actor extends DomainEntity {
       this.apellidos = apellidos;
    }
    
-   
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Pattern(regexp = "^(\\d{8}([A-Z]|[a-z]{1}))$")
    @Column(unique = true, updatable = false)
    public String getDNI() {
@@ -72,8 +70,7 @@ public class Actor extends DomainEntity {
       this.DNI = DNI;
    }
    
-
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getCp() {
       return cp;
    }
@@ -82,8 +79,8 @@ public class Actor extends DomainEntity {
       this.cp = cp;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Email
    @Column(unique = true)
    public String getEmail() {
@@ -94,8 +91,7 @@ public class Actor extends DomainEntity {
       this.email = email;
    }
    
-
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getProvincia() {
       return provincia;
    }
@@ -112,7 +108,7 @@ public class Actor extends DomainEntity {
       this.foto = picture;
    }
    
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getDescripcion() {
       return descripcion;
    }

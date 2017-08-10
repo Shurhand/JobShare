@@ -48,7 +48,7 @@ public class Autoridad implements GrantedAuthority {
       return result;
    }
    
-   @NotBlank
+   @NotBlank(message = "{error.notblank}")
    @Pattern(regexp = "^" + ADMIN + "|" + USUARIO + "|" + PROFESIONAL + "$")
    @Override
    public String getAuthority() {

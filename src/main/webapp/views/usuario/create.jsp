@@ -76,6 +76,7 @@
                         <spring:message code="usuario.provincia" var="provincia"/>
                         <form:label class="control-label" path="provincia">${provincia}</form:label>
                         <form:select class="form-control" path="provincia" placeholder="${provincia}">
+                            <form:option value="-----"/>
                             <form:options items="${provincias}"/>
                         </form:select>
                         <form:errors class="help-block" path="provincia"/>

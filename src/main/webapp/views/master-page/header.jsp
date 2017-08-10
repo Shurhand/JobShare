@@ -20,7 +20,6 @@
                 </div>
                 <ul class="nav navbar-nav navbar-left ">
                     <security:authorize access="hasAuthority('USUARIO')">
-                        <%--<li><a href="usuario/convertirse.do"></a></li>--%>
                         <li class="modal">
                             <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#modalProfesional"
                                data-toggle="modal">¡Conviértete en profesional!
@@ -64,13 +63,14 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-globe"></span> Idioma</a>
+                            class="glyphicon glyphicon-globe"></span> <spring:message code="idioma.header"/></a>
                         <ul class="dropdown-menu box main-dp">
                             <li>
-                                <a href="?language=en"><img src="images/icon_id_en.png"></a>
+                                <a href="?language=en"><img src="images/icon_id_en.png"> <spring:message code="ingles"/></a>
                             </li>
                             <li>
-                                <a href="?language=es"><img src="images/icon_id_es.png"></a>
+                                <a href="?language=es"><img src="images/icon_id_es.png"> <spring:message
+                                    code="español"/></a>
                             </li>
                         </ul>
                     </li>

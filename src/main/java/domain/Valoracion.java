@@ -37,7 +37,7 @@ public class Valoracion extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Range(min = 1, max = 5)
    public Double getPuntuacion() {
       return puntuacion;
@@ -47,8 +47,8 @@ public class Valoracion extends DomainEntity {
       this.puntuacion = puntuacion;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getComentario() {
       return comentario;
    }
@@ -58,7 +58,7 @@ public class Valoracion extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCreacion() {
       return fechaCreacion;

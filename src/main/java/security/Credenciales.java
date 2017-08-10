@@ -16,7 +16,7 @@ public class Credenciales {
       super();
    }
    
-   @NotBlank
+   @NotBlank(message = "{error.notblank}")
    @Size(min = 5, max = 32)
    public String getUsername() {
       return username;
@@ -26,7 +26,7 @@ public class Credenciales {
       this.username = username;
    }
    
-   @NotBlank
+   @NotBlank(message = "{error.notblank}")
    @Size(min = 5, max = 32)
    public String getPassword() {
       return password;

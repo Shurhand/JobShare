@@ -40,8 +40,8 @@ public class Item extends DomainEntity {
       this.estado = estado;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getNombre() {
       return nombre;
    }
@@ -50,8 +50,8 @@ public class Item extends DomainEntity {
       this.nombre = nombre;
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getDescripcion() {
       return descripcion;
    }
@@ -61,7 +61,7 @@ public class Item extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Range(min = 1, max = 10000)
    public Double getPresupuesto() {
       return presupuesto;
@@ -72,7 +72,7 @@ public class Item extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCreacion() {
       return fechaCreacion;

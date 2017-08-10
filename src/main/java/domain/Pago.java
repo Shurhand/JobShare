@@ -21,7 +21,7 @@ public class Pago extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCreacion() {
       return fechaCreacion;

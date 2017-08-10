@@ -43,7 +43,7 @@ public class Oferta extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Range(min = 1, max = 10000)
    public Double getPrecio() {
       return precio;
@@ -54,7 +54,7 @@ public class Oferta extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getComentario() {
       return comentario;
    }
@@ -64,7 +64,7 @@ public class Oferta extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCreacion() {
       return fechaCreacion;
@@ -75,7 +75,7 @@ public class Oferta extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCaducidad() {
       return fechaCaducidad;

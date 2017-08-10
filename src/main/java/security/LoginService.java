@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 public class LoginService implements UserDetailsService {
    // Managed repository -----------------------------------------------------
    @Autowired
-   CuentaRepository userRepository;
+   CuentaRepository cuentaRepository;
    
    // Business methods -------------------------------------------------------
    
@@ -52,8 +52,8 @@ public class LoginService implements UserDetailsService {
       Assert.notNull(username);
       
       UserDetails result;
-      
-      result = userRepository.findByUsername(username);
+   
+      result = cuentaRepository.findByUsername(username);
       Assert.notNull(result);
       // WARNING: The following sentences prevent lazy initialisation problems!
       Assert.isTrue(result.isEnabled() == true);

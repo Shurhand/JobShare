@@ -21,8 +21,8 @@ public class Etiqueta extends DomainEntity {
       
    }
    
-   @NotBlank
-   @SafeHtml
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getNombre() {
       return nombre;
    }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.ActorService;
 import services.UsuarioService;
 
 import javax.validation.Valid;
@@ -28,6 +29,8 @@ public class IndexUsuarioController extends AbstractController {
    // =============== Services =======
    @Autowired
    private UsuarioService usuarioService;
+   @Autowired
+   private ActorService actorService;
    
    // =========== Creation ===========
    
@@ -62,31 +65,57 @@ public class IndexUsuarioController extends AbstractController {
       ModelAndView result = null;
       List<String> errores = new ArrayList<>();
       List<String> erroresCheck = new ArrayList<>();
+      boolean hayError = false;
       
       if (binding.hasErrors()) {
          result = createEditModelAndView(usuarioForm);
          errores = usuarioService.getListaErrores(binding);
+         if (! usuarioForm.isCheckTerminos()) {
+            erroresCheck.add("usuario.error.aceptaTerminos");
+         }
          result.addObject("errores", errores);
       } else {
          try {
-//            if(!usuarioForm.getPassword().equals(usuarioForm.getConfirmarPassword())){
-//               erroresCheck.add("usuario.coincidenciaPasswords");
-//               errores.add("password");
-//               errores.add("confirmarPassword");
-//            }
-            usuarioService.registrarUsuario(usuarioForm);
-            result = new ModelAndView("redirect:/");
-         } catch (Throwable oops) {
-            result = createEditModelAndView(usuarioForm);
-   
-            if (oops.getLocalizedMessage().equals("usuario.coincidenciaPasswords")) {
-               erroresCheck.add(oops.getLocalizedMessage());
+            if (! usuarioService.checkPassword(usuarioForm)) {
+               hayError = true;
+               erroresCheck.add("usuario.error.coincidenciaPasswords");
                errores.add("password");
                errores.add("confirmarPassword");
             }
-            if (oops.getLocalizedMessage().contains("ConstraintViolationException")) {
-               erroresCheck.add("usuario.duplicado");
+            if (actorService.checkDni(usuarioForm.getDNI())) {
+               hayError = true;
+               erroresCheck.add("usuario.error.dniIncorrecto");
+               errores.add("DNI");
             }
+            if (usuarioForm.getProvincia().equals("-----")) {
+               hayError = true;
+               erroresCheck.add("usuario.error.escogeProvincia");
+               errores.add("provincia");
+            }
+            if (actorService.findActorPorUsername(usuarioForm.getUsername()) != null) {
+               hayError = true;
+               erroresCheck.add("usuario.error.usernameDuplicado");
+               errores.add("username");
+            }
+            if (actorService.findActorPorEmail(usuarioForm.getEmail()) != null) {
+               hayError = true;
+               erroresCheck.add("usuario.error.emailDuplicado");
+               errores.add("email");
+            }
+            if (actorService.findActorPorDNI(usuarioForm.getDNI()) != null) {
+               hayError = true;
+               erroresCheck.add("usuario.error.dniDuplicado");
+               errores.add("DNI");
+            }
+            if (! hayError) {
+               usuarioService.registrarUsuario(usuarioForm);
+               result = new ModelAndView("redirect:/");
+            } else {
+               result = createEditModelAndView(usuarioForm);
+            }
+         } catch (Throwable oops) {
+            result = createEditModelAndView(usuarioForm);
+            erroresCheck.add("errorInesperado");
          } finally {
             result.addObject("errores", errores);
             result.addObject("erroresCheck", erroresCheck);
@@ -128,4 +157,6 @@ public class IndexUsuarioController extends AbstractController {
       
       return res;
    }
+   
+   
 }
