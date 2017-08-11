@@ -80,4 +80,22 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
       Actor a = actorService.findPrincipal();
       return profesionalRepository.findProfesional(a.getCuenta());
    }
+   
+    public void modificarPerfil(UsuarioForm usuarioForm){
+      Profesional profesional = this.findProfesional();
+      
+      profesional.setNombre(usuarioForm.getNombre());
+      profesional.setApellidos(usuarioForm.getApellidos());
+      profesional.setCp(usuarioForm.getCp());
+      profesional.setTelefono(usuarioForm.getTelefono());
+      profesional.setEmail(usuarioForm.getEmail());
+      profesional.setFoto(usuarioForm.getFoto());
+      profesional.setProvincia(usuarioForm.getProvincia());
+       
+       profesional.getCuenta().setUsername(usuarioForm.getUsername());
+       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+       String password = md5PassWordEncoder.encodePassword(profesional.getPassword(), null);
+       profesional.getCuenta().setPassword(password);
+       this.save(profesional);
+   }
 }

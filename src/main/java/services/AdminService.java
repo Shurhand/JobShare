@@ -83,6 +83,30 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
       } else {
          u.getCuenta().setIsActivated(true);
       }
+   }
+   
+     public Admin findAdmin() {
+      Actor a = actorService.findPrincipal();
+      return adminRepository.findAdmin(a.getCuenta());
+    }
+      
+     public void modificarPerfil(UsuarioForm usuarioForm){
+      Admin admin = this.findAdmin();
+      
+      admin.setNombre(usuarioForm.getNombre());
+      admin.setApellidos(usuarioForm.getApellidos());
+      admin.setCp(usuarioForm.getCp());
+      admin.setTelefono(usuarioForm.getTelefono());
+      admin.setEmail(usuarioForm.getEmail());
+      admin.setFoto(usuarioForm.getFoto());
+      admin.setProvincia(usuarioForm.getProvincia());
+       
+       admin.getCuenta().setUsername(usuarioForm.getUsername());
+       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+       String password = md5PassWordEncoder.encodePassword(admin.getPassword(), null);
+       admin.getCuenta().setPassword(password);
+       this.save(admin);
+   }
       
    }
 }
