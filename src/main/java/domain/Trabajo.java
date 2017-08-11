@@ -44,8 +44,6 @@ public class Trabajo extends DomainEntity {
       this.fechaFin = LocalDate.parse(fechaFin, formatter);
    }
    
-   // Relaciones
-   private Profesional profesional;
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -68,7 +66,6 @@ public class Trabajo extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    @JsonDeserialize(using = LocalDateDeserializer.class)
    @JsonSerialize(using = LocalDateSerializer.class)
@@ -81,7 +78,6 @@ public class Trabajo extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    @JsonDeserialize(using = LocalDateDeserializer.class)
    @JsonSerialize(using = LocalDateSerializer.class)
@@ -92,6 +88,9 @@ public class Trabajo extends DomainEntity {
    public void setFechaFin(LocalDate fechaFin) {
       this.fechaFin = fechaFin;
    }
+   
+   // Relaciones
+   private Profesional profesional;
    
    @NotNull
    @Valid

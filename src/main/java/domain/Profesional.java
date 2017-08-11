@@ -63,4 +63,9 @@ public class Profesional extends Usuario {
    public void setValoraciones(Collection<Valoracion> valoraciones) {
       this.valoraciones = valoraciones;
    }
+   
+   @Transient
+   public Double getValoracionTotal() {
+      return getValoraciones().stream().mapToDouble(x -> x.getPuntuacion()).average().orElse(0.0);
+   }
 }

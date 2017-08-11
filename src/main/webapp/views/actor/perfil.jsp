@@ -23,14 +23,22 @@
                 code="actor.modificarPerfil"/> </a></h2>
 
         <br>
-        <div class="col-md-3 col-sm-4 col-xs-4 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
+        <div class="col-md-4 col-sm-4 col-xs-4 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
             <c:if test="${actor.foto == null}">
                 <br>
                 <h2><c:out value="Sin foto"></c:out></h2>
             </c:if>
             <c:if test="${actor.foto != null}">
-                <IMG src="${actor.foto}" class="img-circle" width="100" height="100">
+                <IMG src="${actor.foto}" class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1" width="125"
+                     height="125">
             </c:if>
+            <security:authorize access="hasAuthority('PROFESIONAL')">
+                <br>
+                <br>
+
+                <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-loading">
+
+            </security:authorize>
         </div>
         <div class="col-md-5 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
             <p>${actor.nombre} ${actor.apellidos}</p>
@@ -44,8 +52,10 @@
             <p>
             <h5>${actor.descripcion}</h5>
         </div>
-
-        <h4 style="text-align: center"><spring:message code="profesional.estudios"/></h4>
+        <br>
+        <h4 style="text-align: center"><spring:message code="profesional.estudios"/>
+            <a href="/estudio/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
+                code="estudio.nuevo"/> </a></h4>
         <table id="estudios" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                width="100%">
 
@@ -61,7 +71,10 @@
             </thead>
         </table>
         <br>
-        <h4 style="text-align: center"><spring:message code="profesional.trabajos"/></h4>
+        <h4 style="text-align: center"><spring:message code="profesional.trabajos"/>
+            <a href="/trabajo/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
+                code="trabajo.nuevo"/> </a>
+        </h4>
         <table id="trabajos" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                width="100%">
 
@@ -76,6 +89,20 @@
             </tr>
             </thead>
         </table>
+        <div class="col-md-8 col-sm-10 col-md-offset-2 col-sm-offset-1 text-center">
+            <h4><spring:message code="profesional.tusValoraciones"/> (${profesional.valoraciones.size()})</h4>
+            <div class="col-md-2">
+                <c:if test="${actor.foto == null}">
+                    <br>
+                    <h2><c:out value="Sin foto"></c:out></h2>
+                </c:if>
+                <c:if test="${actor.foto != null}">
+                    <IMG src="${actor.foto}" class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
+                         width="125" height="125">
+                </c:if>
+            </div>
+        </div>
+        <hr/>
 
     </div>
 </div>
@@ -113,6 +140,14 @@
                         return editar + borrar;
                     }
                 }]
+
+        });
+        // Rating de estrellas
+        $('#ratingPersonal').rating({
+            size: 'sm',
+            readonly: true,
+            showClear: false,
+            showCaption: false
 
         });
 

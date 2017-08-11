@@ -16,13 +16,21 @@
         <div class="navbar-collapse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
                     <a class="title" href="/"> <img src="images/Logo.png" height="45px"/></a>
                 </div>
                 <ul class="nav navbar-nav navbar-left ">
                     <security:authorize access="hasAuthority('USUARIO')">
                         <li class="modal">
                             <a href="#" class="hidden-sm hidden-md hidden-lg" data-target="#modalProfesional"
-                               data-toggle="modal">¡Conviértete en profesional!
+                               data-toggle="modal"><spring:message code="master.page.convertirse"/>
                                 <span class="caret hidden-sm hidden-md hidden-lg"></span></a>
                             <a class="hidden-xs" data-target="#modalProfesional" data-toggle="modal" href="#"><span
                                 class="fa fa-user-md"></span> <spring:message code="master.page.convertirse"/></a>
@@ -85,13 +93,16 @@
                             </li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('USUARIO')">
-                            <li><a href="usuario/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i>
+                            <li><a href="peticion/usuario/misPeticiones.do"><i class="fa fa-book"
+                                                                               aria-hidden="true"></i>
                                 <spring:message code="master.page.misPeticiones"/></a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('PROFESIONAL')">
-                            <li><a href="profesional/MisPeticiones.do"><i class="fa fa-book" aria-hidden="true"></i>
+                            <li><a href="peticion/usuario/misPeticiones.do"><i class="fa fa-book"
+                                                                               aria-hidden="true"></i>
                                 <spring:message code="master.page.misPeticiones"/></a></li>
-                            <li><a href="profesional/MisOfertas.do"><i class="fa fa-briefcase" aria-hidden="true"></i>
+                            <li><a href="oferta/profesional/misOfertas.do"><i class="fa fa-briefcase"
+                                                                              aria-hidden="true"></i>
                                 <spring:message code="master.page.misOfertas"/></a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('ADMIN')">

@@ -86,9 +86,6 @@
         <property name="email" value="equecrates@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta2"/>
-        <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
-        <property name="descripcion"
-                  value="Experto en montaje de ordenadores y sistemas, muchos años de cacharreo entre ordenadores"/>
         <property name="peticiones">
             <list>
 
@@ -132,6 +129,9 @@
         <property name="DNI" value="17883990H"/>
         <property name="email" value="BruceLee@gmail.com"/>
         <property name="telefono" value="675048498"/>
+        <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
+        <property name="descripcion"
+                  value="Experto en montaje de ordenadores y sistemas, muchos años de cacharreo entre ordenadores"/>
         <property name="cuenta" ref="cuenta4"/>
         <property name="peticiones">
             <list>
@@ -211,6 +211,27 @@
     <!-- ****************** Ofertas ************* -->
 
     <!-- ****************** Valoraciones ************* -->
+
+    <bean id="valoracion1" class="domain.Valoracion">
+        <constructor-arg index="0" name="puntuacion" value="4"/>
+        <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
+        <constructor-arg index="2" name="fechaCreacion" value="12/11/2015"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
+
+    <bean id="valoracion2" class="domain.Valoracion">
+        <constructor-arg index="0" name="puntuacion" value="2"/>
+        <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
+        <constructor-arg index="2" name="fechaCreacion" value="21/03/2016"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
+
+    <bean id="valoracion3" class="domain.Valoracion">
+        <constructor-arg index="0" name="puntuacion" value="1"/>
+        <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
+        <constructor-arg index="2" name="fechaCreacion" value="04/06/2017"/>
+        <property name="profesional" ref="profesional1"/>
+    </bean>
 
 
 </beans>

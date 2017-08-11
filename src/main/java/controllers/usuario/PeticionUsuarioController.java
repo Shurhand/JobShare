@@ -58,15 +58,14 @@ public class PeticionUsuarioController extends AbstractController {
       return res;
    }
    
-    @GetMapping("/editar")
-    public ModelAndView edit(@RequestParam int peticionID) {
-
-        ModelAndView result;
-        Peticion peticion = peticionService.findOne(peticionID);
-
-        result = createEditModelAndView(peticion);
-
-    return result;
+   @GetMapping("/editar")
+   public ModelAndView edit(@RequestParam int peticionID) {
+      
+      ModelAndView result;
+      Peticion peticion = peticionService.findOne(peticionID);
+      
+      result = createEditModelAndView(peticion);
+      return result;
    }
    
    @PostMapping(value = "/editar", params = "save")
@@ -88,7 +87,7 @@ public class PeticionUsuarioController extends AbstractController {
 //               errores.add("confirmarPassword");
 //            }
             peticionService.save(peticion);
-            result = new ModelAndView("redirect:/");
+            result = new ModelAndView("redirect:/peticion/usuario/misPeticiones.do");
          } catch (Throwable oops) {
             result = createEditModelAndView(peticion);
    

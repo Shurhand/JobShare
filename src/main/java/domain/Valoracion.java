@@ -25,6 +25,16 @@ public class Valoracion extends DomainEntity {
       super();
    }
    
+   public Valoracion(Double puntuacion, String comentario, String fechaCreacion) {
+      this.puntuacion = puntuacion;
+      this.comentario = comentario;
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      Locale espanyol = new Locale("es", "ES");
+      formatter = formatter.withLocale(espanyol);
+      
+      this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
+   }
+   
    public Valoracion(Double puntuacion, String comentario, String fechaCreacion, Oferta oferta) {
       this.puntuacion = puntuacion;
       this.comentario = comentario;
@@ -58,7 +68,6 @@ public class Valoracion extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    public LocalDate getFechaCreacion() {
       return fechaCreacion;
@@ -72,9 +81,9 @@ public class Valoracion extends DomainEntity {
    private Oferta oferta;
    private Profesional profesional;
    
-   @NotNull
-   @Valid
-   @OneToOne(optional = false)
+   //   @NotNull
+//   @Valid
+   @OneToOne(optional = true)
    public Oferta getOferta() {
       return oferta;
    }

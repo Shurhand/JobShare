@@ -68,6 +68,8 @@
 
         <security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/peticion/profesional/*" access="hasAuthority('PROFESIONAL')"/>
+        <security:intercept-url pattern="/estudio/profesional/*" access="hasAuthority('PROFESIONAL')"/>
+        <security:intercept-url pattern="/trabajo/profesional/*" access="hasAuthority('PROFESIONAL')"/>
 
         <security:intercept-url pattern="/**"
                                 access="hasAuthority('NONE')"/>

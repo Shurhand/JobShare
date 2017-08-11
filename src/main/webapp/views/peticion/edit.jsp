@@ -13,7 +13,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h2 style="text-align: center"><spring:message code="peticion.nueva" /></h2>
             <div class="well">
-                <c:if test="${!erroresCheck.isEmpty()}">
+                <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
                     <div class="alert alert-danger alert-dismissable alert-link">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
                         <c:forEach var="e" items="${erroresCheck}">

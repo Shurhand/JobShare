@@ -31,12 +31,14 @@
     <script type="text/javascript" src="scripts/tooltip.js"></script>
     <script type="text/javascript" src="scripts/bootstrap-timepicker.js"></script>
     <script type="text/javascript" src="scripts/jquery.bootstrap-duallistbox.js"></script>
+    <script type="text/javascript" src="scripts/star-rating.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.en-GB.min.js"></script>
 
     <link rel="stylesheet" href="styles/common.css" type="text/css">
+    <link rel="stylesheet" href="styles/star-rating.css" type="text/css">
     <link rel="stylesheet" href="styles/bootstrap-duallistbox.css" type="text/css">
     <link rel="stylesheet" href="styles/carousel.css" type="text/css">
     <link rel="stylesheet" href="styles/bootstrap-timepicker.css" type="text/css">
