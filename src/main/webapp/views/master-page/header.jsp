@@ -196,7 +196,8 @@
                                                                            value="<spring:message code="master.page.login" />"/>
                                                                 </div>
                                                                 <a href="#" class="forgot-password">
-                                                                    ¿Contraseña olvidada?
+                                                                    <spring:message
+                                                                        code="master.page.passwordOlvidado"/>
                                                                 </a>
                                                             </form:form>
                                                         </div>
@@ -216,12 +217,27 @@
                                     <spring:message code="master.page.salute"/>
                                     <security:authentication property="principal.username"/>!</a>
                                 <ul class="dropdown-menu box main-dp">
+                                    <security:authorize access="hasAuthority('ADMIN')">
+                                        <li>
+                                            <a href="admin/perfil.do"><i class="fa fa-user" aria-hidden="true">
+                                            </i> <spring:message code="master.page.verPerfil"/></a>
+                                        </li>
+                                    </security:authorize>
+                                    <security:authorize access="hasAuthority('PROFESIONAL')">
+                                        <li>
+                                            <a href="profesional/perfil.do"><i class="fa fa-user" aria-hidden="true">
+                                            </i> <spring:message code="master.page.verPerfil"/></a>
+                                        </li>
+                                    </security:authorize>
+                                    <security:authorize access="hasAuthority('USUARIO')">
+                                        <li>
+                                            <a href="usuario/perfil.do"><i class="fa fa-user" aria-hidden="true">
+                                            </i> <spring:message code="master.page.verPerfil"/></a>
+                                        </li>
+                                    </security:authorize>
                                     <li>
-                                        <a href="actor/perfil.do"><i class="fa fa-user" aria-hidden="true"></i> Ver
-                                            perfil</a>
-                                    </li>
-                                    <li>
-                                        <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
+                                        <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                            <spring:message code="master.page.salir"/></a>
                                     </li>
                                 </ul>
                             </li>

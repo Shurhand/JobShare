@@ -15,12 +15,12 @@
         <put-attribute name="title" value="List users"/>
         <put-attribute name="body" value="/views/usuario/list.jsp"/>
     </definition>
-    
+
     <definition name="usuario/perfil" extends="master.page">
         <put-attribute name="title" value="User profile"/>
         <put-attribute name="body" value="/views/usuario/perfil.jsp"/>
     </definition>
-    
+
     <definition name="usuario/modificarPerfil" extends="master.page">
         <put-attribute name="title" value="Modify profile"/>
         <put-attribute name="body" value="/views/usuario/modificarPerfil.jsp"/>

@@ -33,7 +33,7 @@
             </c:if>
         </div>
         <div class="col-md-5 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <p>${admin.nombre} ${admin.apellidos}</p>
+            <p>${admin.nombre} ${admin.apellidos} ${admin.email}</p>
             <p>${admin.cp} ${admin.provincia}</p>
             <p>${admin.DNI}</p>
         </div>

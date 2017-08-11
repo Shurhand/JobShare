@@ -1,6 +1,7 @@
 package services;
 
 import domain.Actor;
+import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -117,5 +118,37 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
    
    public Actor findActorPorDNI(String DNI) {
       return actorRepository.findActorPorDNI(DNI);
+   }
+   
+   public Boolean checkPassword(UsuarioForm usuarioForm) {
+      return usuarioForm.getPassword().equals(usuarioForm.getConfirmarPassword());
+   }
+   
+   public UsuarioForm convertirActor(Actor a) {
+      UsuarioForm usuarioForm = new UsuarioForm();
+      usuarioForm.setNombre(a.getNombre());
+      usuarioForm.setApellidos(a.getApellidos());
+      usuarioForm.setDNI(a.getDNI());
+      usuarioForm.setCp(a.getCp());
+      usuarioForm.setTelefono(a.getTelefono());
+      usuarioForm.setEmail(a.getEmail());
+      usuarioForm.setProvincia(a.getProvincia());
+      usuarioForm.setFoto(a.getFoto());
+      usuarioForm.setUsername(a.getCuenta().getUsername());
+      usuarioForm.setCheckTerminos(true);
+      
+      return usuarioForm;
+   }
+   
+   public Collection<String> getAllUsernames() {
+      return actorRepository.getAllUsernames();
+   }
+   
+   public Collection<String> getAllDNIs() {
+      return actorRepository.getAllDNIs();
+   }
+   
+   public Collection<String> getAllEmails() {
+      return actorRepository.getAllEmails();
    }
 }

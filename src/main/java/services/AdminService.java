@@ -2,7 +2,9 @@ package services;
 
 import domain.Actor;
 import domain.Admin;
+import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.AdminRepository;
@@ -19,6 +21,8 @@ import java.util.Collection;
 public class AdminService extends AbstractServiceImpl implements AbstractService<Admin> {
    @Autowired
    private AdminRepository adminRepository;
+   @Autowired
+   private ActorService actorService;
    
    @Override
    public Admin create() {
@@ -85,13 +89,28 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
       }
    }
    
-     public Admin findAdmin() {
+   public Admin findAdmin() {
       Actor a = actorService.findPrincipal();
       return adminRepository.findAdmin(a.getCuenta());
-    }
-      
-     public void modificarPerfil(UsuarioForm usuarioForm){
+   }
+   
+   public void modificarPerfil(UsuarioForm usuarioForm) {
       Admin admin = this.findAdmin();
+      
+      Collection<String> allUsernames = actorService.getAllUsernames();
+      Collection<String> allEmails = actorService.getAllEmails();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allUsernames.remove(admin.getCuenta().getUsername());
+      allEmails.remove(admin.getEmail());
+      allDNIs.remove(admin.getDNI());
+      
+      Assert.isTrue(actorService.checkDni(usuarioForm.getDNI()));
+      Assert.isTrue(actorService.checkPassword(usuarioForm));
+      Assert.isTrue(! usuarioForm.getProvincia().equals("-----"));
+      Assert.isTrue(! allUsernames.contains(usuarioForm.getUsername()));
+      Assert.isTrue(! allDNIs.contains(usuarioForm.getDNI()));
+      Assert.isTrue(! allEmails.contains(usuarioForm.getEmail()));
       
       admin.setNombre(usuarioForm.getNombre());
       admin.setApellidos(usuarioForm.getApellidos());
@@ -100,13 +119,13 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
       admin.setEmail(usuarioForm.getEmail());
       admin.setFoto(usuarioForm.getFoto());
       admin.setProvincia(usuarioForm.getProvincia());
-       
-       admin.getCuenta().setUsername(usuarioForm.getUsername());
-       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
-       String password = md5PassWordEncoder.encodePassword(admin.getPassword(), null);
-       admin.getCuenta().setPassword(password);
-       this.save(admin);
-   }
       
+      admin.getCuenta().setUsername(usuarioForm.getUsername());
+      Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+      String password = md5PassWordEncoder.encodePassword(usuarioForm.getPassword(), null);
+      admin.getCuenta().setPassword(password);
+      this.save(admin);
    }
+   
+   
 }

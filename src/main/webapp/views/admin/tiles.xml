@@ -11,7 +11,7 @@
         <put-attribute name="title" value="User profile"/>
         <put-attribute name="body" value="/views/admin/perfil.jsp"/>
     </definition>
-    
+
     <definition name="admin/modificarPerfil" extends="master.page">
         <put-attribute name="title" value="Modify profile"/>
         <put-attribute name="body" value="/views/admin/modificarPerfil.jsp"/>

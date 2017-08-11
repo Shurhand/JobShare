@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import security.Cuenta;
 
+import java.util.Collection;
+
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
    @Query("select a from Actor a where a.cuenta = ?1")
@@ -19,6 +21,13 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
    
    @Query("select a from Actor a where a.email = ?1")
    Actor findActorPorEmail(String email);
- 
    
+   @Query("select a.cuenta.username from Actor a")
+   Collection<String> getAllUsernames();
+   
+   @Query("select a.DNI from Actor a")
+   Collection<String> getAllDNIs();
+   
+   @Query("select a.email from Actor a")
+   Collection<String> getAllEmails();
 }

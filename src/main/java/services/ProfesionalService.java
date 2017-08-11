@@ -2,7 +2,9 @@ package services;
 
 import domain.Actor;
 import domain.Profesional;
+import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.ProfesionalRepository;
@@ -81,8 +83,23 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
       return profesionalRepository.findProfesional(a.getCuenta());
    }
    
-    public void modificarPerfil(UsuarioForm usuarioForm){
+   public void modificarPerfil(UsuarioForm usuarioForm) {
       Profesional profesional = this.findProfesional();
+      
+      Collection<String> allUsernames = actorService.getAllUsernames();
+      Collection<String> allEmails = actorService.getAllEmails();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allUsernames.remove(profesional.getCuenta().getUsername());
+      allEmails.remove(profesional.getEmail());
+      allDNIs.remove(profesional.getDNI());
+      
+      Assert.isTrue(actorService.checkDni(usuarioForm.getDNI()));
+      Assert.isTrue(actorService.checkPassword(usuarioForm));
+      Assert.isTrue(! usuarioForm.getProvincia().equals("-----"));
+      Assert.isTrue(! allUsernames.contains(usuarioForm.getUsername()));
+      Assert.isTrue(! allDNIs.contains(usuarioForm.getDNI()));
+      Assert.isTrue(! allEmails.contains(usuarioForm.getEmail()));
       
       profesional.setNombre(usuarioForm.getNombre());
       profesional.setApellidos(usuarioForm.getApellidos());
@@ -91,11 +108,11 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
       profesional.setEmail(usuarioForm.getEmail());
       profesional.setFoto(usuarioForm.getFoto());
       profesional.setProvincia(usuarioForm.getProvincia());
-       
-       profesional.getCuenta().setUsername(usuarioForm.getUsername());
-       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
-       String password = md5PassWordEncoder.encodePassword(profesional.getPassword(), null);
-       profesional.getCuenta().setPassword(password);
-       this.save(profesional);
+      
+      profesional.getCuenta().setUsername(usuarioForm.getUsername());
+      Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+      String password = md5PassWordEncoder.encodePassword(usuarioForm.getPassword(), null);
+      profesional.getCuenta().setPassword(password);
+      this.save(profesional);
    }
 }

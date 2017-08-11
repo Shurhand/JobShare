@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2 style="text-align: center"><spring:message code="usuario.nuevo"/></h2>
+            <h2 style="text-align: center"><spring:message code="actor.modificarPerfil"/></h2>
             <div class="well">
                 <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
                     <div class="alert alert-danger alert-dismissable alert-link">
@@ -21,8 +21,8 @@
                     </div>
                 </c:if>
                 <form:form action="profesional/modificarPerfil.do" modelAttribute="usuarioForm" acceptCharset="UTF-8">
-                    <form:hidden path = "DNI" />
-                    <form:hidden path = "checkTerminos" />
+                    <form:hidden path="DNI"/>
+                    <form:hidden path="checkTerminos"/>
                     <div
                         class="form-group ${errores.contains('username') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.usuario" var="usuario"/>
@@ -90,7 +90,7 @@
                         <form:errors class="help-block" path="telefono"/>
                     </div>
                     <div class="form-group ${errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="urlFotografia" var="urlFotografia" />
+                        <spring:message code="urlFotografia" var="urlFotografia"/>
                         <form:label class="control-label" path="foto">${urlFotografia}</form:label>
                         <form:input type="URL" class="form-control" path="foto" placeholder="URL"/>
                         <form:errors class="help-block" path="foto"/>
@@ -101,7 +101,7 @@
                         <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message
                             code="volver"/></a>
                         <button type="submit" name="saveForm" class="btn btn-primary"><i class="fa fa-check"></i>
-                            <spring:message code="guardar" />
+                            <spring:message code="guardar"/>
                         </button>
                     </div>
                 </form:form>

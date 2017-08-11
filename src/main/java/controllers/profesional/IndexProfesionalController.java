@@ -1,26 +1,37 @@
-package controllers;
+package controllers.profesional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import domain.*;
+import controllers.AbstractController;
+import domain.Estudio;
+import domain.Profesional;
+import domain.Trabajo;
+import domain.Valoracion;
+import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import security.Credenciales;
 import services.ActorService;
 import services.AdminService;
 import services.ProfesionalService;
 import services.UsuarioService;
 
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("/profesional")
-public class IndexActorController extends AbstractController {
+public class IndexProfesionalController extends AbstractController {
    @Autowired
    private ActorService actorService;
    @Autowired
@@ -37,6 +48,7 @@ public class IndexActorController extends AbstractController {
       
       Collection<Estudio> estudios = new ArrayList<>();
       Collection<Trabajo> trabajos = new ArrayList<>();
+      Collection<Valoracion> valoraciones = new ArrayList<>();
       Profesional profesional = profesionalService.findProfesional();
    
       DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -45,7 +57,7 @@ public class IndexActorController extends AbstractController {
       trabajos = profesional.getTrabajos();
       estudios = profesional.getEstudios();
       valoraciones = profesional.getValoraciones();
-       
+   
       res = new ModelAndView("profesional/perfil");
       res.addObject("profesional", profesional);
       res.addObject("estudios", mapper.writeValueAsString(estudios));
@@ -57,25 +69,39 @@ public class IndexActorController extends AbstractController {
       
    }
    
-         // =========== Perfil =============
-
-      @GetMapping("/modificarPerfil")
-      public ModelAndView modificarPerfil() {
-         ModelAndView result;
-         Profesional profesional = profesionalService.findUsuario();
-
-         result = crearEditarModeloPerfil(profesional);
-
-         return result;
-      }
-      
- @PostMapping(value = "/modificarPerfil", params = "saveForm")
-   public ModelAndView save(@Valid @ModelAttribute UsuarioForm usuarioForm, BindingResult binding) {
+   // =========== Perfil =============
    
+   @GetMapping("/modificarPerfil")
+   public ModelAndView modificarPerfil() {
+      ModelAndView res;
+      Profesional profesional = profesionalService.findProfesional();
+      UsuarioForm usuarioForm = actorService.convertirActor(profesional);
+      Collection<String> provincias = usuarioService.getListaProvincias();
+      Credenciales credenciales = new Credenciales();
+      
+      res = new ModelAndView("profesional/modificarPerfil");
+      res.addObject("usuarioForm", usuarioForm);
+      res.addObject("credenciales", credenciales);
+      res.addObject("provincias", provincias);
+      
+      return res;
+   }
+   
+   @PostMapping(value = "/modificarPerfil", params = "saveForm")
+   public ModelAndView save(@Valid @ModelAttribute UsuarioForm usuarioForm, BindingResult binding) {
+      
       ModelAndView result = null;
+      Profesional profesional = profesionalService.findProfesional();
       List<String> errores = new ArrayList<>();
       List<String> erroresCheck = new ArrayList<>();
       boolean hayError = false;
+      Collection<String> allUsernames = actorService.getAllUsernames();
+      Collection<String> allEmails = actorService.getAllEmails();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allUsernames.remove(profesional.getCuenta().getUsername());
+      allEmails.remove(profesional.getEmail());
+      allDNIs.remove(profesional.getDNI());
       
       if (binding.hasErrors()) {
          result = crearEditarModeloPerfil(usuarioForm);
@@ -83,13 +109,13 @@ public class IndexActorController extends AbstractController {
          result.addObject("errores", errores);
       } else {
          try {
-            if (! usuarioService.checkPassword(usuarioForm)) {
+            if (! actorService.checkPassword(usuarioForm)) {
                hayError = true;
                erroresCheck.add("usuario.error.coincidenciaPasswords");
                errores.add("password");
                errores.add("confirmarPassword");
             }
-            if (actorService.checkDni(usuarioForm.getDNI())) {
+            if (! actorService.checkDni(usuarioForm.getDNI())) {
                hayError = true;
                erroresCheck.add("usuario.error.dniIncorrecto");
                errores.add("DNI");
@@ -99,23 +125,23 @@ public class IndexActorController extends AbstractController {
                erroresCheck.add("usuario.error.escogeProvincia");
                errores.add("provincia");
             }
-            if (actorService.findActorPorUsername(usuarioForm.getUsername()) != null) {
+            if (allUsernames.contains(usuarioForm.getUsername())) {
                hayError = true;
                erroresCheck.add("usuario.error.usernameDuplicado");
                errores.add("username");
             }
-            if (actorService.findActorPorEmail(usuarioForm.getEmail()) != null) {
+            if (allEmails.contains(usuarioForm.getEmail())) {
                hayError = true;
                erroresCheck.add("usuario.error.emailDuplicado");
                errores.add("email");
             }
-            if (actorService.findActorPorDNI(usuarioForm.getDNI()) != null) {
+            if (allDNIs.contains(usuarioForm.getDNI())) {
                hayError = true;
                erroresCheck.add("usuario.error.dniDuplicado");
                errores.add("DNI");
             }
             if (! hayError) {
-               usuarioService.registrarUsuario(usuarioForm);
+               profesionalService.modificarPerfil(usuarioForm);
                result = new ModelAndView("redirect:/profesional/perfil.do");
             } else {
                result = crearEditarModeloPerfil(usuarioForm);
@@ -132,7 +158,7 @@ public class IndexActorController extends AbstractController {
       
    }
    
-      // =========== Ancillary Methods ===========
+   // =========== Ancillary Methods ===========
    protected ModelAndView crearEditarModeloPerfil(UsuarioForm usuarioForm) {
       ModelAndView res;
       
@@ -143,8 +169,8 @@ public class IndexActorController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
- 
-      
+   
+   
       return res;
    }
    

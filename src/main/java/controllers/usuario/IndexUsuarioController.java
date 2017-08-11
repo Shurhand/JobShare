@@ -1,6 +1,7 @@
 package controllers.usuario;
 
 import controllers.AbstractController;
+import domain.Usuario;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,38 +33,56 @@ public class IndexUsuarioController extends AbstractController {
    @Autowired
    private ActorService actorService;
    
-    @GetMapping("/perfil")
-    public ModelAndView verPerfil() {
+   @GetMapping("/perfil")
+   public ModelAndView verPerfil() {
       ModelAndView res;
-
-      Usuario usuario = usuarioService.findUsuario();
       
-      res = new ModelAndView(usuario);
+      Usuario usuario = usuarioService.findUsuario();
+      Collection<String> provincias = usuarioService.getListaProvincias();
+      Credenciales credenciales = new Credenciales();
+      
+      res = new ModelAndView("usuario/perfil");
       res.addObject("usuario", usuario);
-       
+      res.addObject("credenciales", credenciales);
+      res.addObject("provincias", provincias);
+      
       return res;
       
    }
    
-      // =========== Perfil =============
-
-      @GetMapping("/modificarPerfil")
-      public ModelAndView modificarPerfil() {
-         ModelAndView result;
-         Usuario usuario = usuarioService.findUsuario();
-
-         result = crearEditarModeloPerfil(usuario);
-
-         return result;
-      }
-      
- @PostMapping(value = "/modificarPerfil", params = "saveForm")
-   public ModelAndView save(@Valid @ModelAttribute UsuarioForm usuarioForm, BindingResult binding) {
+   // =========== Perfil =============
    
+   @GetMapping("/modificarPerfil")
+   public ModelAndView modificarPerfil() {
+      ModelAndView res;
+      Usuario usuario = usuarioService.findUsuario();
+      UsuarioForm usuarioForm = actorService.convertirActor(usuario);
+      Collection<String> provincias = usuarioService.getListaProvincias();
+      Credenciales credenciales = new Credenciales();
+      
+      res = new ModelAndView("usuario/modificarPerfil");
+      res.addObject("usuarioForm", usuarioForm);
+      res.addObject("credenciales", credenciales);
+      res.addObject("provincias", provincias);
+      
+      return res;
+   }
+   
+   @PostMapping(value = "/modificarPerfil", params = "saveForm")
+   public ModelAndView savePerfil(@Valid @ModelAttribute UsuarioForm usuarioForm, BindingResult binding) {
+      
       ModelAndView result = null;
       List<String> errores = new ArrayList<>();
       List<String> erroresCheck = new ArrayList<>();
       boolean hayError = false;
+      Usuario usuario = usuarioService.findUsuario();
+      Collection<String> allUsernames = actorService.getAllUsernames();
+      Collection<String> allEmails = actorService.getAllEmails();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allUsernames.remove(usuario.getCuenta().getUsername());
+      allEmails.remove(usuario.getEmail());
+      allDNIs.remove(usuario.getDNI());
       
       if (binding.hasErrors()) {
          result = crearEditarModeloPerfil(usuarioForm);
@@ -71,13 +90,13 @@ public class IndexUsuarioController extends AbstractController {
          result.addObject("errores", errores);
       } else {
          try {
-            if (! usuarioService.checkPassword(usuarioForm)) {
+            if (! actorService.checkPassword(usuarioForm)) {
                hayError = true;
                erroresCheck.add("usuario.error.coincidenciaPasswords");
                errores.add("password");
                errores.add("confirmarPassword");
             }
-            if (actorService.checkDni(usuarioForm.getDNI())) {
+            if (! actorService.checkDni(usuarioForm.getDNI())) {
                hayError = true;
                erroresCheck.add("usuario.error.dniIncorrecto");
                errores.add("DNI");
@@ -87,23 +106,23 @@ public class IndexUsuarioController extends AbstractController {
                erroresCheck.add("usuario.error.escogeProvincia");
                errores.add("provincia");
             }
-            if (actorService.findActorPorUsername(usuarioForm.getUsername()) != null) {
+            if (allUsernames.contains(usuarioForm.getUsername())) {
                hayError = true;
                erroresCheck.add("usuario.error.usernameDuplicado");
                errores.add("username");
             }
-            if (actorService.findActorPorEmail(usuarioForm.getEmail()) != null) {
+            if (allEmails.contains(usuarioForm.getEmail())) {
                hayError = true;
                erroresCheck.add("usuario.error.emailDuplicado");
                errores.add("email");
             }
-            if (actorService.findActorPorDNI(usuarioForm.getDNI()) != null) {
+            if (allDNIs.contains(usuarioForm.getDNI())) {
                hayError = true;
                erroresCheck.add("usuario.error.dniDuplicado");
                errores.add("DNI");
             }
             if (! hayError) {
-               usuarioService.registrarUsuario(usuarioForm);
+               usuarioService.modificarPerfil(usuarioForm);
                result = new ModelAndView("redirect:/");
             } else {
                result = crearEditarModeloPerfil(usuarioForm);
@@ -127,7 +146,7 @@ public class IndexUsuarioController extends AbstractController {
       ModelAndView res;
       
       UsuarioForm usuario = new UsuarioForm();
-      
+   
       res = crearEditarModelo(usuario);
       return res;
    }
@@ -150,7 +169,7 @@ public class IndexUsuarioController extends AbstractController {
          result.addObject("errores", errores);
       } else {
          try {
-            if (! usuarioService.checkPassword(usuarioForm)) {
+            if (! actorService.checkPassword(usuarioForm)) {
                hayError = true;
                erroresCheck.add("usuario.error.coincidenciaPasswords");
                errores.add("password");
@@ -212,10 +231,10 @@ public class IndexUsuarioController extends AbstractController {
    // =========== Ancillary Methods ===========
    protected ModelAndView crearEditarModeloPerfil(UsuarioForm usuarioForm) {
       ModelAndView res;
-      
+   
       Collection<String> provincias = usuarioService.getListaProvincias();
       Credenciales credenciales = new Credenciales();
-      
+   
       res = new ModelAndView("usuario/modificarPerfil");
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);

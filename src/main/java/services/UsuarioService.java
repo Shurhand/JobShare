@@ -100,7 +100,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       Cuenta cuenta = new Cuenta();
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
    
-      Assert.isTrue(checkPassword(usuarioForm), "usuario.coincidenciaPasswords");
+      Assert.isTrue(actorService.checkPassword(usuarioForm), "usuario.coincidenciaPasswords");
       
       usuario.setNombre(usuarioForm.getNombre());
       usuario.setApellidos(usuarioForm.getApellidos());
@@ -129,8 +129,23 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    
    }
    
-   public void modificarPerfil(UsuarioForm usuarioForm){
+   public void modificarPerfil(UsuarioForm usuarioForm) {
       Usuario usuario = this.findUsuario();
+      
+      Collection<String> allUsernames = actorService.getAllUsernames();
+      Collection<String> allEmails = actorService.getAllEmails();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allUsernames.remove(usuario.getCuenta().getUsername());
+      allEmails.remove(usuario.getEmail());
+      allDNIs.remove(usuario.getDNI());
+      
+      Assert.isTrue(actorService.checkDni(usuarioForm.getDNI()));
+      Assert.isTrue(actorService.checkPassword(usuarioForm));
+      Assert.isTrue(! usuarioForm.getProvincia().equals("-----"));
+      Assert.isTrue(! allUsernames.contains(usuarioForm.getUsername()));
+      Assert.isTrue(! allDNIs.contains(usuarioForm.getDNI()));
+      Assert.isTrue(! allEmails.contains(usuarioForm.getEmail()));
       
       usuario.setNombre(usuarioForm.getNombre());
       usuario.setApellidos(usuarioForm.getApellidos());
@@ -139,12 +154,12 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       usuario.setEmail(usuarioForm.getEmail());
       usuario.setFoto(usuarioForm.getFoto());
       usuario.setProvincia(usuarioForm.getProvincia());
-       
-       usuario.getCuenta().setUsername(usuarioForm.getUsername());
-       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
-       String password = md5PassWordEncoder.encodePassword(usuario.getPassword(), null);
-       usuario.getCuenta().setPassword(password);
-       this.save(usuario);
+      
+      usuario.getCuenta().setUsername(usuarioForm.getUsername());
+      Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+      String password = md5PassWordEncoder.encodePassword(usuarioForm.getPassword(), null);
+      usuario.getCuenta().setPassword(password);
+      this.save(usuario);
    }
    
    public Usuario findUsuario() {
@@ -183,10 +198,6 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    public Collection<String> getListaProvincias() {
       return Arrays.asList("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
 
-   }
-   
-   public Boolean checkPassword(UsuarioForm usuarioForm) {
-      return usuarioForm.getPassword().equals(usuarioForm.getConfirmarPassword());
    }
    
    

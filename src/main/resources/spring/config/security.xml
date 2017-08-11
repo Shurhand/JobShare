@@ -41,6 +41,9 @@
         <security:intercept-url pattern="/welcome/index.do"
                                 access="permitAll"/>
 
+        <security:intercept-url pattern="/security/loginFailure.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 
@@ -50,19 +53,17 @@
 
         <!-- ******************* AUTENTICADO ************************************ -->
 
-        <security:intercept-url pattern="/security/loginFailure.do"
-                                access="isAuthenticated()"/>
-
         <security:intercept-url pattern="/actor/perfil.do"
                                 access="isAuthenticated()"/>
 
         <!-- ******************** ADMIN ************************************** -->
         <security:intercept-url pattern="/usuario/admin/*" access="hasAuthority('ADMIN')"/>
+        <security:intercept-url pattern="/admin/*" access="hasAuthority('ADMIN')"/>
 
         <!-- ******************** USUARIO ************************************** -->
 
-        <security:intercept-url pattern="/usuario/convertirse.do" access="hasAuthority('USUARIO')"/>
         <security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('USUARIO')"/>
+        <security:intercept-url pattern="/usuario/*" access="hasAuthority('USUARIO')"/>
 
         <!-- ******************** PROFESIONAL ************************************** -->
 
@@ -70,6 +71,7 @@
         <security:intercept-url pattern="/peticion/profesional/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/estudio/profesional/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/trabajo/profesional/*" access="hasAuthority('PROFESIONAL')"/>
+        <security:intercept-url pattern="/profesional/*" access="hasAuthority('PROFESIONAL')"/>
 
         <security:intercept-url pattern="/**"
                                 access="hasAuthority('NONE')"/>
