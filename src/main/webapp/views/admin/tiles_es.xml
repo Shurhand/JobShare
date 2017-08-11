@@ -7,24 +7,14 @@
 
 <tiles-definitions>
 
-    <definition name="welcome/index" extends="master.page">
-        <put-attribute name="title" value="¡Bienvenidos!"/>
-        <put-attribute name="body" value="/views/welcome/index.jsp"/>
+    <definition name="admin/perfil" extends="master.page">
+        <put-attribute name="title" value="Perfil de usuario"/>
+        <put-attribute name="body" value="/views/admin/perfil.jsp"/>
     </definition>
-
-    <definition name="welcome/index/about" extends="master.page">
-        <put-attribute name="title" value="Sobre nosotros"/>
-        <put-attribute name="body" value="/views/welcome/about.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/contact" extends="master.page">
-        <put-attribute name="title" value="Contactános"/>
-        <put-attribute name="body" value="/views/welcome/contact.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/tips" extends="master.page">
-        <put-attribute name="title" value="Consejos"/>
-        <put-attribute name="body" value="/views/welcome/tips.jsp"/>
+    
+    <definition name="admin/modificarPerfil" extends="master.page">
+        <put-attribute name="title" value="Modificar perfil"/>
+        <put-attribute name="body" value="/views/admin/modificarPerfil.jsp"/>
     </definition>
 
 </tiles-definitions>

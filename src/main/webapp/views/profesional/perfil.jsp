@@ -19,30 +19,30 @@
     <div class="row well white col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
 
         <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
-            <a href="/actor/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
+            <a href="/profesional/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
                 code="actor.modificarPerfil"/> </a></h2>
 
         <br>
         <div class="col-md-3 col-sm-4 col-xs-4 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-            <c:if test="${actor.foto == null}">
+            <c:if test="${profesional.foto == null}">
                 <br>
                 <h2><c:out value="Sin foto"></c:out></h2>
             </c:if>
-            <c:if test="${actor.foto != null}">
-                <IMG src="${actor.foto}" class="img-circle" width="100" height="100">
+            <c:if test="${profesional.foto != null}">
+                <IMG src="${profesional.foto}" class="img-circle" width="100" height="100">
             </c:if>
         </div>
         <div class="col-md-5 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <p>${actor.nombre} ${actor.apellidos}</p>
-            <p>${actor.cp} ${actor.provincia}</p>
-            <p>${actor.DNI}</p>
-            <p><spring:message code="usuario.peticionesRealizadas"/> ${usuario.peticiones.size()}<p>
+            <p>${profesional.nombre} ${profesional.apellidos}</p>
+            <p>${profesional.cp} ${profesional.provincia}</p>
+            <p>${profesional.DNI}</p>
+            <p><spring:message code="usuario.peticionesRealizadas"/> ${profesional.peticiones.size()}<p>
             <p><spring:message code="profesional.ofertasRealizadas"/> ${profesional.ofertas.size()}<p>
         </div>
         <div class="col-md-offset-1 col-sm-offset-1">
             <p><spring:message code="usuario.descripcion"/>:
             <p>
-            <h5>${actor.descripcion}</h5>
+            <h5>${profesional.descripcion}</h5>
         </div>
 
         <h4 style="text-align: center"><spring:message code="profesional.estudios"/></h4>

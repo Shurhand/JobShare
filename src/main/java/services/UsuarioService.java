@@ -129,6 +129,24 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    
    }
    
+   public void modificarPerfil(UsuarioForm usuarioForm){
+      Usuario usuario = this.findUsuario();
+      
+      usuario.setNombre(usuarioForm.getNombre());
+      usuario.setApellidos(usuarioForm.getApellidos());
+      usuario.setCp(usuarioForm.getCp());
+      usuario.setTelefono(usuarioForm.getTelefono());
+      usuario.setEmail(usuarioForm.getEmail());
+      usuario.setFoto(usuarioForm.getFoto());
+      usuario.setProvincia(usuarioForm.getProvincia());
+       
+       usuario.getCuenta().setUsername(usuarioForm.getUsername());
+       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+       String password = md5PassWordEncoder.encodePassword(usuario.getPassword(), null);
+       usuario.getCuenta().setPassword(password);
+       this.save(usuario);
+   }
+   
    public Usuario findUsuario() {
       Actor a = actorService.findPrincipal();
       return usuarioRepository.findUsuario(a.getCuenta());

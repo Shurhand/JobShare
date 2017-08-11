@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
+    @Query("select a from Admin a where a.cuenta = ?1")
+   Admin findAdmin(Cuenta cuenta);
 }
