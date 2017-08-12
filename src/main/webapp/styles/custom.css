@@ -156,3 +156,7 @@ hr {
     color: #DDDDDD;
     border: 1px solid;
 }
+
+.justificar-texto > p {
+    word-wrap: break-word;
+}

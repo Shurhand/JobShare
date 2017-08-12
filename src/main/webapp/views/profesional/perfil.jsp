@@ -16,42 +16,48 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 
 <div class="container">
-    <div class="row well white col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
+    <div class="row well white ">
+        <div class="col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
+            <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
+                <a href="/profesional/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
+                    code="actor.modificarPerfil"/> </a></h2>
 
-        <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
-            <a href="/profesional/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
-                code="actor.modificarPerfil"/> </a></h2>
+            <br>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-md-offset-2">
+                    <c:if test="${profesional.foto == null}">
+                        <br>
+                        <h2><spring:message code="actor.sinFoto"/></h2>
+                    </c:if>
+                    <c:if test="${profesional.foto != null}">
+                        <IMG src="${profesional.foto}"
+                             class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
+                             width="125"
+                             height="125">
+                    </c:if>
+                    <security:authorize access="hasAuthority('PROFESIONAL')">
+                        <br>
+                        <br>
 
-        <br>
-        <div class="col-md-4 col-sm-4 col-xs-4 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-            <c:if test="${profesional.foto == null}">
-                <br>
-                <h2><c:out value="Sin foto"></c:out></h2>
-            </c:if>
-            <c:if test="${profesional.foto != null}">
-                <IMG src="${profesional.foto}" class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
-                     width="125"
-                     height="125">
-            </c:if>
-            <security:authorize access="hasAuthority('PROFESIONAL')">
-                <br>
-                <br>
+                        <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-loading">
 
-                <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-loading">
+                    </security:authorize>
+                </div>
 
-            </security:authorize>
-        </div>
-        <div class="col-md-5 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <p>${profesional.nombre} ${profesional.apellidos} - ${profesional.email}</p>
-            <p>${profesional.cp} ${profesional.provincia}</p>
-            <p>${profesional.DNI}</p>
-            <p><spring:message code="usuario.peticionesRealizadas"/> ${profesional.peticiones.size()}<p>
-            <p><spring:message code="profesional.ofertasRealizadas"/> ${profesional.ofertas.size()}<p>
-        </div>
-        <div class="col-md-offset-1 col-sm-offset-1">
-            <p><spring:message code="usuario.descripcion"/>:
-            <p>
-            <h5>${profesional.descripcion}</h5>
+                <div class="col-md-6 col-sm-6">
+                    <p>${profesional.nombre} ${profesional.apellidos} - ${profesional.email}</p>
+                    <p>${profesional.cp} ${profesional.provincia}</p>
+                    <p>${profesional.DNI}</p>
+                    <p><spring:message code="usuario.peticionesRealizadas"/> ${profesional.peticiones.size()}<p>
+                    <p><spring:message code="profesional.ofertasRealizadas"/> ${profesional.ofertas.size()}<p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="justificar-texto">
+                    <p><spring:message code="usuario.descripcion"/>:</p>
+                    <p> ${profesional.descripcion}</p>
+                </div>
         </div>
         <br>
         <h4 style="text-align: center"><spring:message code="profesional.estudios"/>
@@ -98,13 +104,14 @@
                     <h2><c:out value="Sin foto"></c:out></h2>
                 </c:if>
                 <c:if test="${profesional.foto != null}">
-                    <IMG src="${profesional.foto}" class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
+                    <IMG src="${profesional.foto}"
+                         class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
                          width="125" height="125">
                 </c:if>
             </div>
         </div>
         <hr/>
-
+        </div>
     </div>
 </div>
 
