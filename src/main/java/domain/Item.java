@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -25,6 +27,7 @@ public class Item extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 30)
    public String getNombre() {
       return nombre;
    }
@@ -35,6 +38,7 @@ public class Item extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 250)
    public String getDescripcion() {
       return descripcion;
    }
@@ -79,6 +83,7 @@ public class Item extends DomainEntity {
    
    @NotNull
    @Valid
+   @JsonBackReference
    @ManyToOne(optional = false)
    public Peticion getPeticion() {
       return peticion;

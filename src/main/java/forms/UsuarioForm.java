@@ -1,13 +1,10 @@
 package forms;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.*;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.net.URL;
 
 public class UsuarioForm {
    public UsuarioForm() {
@@ -25,7 +22,8 @@ public class UsuarioForm {
    private String password;
    private String confirmarPassword;
    private boolean checkTerminos;
-   private URL foto;
+   private String foto;
+   private String descripcion;
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -136,11 +134,24 @@ public class UsuarioForm {
       this.checkTerminos = checkTerminos;
    }
    
-   public URL getFoto() {
+   @SafeHtml
+   @Length(max = 250)
+   @URL
+   public String getFoto() {
       return foto;
    }
    
-   public void setFoto(URL foto) {
+   public void setFoto(String foto) {
       this.foto = foto;
+   }
+   
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 250)
+   public String getDescripcion() {
+      return descripcion;
+   }
+   
+   public void setDescripcion(String descripcion) {
+      this.descripcion = descripcion;
    }
 }

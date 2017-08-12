@@ -1,6 +1,8 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -44,6 +46,7 @@ public class Peticion extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 50)
    public String getTitulo() {
       return titulo;
    }
@@ -54,6 +57,7 @@ public class Peticion extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 250)
    public String getDescripcion() {
       return descripcion;
    }
@@ -119,6 +123,7 @@ public class Peticion extends DomainEntity {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "peticion")
+   @JsonManagedReference
    public Collection<Item> getItems() {
       return items;
    }
@@ -136,5 +141,14 @@ public class Peticion extends DomainEntity {
    
    public void setEtiquetas(Collection<Etiqueta> etiquetas) {
       this.etiquetas = etiquetas;
+   }
+   
+   @Transient
+   public String getPresupuestoTotal() {
+      String presupuesto = String.valueOf(this.getItems().stream().mapToDouble(x -> x.getPresupuesto()).sum());
+      if (presupuesto.endsWith("0")) {
+         presupuesto = presupuesto.substring(0, presupuesto.length() - 2);
+      }
+      return presupuesto;
    }
 }

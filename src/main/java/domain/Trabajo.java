@@ -3,6 +3,7 @@ package domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,6 +48,7 @@ public class Trabajo extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 20)
    public String getEmpresa() {
       return empresa;
    }
@@ -57,6 +59,7 @@ public class Trabajo extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 20)
    public String getPuesto() {
       return puesto;
    }

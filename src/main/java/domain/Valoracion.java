@@ -1,6 +1,7 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -59,6 +60,7 @@ public class Valoracion extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 250)
    public String getComentario() {
       return comentario;
    }

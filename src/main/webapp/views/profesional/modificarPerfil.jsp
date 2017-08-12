@@ -89,16 +89,25 @@
                         <form:input class="form-control" path="telefono" placeholder="${telefono}"/>
                         <form:errors class="help-block" path="telefono"/>
                     </div>
-                    <div class="form-group ${errores != null ? 'has-success has-feedback' : ''}">
+                    <div
+                        class="form-group ${errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="urlFotografia" var="urlFotografia"/>
                         <form:label class="control-label" path="foto">${urlFotografia}</form:label>
                         <form:input type="URL" class="form-control" path="foto" placeholder="URL"/>
                         <form:errors class="help-block" path="foto"/>
                     </div>
+                    <div
+                        class="form-group ${errores.contains('descripcion') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
+                        <spring:message code="usuario.descripcion" var="descripcion"/>
+                        <form:label class="control-label" path="descripcion">${descripcion}</form:label>
+                        <form:input class="form-control" path="descripcion" placeholder="${descripcion}"/>
+                        <form:errors class="help-block" path="descripcion"/>
+                    </div>
 
                     <div class="form-group text-center">
                         <br>
-                        <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message
+                        <a href="/profesional/perfil.do" class="btn btn-primary"><i class="fa fa-arrow-left"></i>
+                            <spring:message
                             code="volver"/></a>
                         <button type="submit" name="saveForm" class="btn btn-primary"><i class="fa fa-check"></i>
                             <spring:message code="guardar"/>

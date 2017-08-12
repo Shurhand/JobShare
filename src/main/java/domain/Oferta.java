@@ -1,6 +1,7 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -55,6 +56,7 @@ public class Oferta extends DomainEntity {
    
    @NotNull
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 250)
    public String getComentario() {
       return comentario;
    }
@@ -83,6 +85,7 @@ public class Oferta extends DomainEntity {
       this.fechaCaducidad = fechaCaducidad;
    }
    
+   @Length(max = 250)
    public URL getFoto() {
       return foto;
    }

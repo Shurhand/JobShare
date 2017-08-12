@@ -123,7 +123,7 @@ public class IndexUsuarioController extends AbstractController {
             }
             if (! hayError) {
                usuarioService.modificarPerfil(usuarioForm);
-               result = new ModelAndView("redirect:/");
+               result = new ModelAndView("redirect:/usuario/perfil.do");
             } else {
                result = crearEditarModeloPerfil(usuarioForm);
             }

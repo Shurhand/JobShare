@@ -108,6 +108,7 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
       profesional.setEmail(usuarioForm.getEmail());
       profesional.setFoto(usuarioForm.getFoto());
       profesional.setProvincia(usuarioForm.getProvincia());
+      profesional.setDescripcion(usuarioForm.getDescripcion());
       
       profesional.getCuenta().setUsername(usuarioForm.getUsername());
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();

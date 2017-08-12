@@ -70,7 +70,7 @@ public class TrabajoProfesionalController extends AbstractController {
             }
             if (! hayError) {
                trabajoService.save(trabajo);
-               result = new ModelAndView("redirect:/actor/perfil.do");
+               result = new ModelAndView("redirect:/profesional/perfil.do");
             } else {
                result = crearEditarModelo(trabajo);
             }
@@ -92,8 +92,8 @@ public class TrabajoProfesionalController extends AbstractController {
       
       Trabajo trabajo = trabajoService.findOne(trabajoID);
       trabajoService.delete(trabajo);
-      
-      result = new ModelAndView("redirect:/actor/perfil.do");
+   
+      result = new ModelAndView("redirect:/profesional/perfil.do");
       
       return result;
    }
@@ -102,8 +102,9 @@ public class TrabajoProfesionalController extends AbstractController {
       ModelAndView res;
       
       Credenciales credenciales = new Credenciales();
-      
-      res = new ModelAndView("trabajo/profesional/editar");
+      String vista = trabajo.getId() != 0 ? "trabajo/profesional/editar" : "trabajo/profesional/crear";
+   
+      res = new ModelAndView(vista);
       res.addObject("trabajo", trabajo);
       res.addObject("credenciales", credenciales);
       

@@ -110,6 +110,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       usuario.setEmail(usuarioForm.getEmail());
       usuario.setFoto(usuarioForm.getFoto());
       usuario.setProvincia(usuarioForm.getProvincia());
+      usuario.setDescripcion(usuarioForm.getDescripcion());
       
       cuenta.setIsActivated(true);
       cuenta.setUsername(usuarioForm.getUsername());

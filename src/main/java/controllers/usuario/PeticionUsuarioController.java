@@ -48,7 +48,7 @@ public class PeticionUsuarioController extends AbstractController {
    // =========== Edition =============
 
    @GetMapping("/crear")
-   public ModelAndView create() {
+   public ModelAndView crear() {
    
       ModelAndView res;
       Peticion peticion = peticionService.create();
@@ -60,7 +60,7 @@ public class PeticionUsuarioController extends AbstractController {
    }
    
    @GetMapping("/editar")
-   public ModelAndView edit(@RequestParam int peticionID) {
+   public ModelAndView editar(@RequestParam int peticionID) {
       
       ModelAndView result;
       Peticion peticion = peticionService.findOne(peticionID);

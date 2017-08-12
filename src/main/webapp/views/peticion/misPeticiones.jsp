@@ -7,6 +7,8 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
@@ -96,12 +98,12 @@
                 </form>
             </div>
         </div>
+        <h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>
         <c:forEach var="peticion" items="${peticiones}">
             <div class="col-md-9">
                 <div id="map"></div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -115,20 +117,17 @@
                                          src="${peticion.foto}">
 
                                 </div>
-                                <div class="col-xs-6 col-md-8 info-wrapper">
-                                    <strong><h4>${peticion.titulo}</h4></strong>
-                                    <p>
-                                            ${peticion.descripcion}
-                                    </p>
 
+                                <div class="col-xs-6 col-md-8 info-wrapper">
+                                    <b><h4>${peticion.titulo} &nbsp;-&nbsp; ${peticion.usuario.provincia} </h4></b>
+                                    <h5>${peticion.descripcion}</h5>
                                 </div>
                                 <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                    <button onclick="location.replace('/seller/menu/1/');" class="form-control"><span
-                                        class="glyphicon glyphicon-file"></span> Menu
-                                    </button>
-                                    <p class="brief-text">
-                                        <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
-                                    </p>
+                                    <spring:message code="peticion.fechaCaducidad"/>
+                                    <tags:localDate date="${peticion.fechaCaducidad}" pattern="dd/MM/yyyy"/>
+                                    <h4><spring:message code="peticion.presupuesto"/></h4>
+                                    <p>${peticion.getPresupuestoTotal()} €</p>
+
                                 </div>
                             </div>
                         </div>

@@ -70,7 +70,7 @@ public class EstudioProfesionalController extends AbstractController {
             }
             if (! hayError) {
                estudioService.save(estudio);
-               result = new ModelAndView("redirect:/actor/perfil.do");
+               result = new ModelAndView("redirect:/profesional/perfil.do");
             } else {
                result = crearEditarModelo(estudio);
             }
@@ -92,8 +92,8 @@ public class EstudioProfesionalController extends AbstractController {
       
       Estudio estudio = estudioService.findOne(estudioID);
       estudioService.delete(estudio);
-      
-      result = new ModelAndView("redirect:/actor/perfil.do");
+   
+      result = new ModelAndView("redirect:/profesional/perfil.do");
       
       return result;
    }
@@ -102,8 +102,9 @@ public class EstudioProfesionalController extends AbstractController {
       ModelAndView res;
       
       Credenciales credenciales = new Credenciales();
-      
-      res = new ModelAndView("estudio/profesional/editar");
+      String vista = estudio.getId() != 0 ? "estudio/profesional/editar" : "estudio/profesional/crear";
+   
+      res = new ModelAndView(vista);
       res.addObject("estudio", estudio);
       res.addObject("credenciales", credenciales);
       

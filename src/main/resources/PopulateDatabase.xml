@@ -94,7 +94,7 @@
         <property name="nombre" value="Chuck"/>
         <property name="apellidos" value="Norris"/>
         <property name="cp" value="41010"/>
-        <property name="provincia" value="Shangri-la"/>
+        <property name="provincia" value="Texas"/>
         <property name="DNI" value="48820088N"/>
         <property name="email" value="equecrates@gmail.com"/>
         <property name="telefono" value="675048498"/>
@@ -138,7 +138,7 @@
         <property name="nombre" value="Bruce"/>
         <property name="apellidos" value="Lee"/>
         <property name="cp" value="41010"/>
-        <property name="provincia" value="Shangri-la"/>
+        <property name="provincia" value="Chinatown"/>
         <property name="DNI" value="17883990H"/>
         <property name="email" value="BruceLee@gmail.com"/>
         <property name="telefono" value="675048498"/>

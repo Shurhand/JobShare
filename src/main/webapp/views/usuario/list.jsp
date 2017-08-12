@@ -33,6 +33,9 @@
                 <th><spring:message code="usuario.bloquear"/></th>
             </tr>
             </thead>
+            <tbody>
+            asdasd
+            </tbody>
         </table>
     </div>
 </div>

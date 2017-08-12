@@ -119,6 +119,7 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
       admin.setEmail(usuarioForm.getEmail());
       admin.setFoto(usuarioForm.getFoto());
       admin.setProvincia(usuarioForm.getProvincia());
+      admin.setDescripcion(usuarioForm.getDescripcion());
       
       admin.getCuenta().setUsername(usuarioForm.getUsername());
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();

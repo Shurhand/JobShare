@@ -11,7 +11,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2 style="text-align: center"><spring:message code="trabajo.nuevo"/></h2>
+            <c:if test="${trabajo.id == 0}">
+                <h2 style="text-align: center"><spring:message code="trabajo.nuevo"/></h2>
+            </c:if>
+            <c:if test="${trabajo.id != 0}">
+                <h2 style="text-align: center"><spring:message code="trabajo.editar"/></h2>
+            </c:if>
             <div class="well">
                 <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
                     <div class="alert alert-danger alert-dismissable alert-link">
@@ -68,7 +73,7 @@
 
                     <div class="form-group text-center">
                         <br>
-                        <a href="/actor/perfil.do" class="btn btn-primary"><i
+                        <a href="/profesional/perfil.do" class="btn btn-primary"><i
                             class="fa fa-arrow-left"></i> <spring:message code="volver"/></a>
                         <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i>
                             <spring:message code="guardar"/>

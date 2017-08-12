@@ -1,15 +1,12 @@
 package domain;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.*;
 import security.Cuenta;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.net.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -23,7 +20,7 @@ public class Actor extends DomainEntity {
    private String email;
    private String provincia;
    private String descripcion;
-   private URL foto;
+   private String foto;
    
    public Actor() {
       super();
@@ -31,6 +28,7 @@ public class Actor extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 50)
    public String getNombre() {
       return nombre;
    }
@@ -40,6 +38,7 @@ public class Actor extends DomainEntity {
    }
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 20)
    public String getTelefono() {
       return telefono;
    }
@@ -50,6 +49,7 @@ public class Actor extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 50)
    public String getApellidos() {
       return apellidos;
    }
@@ -71,6 +71,7 @@ public class Actor extends DomainEntity {
    }
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 10)
    public String getCp() {
       return cp;
    }
@@ -83,6 +84,7 @@ public class Actor extends DomainEntity {
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Email
    @Column(unique = true)
+   @Length(max = 80)
    public String getEmail() {
       return email;
    }
@@ -92,6 +94,7 @@ public class Actor extends DomainEntity {
    }
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 50)
    public String getProvincia() {
       return provincia;
    }
@@ -100,15 +103,19 @@ public class Actor extends DomainEntity {
       this.provincia = provincia;
    }
    
-   public URL getFoto() {
+   @Length(max = 250)
+   @URL
+   @SafeHtml
+   public String getFoto() {
       return foto;
    }
    
-   public void setFoto(URL picture) {
+   public void setFoto(String picture) {
       this.foto = picture;
    }
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 250)
    public String getDescripcion() {
       return descripcion;
    }
