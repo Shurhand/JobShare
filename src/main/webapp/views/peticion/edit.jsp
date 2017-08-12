@@ -11,41 +11,54 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2 style="text-align: center"><spring:message code="peticion.nueva" /></h2>
+            <c:if test="${peticion.id == 0}">
+                <h2 style="text-align: center"><spring:message code="peticion.nueva"/></h2>
+            </c:if>
+            <c:if test="${peticion.id != 0}">
+                <h2 style="text-align: center"><spring:message code="peticion.editar"/></h2>
+            </c:if>
             <div class="well">
                 <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
-                    <div class="alert alert-danger alert-dismissable alert-link">
+                    <div class="alert alert-danger alert-dismissable alert-link oaerror danger-conjunto">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
                         <c:forEach var="e" items="${erroresCheck}">
                             <spring:message code="${e}"/> <br>
                         </c:forEach>
                     </div>
                 </c:if>
-                <form:form action="peticion/usuario/create.do" modelAttribute="peticion" acceptCharset="UTF-8">
+                <form:form action="peticion/usuario/editar.do" modelAttribute="peticion" acceptCharset="UTF-8">
                     <form:hidden path="id"/>
                     <form:hidden path="version"/>
                     <form:hidden path="usuario"/>
                     <form:hidden path="estado"/>
+                    <form:hidden path="items"/>
+                    <form:hidden path="etiquetas"/>
                     <form:hidden path="fechaCreacion"/>
                     <div
                         class="form-group ${errores.contains('titulo') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="peticion.titulo" var="peticion.titulo" />
-                        <form:label class="control-label" path="titulo">${peticion.titulo}</form:label>
-                        <form:input class="form-control" path="titulo" placeholder="${peticion.titulo}"/>
+                        <spring:message code="peticion.titulo" var="titulo"/>
+                        <form:label class="control-label" path="titulo">${titulo}</form:label>
+                        <form:input class="form-control" path="titulo" placeholder="${titulo}"/>
                         <form:errors class="help-block" path="titulo"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('descripcion') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="peticion.descripcion" var="peticion.descripcion" />
-                        <form:label class="control-label" path="descripcion">${peticion.descripcion}</form:label>
-                        <form:input class="form-control" path="descripcion" placeholder="${peticion.descripcion}"/>
+                        <spring:message code="peticion.descripcion" var="descripcion"/>
+                        <form:label class="control-label" path="descripcion">${descripcion}</form:label>
+                        <form:input class="form-control" path="descripcion" placeholder="${descripcion}"/>
                         <form:errors class="help-block" path="descripcion"/>
                     </div>
                     <div
                         class="form-group ${errores.contains('fechaCaducidad') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="peticion.fechaCaducidad" var="peticion.fechaCaducidad" />
-                        <form:label class="control-label" path="fechaCaducidad">${peticion.fechaCaducidad}</form:label>
-                        <form:input class="form-control" path="fechaCaducidad" placeholder="${peticion.fechaCaducidad}"/>
+                        <spring:message code="peticion.fechaCaducidad" var="fechaCaducidad"/>
+                        <form:label class="control-label" path="fechaCaducidad">${fechaCaducidad}</form:label>
+                        <div class="input-group date" id="datepicker1">
+                            <form:input pattern="\d{1,2}/\d{1,2}/\d{4}" class="form-control" path="fechaCaducidad"
+                                        placeholder="dd/MM/yyyy"/>
+                            <div class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
                         <form:errors class="help-block" path="fechaCaducidad"/>
                     </div>
                     <div class="form-group ${errores != null ? 'has-success has-feedback' : ''}">
@@ -54,7 +67,12 @@
                         <form:input type="URL" class="form-control" path="foto" placeholder="URL"/>
                         <form:errors class="help-block" path="foto"/>
                     </div>
-
+                    <div class="error-notice">
+                        <div class="oaerror warning">
+                            <strong><spring:message code="header.informacion"/>: </strong> <spring:message
+                            code="peticion.informacionItems"/>
+                        </div>
+                    </div>
                     <div class="form-group text-center">
                         <br>
                         <a href="peticion/usuario/misPeticiones.do" class="btn btn-primary"><i
@@ -68,3 +86,15 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker1').datepicker({
+            format: "dd/mm/yyyy",
+            clearBtn: true,
+            startDate: "0",
+            todayHighlight: true,
+            daysOfWeekHighlighted: "0",
+        })
+    });
+</script>

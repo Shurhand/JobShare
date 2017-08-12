@@ -19,7 +19,7 @@
             </c:if>
             <div class="well">
                 <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
-                    <div class="alert alert-danger alert-dismissable alert-link">
+                    <div class="alert alert-danger alert-dismissable alert-link oaerror danger-conjunto">
                         <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
                         <c:forEach var="e" items="${erroresCheck}">
                             <spring:message code="${e}"/> <br>

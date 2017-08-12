@@ -3,6 +3,7 @@ package services;
 import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import repositories.PeticionRepository;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -44,6 +46,7 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    @Override
    public void save(@NotNull Peticion peticion) {
       actorService.checkIfUsuarioOProfesional();
+      Assert.isTrue(checkFechaCaducidad(peticion.getFechaCaducidad()));
       peticionRepository.save(peticion);
    }
    
@@ -84,5 +87,18 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    
    public Collection<Peticion> getPeticionesPorUsuario(Usuario usuario) {
       return peticionRepository.getPeticionesPorUsuario(usuario);
+   }
+   
+   public Collection<Peticion> getPeticionesCaducadasPorUsuario(Usuario usuario) {
+      return getPeticionesPorUsuario(usuario).stream().filter(x -> x.getEstado().equals(Estado.CADUCADA)).collect(Collectors.toList());
+      
+   }
+   
+   public Collection<Peticion> getPeticionesActivasPorUsuario(Usuario usuario) {
+      return peticionRepository.getPeticionesActivasPorUsuario(usuario);
+   }
+   
+   public boolean checkFechaCaducidad(LocalDate fechaCaducidad) {
+      return fechaCaducidad.isAfter(LocalDate.now());
    }
 }

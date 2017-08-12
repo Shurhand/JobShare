@@ -101,7 +101,8 @@
         <property name="cuenta" ref="cuenta2"/>
         <property name="peticiones">
             <list>
-
+                <!--<ref bean="peticion1"/>-->
+                <!--<ref bean="peticion4"/>-->
             </list>
         </property>
         <property name="pagos">
@@ -148,7 +149,8 @@
         <property name="cuenta" ref="cuenta4"/>
         <property name="peticiones">
             <list>
-                <ref bean="peticion1"/>
+                <!--<ref bean="peticion2"/>-->
+                <!--<ref bean="peticion3"/>-->
             </list>
         </property>
         <property name="pagos">
@@ -282,8 +284,8 @@
         </property>
         <property name="etiquetas">
             <list>
-                <ref bean="etiqueta1"/>
-                <ref bean="etiqueta8"/>
+                <!--<ref bean="etiqueta1"/>-->
+                <!--<ref bean="etiqueta8"/>-->
             </list>
         </property>
     </bean>
@@ -307,8 +309,8 @@
         </property>
         <property name="etiquetas">
             <list>
-                <ref bean="etiqueta15"/>
-                <ref bean="etiqueta16"/>
+                <!--<ref bean="etiqueta15"/>-->
+                <!--<ref bean="etiqueta16"/>-->
             </list>
         </property>
     </bean>
@@ -331,10 +333,31 @@
         </property>
         <property name="etiquetas">
             <list>
-                <ref bean="etiqueta4"/>
-                <ref bean="etiqueta12"/>
-                <ref bean="etiqueta13"/>
-                <ref bean="etiqueta14"/>
+                <!--<ref bean="etiqueta4"/>-->
+                <!--<ref bean="etiqueta12"/>-->
+                <!--<ref bean="etiqueta13"/>-->
+                <!--<ref bean="etiqueta14"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <bean id="peticion4" class="domain.Peticion">
+        <constructor-arg index="0" name="titulo" value="Defensa personal"/>
+        <constructor-arg index="1" name="descripcion" value="Necesito clases de defensa personal "/>
+        <constructor-arg index="2" name="fechaCreacion" value="05/04/2016"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="01/06/2017"/>
+        <constructor-arg index="4" name="foto"
+                         value="https://image.flaticon.com/icons/png/512/72/72993.png"/>
+        <constructor-arg index="5" name="estado" value="CADUCADA"/>
+        <property name="usuario" ref="profesional1"/>
+        <property name="items">
+            <list>
+            </list>
+        </property>
+        <property name="etiquetas">
+            <list>
+                <!--<ref bean="etiqueta4"/>-->
+                <!--<ref bean="etiqueta6"/>-->
             </list>
         </property>
     </bean>
@@ -496,6 +519,7 @@
         <property name="peticiones">
             <list>
                 <ref bean="peticion3"/>
+                <ref bean="peticion4"/>
             </list>
         </property>
     </bean>
@@ -515,7 +539,7 @@
         <property name="activada" value="true"/>
         <property name="peticiones">
             <list>
-
+                <ref bean="peticion4"/>
             </list>
         </property>
     </bean>

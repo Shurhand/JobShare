@@ -27,7 +27,7 @@
                 <div class="col-md-4 col-sm-6 col-md-offset-2">
                     <c:if test="${usuario.foto == null}">
                         <br>
-                        <h2><spring:message code="actor.sinFoto"/></h2>
+                        <h3><spring:message code="actor.sinFoto"/></h3>
                     </c:if>
                     <c:if test="${usuario.foto != null}">
                         <IMG src="${usuario.foto}"

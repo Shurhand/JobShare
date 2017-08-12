@@ -98,24 +98,45 @@
                 </form>
             </div>
         </div>
-        <h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>
+        <%--<h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>--%>
+
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-9">
+                    <a href="/peticion/usuario/misPeticiones.do"> <spring:message
+                        code="peticiones.activas"/> </a>|
+                    <a href="/peticion/usuario/misPeticionesCaducadas.do"> <spring:message
+                        code="peticiones.caducadas"/> </a>
+                </div>
+                <div class="col-md-3 text-right">
+                    <a href="/peticion/usuario/crear.do" class="btn btn-primary" role="button"> <spring:message
+                        code="peticion.nueva"/> </a>
+                </div>
+            </div>
+        </div>
+
         <c:forEach var="peticion" items="${peticiones}">
             <div class="col-md-9">
-                <div id="map"></div>
                 <div class="row">
                     <div class="col-md-12">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-
                         <div class="item-search well white">
                             <div class="row">
                                 <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
-
-                                    <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                         src="${peticion.foto}">
-
+                                    <c:if test="${peticion.foto != null}">
+                                        <img alt="" height="100px" width="100px" class="img-circle center-block"
+                                             src="${peticion.foto}">
+                                    </c:if>
+                                    <c:if test="${peticion.foto == null}">
+                                        <br>
+                                        <h2><spring:message code="peticion.sinFoto"/></h2>
+                                    </c:if>
+                                    <c:if test="${peticion.items.isEmpty()}">
+                                        <div class="error-notice">
+                                            <div class="oaerror-small warning">
+                                                <spring:message code="peticion.sinItems"/>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
 
                                 <div class="col-xs-6 col-md-8 info-wrapper">

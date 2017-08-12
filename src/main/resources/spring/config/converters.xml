@@ -41,6 +41,9 @@
         <bean class="converters.RolToStringConverter"></bean>
         <bean class="converters.StringToRolConverter"></bean>
 
+        <bean class="converters.UsuarioToStringConverter"></bean>
+        <bean class="converters.StringToUsuarioConverter"></bean>
+
         <bean class="converters.TrabajoToStringConverter"></bean>
         <bean class="converters.StringToTrabajoConverter"></bean>
 

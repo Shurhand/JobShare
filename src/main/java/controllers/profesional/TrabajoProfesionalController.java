@@ -57,12 +57,12 @@ public class TrabajoProfesionalController extends AbstractController {
          result.addObject("errores", errores);
       } else {
          try {
-            if (trabajoService.checkFechaFin(trabajo.getFechaFin())) {
+            if (! trabajoService.checkFechaFin(trabajo.getFechaFin())) {
                hayError = true;
                erroresCheck.add("trabajo.error.fechaFinFutura");
                errores.add("fechaFin");
             }
-            if (trabajoService.checkFechas(trabajo.getFechaInicio(), trabajo.getFechaFin())) {
+            if (! trabajoService.checkFechas(trabajo.getFechaInicio(), trabajo.getFechaFin())) {
                hayError = true;
                erroresCheck.add("trabajo.error.fechasInvalidas");
                errores.add("fechaInicio");

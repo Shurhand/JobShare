@@ -4,6 +4,7 @@ import domain.Profesional;
 import domain.Trabajo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import repositories.TrabajoRepository;
 
 import javax.transaction.Transactional;
@@ -33,8 +34,8 @@ public class TrabajoService extends AbstractServiceImpl implements AbstractServi
    @Override
    public void save(@NotNull Trabajo trabajo) {
       profesionalService.checkIfProfesional();
-      this.checkFechaFin(trabajo.getFechaFin());
-      this.checkFechas(trabajo.getFechaInicio(), trabajo.getFechaFin());
+      Assert.isTrue(checkFechaFin(trabajo.getFechaFin()));
+      Assert.isTrue(checkFechas(trabajo.getFechaInicio(), trabajo.getFechaFin()));
       trabajoRepository.save(trabajo);
    }
    
@@ -74,7 +75,7 @@ public class TrabajoService extends AbstractServiceImpl implements AbstractServi
    }
    
    public boolean checkFechas(LocalDate fechaInicio, LocalDate fechaFin) {
-      return fechaInicio.isAfter(fechaFin);
+      return fechaInicio.isBefore(fechaFin);
    }
    
    public boolean checkFechaFin(LocalDate fechaFin) {
