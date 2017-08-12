@@ -49,6 +49,13 @@
                         <form:errors class="help-block" path="descripcion"/>
                     </div>
                     <div
+                        class="form-group ${errores.contains('provincia') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
+                        <spring:message code="peticion.provincia" var="provincia"/>
+                        <form:label class="control-label" path="provincia">${provincia}</form:label>
+                        <form:input class="form-control" path="provincia" placeholder="${provincia}"/>
+                        <form:errors class="help-block" path="provincia"/>
+                    </div>
+                    <div
                         class="form-group ${errores.contains('fechaCaducidad') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="peticion.fechaCaducidad" var="fechaCaducidad"/>
                         <form:label class="control-label" path="fechaCaducidad">${fechaCaducidad}</form:label>
@@ -67,6 +74,7 @@
                         <form:input type="URL" class="form-control" path="foto" placeholder="URL"/>
                         <form:errors class="help-block" path="foto"/>
                     </div>
+
                     <div class="error-notice">
                         <div class="oaerror warning">
                             <strong><spring:message code="header.informacion"/>: </strong> <spring:message

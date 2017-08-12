@@ -46,6 +46,9 @@
         <security:intercept-url pattern="/etiqueta/lista.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/peticion/ver.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 

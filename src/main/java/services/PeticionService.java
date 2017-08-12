@@ -101,4 +101,8 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    public boolean checkFechaCaducidad(LocalDate fechaCaducidad) {
       return fechaCaducidad.isAfter(LocalDate.now());
    }
+   
+   public void checkMisPeticiones(Peticion peticion) {
+      Assert.isTrue(usuarioService.findUsuario().getPeticiones().contains(peticion));
+   }
 }

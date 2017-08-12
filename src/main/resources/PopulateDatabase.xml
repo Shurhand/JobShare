@@ -271,9 +271,10 @@
         <constructor-arg index="1" name="descripcion" value="Necesito unos cuantos arreglos en casa y reparaciones"/>
         <constructor-arg index="2" name="fechaCreacion" value="12/07/2017"/>
         <constructor-arg index="3" name="fechaCaducidad" value="01/10/2017"/>
-        <constructor-arg index="4" name="foto"
+        <constructor-arg index="4" name="provincia" value="Sevilla"/>
+        <constructor-arg index="5" name="foto"
                          value="https://www.bankforeclosuressale.com/images/outline-of-home-made-with-construction-tools.jpg"/>
-        <constructor-arg index="5" name="estado" value="ACTIVA"/>
+        <constructor-arg index="6" name="estado" value="ACTIVA"/>
         <property name="usuario" ref="profesional1"/>
         <property name="items">
             <list>
@@ -296,9 +297,10 @@
                          value="Me voy de viaje a Sevilla y necesito algún guía para la catedral y otros sitios"/>
         <constructor-arg index="2" name="fechaCreacion" value="05/06/2017"/>
         <constructor-arg index="3" name="fechaCaducidad" value="12/11/2017"/>
-        <constructor-arg index="4" name="foto"
+        <constructor-arg index="4" name="provincia" value="Zaragoza"/>
+        <constructor-arg index="5" name="foto"
                          value="http://www.newhealthfoundation.org/web/wp-content/uploads/2016/04/sevilla.jpg"/>
-        <constructor-arg index="5" name="estado" value="ACTIVA"/>
+        <constructor-arg index="6" name="estado" value="ACTIVA"/>
         <property name="usuario" ref="usuario1"/>
         <property name="items">
             <list>
@@ -320,9 +322,10 @@
         <constructor-arg index="1" name="descripcion" value="Necesito clases particulares de varios idiomas"/>
         <constructor-arg index="2" name="fechaCreacion" value="12/07/2017"/>
         <constructor-arg index="3" name="fechaCaducidad" value="01/10/2017"/>
-        <constructor-arg index="4" name="foto"
+        <constructor-arg index="4" name="provincia" value="Málaga"/>
+        <constructor-arg index="5" name="foto"
                          value="http://www.escueladebloggers.com/wp-content/uploads/2012/02/clases-particulares1.jpg"/>
-        <constructor-arg index="5" name="estado" value="ACTIVA"/>
+        <constructor-arg index="6" name="estado" value="ACTIVA"/>
         <property name="usuario" ref="usuario1"/>
         <property name="items">
             <list>
@@ -346,9 +349,10 @@
         <constructor-arg index="1" name="descripcion" value="Necesito clases de defensa personal "/>
         <constructor-arg index="2" name="fechaCreacion" value="05/04/2016"/>
         <constructor-arg index="3" name="fechaCaducidad" value="01/06/2017"/>
-        <constructor-arg index="4" name="foto"
+        <constructor-arg index="4" name="provincia" value="Sevilla"/>
+        <constructor-arg index="5" name="foto"
                          value="https://image.flaticon.com/icons/png/512/72/72993.png"/>
-        <constructor-arg index="5" name="estado" value="CADUCADA"/>
+        <constructor-arg index="6" name="estado" value="CADUCADA"/>
         <property name="usuario" ref="profesional1"/>
         <property name="items">
             <list>

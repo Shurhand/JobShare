@@ -23,6 +23,7 @@ public class Peticion extends DomainEntity {
    private String descripcion;
    private LocalDate fechaCreacion;
    private LocalDate fechaCaducidad;
+   private String provincia;
    private URL foto;
    private Estado estado;
    
@@ -30,7 +31,7 @@ public class Peticion extends DomainEntity {
       super();
    }
    
-   public Peticion(String titulo, String descripcion, String fechaCreacion, String fechaCaducidad, URL foto, Estado estado) {
+   public Peticion(String titulo, String descripcion, String fechaCreacion, String fechaCaducidad, String provincia, URL foto, Estado estado) {
       this.titulo = titulo;
       this.descripcion = descripcion;
       
@@ -40,6 +41,7 @@ public class Peticion extends DomainEntity {
       
       this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
       this.fechaCaducidad = LocalDate.parse(fechaCaducidad, formatter);
+      this.provincia = provincia;
       this.foto = foto;
       this.estado = estado;
    }
@@ -102,6 +104,17 @@ public class Peticion extends DomainEntity {
    
    public void setEstado(Estado estado) {
       this.estado = estado;
+   }
+   
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Length(max = 50)
+   public String getProvincia() {
+      return provincia;
+   }
+   
+   public void setProvincia(String provincia) {
+      this.provincia = provincia;
    }
    
    // Relaciones

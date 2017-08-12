@@ -234,3 +234,9 @@ hr {
 .success strong {
     color: #2b542c;
 }
+
+/* Search
+------------------------------------------------------------*/
+.item-search:hover {
+    border-color: #737373;
+}

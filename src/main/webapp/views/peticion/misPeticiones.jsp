@@ -113,15 +113,14 @@
                         code="peticion.nueva"/> </a>
                 </div>
             </div>
-        </div>
 
-        <c:forEach var="peticion" items="${peticiones}">
-            <div class="col-md-9">
+            <c:forEach var="peticion" items="${peticiones}">
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="item-search well white">
                             <div class="row">
-                                <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
+                                <div class="col-xs-4 col-md-2 avatar-wrapper text-center">
                                     <c:if test="${peticion.foto != null}">
                                         <img alt="" height="100px" width="100px" class="img-circle center-block"
                                              src="${peticion.foto}">
@@ -139,8 +138,9 @@
                                     </c:if>
                                 </div>
 
-                                <div class="col-xs-6 col-md-8 info-wrapper">
-                                    <b><h4>${peticion.titulo} &nbsp;-&nbsp; ${peticion.usuario.provincia} </h4></b>
+                                <div class="col-xs-8 col-md-8 info-wrapper">
+                                    <a href="peticion/ver.do?peticionID=${peticion.id}"> <b><h4>${peticion.titulo}
+                                        &nbsp;-&nbsp; ${peticion.provincia} </h4></b></a>
                                     <h5>${peticion.descripcion}</h5>
                                 </div>
                                 <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
@@ -155,7 +155,7 @@
 
                     </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
 </div>

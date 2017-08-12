@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.ProfesionalRepository;
 import security.Autoridad;
+import security.Cuenta;
 import security.LoginService;
 
 import javax.transaction.Transactional;
@@ -81,6 +82,10 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
    public Profesional findProfesional() {
       Actor a = actorService.findPrincipal();
       return profesionalRepository.findProfesional(a.getCuenta());
+   }
+   
+   public Profesional findProfesionalPorCuenta(Cuenta cuenta) {
+      return profesionalRepository.findProfesional(cuenta);
    }
    
    public void modificarPerfil(UsuarioForm usuarioForm) {
