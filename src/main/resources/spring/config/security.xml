@@ -37,17 +37,18 @@
         <security:intercept-url pattern="/views/misc/index.jsp"
                                 access="permitAll"/>
 
-
         <security:intercept-url pattern="/welcome/index.do"
                                 access="permitAll"/>
 
         <security:intercept-url pattern="/security/loginFailure.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/etiqueta/lista.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 
-       
         <security:intercept-url pattern="/security/login.do"
                                 access="isAnonymous()"/>
 
@@ -58,16 +59,18 @@
 
         <!-- ******************** ADMIN ************************************** -->
         <security:intercept-url pattern="/usuario/admin/*" access="hasAuthority('ADMIN')"/>
+        <security:intercept-url pattern="/etiqueta/admin/*" access="hasAuthority('ADMIN')"/>
         <security:intercept-url pattern="/admin/*" access="hasAuthority('ADMIN')"/>
 
         <!-- ******************** USUARIO ************************************** -->
 
-        <security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('USUARIO')"/>
+        <security:intercept-url pattern="/peticion/usuario/*"
+                                access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/usuario/*" access="hasAuthority('USUARIO')"/>
 
         <!-- ******************** PROFESIONAL ************************************** -->
 
-        <security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('PROFESIONAL')"/>
+        <!--<security:intercept-url pattern="/peticion/usuario/*" access="hasAuthority('PROFESIONAL')"/>-->
         <security:intercept-url pattern="/peticion/profesional/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/estudio/profesional/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/trabajo/profesional/*" access="hasAuthority('PROFESIONAL')"/>

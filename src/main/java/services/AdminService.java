@@ -80,12 +80,12 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
       
    }
    
-   public void bloquear(Actor u) {
+   public void bloquear(Actor a) {
       this.checkIfAdmin();
-      if (u.getCuenta().getIsActivated()) {
-         u.getCuenta().setIsActivated(false);
+      if (a.getCuenta().getIsActivated()) {
+         a.getCuenta().setIsActivated(false);
       } else {
-         u.getCuenta().setIsActivated(true);
+         a.getCuenta().setIsActivated(true);
       }
    }
    

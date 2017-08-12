@@ -33,7 +33,7 @@
             </c:if>
         </div>
         <div class="col-md-5 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <p>${usuario.nombre} ${usuario.apellidos} ${usuario.email}</p>
+            <p>${usuario.nombre} ${usuario.apellidos} - ${usuario.email}</p>
             <p>${usuario.cp} ${usuario.provincia}</p>
             <p>${usuario.DNI}</p>
             <p><spring:message code="usuario.peticionesRealizadas"/> ${usuario.peticiones.size()}<p>

@@ -17,7 +17,6 @@ import services.AdminService;
 import services.ProfesionalService;
 import services.UsuarioService;
 
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,10 +52,10 @@ public class UsuarioAdminController extends AbstractController {
    }
    
    @GetMapping(value = "/bloquear")
-   public ModelAndView bloquear(@RequestParam @NotNull int actorID) throws JsonProcessingException {
+   public ModelAndView bloquear(@RequestParam int usuarioID) throws JsonProcessingException {
+      Usuario u = usuarioService.findOne(usuarioID);
+      adminService.bloquear(u);
    
-      adminService.bloquear(actorService.findOne(actorID));
-      
-      return this.list();
+      return new ModelAndView("redirect:/usuario/admin/listaUsuarios.do");
    }
 }

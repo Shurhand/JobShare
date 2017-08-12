@@ -1,7 +1,7 @@
 package services;
 
 import domain.Etiqueta;
-import domain.Item;
+import domain.Peticion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.EtiquetaRepository;
@@ -9,7 +9,6 @@ import repositories.EtiquetaRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,12 +20,9 @@ public class EtiquetaService extends AbstractServiceImpl implements AbstractServ
    
    @Override
    public Etiqueta create() {
-      Collection<Item> items = new ArrayList<>();
-      LocalDate fechaCreacion = LocalDate.now();
-      
-      
+      Collection<Peticion> peticiones = new ArrayList<>();
       Etiqueta etiqueta = new Etiqueta();
-      etiqueta.setItems(items);
+      etiqueta.setPeticiones(peticiones);
       
       return etiqueta;
    }
@@ -65,5 +61,13 @@ public class EtiquetaService extends AbstractServiceImpl implements AbstractServ
    @NotNull
    public Etiqueta findOne(@NotNull @Min(1) Integer etiquetaID) {
       return etiquetaRepository.findOne(etiquetaID);
+   }
+   
+   public void activar(Etiqueta etiqueta) {
+      if (etiqueta.isActivada()) {
+         etiqueta.setActivada(false);
+      } else {
+         etiqueta.setActivada(true);
+      }
    }
 }

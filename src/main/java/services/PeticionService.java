@@ -1,9 +1,6 @@
 package services;
 
-import domain.Estado;
-import domain.Item;
-import domain.Peticion;
-import domain.Usuario;
+import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.PeticionRepository;
@@ -30,6 +27,7 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       actorService.checkIfUsuarioOProfesional();
       Usuario usuario = usuarioService.findUsuario();
       Collection<Item> items = new ArrayList<>();
+      Collection<Etiqueta> etiquetas = new ArrayList<>();
       LocalDate fechaCreacion = LocalDate.now();
       Estado estado = Estado.ACTIVA;
       Peticion peticion = new Peticion();
@@ -38,6 +36,7 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       peticion.setUsuario(usuario);
       peticion.setItems(items);
       peticion.setEstado(estado);
+      peticion.setEtiquetas(etiquetas);
       
       return peticion;
    }

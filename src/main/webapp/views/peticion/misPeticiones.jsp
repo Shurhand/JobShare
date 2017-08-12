@@ -35,6 +35,8 @@
         <div class="col-md-3 search-filter" id="sidebar">
             <div class="col-md-12 well white">
                 <form action="/seller/search/" method="GET">
+                    <h2 class="text-center">Filtros</h2>
+                    <hr/>
                     <h4>Ordenar por</h4>
                     <div class="radio">
                         <label>
@@ -94,192 +96,46 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-9">
-            <div id="map"></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>5 locales encontrado en esta zona</h4>
+        <c:forEach var="peticion" items="${peticiones}">
+            <div class="col-md-9">
+                <div id="map"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="item-search well white">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
+
+                                    <img alt="" height="100px" width="100px" class="img-circle center-block"
+                                         src="${peticion.foto}">
+
+                                </div>
+                                <div class="col-xs-6 col-md-8 info-wrapper">
+                                    <strong><h4>${peticion.titulo}</h4></strong>
+                                    <p>
+                                            ${peticion.descripcion}
+                                    </p>
+
+                                </div>
+                                <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
+                                    <button onclick="location.replace('/seller/menu/1/');" class="form-control"><span
+                                        class="glyphicon glyphicon-file"></span> Menu
+                                    </button>
+                                    <p class="brief-text">
+                                        <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="item-search well white">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
-
-                                <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                     src="https://s3-media1.fl.yelpcdn.com/bphoto/bqVR69LXKcTOh0imCBZt4A/ls.jpg">
-
-                                <p class="stars">
-                                    4,00/5
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </p>
-                            </div>
-                            <div class="col-xs-6 col-md-8 info-wrapper">
-                                <b>ÑemÑem</b>
-                                <p>
-                                    Establecimiento espacialista en bocatas de pollo empañado y en cañas de chocolate
-                                </p>
-                                <p class="brief-text bottom">
-
-                                    <a href="/customer/comments/1/"><span class="glyphicon glyphicon-comment"></span> 2
-                                        Comentarios</a>
-
-                                </p>
-                            </div>
-                            <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                <button onclick="location.replace('/seller/menu/1/');" class="form-control"><span
-                                    class="glyphicon glyphicon-file"></span> Menu
-                                </button>
-                                <p class="brief-text">
-                                    <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-search well white">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
-
-                                <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                     src="https://s3-media1.fl.yelpcdn.com/bphoto/QKiTaoNVWDuM1i-4Z3IJxA/168s.jpg">
-
-                                <p class="stars">
-                                    4,00/5
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </p>
-                            </div>
-                            <div class="col-xs-6 col-md-8 info-wrapper">
-                                <b>Rica Rica</b>
-                                <p>
-                                    Tenemos las mejores ofertas para merendar!
-                                </p>
-                                <p class="brief-text bottom">
-
-                                    <a href="/customer/comments/2/">1 comentario</a>
-
-                                </p>
-                            </div>
-                            <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                <button onclick="location.replace('/seller/menu/2/');" class="form-control"><span
-                                    class="glyphicon glyphicon-file"></span> Menu
-                                </button>
-                                <p class="brief-text">
-                                    <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-search well white">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
-
-                                <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                     src="http://www.asesoresinmobiliariosbv.es/wp-content/uploads/2015/10/100-montaditos.jpg">
-
-                                <p class="stars">
-                                    3,50/5
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </p>
-                            </div>
-                            <div class="col-xs-6 col-md-8 info-wrapper">
-                                <b>1000 Montaditos</b>
-                                <p>
-                                    Los miercoles todo a 1€!
-                                </p>
-                                <p class="brief-text bottom">
-
-                                    <a href="/customer/comments/3/"><span class="glyphicon glyphicon-comment"></span> 2
-                                        Comentarios</a>
-
-                                </p>
-                            </div>
-                            <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                <button onclick="location.replace('/seller/menu/3/');" class="form-control"><span
-                                    class="glyphicon glyphicon-file"></span> Menu
-                                </button>
-                                <p class="brief-text">
-                                    <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-search well white">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
-
-                                <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                     src="http://fotos.subefotos.com/7b9bc1c91b4ba708f179ee6d79d2ac6fo.jpg">
-
-                                <p class="stars">
-                                    5,00/5
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </p>
-                            </div>
-                            <div class="col-xs-6 col-md-8 info-wrapper">
-                                <b>Bocatería Frankys</b>
-                                <p>
-                                    ¿Quieres un Bocata? Pues ven a comerte el mejor!
-                                </p>
-                                <p class="brief-text bottom">
-
-                                    <a href="/customer/comments/4/"><span class="glyphicon glyphicon-comment"></span> 2
-                                        Comentarios</a>
-
-                                </p>
-                            </div>
-                            <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                <button onclick="location.replace('/seller/menu/4/');" class="form-control"><span
-                                    class="glyphicon glyphicon-file"></span> Menu
-                                </button>
-                                <p class="brief-text">
-                                    <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-search well white">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-2 avatar-wrapper text-center">
-
-                                <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                     src="http://ultrarradio.com/wp-content/uploads/2013/04/c_caseras1.jpg">
-
-                                <p class="stars">
-                                    4,00/5
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                </p>
-                            </div>
-                            <div class="col-xs-6 col-md-8 info-wrapper">
-                                <b>Buen provecho</b>
-                                <p>
-                                    Comida casera hecha con todo el cariño del mundo
-                                </p>
-                                <p class="brief-text bottom">
-
-                                    <a href="/customer/comments/5/"><span class="glyphicon glyphicon-comment"></span> 2
-                                        Comentarios</a>
-
-                                </p>
-                            </div>
-                            <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                <button onclick="location.replace('/seller/menu/5/');" class="form-control"><span
-                                    class="glyphicon glyphicon-file"></span> Menu
-                                </button>
-                                <p class="brief-text">
-                                    <span class="glyphicon glyphicon-time"></span> TODA LA SEMANA · 9-14:30
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 </div>

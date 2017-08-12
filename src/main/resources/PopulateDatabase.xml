@@ -62,6 +62,19 @@
         </property>
     </bean>
 
+    <bean id="cuenta5" class="security.Cuenta">
+        <property name="username" value="profesional2"/>
+        <property name="password" value="e16f47b31979684fa31e74f594404d5c"/>
+        <property name="isActivated" value="true"/>
+        <property name="authorities">
+            <list>
+                <bean class="security.Autoridad">
+                    <property name="authority" value="PROFESIONAL"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- ****************** Admin ************* -->
 
     <bean id="admin1" class="domain.Admin">
@@ -135,7 +148,7 @@
         <property name="cuenta" ref="cuenta4"/>
         <property name="peticiones">
             <list>
-
+                <ref bean="peticion1"/>
             </list>
         </property>
         <property name="pagos">
@@ -163,6 +176,51 @@
             <list>
                 <ref bean="trabajo1"/>
                 <ref bean="trabajo1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profesional2" class="domain.Profesional">
+        <property name="nombre" value="Manitas"/>
+        <property name="apellidos" value="Master"/>
+        <property name="cp" value="41064"/>
+        <property name="provincia" value="Manitalandia"/>
+        <property name="DNI" value="49125822F"/>
+        <property name="email" value="Manitas@gmail.com"/>
+        <property name="telefono" value="675654654"/>
+        <property name="foto"
+                  value="http://s3-eu-west-1.amazonaws.com/rankia/images/valoraciones/0018/7795/servicio-manitas-seguro-de-hogar.jpg?1425494032"/>
+        <property name="descripcion"
+                  value="Gran manitas con conocimiento sobre todas las cosas."/>
+        <property name="cuenta" ref="cuenta5"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+        <property name="pagos">
+            <list>
+
+            </list>
+        </property>
+        <property name="valoraciones">
+            <list>
+
+            </list>
+        </property>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
+        <property name="estudios">
+            <list>
+
+            </list>
+        </property>
+        <property name="trabajos">
+            <list>
+
             </list>
         </property>
     </bean>
@@ -206,7 +264,174 @@
 
     <!-- ****************** Peticiones ************* -->
 
+    <bean id="peticion1" class="domain.Peticion">
+        <constructor-arg index="0" name="titulo" value="Arreglos en casa"/>
+        <constructor-arg index="1" name="descripcion" value="Necesito unos cuantos arreglos en casa y reparaciones"/>
+        <constructor-arg index="2" name="fechaCreacion" value="12/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="01/10/2017"/>
+        <constructor-arg index="4" name="foto"
+                         value="https://www.bankforeclosuressale.com/images/outline-of-home-made-with-construction-tools.jpg"/>
+        <constructor-arg index="5" name="estado" value="ACTIVA"/>
+        <property name="usuario" ref="profesional1"/>
+        <property name="items">
+            <list>
+                <ref bean="item1"/>
+                <ref bean="item2"/>
+                <ref bean="item3"/>
+            </list>
+        </property>
+        <property name="etiquetas">
+            <list>
+                <ref bean="etiqueta1"/>
+                <ref bean="etiqueta8"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="peticion2" class="domain.Peticion">
+        <constructor-arg index="0" name="titulo" value="Viaje por Sevilla"/>
+        <constructor-arg index="1" name="descripcion"
+                         value="Me voy de viaje a Sevilla y necesito algún guía para la catedral y otros sitios"/>
+        <constructor-arg index="2" name="fechaCreacion" value="05/06/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="12/11/2017"/>
+        <constructor-arg index="4" name="foto"
+                         value="http://www.newhealthfoundation.org/web/wp-content/uploads/2016/04/sevilla.jpg"/>
+        <constructor-arg index="5" name="estado" value="ACTIVA"/>
+        <property name="usuario" ref="usuario1"/>
+        <property name="items">
+            <list>
+                <ref bean="item4"/>
+                <ref bean="item5"/>
+                <ref bean="item6"/>
+            </list>
+        </property>
+        <property name="etiquetas">
+            <list>
+                <ref bean="etiqueta15"/>
+                <ref bean="etiqueta16"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="peticion3" class="domain.Peticion">
+        <constructor-arg index="0" name="titulo" value="Clases particulares de idiomas"/>
+        <constructor-arg index="1" name="descripcion" value="Necesito clases particulares de varios idiomas"/>
+        <constructor-arg index="2" name="fechaCreacion" value="12/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="01/10/2017"/>
+        <constructor-arg index="4" name="foto"
+                         value="http://www.escueladebloggers.com/wp-content/uploads/2012/02/clases-particulares1.jpg"/>
+        <constructor-arg index="5" name="estado" value="ACTIVA"/>
+        <property name="usuario" ref="usuario1"/>
+        <property name="items">
+            <list>
+                <ref bean="item7"/>
+                <ref bean="item8"/>
+                <ref bean="item9"/>
+            </list>
+        </property>
+        <property name="etiquetas">
+            <list>
+                <ref bean="etiqueta4"/>
+                <ref bean="etiqueta12"/>
+                <ref bean="etiqueta13"/>
+                <ref bean="etiqueta14"/>
+            </list>
+        </property>
+    </bean>
+
     <!-- ****************** Items ************* -->
+
+    <!-- Petición 1 -->
+
+    <bean id="item1" class="domain.Item">
+        <property name="nombre" value="Reparación ordenador"/>
+        <property name="descripcion" value="Necesito reparar un ordenador viejo"/>
+        <property name="presupuesto" value="35"/>
+        <property name="foto"
+                  value="https://t1.uc.ltmcdn.com/images/5/1/2/img_que_hacer_con_mi_ordenador_viejo_24215_600.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion1"/>
+    </bean>
+
+    <bean id="item2" class="domain.Item">
+        <property name="nombre" value="Reparación persiana"/>
+        <property name="descripcion" value="Necesito reparar un store que se ha rasgado"/>
+        <property name="presupuesto" value="35"/>
+        <property name="foto" value="http://www.toldoscano.com/wp-content/uploads/2014/09/STOR.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion1"/>
+    </bean>
+
+    <bean id="item3" class="domain.Item">
+        <property name="nombre" value="Recambio de lámparas"/>
+        <property name="descripcion" value="Necesito cambiar unas lámparas viejas que ya no funcionan"/>
+        <property name="presupuesto" value="35"/>
+        <property name="foto" value="http://mm.decoralis.es/uploads/ILUMINACI__N/lampredo2.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion1"/>
+    </bean>
+
+    <!-- Petición 2 -->
+
+    <bean id="item4" class="domain.Item">
+        <property name="nombre" value="Visita a la catedral y Alcázar"/>
+        <property name="descripcion" value="Busco un guía para la Catedral y el Alcázar de Sevilla"/>
+        <property name="presupuesto" value="16"/>
+        <property name="foto"
+                  value="https://www.turismosevilla.com/content/1-guia/2-lugares-de-interes-en-sevilla/20160622-la-catedral-de-sevilla/thumbs/la-catedral-de-sevilla-1000.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion2"/>
+    </bean>
+
+    <bean id="item5" class="domain.Item">
+        <property name="nombre" value="Transporte para el Castillo de las guardas"/>
+        <property name="descripcion" value="Busco alguien que me lleve al safari del castillo de las guardas"/>
+        <property name="presupuesto" value="35"/>
+        <property name="foto" value="http://www.esp.andalucia.com/provincia/image/MVC090900041elcastilloguard.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion2"/>
+    </bean>
+
+    <bean id="item6" class="domain.Item">
+        <property name="nombre" value="Paseo por el casco antiguo"/>
+        <property name="descripcion"
+                  value="Busco alguien que me de una vuelta por el casco antiguo de Sevilla para conocerlo bien"/>
+        <property name="presupuesto" value="35"/>
+        <property name="foto"
+                  value="http://estaticos.sevillaciudad.abc.es/wp-content/uploads/2013/09/centro-sevilla-casco-antiguo.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion2"/>
+    </bean>
+
+
+    <!-- Petición 3 -->
+
+    <bean id="item7" class="domain.Item">
+        <property name="nombre" value="Ingles básico"/>
+        <property name="descripcion" value="Necesito clases de inglés básico"/>
+        <property name="presupuesto" value="30"/>
+        <property name="foto" value="https://www.flaginstitute.org/wp/wp-content/uploads/2012/10/UK-Union-Flag.png"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion3"/>
+    </bean>
+
+    <bean id="item8" class="domain.Item">
+        <property name="nombre" value="Francés medio"/>
+        <property name="descripcion" value="Francés medio, que haya vivido en Francia algunos años al menos"/>
+        <property name="presupuesto" value="50"/>
+        <property name="foto" value="http://www.limerickpost.ie/site/wp-content/uploads/france-flag.jpg"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion3"/>
+    </bean>
+
+    <bean id="item9" class="domain.Item">
+        <property name="nombre" value="Alemán avanzado"/>
+        <property name="descripcion" value="Se necesita alguien con dominio nativo de Alemán"/>
+        <property name="presupuesto" value="80"/>
+        <property name="foto" value="https://cdn.pixabay.com/photo/2013/07/12/12/51/german-146401_960_720.png"/>
+        <property name="estado" value="ACTIVA"/>
+        <property name="peticion" ref="peticion3"/>
+    </bean>
 
     <!-- ****************** Ofertas ************* -->
 
@@ -233,5 +458,164 @@
         <property name="profesional" ref="profesional1"/>
     </bean>
 
+    <!-- ****************** Etiquetas ************* -->
 
+    <bean id="etiqueta1" class="domain.Etiqueta">
+        <property name="nombre" value="Obras"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta2" class="domain.Etiqueta">
+        <property name="nombre" value="asdasd"/>
+        <property name="activada" value="false"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta3" class="domain.Etiqueta">
+        <property name="nombre" value="HURR"/>
+        <property name="activada" value="false"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta4" class="domain.Etiqueta">
+        <property name="nombre" value="Clases"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion3"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta5" class="domain.Etiqueta">
+        <property name="nombre" value="Cuidado"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta6" class="domain.Etiqueta">
+        <property name="nombre" value="Boxeo"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta7" class="domain.Etiqueta">
+        <property name="nombre" value="Niños"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta8" class="domain.Etiqueta">
+        <property name="nombre" value="Reparacion"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion1"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta9" class="domain.Etiqueta">
+        <property name="nombre" value="Reparacion"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta10" class="domain.Etiqueta">
+        <property name="nombre" value="Reparacion"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta11" class="domain.Etiqueta">
+        <property name="nombre" value="Hogar"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta12" class="domain.Etiqueta">
+        <property name="nombre" value="Inglés"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion3"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta13" class="domain.Etiqueta">
+        <property name="nombre" value="Francés"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion3"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta14" class="domain.Etiqueta">
+        <property name="nombre" value="Alemán"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion3"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="etiqueta15" class="domain.Etiqueta">
+        <property name="nombre" value="Sevilla"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion2"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="etiqueta16" class="domain.Etiqueta">
+        <property name="nombre" value="Viajes"/>
+        <property name="activada" value="true"/>
+        <property name="peticiones">
+            <list>
+                <ref bean="peticion2"/>
+            </list>
+        </property>
+    </bean>
 </beans>

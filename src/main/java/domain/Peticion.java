@@ -7,7 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.net.URL;
 import java.time.LocalDate;
@@ -104,6 +103,7 @@ public class Peticion extends DomainEntity {
    // Relaciones
    private Usuario usuario;
    private Collection<Item> items;
+   private Collection<Etiqueta> etiquetas;
    
    @NotNull
    @Valid
@@ -118,8 +118,6 @@ public class Peticion extends DomainEntity {
    }
    
    @NotNull
-   @NotEmpty
-   @Valid
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "peticion")
    public Collection<Item> getItems() {
       return items;
@@ -127,5 +125,16 @@ public class Peticion extends DomainEntity {
    
    public void setItems(Collection<Item> items) {
       this.items = items;
+   }
+   
+   @NotNull
+   @JsonBackReference
+   @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "peticiones")
+   public Collection<Etiqueta> getEtiquetas() {
+      return etiquetas;
+   }
+   
+   public void setEtiquetas(Collection<Etiqueta> etiquetas) {
+      this.etiquetas = etiquetas;
    }
 }

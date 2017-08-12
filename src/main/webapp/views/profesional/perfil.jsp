@@ -42,7 +42,7 @@
             </security:authorize>
         </div>
         <div class="col-md-5 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <p>${profesional.nombre} ${profesional.apellidos} ${profesional.email}</p>
+            <p>${profesional.nombre} ${profesional.apellidos} - ${profesional.email}</p>
             <p>${profesional.cp} ${profesional.provincia}</p>
             <p>${profesional.DNI}</p>
             <p><spring:message code="usuario.peticionesRealizadas"/> ${profesional.peticiones.size()}<p>

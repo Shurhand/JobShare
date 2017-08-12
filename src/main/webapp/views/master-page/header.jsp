@@ -87,8 +87,15 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <security:authorize access="isAuthenticated()">
-                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> <spring:message
+                        <security:authorize access="!hasAuthority('ADMIN')">
+                            <li><a href="etiqueta/lista.do"><i class="fa fa-tags" aria-hidden="true"></i>
+                                <spring:message
+                                    code="master.page.verEtiquetas"/></a>
+                            </li>
+                        </security:authorize>
+                        <security:authorize access="hasAuthority('ADMIN')">
+                            <li><a href="etiqueta/admin/lista.do"><i class="fa fa-tags" aria-hidden="true"></i>
+                                <spring:message
                                 code="master.page.verEtiquetas"/></a>
                             </li>
                         </security:authorize>
@@ -110,9 +117,6 @@
                                 <spring:message code="master.page.listaUsuarios"/></a></li>
                         </security:authorize>
                         <security:authorize access="isAnonymous()">
-                            <li><a href="etiquetas.do"><i class="fa fa-tags" aria-hidden="true"></i> <spring:message
-                                code="master.page.verEtiquetas"/></a>
-                            </li>
                             <li><a href="usuario/registro.do"><i class="fa fa-user-plus" aria-hidden="true"></i>
                                 <spring:message code="master.page.signUp"/></a></li>
 

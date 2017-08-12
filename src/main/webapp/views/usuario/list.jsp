@@ -22,16 +22,15 @@
 
             <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Código Postal</th>
-                <th>DNI</th>
-                <th>Email</th>
-                <th>Provincia</th>
-                <th>Usuario</th>
-                <th>Cuenta activa</th>
-                <th>Bloquear/Desbloquear</th>
-
+                <th><spring:message code="usuario.nombre"/></th>
+                <th><spring:message code="usuario.apellidos"/></th>
+                <th><spring:message code="usuario.cp"/></th>
+                <th><spring:message code="usuario.dni"/></th>
+                <th><spring:message code="usuario.email"/></th>
+                <th><spring:message code="usuario.provincia"/></th>
+                <th><spring:message code="usuario.usuario"/></th>
+                <th><spring:message code="usuario.cuentaActiva"/></th>
+                <th><spring:message code="usuario.bloquear"/></th>
             </tr>
             </thead>
         </table>
@@ -63,7 +62,7 @@
                 'className': 'dt-body-center',
                 "mRender": function (data, type, full) {
                     var aux = full.id;
-                    var elHTML = '<a href="usuario/admin/bloquear.do?userID=';
+                    var elHTML = '<a href="usuario/admin/bloquear.do?usuarioID=';
                     var final = elHTML + aux + '"><spring:message code="usuario.bloquear"/> </a>';
                     return final;
                 }
@@ -73,14 +72,14 @@
     });
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var idioma = document.getElementById('idioma').innerHTML;
-        if (idioma == 'es') {
-            document.body.innerHTML = document.body.innerHTML.replace(/true/g, 'Sí');
-        } else {
-            document.body.innerHTML = document.body.innerHTML.replace(/true/g, 'Yes');
-        }
-        document.body.innerHTML = document.body.innerHTML.replace(/false/g, 'No');
-    });
-</script>
+<%--<script type="text/javascript">--%>
+<%--$(document).ready(function () {--%>
+<%--var idioma = document.getElementById('idioma').innerHTML;--%>
+<%--if (idioma == 'es') {--%>
+<%--document.body.innerHTML = document.body.innerHTML.replace(/true/g, 'Sí');--%>
+<%--} else {--%>
+<%--document.body.innerHTML = document.body.innerHTML.replace(/true/g, 'Yes');--%>
+<%--}--%>
+<%--document.body.innerHTML = document.body.innerHTML.replace(/false/g, 'No');--%>
+<%--});--%>
+<%--</script>--%>

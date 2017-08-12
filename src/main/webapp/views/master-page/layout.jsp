@@ -58,7 +58,6 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.standalone.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"/>
 
-
     <title><tiles:insertAttribute name="title" ignore="true"/></title>
 
 </head>

@@ -3,16 +3,11 @@ package domain;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
-import java.util.Locale;
+import java.net.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,25 +15,13 @@ public class Item extends DomainEntity {
    private String nombre;
    private String descripcion;
    private Double presupuesto;
-   private LocalDate fechaCreacion;
+   private URL foto;
    private Estado estado;
    
    public Item() {
       super();
    }
    
-   public Item(String nombre, String descripcion, Double presupuesto, String fechaCreacion, Estado estado) {
-      this.nombre = nombre;
-      this.descripcion = descripcion;
-      this.presupuesto = presupuesto;
-      
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-      Locale espanyol = new Locale("es", "ES");
-      formatter = formatter.withLocale(espanyol);
-      
-      this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
-      this.estado = estado;
-   }
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
@@ -71,18 +54,9 @@ public class Item extends DomainEntity {
       this.presupuesto = presupuesto;
    }
    
-   @NotNull
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
-   public LocalDate getFechaCreacion() {
-      return fechaCreacion;
-   }
-   
-   public void setFechaCreacion(LocalDate fechaCreacion) {
-      this.fechaCreacion = fechaCreacion;
-   }
-   
    @Enumerated
    @NotNull
+//   @Pattern(regexp = "^" + "ACTIVA" + "|" + "INACTIVA" + "$")
    public Estado getEstado() {
       return estado;
    }
@@ -91,20 +65,15 @@ public class Item extends DomainEntity {
       this.estado = estado;
    }
    
-   @NotNull
-   @NotEmpty
-   @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                            CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "items")
-   public Collection<Etiqueta> getEtiquetas() {
-      return etiquetas;
+   public URL getFoto() {
+      return foto;
    }
    
-   public void setEtiquetas(Collection<Etiqueta> etiquetas) {
-      this.etiquetas = etiquetas;
+   public void setFoto(URL foto) {
+      this.foto = foto;
    }
    
    // Relaciones
-   private Collection<Etiqueta> etiquetas;
    private Peticion peticion;
    private Pago pago;
    
@@ -119,9 +88,8 @@ public class Item extends DomainEntity {
       this.peticion = peticion;
    }
    
-   @NotNull
    @Valid
-   @ManyToOne(optional = false)
+   @ManyToOne(optional = true)
    public Pago getPago() {
       return pago;
    }

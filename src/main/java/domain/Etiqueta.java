@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
@@ -40,14 +41,16 @@ public class Etiqueta extends DomainEntity {
    }
    
    // Relaciones
-   private Collection<Item> items;
+   private Collection<Peticion> peticiones;
+   
    
    @ManyToMany
-   public Collection<Item> getItems() {
-      return items;
+   @JsonManagedReference
+   public Collection<Peticion> getPeticiones() {
+      return peticiones;
    }
    
-   public void setItems(Collection<Item> items) {
-      this.items = items;
+   public void setPeticiones(Collection<Peticion> peticiones) {
+      this.peticiones = peticiones;
    }
 }

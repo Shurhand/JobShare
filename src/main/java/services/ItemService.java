@@ -9,7 +9,6 @@ import repositories.ItemRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.Collection;
 
 @Service
@@ -20,12 +19,9 @@ public class ItemService extends AbstractServiceImpl implements AbstractService<
    
    @Override
    public Item create() {
-      LocalDate fechaCreacion = LocalDate.now();
       Estado estado = Estado.ACTIVA;
       Item item = new Item();
-      
-      
-      item.setFechaCreacion(fechaCreacion);
+   
       item.setEstado(estado);
       
       return item;

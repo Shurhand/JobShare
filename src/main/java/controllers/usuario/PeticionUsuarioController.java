@@ -40,6 +40,7 @@ public class PeticionUsuarioController extends AbstractController {
 
       res = new ModelAndView("peticion/usuario/misPeticiones");
       res.addObject("peticiones", peticiones);
+      res.addObject("usuario", usuario);
       
       return res;
    }
