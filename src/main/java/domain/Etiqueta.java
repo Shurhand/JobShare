@@ -5,11 +5,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import java.util.Collection;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,6 +23,7 @@ public class Etiqueta extends DomainEntity {
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Length(max = 20)
+   @Column(unique = true)
    public String getNombre() {
       return nombre;
    }
@@ -43,16 +41,16 @@ public class Etiqueta extends DomainEntity {
    }
    
    // Relaciones
-   private Collection<Peticion> peticiones;
+   private Set<Peticion> peticiones;
    
    
    @ManyToMany
    @JsonManagedReference
-   public Collection<Peticion> getPeticiones() {
+   public Set<Peticion> getPeticiones() {
       return peticiones;
    }
    
-   public void setPeticiones(Collection<Peticion> peticiones) {
+   public void setPeticiones(Set<Peticion> peticiones) {
       this.peticiones = peticiones;
    }
 }

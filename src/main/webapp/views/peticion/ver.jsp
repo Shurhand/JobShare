@@ -26,8 +26,8 @@
                         code="peticion.modificarPeticion"/> </a>
                 <a href="item/usuario/crear.do?peticionID=${peticion.id}" class="btn btn-primary" role="button">
                     <spring:message
-                        code="peticion.addItem"/> </a></h2>
-            </c:if>
+                        code="peticion.addItem"/> </a>
+                </c:if></h2>
             <br>
             <div class="row">
                 <div class="col-md-3">
@@ -60,14 +60,14 @@
                         <b class="etiquetas">#<c:out value="${etiqueta.nombre}"/></b>
                     </c:forEach>
                     <p>${peticion.provincia}</p>
-                    <p><spring:message code="peticion.presupuestoTotal"/>: ${peticion.getPresupuestoTotal()}</p>
+                    <p><spring:message code="peticion.presupuestoTotal"/>: ${peticion.getPresupuestoTotal()} €</p>
                     <p><spring:message code="peticion.fechaCaducidad"/>:
                         <tags:localDate date="${peticion.fechaCaducidad}" pattern="dd/MM/yyyy"/>
 
                 </div>
 
             </div>
-
+            <br>
             <div class="row">
                 <div class="justificar-texto">
                     <p><spring:message code="usuario.descripcion"/>:</p>
@@ -75,6 +75,56 @@
                 </div>
             </div>
             <br>
+            <br>
+
+            <c:forEach var="item" items="${peticion.items}">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="item-search well white">
+                            <div class="row">
+                                <div class="col-xs-4 col-md-2 avatar-wrapper text-center">
+                                    <c:if test="${item.foto != null}">
+                                        <img alt="" height="100px" width="100px" class="img-circle center-block"
+                                             src="${item.foto}">
+                                    </c:if>
+                                    <c:if test="${item.foto == null}">
+                                        <br>
+                                        <h2><spring:message code="peticion.sinFoto"/></h2>
+                                    </c:if>
+
+                                </div>
+
+                                <div class="col-xs-8 col-md-8 info-wrapper">
+                                    <h4>${item.nombre}</h4>
+                                    <h5>${item.descripcion}</h5>
+                                </div>
+                                <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
+                                    <h4><spring:message code="peticion.presupuesto"/></h4>
+                                    <c:set var="presupuestoString" value="${String.valueOf(item.presupuesto)}"/>
+                                    <c:if test="${presupuestoString.endsWith('0')}">
+                                        <c:set value="${presupuestoString.substring(0, presupuestoString.length() - 2)}"
+                                               var="prep"/>
+                                    </c:if>
+                                    <c:if test="${!presupuestoString.endsWith('0')}">
+                                        <c:set value="${item.presupuesto}" var="prep"/>
+                                    </c:if>
+                                    <p>${prep} €</p>
+                                    <br>
+                                    <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
+                                        <a href="item/usuario/editar.do?peticionID=${peticion.id}&itemID=${item.id}"
+                                           class="btn btn-info btn-sm" role="button"><spring:message code="editar"/></a>
+                                        <a href="item/usuario/borrar.do?peticionID=${peticion.id}&itemID=${item.id}"
+                                           class="btn btn-danger btn-sm" role="button"><spring:message
+                                            code="borrar"/></a>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>

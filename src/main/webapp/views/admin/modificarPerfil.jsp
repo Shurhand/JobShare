@@ -69,10 +69,7 @@
                         class="form-group ${errores.contains('provincia') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.provincia" var="provincia"/>
                         <form:label class="control-label" path="provincia">${provincia}</form:label>
-                        <form:select class="form-control" path="provincia" placeholder="${provincia}">
-                            <form:option value="-----"/>
-                            <form:options items="${provincias}"/>
-                        </form:select>
+                        <form:input class="form-control" path="provincia" placeholder="${provincia}"/>
                         <form:errors class="help-block" path="provincia"/>
                     </div>
                     <div

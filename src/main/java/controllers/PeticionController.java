@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import security.Autoridad;
 import security.Credenciales;
 import services.ActorService;
 import services.PeticionService;
@@ -41,14 +40,10 @@ public class PeticionController extends AbstractController {
       if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
          actorAutenticado = actorService.findPrincipal();
       }
-      if (peticion.getUsuario().getCuenta().getAuthorities().contains(Autoridad.PROFESIONAL)) {
-         profesional = profesionalService.findProfesionalPorCuenta(peticion.getUsuario().getCuenta());
-      }
       
       res = new ModelAndView("peticion/ver");
       res.addObject("peticion", peticion);
       res.addObject("usuario", peticion.getUsuario());
-      res.addObject("profesional", profesional);
       res.addObject("credenciales", credenciales);
       res.addObject("actorAutenticado", actorAutenticado);
       

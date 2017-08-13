@@ -8,12 +8,12 @@
 
     <definition name="trabajo/profesional/crear" extends="master.page">
         <put-attribute name="title" value="Nuevo trabajo"/>
-        <put-attribute name="body" value="/views/trabajo/edit.jsp"/>
+        <put-attribute name="body" value="/views/trabajo/editar.jsp"/>
     </definition>
 
     <definition name="trabajo/profesional/editar" extends="master.page">
         <put-attribute name="title" value="Editar trabajo"/>
-        <put-attribute name="body" value="/views/trabajo/edit.jsp"/>
+        <put-attribute name="body" value="/views/trabajo/editar.jsp"/>
     </definition>
 
 </tiles-definitions>

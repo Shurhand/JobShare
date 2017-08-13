@@ -1,15 +1,11 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.net.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -17,7 +13,7 @@ public class Item extends DomainEntity {
    private String nombre;
    private String descripcion;
    private Double presupuesto;
-   private URL foto;
+   private String foto;
    private Estado estado;
    
    public Item() {
@@ -48,7 +44,6 @@ public class Item extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Range(min = 1, max = 10000)
    public Double getPresupuesto() {
       return presupuesto;
@@ -69,11 +64,14 @@ public class Item extends DomainEntity {
       this.estado = estado;
    }
    
-   public URL getFoto() {
+   @SafeHtml
+   @Length(max = 250)
+   @URL
+   public String getFoto() {
       return foto;
    }
    
-   public void setFoto(URL foto) {
+   public void setFoto(String foto) {
       this.foto = foto;
    }
    

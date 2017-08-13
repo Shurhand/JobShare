@@ -9,7 +9,7 @@
 
     <util:list id="converters">
 
-        <!--<bean class="converters.DateAttributeConverter"></bean>-->
+        <bean class="converters.StringArrayToCollectionEtiquetas"></bean>
 
         <bean class="converters.ActorToStringConverter"></bean>
         <bean class="converters.StringToActorConverter"></bean>

@@ -383,7 +383,7 @@
     <bean id="item2" class="domain.Item">
         <property name="nombre" value="Reparación persiana"/>
         <property name="descripcion" value="Necesito reparar un store que se ha rasgado"/>
-        <property name="presupuesto" value="35"/>
+        <property name="presupuesto" value="50"/>
         <property name="foto" value="http://www.toldoscano.com/wp-content/uploads/2014/09/STOR.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion1"/>
@@ -392,7 +392,7 @@
     <bean id="item3" class="domain.Item">
         <property name="nombre" value="Recambio de lámparas"/>
         <property name="descripcion" value="Necesito cambiar unas lámparas viejas que ya no funcionan"/>
-        <property name="presupuesto" value="35"/>
+        <property name="presupuesto" value="45"/>
         <property name="foto" value="http://mm.decoralis.es/uploads/ILUMINACI__N/lampredo2.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion1"/>
@@ -569,7 +569,7 @@
     </bean>
 
     <bean id="etiqueta9" class="domain.Etiqueta">
-        <property name="nombre" value="Reparacion"/>
+        <property name="nombre" value="Enseñanza"/>
         <property name="activada" value="true"/>
         <property name="peticiones">
             <list>
@@ -579,7 +579,7 @@
     </bean>
 
     <bean id="etiqueta10" class="domain.Etiqueta">
-        <property name="nombre" value="Reparacion"/>
+        <property name="nombre" value="Mecánica"/>
         <property name="activada" value="true"/>
         <property name="peticiones">
             <list>

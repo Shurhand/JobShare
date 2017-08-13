@@ -18,6 +18,7 @@
         <value>/views/usuario/tiles.xml</value>
         <value>/views/profesional/tiles.xml</value>
         <value>/views/estudio/tiles.xml</value>
+        <value>/views/item/tiles.xml</value>
         <value>/views/trabajo/tiles.xml</value>
         <value>/views/peticion/tiles.xml</value>
         <value>/views/oferta/tiles.xml</value>

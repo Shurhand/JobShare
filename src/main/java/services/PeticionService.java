@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,17 +21,19 @@ import java.util.stream.Collectors;
 public class PeticionService extends AbstractServiceImpl implements AbstractService<Peticion> {
    @Autowired
    private PeticionRepository peticionRepository;
-    @Autowired
+   @Autowired
    private ActorService actorService;
-    @Autowired
+   @Autowired
    private UsuarioService usuarioService;
+   @Autowired
+   private EtiquetaService etiquetaService;
    
    @Override
    public Peticion create() {
       actorService.checkIfUsuarioOProfesional();
       Usuario usuario = usuarioService.findUsuario();
       Collection<Item> items = new ArrayList<>();
-      Collection<Etiqueta> etiquetas = new ArrayList<>();
+      Set<Etiqueta> etiquetas = new HashSet<>();
       LocalDate fechaCreacion = LocalDate.now();
       Estado estado = Estado.ACTIVA;
       Peticion peticion = new Peticion();
@@ -47,6 +51,7 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    public void save(@NotNull Peticion peticion) {
       actorService.checkIfUsuarioOProfesional();
       Assert.isTrue(checkFechaCaducidad(peticion.getFechaCaducidad()));
+      peticion.getEtiquetas().forEach(x -> x.getPeticiones().add(peticion));
       peticionRepository.save(peticion);
    }
    

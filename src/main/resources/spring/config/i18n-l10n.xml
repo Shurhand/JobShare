@@ -19,6 +19,7 @@
         <value>/views/estudio/messages</value>
         <value>/views/trabajo/messages</value>
         <value>/views/peticion/messages</value>
+        <value>/views/item/messages</value>
         <value>/views/oferta/messages</value>
         <value>/views/pago/messages</value>
         <value>/views/etiqueta/messages</value>

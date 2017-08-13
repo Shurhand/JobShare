@@ -9,26 +9,32 @@ import repositories.EtiquetaRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Transactional
 public class EtiquetaService extends AbstractServiceImpl implements AbstractService<Etiqueta> {
    @Autowired
    private EtiquetaRepository etiquetaRepository;
+   @Autowired
+   private ActorService actorService;
    
    @Override
    public Etiqueta create() {
-      Collection<Peticion> peticiones = new ArrayList<>();
+      actorService.checkIfAutenticado();
+      Set<Peticion> peticiones = new HashSet<>();
       Etiqueta etiqueta = new Etiqueta();
       etiqueta.setPeticiones(peticiones);
+      etiqueta.setActivada(true);
       
       return etiqueta;
    }
    
    @Override
    public void save(@NotNull Etiqueta etiqueta) {
+      actorService.checkIfAutenticado();
       etiquetaRepository.save(etiqueta);
    }
    
@@ -57,6 +63,10 @@ public class EtiquetaService extends AbstractServiceImpl implements AbstractServ
       return etiquetaRepository.findAll();
    }
    
+   public Collection<Etiqueta> getEtiquetasActivas() {
+      return etiquetaRepository.getEtiquetasActivas();
+   }
+   
    @Override
    @NotNull
    public Etiqueta findOne(@NotNull @Min(1) Integer etiquetaID) {
@@ -69,5 +79,9 @@ public class EtiquetaService extends AbstractServiceImpl implements AbstractServ
       } else {
          etiqueta.setActivada(true);
       }
+   }
+   
+   public Collection<String> getNombreEtiquetas() {
+      return etiquetaRepository.getNombreEtiquetas();
    }
 }

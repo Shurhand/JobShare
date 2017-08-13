@@ -7,6 +7,8 @@
           uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <div class="container">
     <div class="row">
@@ -74,7 +76,18 @@
                         <form:input type="URL" class="form-control" path="foto" placeholder="URL"/>
                         <form:errors class="help-block" path="foto"/>
                     </div>
+                    <div
+                        class="form-group ${errores.contains('etiquetas') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
+                        <spring:message code="peticion.etiquetas" var="etiquetas"/>
+                        <form:label class="control-label" path="etiquetas">${etiquetas}</form:label>
+                        <form:select path="etiquetas" class="form-control js-example-basic-multiple"
+                                     multiple="multiple">
+                            <form:options items="${todasEtiquetas}" itemLabel="nombre" itemValue="id"/>
+                        </form:select>
+                            <%--<form:input class="form-control" path="etiquetas" placeholder="${etiquetas}"/>--%>
 
+                        <form:errors class="help-block" path="etiquetas"/>
+                    </div>
                     <div class="error-notice">
                         <div class="oaerror warning">
                             <strong><spring:message code="header.informacion"/>: </strong> <spring:message
@@ -83,7 +96,7 @@
                     </div>
                     <div class="form-group text-center">
                         <br>
-                        <a href="peticion/usuario/misPeticiones.do" class="btn btn-primary"><i
+                        <a href="peticion/ver.do?peticionID=${peticion.id}" class="btn btn-primary"><i
                             class="fa fa-arrow-left"></i> <spring:message code="volver"/></a>
                         <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i>
                             <spring:message code="guardar" />
@@ -105,4 +118,8 @@
             daysOfWeekHighlighted: "0",
         })
     });
+</script>
+
+<script type="text/javascript">
+    $('.js-example-basic-multiple').select2();
 </script>

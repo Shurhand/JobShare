@@ -44,7 +44,6 @@ public class Oferta extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Range(min = 1, max = 10000)
    public Double getPrecio() {
       return precio;

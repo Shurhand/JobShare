@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Set;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -59,7 +60,8 @@ public class Peticion extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-   @Length(max = 250)
+   @Lob
+   @Length(max = 1000)
    public String getDescripcion() {
       return descripcion;
    }
@@ -120,7 +122,7 @@ public class Peticion extends DomainEntity {
    // Relaciones
    private Usuario usuario;
    private Collection<Item> items;
-   private Collection<Etiqueta> etiquetas;
+   private Set<Etiqueta> etiquetas;
    
    @NotNull
    @Valid
@@ -148,11 +150,11 @@ public class Peticion extends DomainEntity {
    @NotNull
    @JsonBackReference
    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "peticiones")
-   public Collection<Etiqueta> getEtiquetas() {
+   public Set<Etiqueta> getEtiquetas() {
       return etiquetas;
    }
    
-   public void setEtiquetas(Collection<Etiqueta> etiquetas) {
+   public void setEtiquetas(Set<Etiqueta> etiquetas) {
       this.etiquetas = etiquetas;
    }
    

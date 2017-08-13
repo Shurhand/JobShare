@@ -28,6 +28,13 @@
             </thead>
         </table>
     </div>
+    <security:authorize access="isAuthenticated()">
+        <div class="text-center">
+            <h2>
+                <a href="/etiqueta/actor/crear.do" class="btn btn-primary btn-lg" role="button"><spring:message
+                    code="etiqueta.nueva"/> </a></h2>
+        </div>
+    </security:authorize>
 </div>
 
 <script type="text/javascript">

@@ -1,6 +1,7 @@
 package controllers.usuario;
 
 import controllers.AbstractController;
+import domain.Etiqueta;
 import domain.Peticion;
 import domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.EtiquetaService;
 import services.PeticionService;
 import services.UsuarioService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/peticion/usuario/")
@@ -29,6 +29,8 @@ public class PeticionUsuarioController extends AbstractController {
    private UsuarioService usuarioService;
    @Autowired
    private PeticionService peticionService;
+   @Autowired
+   private EtiquetaService etiquetaService;
    
    @GetMapping("/misPeticiones")
    public ModelAndView misPeticiones() {
@@ -62,10 +64,16 @@ public class PeticionUsuarioController extends AbstractController {
    public ModelAndView crear() {
    
       ModelAndView res;
+   
+      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
+      SortedSet<Etiqueta> etiquetas = new TreeSet<>(comparator);
+      etiquetas.addAll(etiquetaService.getEtiquetasActivas());
+      
       Peticion peticion = peticionService.create();
 
       res = new ModelAndView("peticion/usuario/crear");
       res.addObject("peticion", peticion);
+      res.addObject("todasEtiquetas", etiquetas);
    
       return res;
    }
@@ -101,7 +109,7 @@ public class PeticionUsuarioController extends AbstractController {
             }
             if (! hayError) {
                peticionService.save(peticion);
-               result = new ModelAndView("redirect:/peticion/usuario/misPeticiones.do");
+               result = new ModelAndView("redirect:/peticion/ver.do?peticionID=" + peticion.getId());
             }
          } catch (Throwable oops) {
             result = crearEditarModelo(peticion);
@@ -128,12 +136,17 @@ public class PeticionUsuarioController extends AbstractController {
    
    private ModelAndView crearEditarModelo(Peticion peticion) {
       ModelAndView res;
+      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
+      SortedSet<Etiqueta> etiquetas = new TreeSet<>(comparator);
+      etiquetas.addAll(etiquetaService.getEtiquetasActivas());
       
       Credenciales credenciales = new Credenciales();
-      
-      res = new ModelAndView("peticion/usuario/editar");
+      String vista = peticion.getId() != 0 ? "peticion/usuario/editar" : "peticion/usuario/crear";
+   
+      res = new ModelAndView(vista);
       res.addObject("peticion", peticion);
       res.addObject("credenciales", credenciales);
+      res.addObject("todasEtiquetas", etiquetas);
       
       return res;
    }

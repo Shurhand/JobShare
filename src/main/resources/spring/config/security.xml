@@ -49,15 +49,17 @@
         <security:intercept-url pattern="/peticion/ver.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/security/login.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
-
-        <security:intercept-url pattern="/security/login.do"
-                                access="isAnonymous()"/>
 
         <!-- ******************* AUTENTICADO ************************************ -->
 
         <security:intercept-url pattern="/actor/perfil.do"
+                                access="isAuthenticated()"/>
+        <security:intercept-url pattern="/etiqueta/actor/crear.do"
                                 access="isAuthenticated()"/>
 
         <!-- ******************** ADMIN ************************************** -->
@@ -68,6 +70,8 @@
         <!-- ******************** USUARIO ************************************** -->
 
         <security:intercept-url pattern="/peticion/usuario/*"
+                                access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')"/>
+        <security:intercept-url pattern="/item/usuario/*"
                                 access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/usuario/*" access="hasAuthority('USUARIO')"/>
 

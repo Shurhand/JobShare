@@ -187,7 +187,7 @@ hr {
     border: 1px solid #eee;
     border-left-width: 5px;
     border-radius: 3px;
-    margin: 0;
+
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
 }
@@ -200,7 +200,7 @@ hr {
 .danger-conjunto {
     border-left-color: #d9534f; /* Left side border color */
     background-color: rgba(217, 83, 79, 0.1); /* Same color as the left border with reduced alpha to 0.1 */
-    margin: 2px 0 2px 0;
+    margin: 2px 0 4px 0;
 }
 
 .danger strong {
