@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -78,6 +79,7 @@ public class Item extends DomainEntity {
    // Relaciones
    private Peticion peticion;
    private Pago pago;
+   private Collection<Oferta> ofertas;
    
    @NotNull
    @Valid
@@ -99,5 +101,15 @@ public class Item extends DomainEntity {
    
    public void setPago(Pago pago) {
       this.pago = pago;
+   }
+   
+   @NotNull
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+   public Collection<Oferta> getOfertas() {
+      return ofertas;
+   }
+   
+   public void setOfertas(Collection<Oferta> ofertas) {
+      this.ofertas = ofertas;
    }
 }

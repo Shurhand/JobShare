@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -21,14 +20,13 @@ public class Oferta extends DomainEntity {
    private String comentario;
    private LocalDate fechaCreacion;
    private LocalDate fechaCaducidad;
-   private URL foto;
    private Estado estado;
    
    public Oferta() {
       super();
    }
    
-   public Oferta(Double precio, String comentario, String fechaCreacion, String fechaCaducidad, URL foto, Estado estado) {
+   public Oferta(Double precio, String comentario, String fechaCreacion, String fechaCaducidad, Estado estado) {
       this.precio = precio;
       this.comentario = comentario;
       
@@ -38,8 +36,6 @@ public class Oferta extends DomainEntity {
       
       this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
       this.fechaCaducidad = LocalDate.parse(fechaCaducidad, formatter);
-      
-      this.foto = foto;
       this.estado = estado;
    }
    
@@ -84,15 +80,6 @@ public class Oferta extends DomainEntity {
       this.fechaCaducidad = fechaCaducidad;
    }
    
-   @Length(max = 250)
-   public URL getFoto() {
-      return foto;
-   }
-   
-   public void setFoto(URL foto) {
-      this.foto = foto;
-   }
-   
    @NotNull
    @Enumerated
    public Estado getEstado() {
@@ -122,7 +109,7 @@ public class Oferta extends DomainEntity {
    
    @NotNull
    @Valid
-   @OneToOne(optional = true)
+   @OneToOne(cascade = CascadeType.ALL, optional = true, mappedBy = "oferta")
    public Valoracion getValoracion() {
       return valoracion;
    }
@@ -133,7 +120,7 @@ public class Oferta extends DomainEntity {
    
    @NotNull
    @Valid
-   @OneToOne(optional = false)
+   @ManyToOne(optional = false)
    public Item getItem() {
       return item;
    }

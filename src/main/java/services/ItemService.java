@@ -2,6 +2,7 @@ package services;
 
 import domain.Estado;
 import domain.Item;
+import domain.Oferta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.ItemRepository;
@@ -9,6 +10,7 @@ import repositories.ItemRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -24,8 +26,10 @@ public class ItemService extends AbstractServiceImpl implements AbstractService<
       actorService.checkIfUsuarioOProfesional();
       Estado estado = Estado.ACTIVA;
       Item item = new Item();
+      Collection<Oferta> ofertas = new ArrayList<>();
    
       item.setEstado(estado);
+      item.setOfertas(ofertas);
       
       return item;
    }

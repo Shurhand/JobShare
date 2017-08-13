@@ -14,7 +14,6 @@ public class Profesional extends Usuario {
    private Collection<Oferta> ofertas;
    private Collection<Trabajo> trabajos;
    private Collection<Estudio> estudios;
-   private Collection<Valoracion> valoraciones;
    
    public Profesional() {
       super();
@@ -53,19 +52,9 @@ public class Profesional extends Usuario {
       this.estudios = estudios;
    }
    
-   @NotNull
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesional")
-   @JsonManagedReference
-   public Collection<Valoracion> getValoraciones() {
-      return valoraciones;
-   }
-   
-   public void setValoraciones(Collection<Valoracion> valoraciones) {
-      this.valoraciones = valoraciones;
-   }
    
    @Transient
    public Double getValoracionTotal() {
-      return getValoraciones().stream().mapToDouble(x -> x.getPuntuacion()).average().orElse(0.0);
+      return getOfertas().stream().filter(x -> x.getValoracion() != null).mapToDouble(x -> x.getValoracion().getPuntuacion()).average().orElse(0.0);
    }
 }

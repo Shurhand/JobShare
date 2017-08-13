@@ -120,6 +120,68 @@
                                     </c:if>
                                 </div>
                             </div>
+                            <hr>
+                            <h3 class="text-center" ;"><spring:message code="item.ofertasDisponibles"/></h3>
+                            <br>
+                            <c:if test="${!todasOfertas.isEmpty()}">
+                                <c:forEach var="oferta" items="${todasOfertas}">
+                                    <c:if test="${oferta.item.id == item.id}">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
+                                                <c:if test="${oferta.profesional.foto != null}">
+                                                    <img alt="" height="50px" width="50px"
+                                                         class="img-circle center-block"
+                                                         src="${oferta.profesional.foto}">
+                                                </c:if>
+                                                <c:if test="${oferta.profesional.foto == null}">
+                                                    <br>
+                                                    <h2><spring:message code="peticion.sinFoto"/></h2>
+                                                </c:if>
+                                                <h6 style="margin: auto">${oferta.profesional.nombre}</h6>
+                                                <input value="${oferta.profesional.getValoracionTotal()}"
+                                                       class="rating-loading">
+                                                <br>
+                                            </div>
+                                            <div class="col-xs-2 col-md-2">
+                                                <br>
+                                                <c:set var="precioString" value="${String.valueOf(oferta.precio)}"/>
+                                                <c:if test="${precioString.endsWith('0')}">
+                                                    <c:set
+                                                        value="${precioString.substring(0, precioString.length() - 2)}"
+                                                        var="precio"/>
+                                                </c:if>
+                                                <c:if test="${!precioString.endsWith('0')}">
+                                                    <c:set value="${oferta.precio}" var="precio"/>
+                                                </c:if>
+                                                <h4 style="font-size: 2rem; ">${precio} €</h4>
+                                            </div>
+
+                                            <div class="col-xs-6 col-md-6">
+                                                <br>
+                                                <div class="justificar-texto">
+                                                    <h5>${oferta.comentario}</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-2 col-md-2">
+                                                <br>
+                                                <spring:message code="item.marcarOferta"/>
+                                                <div class="">
+                                                        <%--<form action="pago/usuario/conjunto.do" method="post">--%>
+                                                        <%--<input type="radio" id="radioOferta${oferta.id}"/>--%>
+
+                                                        <%--</form>--%>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                                <%--<c:if test="${todasOfertas.isEmpty()}">--%>
+                                <%--<p><h3><spring:message code="item.sinOfertas"/> </h3></p>--%>
+                                <%--</c:if>--%>
+
                         </div>
 
                     </div>
@@ -129,3 +191,13 @@
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    // Rating de estrellas
+    $('.rating-loading').rating({
+        size: 'xxs',
+        readonly: true,
+        showClear: false,
+        showCaption: false,
+    });
+
+</script>

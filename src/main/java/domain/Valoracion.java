@@ -81,11 +81,11 @@ public class Valoracion extends DomainEntity {
    
    // Relaciones
    private Oferta oferta;
-   private Profesional profesional;
+   private Usuario usuario;
    
-   //   @NotNull
-//   @Valid
-   @OneToOne(optional = true)
+   @NotNull
+   @Valid
+   @OneToOne(optional = false)
    public Oferta getOferta() {
       return oferta;
    }
@@ -98,11 +98,11 @@ public class Valoracion extends DomainEntity {
    @JsonBackReference
    @Valid
    @ManyToOne(optional = false)
-   public Profesional getProfesional() {
-      return profesional;
+   public Usuario getUsuario() {
+      return usuario;
    }
    
-   public void setProfesional(Profesional profesional) {
-      this.profesional = profesional;
+   public void setUsuario(Usuario usuario) {
+      this.usuario = usuario;
    }
 }

@@ -17,6 +17,7 @@ public class Usuario extends Actor {
    // Relaciones
    private Collection<Peticion> peticiones;
    private Collection<Pago> pagos;
+   private Collection<Valoracion> valoraciones;
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
@@ -40,5 +41,15 @@ public class Usuario extends Actor {
       this.pagos = pagos;
    }
    
+   @NotNull
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+   @JsonManagedReference
+   public Collection<Valoracion> getValoraciones() {
+      return valoraciones;
+   }
+   
+   public void setValoraciones(Collection<Valoracion> valoraciones) {
+      this.valoraciones = valoraciones;
+   }
    
 }

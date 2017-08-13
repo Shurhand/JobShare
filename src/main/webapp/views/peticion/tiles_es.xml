@@ -30,5 +30,10 @@
         <put-attribute name="title" value="Ver petición"/>
         <put-attribute name="body" value="/views/peticion/ver.jsp"/>
     </definition>
+
+    <definition name="peticion/buscar" extends="master.page">
+        <put-attribute name="title" value="Peticiones encontradas"/>
+        <put-attribute name="body" value="/views/peticion/buscar.jsp"/>
+    </definition>
     
 </tiles-definitions>

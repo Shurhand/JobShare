@@ -49,6 +49,9 @@
         <security:intercept-url pattern="/peticion/ver.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/peticion/buscar.do"
+                                access="permitAll()"/>
+
         <security:intercept-url pattern="/security/login.do"
                                 access="permitAll()"/>
 

@@ -31,6 +31,7 @@
                     <form:hidden path="id"/>
                     <form:hidden path="version"/>
                     <form:hidden path="peticion"/>
+                    <form:hidden path="ofertas"/>
                     <form:hidden path="estado"/>
                     <div
                         class="form-group ${errores.contains('nombre') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">

@@ -240,3 +240,7 @@ hr {
 .item-search:hover {
     border-color: #737373;
 }
+
+theme-miniatura {
+    border-width: thick;
+}

@@ -1,6 +1,7 @@
 package services;
 
 import domain.*;
+import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -109,5 +110,11 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    
    public void checkMisPeticiones(Peticion peticion) {
       Assert.isTrue(usuarioService.findUsuario().getPeticiones().contains(peticion));
+   }
+   
+   public Collection<Peticion> getPeticionesBuscadas(BuscaForm buscaForm) {
+      Collection<Peticion> res = new ArrayList<>();
+      
+      return peticionRepository.findAll();
    }
 }

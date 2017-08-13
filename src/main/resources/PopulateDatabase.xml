@@ -165,7 +165,8 @@
         </property>
         <property name="ofertas">
             <list>
-
+                <!--<ref bean="oferta1" />-->
+                <!--<ref bean="oferta3" />-->
             </list>
         </property>
         <property name="estudios">
@@ -177,7 +178,7 @@
         <property name="trabajos">
             <list>
                 <ref bean="trabajo1"/>
-                <ref bean="trabajo1"/>
+                <ref bean="trabajo2"/>
             </list>
         </property>
     </bean>
@@ -212,7 +213,10 @@
         </property>
         <property name="ofertas">
             <list>
-
+                <!--<ref bean="oferta2" />-->
+                <!--<ref bean="oferta4" />-->
+                <!--<ref bean="oferta5" />-->
+                <!--<ref bean="oferta6" />-->
             </list>
         </property>
         <property name="estudios">
@@ -378,6 +382,11 @@
                   value="https://t1.uc.ltmcdn.com/images/5/1/2/img_que_hacer_con_mi_ordenador_viejo_24215_600.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion1"/>
+        <property name="ofertas">
+            <list>
+                <ref bean="oferta5"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="item2" class="domain.Item">
@@ -387,6 +396,11 @@
         <property name="foto" value="http://www.toldoscano.com/wp-content/uploads/2014/09/STOR.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion1"/>
+        <property name="ofertas">
+            <list>
+                <ref bean="oferta6"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="item3" class="domain.Item">
@@ -396,6 +410,11 @@
         <property name="foto" value="http://mm.decoralis.es/uploads/ILUMINACI__N/lampredo2.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion1"/>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
     </bean>
 
     <!-- Petición 2 -->
@@ -408,6 +427,12 @@
                   value="https://www.turismosevilla.com/content/1-guia/2-lugares-de-interes-en-sevilla/20160622-la-catedral-de-sevilla/thumbs/la-catedral-de-sevilla-1000.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion2"/>
+        <property name="ofertas">
+            <list>
+                <ref bean="oferta1"/>
+                <ref bean="oferta2"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="item5" class="domain.Item">
@@ -417,6 +442,12 @@
         <property name="foto" value="http://www.esp.andalucia.com/provincia/image/MVC090900041elcastilloguard.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion2"/>
+        <property name="ofertas">
+            <list>
+                <ref bean="oferta3"/>
+                <ref bean="oferta4"/>
+            </list>
+        </property>
     </bean>
 
     <bean id="item6" class="domain.Item">
@@ -428,6 +459,11 @@
                   value="http://estaticos.sevillaciudad.abc.es/wp-content/uploads/2013/09/centro-sevilla-casco-antiguo.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion2"/>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
     </bean>
 
 
@@ -440,6 +476,11 @@
         <property name="foto" value="https://www.flaginstitute.org/wp/wp-content/uploads/2012/10/UK-Union-Flag.png"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion3"/>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
     </bean>
 
     <bean id="item8" class="domain.Item">
@@ -449,6 +490,11 @@
         <property name="foto" value="http://www.limerickpost.ie/site/wp-content/uploads/france-flag.jpg"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion3"/>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
     </bean>
 
     <bean id="item9" class="domain.Item">
@@ -458,9 +504,80 @@
         <property name="foto" value="https://cdn.pixabay.com/photo/2013/07/12/12/51/german-146401_960_720.png"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion3"/>
+        <property name="ofertas">
+            <list>
+
+            </list>
+        </property>
     </bean>
 
     <!-- ****************** Ofertas ************* -->
+
+    <bean id="oferta1" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="20.5"/>
+        <constructor-arg index="1" name="comentario"
+                         value="Tengo mucha experiencia en el tema, mira mi perfil si quieres"/>
+        <constructor-arg index="2" name="fechaCreacion" value="13/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="25/08/2017"/>
+        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <property name="profesional" ref="profesional1"/>
+        <property name="item" ref="item4"/>
+        <property name="valoracion" ref="valoracion1"/>
+    </bean>
+
+    <bean id="oferta2" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="32.5"/>
+        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="2" name="fechaCreacion" value="18/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
+        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <property name="profesional" ref="profesional2"/>
+        <property name="item" ref="item4"/>
+        <property name="valoracion" ref="valoracion2"/>
+
+    </bean>
+
+    <bean id="oferta3" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="23"/>
+        <constructor-arg index="1" name="comentario"
+                         value="Tengo mucha experiencia en el tema, mira mi perfil si quieres"/>
+        <constructor-arg index="2" name="fechaCreacion" value="15/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="25/08/2017"/>
+        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <property name="profesional" ref="profesional1"/>
+        <property name="item" ref="item5"/>
+        <property name="valoracion" ref="valoracion3"/>
+    </bean>
+
+    <bean id="oferta4" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="10"/>
+        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
+        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <property name="profesional" ref="profesional2"/>
+        <property name="item" ref="item5"/>
+    </bean>
+
+    <bean id="oferta5" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="15"/>
+        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
+        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <property name="profesional" ref="profesional2"/>
+        <property name="item" ref="item1"/>
+    </bean>
+
+    <bean id="oferta6" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="25"/>
+        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
+        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
+        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <property name="profesional" ref="profesional2"/>
+        <property name="item" ref="item2"/>
+    </bean>
 
     <!-- ****************** Valoraciones ************* -->
 
@@ -468,21 +585,25 @@
         <constructor-arg index="0" name="puntuacion" value="4"/>
         <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
         <constructor-arg index="2" name="fechaCreacion" value="12/11/2015"/>
-        <property name="profesional" ref="profesional1"/>
+        <property name="usuario" ref="usuario1"/>
+        <property name="oferta" ref="oferta1"/>
+
     </bean>
 
     <bean id="valoracion2" class="domain.Valoracion">
         <constructor-arg index="0" name="puntuacion" value="2"/>
         <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
         <constructor-arg index="2" name="fechaCreacion" value="21/03/2016"/>
-        <property name="profesional" ref="profesional1"/>
+        <property name="usuario" ref="usuario1"/>
+        <property name="oferta" ref="oferta2"/>
     </bean>
 
     <bean id="valoracion3" class="domain.Valoracion">
         <constructor-arg index="0" name="puntuacion" value="1"/>
         <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
         <constructor-arg index="2" name="fechaCreacion" value="04/06/2017"/>
-        <property name="profesional" ref="profesional1"/>
+        <property name="usuario" ref="profesional2"/>
+        <property name="oferta" ref="oferta3"/>
     </bean>
 
     <!-- ****************** Etiquetas ************* -->
