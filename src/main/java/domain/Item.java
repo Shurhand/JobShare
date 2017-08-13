@@ -1,6 +1,7 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
@@ -105,6 +106,7 @@ public class Item extends DomainEntity {
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+   @JsonIgnore
    public Collection<Oferta> getOfertas() {
       return ofertas;
    }

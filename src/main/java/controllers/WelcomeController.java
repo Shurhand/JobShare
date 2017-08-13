@@ -1,6 +1,8 @@
 
 package controllers;
 
+import domain.Etiqueta;
+import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -11,16 +13,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
 import security.LoginService;
+import services.EtiquetaService;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
    @Autowired
    private LoginService loginService;
+   @Autowired
+   private EtiquetaService etiquetaService;
    // Constructors -----------------------------------------------------------
    
    public WelcomeController() {
@@ -36,12 +44,19 @@ public class WelcomeController extends AbstractController {
       String moment;
       Assert.notNull(credenciales);
       Assert.notNull(bindingResult);
+      BuscaForm buscaForm = new BuscaForm();
+   
+      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
+      SortedSet<Etiqueta> todasEtiquetas = new TreeSet<>(comparator);
+      todasEtiquetas.addAll(etiquetaService.getEtiquetasActivas());
       
       formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
       moment = formatter.format(new Date());
       
       result = new ModelAndView("welcome/index");
       result.addObject("name", name);
+      result.addObject("buscaForm", buscaForm);
+      result.addObject("todasEtiquetas", todasEtiquetas);
       result.addObject("moment", moment);
       result.addObject("credenciales", credenciales);
       result.addObject("showError", showError);

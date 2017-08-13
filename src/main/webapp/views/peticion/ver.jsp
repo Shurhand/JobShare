@@ -49,7 +49,7 @@
                     </c:if>
                     <c:if test="${peticion.foto != null}">
                         <IMG src="${peticion.foto}"
-                             class="col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
+                             class="img-rounded col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
                              width="125"
                              height="125">
                     </c:if>

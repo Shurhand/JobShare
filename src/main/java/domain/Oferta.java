@@ -1,6 +1,7 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -109,6 +110,7 @@ public class Oferta extends DomainEntity {
    
    @NotNull
    @Valid
+   @JsonIgnore
    @OneToOne(cascade = CascadeType.ALL, optional = true, mappedBy = "oferta")
    public Valoracion getValoracion() {
       return valoracion;
@@ -121,6 +123,7 @@ public class Oferta extends DomainEntity {
    @NotNull
    @Valid
    @ManyToOne(optional = false)
+   @JsonIgnore
    public Item getItem() {
       return item;
    }

@@ -1,11 +1,13 @@
 package forms;
 
+import domain.Etiqueta;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 public class BuscaForm {
    public BuscaForm() {
@@ -16,6 +18,11 @@ public class BuscaForm {
    private LocalDate fechaCaducidad;
    private Double presupuesto;
    private String provincia;
+   private Collection<Etiqueta> etiquetas;
+   private Boolean mayorPresupuesto;
+   private Boolean menorPresupuesto;
+   private Boolean mayorfechaCaducidad;
+   private Boolean menorfechaCaducidad;
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Length(max = 250)
@@ -52,5 +59,45 @@ public class BuscaForm {
    
    public void setProvincia(String provincia) {
       this.provincia = provincia;
+   }
+   
+   public Collection<Etiqueta> getEtiquetas() {
+      return etiquetas;
+   }
+   
+   public void setEtiquetas(Collection<Etiqueta> etiquetas) {
+      this.etiquetas = etiquetas;
+   }
+   
+   public Boolean getMayorPresupuesto() {
+      return mayorPresupuesto;
+   }
+   
+   public void setMayorPresupuesto(Boolean mayorPresupuesto) {
+      this.mayorPresupuesto = mayorPresupuesto;
+   }
+   
+   public Boolean getMenorPresupuesto() {
+      return menorPresupuesto;
+   }
+   
+   public void setMenorPresupuesto(Boolean menorPresupuesto) {
+      this.menorPresupuesto = menorPresupuesto;
+   }
+   
+   public Boolean getMayorfechaCaducidad() {
+      return mayorfechaCaducidad;
+   }
+   
+   public void setMayorfechaCaducidad(Boolean mayorfechaCaducidad) {
+      this.mayorfechaCaducidad = mayorfechaCaducidad;
+   }
+   
+   public Boolean getMenorfechaCaducidad() {
+      return menorfechaCaducidad;
+   }
+   
+   public void setMenorfechaCaducidad(Boolean menorfechaCaducidad) {
+      this.menorfechaCaducidad = menorfechaCaducidad;
    }
 }

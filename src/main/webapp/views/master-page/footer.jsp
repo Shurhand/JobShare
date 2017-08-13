@@ -4,10 +4,6 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <jsp:useBean id="date" class="java.util.Date"/>
-
-<%--<p class="text-center strong">Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy"/>--%>
-<%--JobShare Co., Inc.</p>--%>
-
 <div class="row">
 <footer class="footer">
     <div>

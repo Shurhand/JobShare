@@ -19,21 +19,6 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <br/>
-            <form class="form-inline well white" style="text-align:center;">
-                <div class="form-group">
-                    <label style="font-weight: normal;" for="postcode">Resultados para: </label>
-                    <input id="postcode" name="postcode" type="text" class="form-control input-md" value="41012"
-                           required>
-                </div>
-                <button onclick="#" class="form-control"><span class="glyphicon glyphicon-search"></span> Buscar
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-3 search-filter" id="sidebar">
             <div class="col-md-12 well white">
                 <form action="/seller/search/" method="GET">
