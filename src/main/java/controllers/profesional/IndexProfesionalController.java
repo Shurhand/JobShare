@@ -56,7 +56,7 @@ public class IndexProfesionalController extends AbstractController {
       
       trabajos = profesional.getTrabajos();
       estudios = profesional.getEstudios();
-      valoraciones = profesional.getValoraciones();
+      valoraciones = profesional.getOfertas.stream().map(x -> x.getValoracion()).collect(Collectors.toList());
    
       res = new ModelAndView("profesional/perfil");
       res.addObject("profesional", profesional);

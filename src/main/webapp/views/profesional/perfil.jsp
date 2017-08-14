@@ -96,18 +96,40 @@
             </tr>
             </thead>
         </table>
-        <div class="col-md-8 col-sm-10 col-md-offset-2 col-sm-offset-1 text-center">
-            <h4><spring:message code="profesional.tusValoraciones"/> (${profesional.valoraciones.size()})</h4>
-            <div class="col-md-2">
-                <c:if test="${profesional.foto == null}">
-                    <br>
-                    <h2><c:out value="Sin foto"></c:out></h2>
-                </c:if>
-                <c:if test="${profesional.foto != null}">
-                    <IMG src="${profesional.foto}"
-                         class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
-                         width="125" height="125">
-                </c:if>
+        <br><hr>
+        
+        <c:forEach var="valoracion" items="${valoraciones}">
+         <div class="row">
+                        <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
+                            <c:if test="${valoracion.usuario.foto != null}">
+                                <img alt="" height="50px" width="50px"
+                                     class="img-circle center-block"
+                                     src="${valoracion.usuario.foto}">
+                            </c:if>
+                            <c:if test="${valoracion.usuario.foto == null}">
+                                <br>
+                                <h2><spring:message code="peticion.sinFoto"/></h2>
+                            </c:if>
+                            <h6 style="margin: auto">${valoracion.usuario.nombre}</h6>
+                            <input value="${valoracion.profesional.getValoracionTotal()}"
+                                   class="rating-loading">
+                            <br>
+                        </div>
+
+                        <div class="col-xs-8 col-md-8">
+                            <br>
+                            <div class="justificar-texto">
+                                <h5>${valoracion.comentario}</h5>
+                            </div>
+                        </div>
+                        <security:authorize access="hasAuthority('ADMIN')> 
+                        <div class="col-xs-2 col-md-2">
+                            <a href="valoracion/admin/eliminar.do?valoracionID=${valoracion.id}"
+                                class="btn btn-info btn-sm" role="button"><spring:message code="borrar"/></a>
+                        </div>
+                        </security:authorize>
+                        </c:forEach>
+                    </div>
             </div>
         </div>
         <hr/>

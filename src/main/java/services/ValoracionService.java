@@ -16,9 +16,15 @@ import java.util.Collection;
 public class ValoracionService extends AbstractServiceImpl implements AbstractService<Valoracion> {
    @Autowired
    private ValoracionRepository valoracionReporsitory;
+   @Autowired
+   private AdminService adminService;
+   @Autowired
+   private ActorService actorService;
    
    @Override
    public Valoracion create() {
+      actorService.checkIfUsuarioOProfesional()
+
       Valoracion valoracion = new Valoracion();
       LocalDate fechaCreacion = LocalDate.now();
       
@@ -29,26 +35,34 @@ public class ValoracionService extends AbstractServiceImpl implements AbstractSe
    
    @Override
    public void save(@NotNull Valoracion valoracion) {
+        actorService.checkIfUsuarioOProfesional()
       valoracionReporsitory.save(valoracion);
    }
    
    @Override
    public void saveAll(Iterable<Valoracion> valoraciones) {
+        actorService.checkIfUsuarioOProfesional()
       valoracionReporsitory.save(valoraciones);
    }
    
    @Override
    public Valoracion saveWithReturn(@NotNull Valoracion valoracion) {
+        actorService.checkIfUsuarioOProfesional()
       return valoracionReporsitory.save(valoracion);
    }
    
    @Override
    public void delete(@NotNull Valoracion valoracion) {
+     adminService.checkIfAdmin();
+        valoracion.getOferta.setValoracion(null);
+           valoracion.getUsuario().getValoraciones().remove(valoracion);
+             
       valoracionReporsitory.delete(valoracion);
    }
    
    @Override
    public void deleteAll(Iterable<Valoracion> valoraciones) {
+             adminService.checkIfAdmin();
       valoracionReporsitory.delete(valoraciones);
    }
    

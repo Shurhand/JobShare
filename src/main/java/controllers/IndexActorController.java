@@ -20,5 +20,11 @@ public class IndexActorController extends AbstractController {
    @Autowired
    private UsuarioService usuarioService;
    
-   
+   // @GetMapping("verPefil")
+   // public ModelAndView verPerfil(@RequestParam int actorID) {
+       // ModelAndView res;
+       
+       // Actor actor = actorService.findOne(actorID);
+       // res = new ModelAndView
+   // }
 }
