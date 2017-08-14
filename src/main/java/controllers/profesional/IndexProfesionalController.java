@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/profesional")
@@ -56,7 +57,7 @@ public class IndexProfesionalController extends AbstractController {
       
       trabajos = profesional.getTrabajos();
       estudios = profesional.getEstudios();
-      valoraciones = profesional.getOfertas.stream().map(x -> x.getValoracion()).collect(Collectors.toList());
+      valoraciones = profesional.getOfertas().stream().map(x -> x.getValoracion()).collect(Collectors.toList());
    
       res = new ModelAndView("profesional/perfil");
       res.addObject("profesional", profesional);
