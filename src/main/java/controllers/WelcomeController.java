@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import security.Credenciales;
 import security.LoginService;
 import services.EtiquetaService;
 
@@ -38,13 +37,12 @@ public class WelcomeController extends AbstractController {
    // Index ------------------------------------------------------------------
    
    @RequestMapping(value = "/index")
-   public ModelAndView index(@RequestParam(required = false, defaultValue = "JobShare") String name, @Valid @ModelAttribute Credenciales credenciales, BindingResult bindingResult, @RequestParam(required = false) boolean showError) {
+   public ModelAndView index(@RequestParam(required = false, defaultValue = "JobShare") String name, @Valid @ModelAttribute BuscaForm buscaForm, BindingResult bindingResult, @RequestParam(required = false) boolean showError) {
       ModelAndView result;
       SimpleDateFormat formatter;
       String moment;
-      Assert.notNull(credenciales);
+      Assert.notNull(buscaForm);
       Assert.notNull(bindingResult);
-      BuscaForm buscaForm = new BuscaForm();
    
       Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
       SortedSet<Etiqueta> todasEtiquetas = new TreeSet<>(comparator);
@@ -55,10 +53,9 @@ public class WelcomeController extends AbstractController {
       
       result = new ModelAndView("welcome/index");
       result.addObject("name", name);
-      result.addObject("buscaForm", buscaForm);
       result.addObject("todasEtiquetas", todasEtiquetas);
       result.addObject("moment", moment);
-      result.addObject("credenciales", credenciales);
+      result.addObject("buscaForm", buscaForm);
       result.addObject("showError", showError);
       
       return result;

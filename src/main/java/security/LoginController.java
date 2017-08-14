@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,17 +29,12 @@ public class LoginController extends AbstractController {
    
    // Login ------------------------------------------------------------------
    
-   @RequestMapping("/login")
-   public ModelAndView login(
-                               @Valid @ModelAttribute Credenciales credenciales,
-                               BindingResult bindingResult,
-                               @RequestParam(required = false) boolean showError) {
-      Assert.notNull(credenciales);
-      Assert.notNull(bindingResult);
-      
+   @GetMapping("/login")
+   public ModelAndView login(@RequestParam(required = false) boolean showError) {
       ModelAndView result;
+      Credenciales credenciales = new Credenciales();
       
-      result = new ModelAndView("welcome/index");
+      result = new ModelAndView("security/login");
       result.addObject("credenciales", credenciales);
       result.addObject("showError", showError);
       
