@@ -3,7 +3,6 @@ package controllers;
 import domain.*;
 import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,9 +14,7 @@ import services.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.SortedSet;
-import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/peticion")
@@ -42,9 +39,7 @@ public class PeticionController extends AbstractController {
       Credenciales credenciales = new Credenciales();
       
       Collection<Peticion> peticiones = peticionService.getPeticionesBuscadas(buscaForm);
-      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
-      SortedSet<Etiqueta> todasEtiquetas = new TreeSet<>(comparator);
-      todasEtiquetas.addAll(etiquetaService.getEtiquetasActivas());
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       res = new ModelAndView("peticion/buscar");
       res.addObject("peticiones", peticiones);
@@ -63,7 +58,7 @@ public class PeticionController extends AbstractController {
       Profesional profesional = null;
       
       Peticion peticion = peticionService.findOne(peticionID);
-      if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+      if (! actorService.isAnonimo()) {
          actorAutenticado = actorService.findPrincipal();
       }
       Collection<Oferta> todasOfertas = ofertaService.findAll();

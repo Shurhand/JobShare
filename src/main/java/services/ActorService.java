@@ -3,6 +3,7 @@ package services;
 import domain.Actor;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -73,6 +74,16 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       result = actorRepository.findActor(cuenta);
       
       return result;
+   }
+   
+   public boolean isAnonimo() {
+      boolean esAnonimo = false;
+      for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+         if (ga.getAuthority().equals("ROLE_ANONYMOUS")) {
+            esAnonimo = true;
+         }
+      }
+      return esAnonimo;
    }
    
    public Boolean checkDni(String dni) {

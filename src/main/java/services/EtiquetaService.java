@@ -9,9 +9,7 @@ import repositories.EtiquetaRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
@@ -84,4 +82,13 @@ public class EtiquetaService extends AbstractServiceImpl implements AbstractServ
    public Collection<String> getNombreEtiquetas() {
       return etiquetaRepository.getNombreEtiquetas();
    }
+   
+   public SortedSet<Etiqueta> getEtiquetasActivadasOrdenadas() {
+      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
+      SortedSet<Etiqueta> todasEtiquetas = new TreeSet<>(comparator);
+      todasEtiquetas.addAll(getEtiquetasActivas());
+      
+      return todasEtiquetas;
+   }
 }
+

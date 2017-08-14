@@ -28,25 +28,25 @@
                     <h4><spring:message code="peticion.ordernarPor"/></h4>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="mayorPresupuesto" value="1"/>
+                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="1"/>
                             <spring:message code="peticion.mayorPresupuesto"/>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="mayorPresupuesto" value="0"/>
+                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="2"/>
                             <spring:message code="peticion.menorPresupuesto"/>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="mayorfechaCaducidad" value="1"/>
+                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="3"/>
                             <spring:message code="peticion.mayorFechaCaducidad"/>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="mayorfechaCaducidad" value="0"/>
+                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="4"/>
                             <spring:message code="peticion.menorFechaCaducidad"/>
                         </label>
                     </div>

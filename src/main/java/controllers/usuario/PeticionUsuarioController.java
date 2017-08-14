@@ -4,6 +4,7 @@ import controllers.AbstractController;
 import domain.Etiqueta;
 import domain.Peticion;
 import domain.Usuario;
+import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,10 @@ import services.PeticionService;
 import services.UsuarioService;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.SortedSet;
 
 @Controller
 @RequestMapping("/peticion/usuario/")
@@ -36,11 +40,47 @@ public class PeticionUsuarioController extends AbstractController {
    public ModelAndView misPeticiones() {
       ModelAndView res;
       Usuario usuario = usuarioService.findUsuario();
+      BuscaForm buscaForm = new BuscaForm();
       Collection<Peticion> peticiones = peticionService.getPeticionesActivasPorUsuario(usuario);
-
+   
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+      
       res = new ModelAndView("peticion/usuario/misPeticiones");
       res.addObject("peticiones", peticiones);
+      res.addObject("buscaForm", buscaForm);
       res.addObject("usuario", usuario);
+      res.addObject("todasEtiquetas", todasEtiquetas);
+      
+      return res;
+   }
+   
+   @GetMapping("/buscarMisPeticiones")
+   public ModelAndView buscarMisPeticiones(@Valid @ModelAttribute BuscaForm buscaForm) {
+      ModelAndView res;
+      
+      Collection<Peticion> peticiones = peticionService.getMisPeticionesBuscadas(buscaForm);
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+      
+      res = new ModelAndView("peticion/usuario/buscar");
+      res.addObject("peticiones", peticiones);
+      res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("action", "peticion/usuario/buscarMisPeticiones.do");
+      
+      return res;
+   }
+   
+   @GetMapping("/buscarMisPeticionesCaducadas")
+   public ModelAndView buscarMisPeticionesCaducadas(@Valid @ModelAttribute BuscaForm buscaForm) {
+      ModelAndView res;
+      
+      Collection<Peticion> peticiones = peticionService.getMisPeticionesBuscadasCaducadas(buscaForm);
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+      
+      res = new ModelAndView("peticion/usuario/buscar");
+      res.addObject("peticiones", peticiones);
+      res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("action", "peticion/usuario/buscarMisPeticionesCaducadas.do");
+      
       
       return res;
    }
@@ -48,12 +88,16 @@ public class PeticionUsuarioController extends AbstractController {
    @GetMapping("/misPeticionesCaducadas")
    public ModelAndView misPeticionesCaducadas() {
       ModelAndView res;
+      BuscaForm buscaForm = new BuscaForm();
       Usuario usuario = usuarioService.findUsuario();
       Collection<Peticion> peticiones = peticionService.getPeticionesCaducadasPorUsuario(usuario);
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       res = new ModelAndView("peticion/usuario/misPeticionesCaducadas");
       res.addObject("peticiones", peticiones);
+      res.addObject("buscaForm", buscaForm);
       res.addObject("usuario", usuario);
+      res.addObject("todasEtiquetas", todasEtiquetas);
       
       return res;
    }
@@ -65,15 +109,13 @@ public class PeticionUsuarioController extends AbstractController {
    
       ModelAndView res;
    
-      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
-      SortedSet<Etiqueta> etiquetas = new TreeSet<>(comparator);
-      etiquetas.addAll(etiquetaService.getEtiquetasActivas());
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       Peticion peticion = peticionService.create();
 
       res = new ModelAndView("peticion/usuario/crear");
       res.addObject("peticion", peticion);
-      res.addObject("todasEtiquetas", etiquetas);
+      res.addObject("todasEtiquetas", todasEtiquetas);
    
       return res;
    }
@@ -136,9 +178,7 @@ public class PeticionUsuarioController extends AbstractController {
    
    private ModelAndView crearEditarModelo(Peticion peticion) {
       ModelAndView res;
-      Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
-      SortedSet<Etiqueta> etiquetas = new TreeSet<>(comparator);
-      etiquetas.addAll(etiquetaService.getEtiquetasActivas());
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       Credenciales credenciales = new Credenciales();
       String vista = peticion.getId() != 0 ? "peticion/usuario/editar" : "peticion/usuario/crear";
@@ -146,7 +186,7 @@ public class PeticionUsuarioController extends AbstractController {
       res = new ModelAndView(vista);
       res.addObject("peticion", peticion);
       res.addObject("credenciales", credenciales);
-      res.addObject("todasEtiquetas", etiquetas);
+      res.addObject("todasEtiquetas", todasEtiquetas);
       
       return res;
    }

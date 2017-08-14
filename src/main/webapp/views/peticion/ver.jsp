@@ -20,14 +20,16 @@
     <div class="row well white">
         <div class="col-md-10 col-md-offset-1">
             <h2 class="col-md-push-2" style="text-align: center">${peticion.titulo}
-                <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
-                <a href="peticion/usuario/editar.do?peticionID=${peticion.id}" class="btn btn-info" role="button">
-                    <spring:message
-                        code="peticion.modificarPeticion"/> </a>
-                <a href="item/usuario/crear.do?peticionID=${peticion.id}" class="btn btn-primary" role="button">
-                    <spring:message
-                        code="peticion.addItem"/> </a>
-                </c:if></h2>
+                <security:authorize access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
+
+                    <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
+                        <a href="peticion/usuario/editar.do?peticionID=${peticion.id}" class="btn btn-info" role="button">
+                            <spring:message
+                                code="peticion.modificarPeticion"/> </a>
+                        <a href="item/usuario/crear.do?peticionID=${peticion.id}" class="btn btn-primary" role="button">
+                            <spring:message
+                                code="peticion.addItem"/> </a>
+                    </c:if></security:authorize></h2>
             <br>
             <div class="row">
                 <div class="col-md-3">
@@ -111,13 +113,15 @@
                                     </c:if>
                                     <p>${prep} €</p>
                                     <br>
-                                    <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
-                                        <a href="item/usuario/editar.do?peticionID=${peticion.id}&itemID=${item.id}"
-                                           class="btn btn-info btn-sm" role="button"><spring:message code="editar"/></a>
-                                        <a href="item/usuario/borrar.do?peticionID=${peticion.id}&itemID=${item.id}"
-                                           class="btn btn-danger btn-sm" role="button"><spring:message
-                                            code="borrar"/></a>
-                                    </c:if>
+                                    <security:authorize access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
+                                        <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
+                                            <a href="item/usuario/editar.do?peticionID=${peticion.id}&itemID=${item.id}"
+                                               class="btn btn-info btn-sm" role="button"><spring:message code="editar"/></a>
+                                            <a href="item/usuario/borrar.do?peticionID=${peticion.id}&itemID=${item.id}"
+                                               class="btn btn-danger btn-sm" role="button"><spring:message
+                                                code="borrar"/></a>
+                                        </c:if>
+                                    </security:authorize>
                                 </div>
                             </div>
                             <hr>

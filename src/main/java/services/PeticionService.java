@@ -116,8 +116,8 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       Collection<Etiqueta> etiquetasForm = buscaForm.getEtiquetas() == null || buscaForm.getEtiquetas().isEmpty() ? etiquetaService.getEtiquetasActivas() : buscaForm.getEtiquetas();
       String provinciaForm = buscaForm.getProvincia() != null ? buscaForm.getProvincia().toLowerCase(espanyol) : "".toLowerCase(espanyol);
       String palabraClaveForm = buscaForm.getPalabraClave() != null ? buscaForm.getPalabraClave() : "";
-   
-   
+      
+      
       Collection<Peticion> res = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
       Collection<Peticion> todasPorClave = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
       for (Peticion peticion : todasPorClave) {
@@ -125,9 +125,9 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
             res.remove(peticion);
          }
       }
-
+      
       Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
-   
+      
       if (buscaForm.getOpcionRadio() != null) {
          if (buscaForm.getOpcionRadio().equals(1)) {
             peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
@@ -143,11 +143,103 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
             peticionComparator = peticionComparator.thenComparing(peticionComparator);
          }
       }
-   
+      
       SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
       peticionesOrdenadas.addAll(res);
       peticionesOrdenadas.removeIf(x -> x.getItems().isEmpty());
       
       return peticionesOrdenadas;
+   }
+   
+   public Collection<Peticion> getMisPeticionesBuscadas(BuscaForm buscaForm) {
+      Usuario usuario = usuarioService.findUsuario();
+      Locale espanyol = new Locale("es", "ES");
+      Double presupuestoForm = buscaForm.getPresupuesto() != null ? buscaForm.getPresupuesto() : 10000.0;
+      LocalDate fechaCaducidadForm = buscaForm.getFechaCaducidad() != null ? buscaForm.getFechaCaducidad() : LocalDate.MAX;
+      Collection<Etiqueta> etiquetasForm = buscaForm.getEtiquetas() == null || buscaForm.getEtiquetas().isEmpty() ? etiquetaService.getEtiquetasActivas() : buscaForm.getEtiquetas();
+      String provinciaForm = buscaForm.getProvincia() != null ? buscaForm.getProvincia().toLowerCase(espanyol) : "".toLowerCase(espanyol);
+      String palabraClaveForm = buscaForm.getPalabraClave() != null ? buscaForm.getPalabraClave() : "";
+      
+      
+      Collection<Peticion> res = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
+      Collection<Peticion> todasPorClave = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
+      for (Peticion peticion : todasPorClave) {
+         if (peticion.getMenorPresupuestoItem() > presupuestoForm || peticion.getFechaCaducidad().isAfter(fechaCaducidadForm) || Collections.disjoint(peticion.getEtiquetas(), etiquetasForm) || ! peticion.getProvincia().toLowerCase(espanyol).contains(provinciaForm)) {
+            res.remove(peticion);
+         }
+      }
+      
+      Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
+      
+      if (buscaForm.getOpcionRadio() != null) {
+         if (buscaForm.getOpcionRadio().equals(1)) {
+            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
+            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
+         } else if (buscaForm.getOpcionRadio().equals(2)) {
+            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
+            peticionComparator = peticionComparator.thenComparing(peticionComparator);
+         } else if (buscaForm.getOpcionRadio().equals(3)) {
+            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
+            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
+         } else if (buscaForm.getOpcionRadio().equals(4)) {
+            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
+            peticionComparator = peticionComparator.thenComparing(peticionComparator);
+         }
+      }
+      
+      SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
+      peticionesOrdenadas.addAll(res);
+      peticionesOrdenadas.removeIf(x -> ! x.getUsuario().equals(usuario));
+      peticionesOrdenadas.removeIf(x -> x.getFechaCaducidad().isBefore(LocalDate.now()));
+      
+      return peticionesOrdenadas;
+   }
+   
+   public Collection<Peticion> getMisPeticionesBuscadasCaducadas(BuscaForm buscaForm) {
+      Usuario usuario = usuarioService.findUsuario();
+      Locale espanyol = new Locale("es", "ES");
+      Double presupuestoForm = buscaForm.getPresupuesto() != null ? buscaForm.getPresupuesto() : 10000.0;
+      LocalDate fechaCaducidadForm = buscaForm.getFechaCaducidad() != null ? buscaForm.getFechaCaducidad() : LocalDate.MAX;
+      Collection<Etiqueta> etiquetasForm = buscaForm.getEtiquetas() == null || buscaForm.getEtiquetas().isEmpty() ? etiquetaService.getEtiquetasActivas() : buscaForm.getEtiquetas();
+      String provinciaForm = buscaForm.getProvincia() != null ? buscaForm.getProvincia().toLowerCase(espanyol) : "".toLowerCase(espanyol);
+      String palabraClaveForm = buscaForm.getPalabraClave() != null ? buscaForm.getPalabraClave() : "";
+      
+      
+      Collection<Peticion> res = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
+      Collection<Peticion> todasPorClave = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
+      for (Peticion peticion : todasPorClave) {
+         if (peticion.getMenorPresupuestoItem() > presupuestoForm || peticion.getFechaCaducidad().isAfter(fechaCaducidadForm) || Collections.disjoint(peticion.getEtiquetas(), etiquetasForm) || ! peticion.getProvincia().toLowerCase(espanyol).contains(provinciaForm)) {
+            res.remove(peticion);
+         }
+      }
+      
+      Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
+      
+      if (buscaForm.getOpcionRadio() != null) {
+         if (buscaForm.getOpcionRadio().equals(1)) {
+            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
+            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
+         } else if (buscaForm.getOpcionRadio().equals(2)) {
+            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
+            peticionComparator = peticionComparator.thenComparing(peticionComparator);
+         } else if (buscaForm.getOpcionRadio().equals(3)) {
+            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
+            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
+         } else if (buscaForm.getOpcionRadio().equals(4)) {
+            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
+            peticionComparator = peticionComparator.thenComparing(peticionComparator);
+         }
+      }
+      
+      SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
+      peticionesOrdenadas.addAll(res);
+      peticionesOrdenadas.removeIf(x -> ! x.getUsuario().equals(usuario));
+      peticionesOrdenadas.removeIf(x -> x.getFechaCaducidad().isAfter(LocalDate.now()));
+      
+      return peticionesOrdenadas;
+   }
+   
+   private void setComparators() {
+   
    }
 }
