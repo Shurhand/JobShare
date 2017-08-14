@@ -14,6 +14,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.Set;
 
@@ -165,5 +166,15 @@ public class Peticion extends DomainEntity {
          presupuesto = presupuesto.substring(0, presupuesto.length() - 2);
       }
       return presupuesto;
+   }
+   
+   @Transient
+   public Double getMenorPresupuestoItem() {
+      Comparator<Item> comp = Comparator.comparingDouble(x -> x.getPresupuesto());
+      Double precio = 0.0;
+      if (! this.getItems().isEmpty() && this.getItems() != null) {
+         precio = this.getItems().stream().filter(x -> ! this.getItems().isEmpty() && this.getItems() != null).min(comp).orElse(null).getPresupuesto();
+      }
+      return precio;
    }
 }

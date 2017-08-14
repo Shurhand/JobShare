@@ -18,10 +18,11 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 <br><br>
 <div class="container">
-    <div class="row">
-        <div class="col-md-3 search-filter" id="sidebar">
-            <div class="col-md-12 well white">
-                <form:form action="peticion/buscar.do" method="get" modelAttribute="buscaForm" acceptCharset="UTF-8">
+    <form:form action="peticion/buscar.do" method="get" modelAttribute="buscaForm" acceptCharset="UTF-8">
+        <div class="row">
+            <div class="col-md-3 search-filter" id="sidebar">
+                <div class="col-md-12 well white">
+
                     <h2 class="text-center"><spring:message code="peticion.filtros"/></h2>
                     <hr/>
                     <h4><spring:message code="peticion.ordernarPor"/></h4>
@@ -78,7 +79,7 @@
                         <form:errors class="help-block" path="fechaCaducidad"/>
                     </div>
                     <hr/>
-                    <h4><spring:message code="peticion.presupuesto"/></h4>
+                    <h4><spring:message code="buscaForm.presupuestoMaximoPorItem"/></h4>
                     <div
                         class="form-group ${errores.contains('presupuesto') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="buscaForm.presupuesto" var="presupuesto"/>
@@ -88,7 +89,7 @@
                         <form:errors class="help-block" path="presupuesto"/>
                     </div>
                     <hr/>
-                    <h4><spring:message code="peticion.provincia"/></h4>
+                    <h4><spring:message code="buscaForm.provincia"/></h4>
                     <div
                         class="form-group ${errores.contains('provincia') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="buscaForm.provincia" var="provincia"/>
@@ -97,61 +98,75 @@
                                     path="provincia" placeholder="${provincia}"/>
                         <form:errors class="help-block" path="provincia"/>
                     </div>
-                </form:form>
-            </div>
-        </div>
-
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-9">
-                    <p>${peticiones.size()} <spring:message code="peticion.peticionEncontradas"/></p>
+                    <br>
+                    <button onclick="clearRadio()" class="form-control"><span
+                        class="glyphicon glyphicon-refresh"></span> <spring:message code="peticion.limpiarRadio"/>
+                    </button>
                 </div>
             </div>
 
-            <c:forEach var="peticion" items="${peticiones}">
-
+            <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="item-search well white">
-                            <div class="row">
-                                <div class="col-xs-4 col-md-2 avatar-wrapper text-center">
-                                    <c:if test="${peticion.foto != null}">
-                                        <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                             src="${peticion.foto}">
-                                    </c:if>
-                                    <c:if test="${peticion.foto == null}">
-                                        <br>
-                                        <h2><spring:message code="peticion.sinFoto"/></h2>
-                                    </c:if>
-                                    <c:if test="${peticion.items.isEmpty()}">
-                                        <div class="error-notice">
-                                            <div class="oaerror-small warning">
-                                                <spring:message code="peticion.sinItems"/>
-                                            </div>
-                                        </div>
-                                    </c:if>
-                                </div>
-
-                                <div class="col-xs-8 col-md-8 info-wrapper">
-                                    <a href="peticion/ver.do?peticionID=${peticion.id}"> <b><h4>${peticion.titulo}
-                                        &nbsp;-&nbsp; ${peticion.provincia} </h4></b></a>
-                                    <h5>${peticion.descripcion}</h5>
-                                </div>
-                                <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                    <spring:message code="peticion.fechaCaducidad"/>
-                                    <tags:localDate date="${peticion.fechaCaducidad}" pattern="dd/MM/yyyy"/>
-                                    <h4><spring:message code="peticion.presupuesto"/></h4>
-                                    <p>${peticion.getPresupuestoTotal()} €</p>
-
-                                </div>
-                            </div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <spring:message code="buscaForm.search" var="search"/>
+                            <form:input path="palabraClave" class="form-control input" placeholder="${search}"/>
+                            <span class="input-group-btn">
+                                <button type="submit" name="buscar" class="btn btn btn-primary"><i
+                                    class="fa fa-search"></i>
+                                    <spring:message code="buscar"/>
+                              </button>
+                            </span>
                         </div>
-
+                        <p>${peticiones.size()} <spring:message code="peticion.peticionEncontradas"/></p>
                     </div>
                 </div>
-            </c:forEach>
+
+                <c:forEach var="peticion" items="${peticiones}">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="item-search well white">
+                                <div class="row">
+                                    <div class="col-xs-4 col-md-2 avatar-wrapper text-center">
+                                        <c:if test="${peticion.foto != null}">
+                                            <img alt="" height="100px" width="100px" class="img-circle center-block"
+                                                 src="${peticion.foto}">
+                                        </c:if>
+                                        <c:if test="${peticion.foto == null}">
+                                            <br>
+                                            <h2><spring:message code="peticion.sinFoto"/></h2>
+                                        </c:if>
+                                        <c:if test="${peticion.items.isEmpty()}">
+                                            <div class="error-notice">
+                                                <div class="oaerror-small warning">
+                                                    <spring:message code="peticion.sinItems"/>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                    </div>
+
+                                    <div class="col-xs-8 col-md-8 info-wrapper">
+                                        <a href="peticion/ver.do?peticionID=${peticion.id}"> <b><h4>${peticion.titulo}
+                                            &nbsp;-&nbsp; ${peticion.provincia} </h4></b></a>
+                                        <h5>${peticion.descripcion}</h5>
+                                    </div>
+                                    <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
+                                        <spring:message code="peticion.fechaCaducidad"/>
+                                        <tags:localDate date="${peticion.fechaCaducidad}" pattern="dd/MM/yyyy"/>
+                                        <h4><spring:message code="peticion.presupuesto"/></h4>
+                                        <p>${peticion.getPresupuestoTotal()} €</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-    </div>
+    </form:form>
 </div>
 
 <script type="text/javascript">
@@ -175,4 +190,9 @@
     $('form input').change(function () {
         $(this).closest('form').submit();
     });
+</script>
+<script type="text/javascript">
+    function clearRadio() {
+        $('input[type=radio]').prop('checked', false);
+    }
 </script>

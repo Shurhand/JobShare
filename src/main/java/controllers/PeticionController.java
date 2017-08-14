@@ -14,7 +14,10 @@ import security.Credenciales;
 import services.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Controller
 @RequestMapping("/peticion")
@@ -36,6 +39,7 @@ public class PeticionController extends AbstractController {
    @GetMapping("/buscar")
    public ModelAndView buscar(@Valid @ModelAttribute BuscaForm buscaForm) {
       ModelAndView res;
+      Credenciales credenciales = new Credenciales();
       
       Collection<Peticion> peticiones = peticionService.getPeticionesBuscadas(buscaForm);
       Comparator<Etiqueta> comparator = Comparator.comparing(x -> x.getNombre());
@@ -45,6 +49,7 @@ public class PeticionController extends AbstractController {
       res = new ModelAndView("peticion/buscar");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("credenciales", credenciales);
       
       return res;
    }
@@ -62,10 +67,6 @@ public class PeticionController extends AbstractController {
          actorAutenticado = actorService.findPrincipal();
       }
       Collection<Oferta> todasOfertas = ofertaService.findAll();
-      Collection<Oferta> ofertas = new ArrayList<>();
-      for (Oferta o : todasOfertas) {
-      
-      }
       
       res = new ModelAndView("peticion/ver");
       res.addObject("peticion", peticion);

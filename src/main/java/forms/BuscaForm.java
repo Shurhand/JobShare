@@ -20,9 +20,7 @@ public class BuscaForm {
    private String provincia;
    private Collection<Etiqueta> etiquetas;
    private Boolean mayorPresupuesto;
-   private Boolean menorPresupuesto;
    private Boolean mayorfechaCaducidad;
-   private Boolean menorfechaCaducidad;
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Length(max = 250)
@@ -77,13 +75,6 @@ public class BuscaForm {
       this.mayorPresupuesto = mayorPresupuesto;
    }
    
-   public Boolean getMenorPresupuesto() {
-      return menorPresupuesto;
-   }
-   
-   public void setMenorPresupuesto(Boolean menorPresupuesto) {
-      this.menorPresupuesto = menorPresupuesto;
-   }
    
    public Boolean getMayorfechaCaducidad() {
       return mayorfechaCaducidad;
@@ -91,13 +82,5 @@ public class BuscaForm {
    
    public void setMayorfechaCaducidad(Boolean mayorfechaCaducidad) {
       this.mayorfechaCaducidad = mayorfechaCaducidad;
-   }
-   
-   public Boolean getMenorfechaCaducidad() {
-      return menorfechaCaducidad;
-   }
-   
-   public void setMenorfechaCaducidad(Boolean menorfechaCaducidad) {
-      this.menorfechaCaducidad = menorfechaCaducidad;
    }
 }
