@@ -61,13 +61,18 @@ public class PeticionController extends AbstractController {
       Credenciales credenciales = new Credenciales();
       Actor actorAutenticado = null;
       Profesional profesional;
+      Profesional profesionalAutenticado = null;
       
       Peticion peticion = peticionService.findOne(peticionID);
       if (! actorService.isAnonimo()) {
          actorAutenticado = actorService.findPrincipal();
       }
+      if (actorService.isProfesional()) {
+         profesionalAutenticado = profesionalService.findProfesional();
+      }
       Collection<Oferta> todasOfertas = ofertaService.findAll();
    
+      todasOfertas.stream().filter(x -> ! x.getItem().getOfertas().contains(x)).forEach(x -> x.getItem().getOfertas().add(x));
       profesional = profesionalService.findProfesionalPorCuenta(peticion.getUsuario().getCuenta());
    
    
@@ -78,7 +83,7 @@ public class PeticionController extends AbstractController {
       res.addObject("todasOfertas", todasOfertas);
       res.addObject("actorAutenticado", actorAutenticado);
       res.addObject("profesional", profesional);
-      
+      res.addObject("profesionalAutenticado", profesionalAutenticado);
       
       return res;
    }
