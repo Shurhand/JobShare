@@ -11,19 +11,5 @@
         <put-attribute name="body" value="/views/welcome/index.jsp"/>
     </definition>
 
-    <definition name="welcome/index/about" extends="master.page">
-        <put-attribute name="title" value="About us"/>
-        <put-attribute name="body" value="/views/welcome/about.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/contact" extends="master.page">
-        <put-attribute name="title" value="Contact us"/>
-        <put-attribute name="body" value="/views/welcome/contact.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/tips" extends="master.page">
-        <put-attribute name="title" value="Tips"/>
-        <put-attribute name="body" value="/views/welcome/tips.jsp"/>
-    </definition>
 
 </tiles-definitions>

@@ -19,7 +19,7 @@
 <br><br>
 <div class="container">
 
-    <form:form action="peticion/usuario/buscarMisPeticiones.do" method="get" modelAttribute="buscaForm"
+    <form:form action="peticion/usuario/buscarMisPeticionesCaducadas.do" method="get" modelAttribute="buscaForm"
                acceptCharset="UTF-8">
         <div class="row">
             <div class="col-md-3 search-filter" id="sidebar">

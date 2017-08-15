@@ -32,17 +32,20 @@
                     </c:if></security:authorize></h2>
             <br>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 text-center">
+
                     <c:if test="${usuario.foto == null}">
                         <br>
-                        <h2><spring:message code="actor.sinFoto"/></h2>
+                        <h2><a href="actor/verPerfil.do?actorID=${usuario.id}"><spring:message
+                            code="actor.sinFoto"/></a></h2>
                     </c:if>
                     <c:if test="${usuario.foto != null}">
-                        <IMG src="${usuario.foto}"
-                             class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
-                             width="125"
-                             height="125">
+                        <a href="actor/verPerfil.do?actorID=${usuario.id}"> <IMG src="${usuario.foto}"
+                                                                                 class="img-circle col-md-offset-1 col-xs-offset-1 col-sm-offset-1"
+                                                                                 width="125"
+                                                                                 height="125"></a>
                     </c:if>
+                    <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-animate"/>
                 </div>
                 <div class="col-md-3">
                     <c:if test="${peticion.foto == null}">
@@ -125,7 +128,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <h3 class="text-center" ;"><spring:message code="item.ofertasDisponibles"/></h3>
+                            <h3 class="text-center" ;><spring:message code="item.ofertasDisponibles"/></h3>
                             <br>
                             <c:if test="${!todasOfertas.isEmpty()}">
                                 <c:forEach var="oferta" items="${todasOfertas}">
@@ -196,12 +199,20 @@
 </div>
 </div>
 <script type="text/javascript">
-    // Rating de estrellas
+    //    // Rating de estrellas
     $('.rating-loading').rating({
         size: 'xxs',
         readonly: true,
         showClear: false,
         showCaption: false,
+    });
+
+    $('#ratingPersonal').rating({
+        size: 'sm',
+        readonly: true,
+        showClear: false,
+        showCaption: false
+
     });
 
 </script>

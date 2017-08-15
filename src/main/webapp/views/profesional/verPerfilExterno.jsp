@@ -18,9 +18,7 @@
 <div class="container">
     <div class="row well white ">
         <div class="col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
-            <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
-                <a href="/profesional/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
-                    code="actor.modificarPerfil"/> </a></h2>
+            <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/></h2>
 
             <br>
             <div class="row">
@@ -35,13 +33,11 @@
                              width="125"
                              height="125">
                     </c:if>
-                    <security:authorize access="hasAuthority('PROFESIONAL')">
-                        <br>
-                        <br>
 
-                        <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-animate"/>
+                    <br>
+                    <br>
+                    <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-loading"/>
 
-                    </security:authorize>
                 </div>
 
                 <div class="col-md-6 col-sm-6">
@@ -61,8 +57,7 @@
             </div>
             <br>
             <h4 style="text-align: center"><spring:message code="profesional.estudios"/>
-                <a href="/estudio/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
-                    code="estudio.nuevo"/> </a></h4>
+            </h4>
             <table id="estudios" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                    width="100%">
 
@@ -72,15 +67,13 @@
                     <th><spring:message code="estudio.centro"/></th>
                     <th><spring:message code="estudio.fechaInicio"/></th>
                     <th><spring:message code="estudio.fechaFin"/></th>
-                    <th><spring:message code="estudio.acciones"/></th>
 
                 </tr>
                 </thead>
             </table>
             <br>
             <h4 style="text-align: center"><spring:message code="profesional.trabajos"/>
-                <a href="/trabajo/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
-                    code="trabajo.nuevo"/> </a>
+
             </h4>
             <table id="trabajos" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                    width="100%">
@@ -91,7 +84,6 @@
                     <th><spring:message code="trabajo.empresa"/></th>
                     <th><spring:message code="trabajo.fechaInicio"/></th>
                     <th><spring:message code="trabajo.fechaFin"/></th>
-                    <th><spring:message code="trabajo.acciones"/></th>
 
                 </tr>
                 </thead>
@@ -125,7 +117,7 @@
                         <input value="${valoracion.getPuntuacion()}" class="rating-loading rating-xs"/>
                     </div>
                     <div class="col-xs-7 col-md-7 ">
-                            <br>
+                        <br>
                         <div class="text-left">
                             <h5>${valoracion.comentario}</h5>
                         </div>
@@ -133,7 +125,7 @@
                     <security:authorize access="hasAuthority('ADMIN')">
                         <div class="col-xs-2 col-md-1">
                             <br>
-                            <a href="valoracion/admin/borrar.do?valoracionID=${valoracion.id}&actorID${profesional.id}"
+                            <a href="valoracion/admin/borrar.do?valoracionID=${valoracion.id}&actorID=${profesional.id}"
                                class="btn btn-info btn-sm" role="button"><spring:message code="borrar"/></a>
                         </div>
                     </security:authorize>
@@ -163,27 +155,10 @@
                 {"mData": "centro"},
                 {"mData": "fechaInicio"},
                 {"mData": "fechaFin"}
-            ],
-
-            'columnDefs': [{"className": "dt-body-center", "targets": "_all"},
-                {
-                    'targets': 4,
-                    'searchable': false,
-                    'orderable': false,
-                    "mRender": function (data, type, full) {
-                        var elHTML = '<a href="estudio/profesional/editar.do?estudioID=';
-                        var editar = elHTML + full.id + '" style="margin: 5px;" class="btn btn-info btn-sm role="button"><spring:message code="editar"/> </a>';
-
-                        var elHTML2 = '<a href="estudio/profesional/borrar.do?estudioID=';
-                        var borrar = elHTML2 + full.id + '" style="margin: 5px;" class="btn btn-danger btn-sm role="button"><spring:message code="borrar"/> </a>';
-
-                        return editar + borrar;
-                    }
-                }]
-
+            ]
         });
         // Rating de estrellas
-        $('.rating-animate').rating({
+        $('#ratingPersonal').rating({
             size: 'sm',
             readonly: true,
             showClear: false,
@@ -213,22 +188,7 @@
                 {"mData": "empresa"},
                 {"mData": "fechaInicio"},
                 {"mData": "fechaFin"}
-            ],
-            'columnDefs': [{"className": "dt-body-center", "targets": "_all"},
-                {
-                    'targets': 4,
-                    'searchable': false,
-                    'orderable': false,
-                    "mRender": function (data, type, full) {
-                        var elHTML = '<a href="trabajo/profesional/editar.do?trabajoID=';
-                        var editar = elHTML + full.id + '" style="margin: 5px;" class="btn btn-info btn-sm role="button"><spring:message code="editar"/> </a>';
-
-                        var elHTML2 = '<a href="trabajo/profesional/borrar.do?trabajoID=';
-                        var borrar = elHTML2 + full.id + '" style="margin: 5px;" class="btn btn-danger btn-sm role="button"><spring:message code="borrar"/> </a>';
-
-                        return editar + borrar;
-                    }
-                }]
+            ]
         })
     });
 </script>

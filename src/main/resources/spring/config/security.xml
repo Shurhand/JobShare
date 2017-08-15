@@ -55,6 +55,9 @@
         <security:intercept-url pattern="/security/login.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/actor/verPerfil.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 
@@ -69,6 +72,7 @@
         <security:intercept-url pattern="/usuario/admin/*" access="hasAuthority('ADMIN')"/>
         <security:intercept-url pattern="/etiqueta/admin/*" access="hasAuthority('ADMIN')"/>
         <security:intercept-url pattern="/admin/*" access="hasAuthority('ADMIN')"/>
+        <security:intercept-url pattern="/valoracion/admin/*" access="hasAuthority('ADMIN')"/>
 
         <!-- ******************** USUARIO ************************************** -->
 

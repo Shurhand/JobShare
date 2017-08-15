@@ -31,10 +31,10 @@
                 <th><spring:message code="usuario.usuario"/></th>
                 <th><spring:message code="usuario.cuentaActiva"/></th>
                 <th><spring:message code="usuario.bloquear"/></th>
+                <th><spring:message code="usuario.verPerfil"/></th>
             </tr>
             </thead>
             <tbody>
-            asdasd
             </tbody>
         </table>
     </div>
@@ -69,8 +69,20 @@
                     var final = elHTML + aux + '"><spring:message code="usuario.bloquear"/> </a>';
                     return final;
                 }
+            },
+                {
+                    'targets': 9,
+                    'searchable': false,
+                    'orderable': false,
+                    'className': 'dt-body-center',
+                    "mRender": function (data, type, full) {
+                        var aux = full.id;
+                        var elHTML = '<a href="actor/verPerfil.do?actorID=';
+                        var final = elHTML + aux + '"><spring:message code="usuario.ver"/> </a>';
+                        return final;
+                    }
 
-            }]
+                }]
         });
     });
 </script>

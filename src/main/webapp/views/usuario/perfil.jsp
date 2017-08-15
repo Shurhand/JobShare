@@ -19,9 +19,13 @@
     <div class="row well white ">
         <div class="col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
             <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
-                <a href="/usuario/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
-                    code="actor.modificarPerfil"/> </a></h2>
-
+                <security:authorize access="hasAuthority('USUARIO')">
+                    <c:if test="${actorAutenticado.id.equals(usuario.id)}">
+                        <a href="usuario/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
+                            code="actor.modificarPerfil"/> </a>
+                    </c:if>
+                </security:authorize>
+            </h2>
             <br>
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-md-offset-2">

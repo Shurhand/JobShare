@@ -55,20 +55,25 @@ public class PeticionController extends AbstractController {
       ModelAndView res;
       Credenciales credenciales = new Credenciales();
       Actor actorAutenticado = null;
-      Profesional profesional = null;
+      Profesional profesional;
       
       Peticion peticion = peticionService.findOne(peticionID);
       if (! actorService.isAnonimo()) {
          actorAutenticado = actorService.findPrincipal();
       }
       Collection<Oferta> todasOfertas = ofertaService.findAll();
-      
+   
+      profesional = profesionalService.findProfesionalPorCuenta(peticion.getUsuario().getCuenta());
+   
+   
       res = new ModelAndView("peticion/ver");
       res.addObject("peticion", peticion);
       res.addObject("usuario", peticion.getUsuario());
       res.addObject("credenciales", credenciales);
       res.addObject("todasOfertas", todasOfertas);
       res.addObject("actorAutenticado", actorAutenticado);
+      res.addObject("profesional", profesional);
+      
       
       return res;
    }

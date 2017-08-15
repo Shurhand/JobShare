@@ -37,6 +37,7 @@ public class ItemService extends AbstractServiceImpl implements AbstractService<
    @Override
    public void save(@NotNull Item item) {
       actorService.checkIfUsuarioOProfesional();
+      item.getPeticion().getItems().add(item);
       itemRepository.save(item);
    }
    

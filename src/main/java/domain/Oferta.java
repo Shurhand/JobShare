@@ -108,7 +108,6 @@ public class Oferta extends DomainEntity {
       this.profesional = profesional;
    }
    
-   @NotNull
    @Valid
    @JsonIgnore
    @OneToOne(cascade = CascadeType.ALL, optional = true, mappedBy = "oferta")

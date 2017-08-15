@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import repositories.AdminRepository;
 import security.Autoridad;
+import security.Cuenta;
 import security.LoginService;
 
 import javax.transaction.Transactional;
@@ -92,6 +93,10 @@ public class AdminService extends AbstractServiceImpl implements AbstractService
    public Admin findAdmin() {
       Actor a = actorService.findPrincipal();
       return adminRepository.findAdmin(a.getCuenta());
+   }
+   
+   public Admin findUsuarioPorCuenta(Cuenta cuenta) {
+      return adminRepository.findAdmin(cuenta);
    }
    
    public void modificarPerfil(UsuarioForm usuarioForm) {

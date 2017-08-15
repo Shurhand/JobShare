@@ -1,5 +1,6 @@
 package services;
 
+import domain.Oferta;
 import domain.Valoracion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,14 @@ public class ValoracionService extends AbstractServiceImpl implements AbstractSe
    @Override
    public void delete(@NotNull Valoracion valoracion) {
       adminService.checkIfAdmin();
+      Oferta ofertaUsuario = valoracion.getOferta();
       valoracion.getOferta().setValoracion(null);
+      Collection<Oferta> ofertas = valoracion.getOferta().getProfesional().getOfertas();
+      for (Oferta f : ofertas) {
+         if (f.equals(ofertaUsuario)) {
+            f.setValoracion(null);
+         }
+      }
       valoracion.getUsuario().getValoraciones().remove(valoracion);
       
       valoracionReporsitory.delete(valoracion);

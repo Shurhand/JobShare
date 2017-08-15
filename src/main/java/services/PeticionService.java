@@ -125,24 +125,8 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
             res.remove(peticion);
          }
       }
-      
-      Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
-      
-      if (buscaForm.getOpcionRadio() != null) {
-         if (buscaForm.getOpcionRadio().equals(1)) {
-            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
-            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
-         } else if (buscaForm.getOpcionRadio().equals(2)) {
-            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
-            peticionComparator = peticionComparator.thenComparing(peticionComparator);
-         } else if (buscaForm.getOpcionRadio().equals(3)) {
-            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
-            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
-         } else if (buscaForm.getOpcionRadio().equals(4)) {
-            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
-            peticionComparator = peticionComparator.thenComparing(peticionComparator);
-         }
-      }
+   
+      Comparator<Peticion> peticionComparator = this.setComparators(buscaForm);
       
       SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
       peticionesOrdenadas.addAll(res);
@@ -168,24 +152,8 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
             res.remove(peticion);
          }
       }
-      
-      Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
-      
-      if (buscaForm.getOpcionRadio() != null) {
-         if (buscaForm.getOpcionRadio().equals(1)) {
-            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
-            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
-         } else if (buscaForm.getOpcionRadio().equals(2)) {
-            peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
-            peticionComparator = peticionComparator.thenComparing(peticionComparator);
-         } else if (buscaForm.getOpcionRadio().equals(3)) {
-            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
-            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
-         } else if (buscaForm.getOpcionRadio().equals(4)) {
-            peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
-            peticionComparator = peticionComparator.thenComparing(peticionComparator);
-         }
-      }
+   
+      Comparator<Peticion> peticionComparator = this.setComparators(buscaForm);
       
       SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
       peticionesOrdenadas.addAll(res);
@@ -213,8 +181,18 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
          }
       }
       
-      Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
+      Comparator<Peticion> peticionComparator = this.setComparators(buscaForm);
       
+      SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
+      peticionesOrdenadas.addAll(res);
+      peticionesOrdenadas.removeIf(x -> ! x.getUsuario().equals(usuario));
+      peticionesOrdenadas.removeIf(x -> x.getFechaCaducidad().isAfter(LocalDate.now()));
+      
+      return peticionesOrdenadas;
+   }
+   
+   private Comparator<Peticion> setComparators(BuscaForm buscaForm) {
+      Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
       if (buscaForm.getOpcionRadio() != null) {
          if (buscaForm.getOpcionRadio().equals(1)) {
             peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
@@ -230,16 +208,6 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
             peticionComparator = peticionComparator.thenComparing(peticionComparator);
          }
       }
-      
-      SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
-      peticionesOrdenadas.addAll(res);
-      peticionesOrdenadas.removeIf(x -> ! x.getUsuario().equals(usuario));
-      peticionesOrdenadas.removeIf(x -> x.getFechaCaducidad().isAfter(LocalDate.now()));
-      
-      return peticionesOrdenadas;
-   }
-   
-   private void setComparators() {
-   
+      return peticionComparator;
    }
 }

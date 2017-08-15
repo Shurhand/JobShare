@@ -168,6 +168,10 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       return usuarioRepository.findUsuario(a.getCuenta());
    }
    
+   public Usuario findUsuarioPorCuenta(Cuenta cuenta) {
+      return usuarioRepository.findUsuario(cuenta);
+   }
+   
    public void convertirse() {
       this.checkIfUsuario();
       Collection<Autoridad> res = new ArrayList<>();

@@ -86,6 +86,39 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       return esAnonimo;
    }
    
+   public boolean isUsuario() {
+      boolean esUsuario = false;
+      for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+         
+         if (ga.getAuthority().equals("USUARIO")) {
+            esUsuario = true;
+         }
+      }
+      return esUsuario;
+   }
+   
+   public boolean isProfesional() {
+      boolean esProfesional = false;
+      for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+         
+         if (ga.getAuthority().equals("PROFESIONAL")) {
+            esProfesional = true;
+         }
+      }
+      return esProfesional;
+   }
+   
+   public boolean isAdmin() {
+      boolean esAdmin = false;
+      for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+         System.out.println(ga.getAuthority());
+         if (ga.getAuthority().equals("PROFESIONAL")) {
+            esAdmin = true;
+         }
+      }
+      return esAdmin;
+   }
+   
    public Boolean checkDni(String dni) {
       return checkDniCaracteres(dni) && checkDniLetra(dni);
    }
