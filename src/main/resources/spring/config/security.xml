@@ -58,6 +58,9 @@
         <security:intercept-url pattern="/actor/verPerfil.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/usuario/googleToken.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 
@@ -89,6 +92,7 @@
         <security:intercept-url pattern="/estudio/profesional/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/trabajo/profesional/*" access="hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/profesional/*" access="hasAuthority('PROFESIONAL')"/>
+        <security:intercept-url pattern="/oferta/profesional/*" access="hasAuthority('PROFESIONAL')"/>
 
         <security:intercept-url pattern="/**"
                                 access="hasAuthority('NONE')"/>

@@ -20,14 +20,13 @@ public class Oferta extends DomainEntity {
    private Double precio;
    private String comentario;
    private LocalDate fechaCreacion;
-   private LocalDate fechaCaducidad;
    private Estado estado;
    
    public Oferta() {
       super();
    }
    
-   public Oferta(Double precio, String comentario, String fechaCreacion, String fechaCaducidad, Estado estado) {
+   public Oferta(Double precio, String comentario, String fechaCreacion, Estado estado) {
       this.precio = precio;
       this.comentario = comentario;
       
@@ -36,7 +35,6 @@ public class Oferta extends DomainEntity {
       formatter = formatter.withLocale(espanyol);
       
       this.fechaCreacion = LocalDate.parse(fechaCreacion, formatter);
-      this.fechaCaducidad = LocalDate.parse(fechaCaducidad, formatter);
       this.estado = estado;
    }
    
@@ -71,15 +69,6 @@ public class Oferta extends DomainEntity {
       this.fechaCreacion = fechaCreacion;
    }
    
-   @NotNull
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
-   public LocalDate getFechaCaducidad() {
-      return fechaCaducidad;
-   }
-   
-   public void setFechaCaducidad(LocalDate fechaCaducidad) {
-      this.fechaCaducidad = fechaCaducidad;
-   }
    
    @NotNull
    @Enumerated

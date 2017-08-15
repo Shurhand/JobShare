@@ -36,15 +36,20 @@ public class PeticionController extends AbstractController {
    @GetMapping("/buscar")
    public ModelAndView buscar(@Valid @ModelAttribute BuscaForm buscaForm) {
       ModelAndView res;
-      Credenciales credenciales = new Credenciales();
+   
+      Actor actorAutenticado = null;
       
       Collection<Peticion> peticiones = peticionService.getPeticionesBuscadas(buscaForm);
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+   
+      if (! actorService.isAnonimo()) {
+         actorAutenticado = actorService.findPrincipal();
+      }
       
       res = new ModelAndView("peticion/buscar");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
-      res.addObject("credenciales", credenciales);
+      res.addObject("actorAutenticado", actorAutenticado);
       
       return res;
    }

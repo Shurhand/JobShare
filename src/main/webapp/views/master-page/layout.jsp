@@ -14,6 +14,8 @@
     <meta charset="UTF-8">
     <title>Jobshare - Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id"
+          content="48702837365-ji2jahi3jk0c1ug8472ri0ljesoc461h.apps.googleusercontent.com">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
 
     <base

@@ -121,5 +121,7 @@
 </script>
 
 <script type="text/javascript">
-    $('.js-example-basic-multiple').select2();
+    $('.js-example-basic-multiple').select2(
+        {width: '100%'})
+    ;
 </script>

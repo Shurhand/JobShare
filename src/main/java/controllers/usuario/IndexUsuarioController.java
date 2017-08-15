@@ -1,23 +1,28 @@
 package controllers.usuario;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import controllers.AbstractController;
 import domain.Usuario;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
 import services.ActorService;
 import services.UsuarioService;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -26,6 +31,8 @@ public class IndexUsuarioController extends AbstractController {
    public IndexUsuarioController() {
       super();
    }
+   
+   private static final JacksonFactory jacksonFactory = new JacksonFactory();
    
    // =============== Services =======
    @Autowired
@@ -226,6 +233,50 @@ public class IndexUsuarioController extends AbstractController {
       res = new ModelAndView("redirect:/");
       return res;
    }
+   
+   //
+   @PostMapping("/googleToken")
+   public String googleLogin(@RequestParam String idTokenString) throws GeneralSecurityException, IOException {
+      
+      GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory).setAudience(Collections.singletonList("48702837365-ji2jahi3jk0c1ug8472ri0ljesoc461h.apps.googleusercontent.com")).build();
+      
+      
+      GoogleIdToken idToken = verifier.verify(idTokenString);
+      if (idToken != null) {
+         Payload payload = idToken.getPayload();
+         
+         // Print user identifier
+         String userId = payload.getSubject();
+         System.out.println("User ID: " + userId);
+         
+         // Get profile information from payload
+         String email = payload.getEmail();
+         boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+         String name = (String) payload.get("name");
+         String pictureUrl = (String) payload.get("picture");
+         String locale = (String) payload.get("locale");
+         String familyName = (String) payload.get("family_name");
+         String givenName = (String) payload.get("given_name");
+         
+         
+         // Use or store profile information
+         // ...
+         
+      } else {
+         System.out.println("Invalid ID token.");
+      }
+      return "redirect:/usuario/registroGoogle";
+   }
+
+//   @PostMapping("/registroGoogle")
+//   public String doPost2(HttpServletRequest request, HttpServletResponse response) {
+//      System.out.println("He entrado");
+//      System.out.println("He entrado");
+//      System.out.println("He entrado");
+//      System.out.println("He entrado");
+//
+//      return "redirect:/usuario/registroGoogle";
+//   }
    
    
    // =========== Ancillary Methods ===========

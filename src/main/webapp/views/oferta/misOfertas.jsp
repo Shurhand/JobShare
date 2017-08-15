@@ -18,7 +18,9 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 <br><br>
 <div class="container">
-    <form:form action="peticion/buscar.do" method="get" modelAttribute="buscaForm" acceptCharset="UTF-8">
+
+    <form:form action="peticion/profesional/buscarMisOfertas.do" method="get" modelAttribute="buscaForm"
+               acceptCharset="UTF-8">
         <div class="row">
             <div class="col-md-3 search-filter" id="sidebar">
                 <div class="col-md-12 well white">
@@ -102,8 +104,10 @@
                     <button onclick="clearRadio()" class="form-control"><span
                         class="glyphicon glyphicon-refresh"></span> <spring:message code="peticion.limpiarRadio"/>
                     </button>
+
                 </div>
             </div>
+                <%--<h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>--%>
 
             <div class="col-md-9">
                 <div class="row">
@@ -118,8 +122,12 @@
                               </button>
                             </span>
                         </div>
-                        <p>${peticiones.size()} <spring:message code="peticion.peticionEncontradas"/></p>
+                        <a href="oferta/profesional/misOfertas.do"> <spring:message
+                            code="ofertas.activas"/> </a>|
+                        <a href="oferta/profesional/misOfertasContratadas.do"> <spring:message
+                            code="ofertas.contratadas"/> </a>
                     </div>
+
                 </div>
 
                 <c:forEach var="peticion" items="${peticiones}">

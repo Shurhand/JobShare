@@ -136,15 +136,23 @@
                                         <div class="row">
                                             <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
                                                 <c:if test="${oferta.profesional.foto != null}">
-                                                    <img alt="" height="50px" width="50px"
-                                                         class="img-circle center-block"
-                                                         src="${oferta.profesional.foto}">
+                                                    <a href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><img
+                                                        alt="" height="50px" width="50px"
+                                                        class="img-circle center-block"
+                                                        src="${oferta.profesional.foto}"></a>
                                                 </c:if>
                                                 <c:if test="${oferta.profesional.foto == null}">
                                                     <br>
-                                                    <h2><spring:message code="peticion.sinFoto"/></h2>
+                                                    <h2><a
+                                                        href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><spring:message
+                                                        code="peticion.sinFoto"/></a></h2>
                                                 </c:if>
-                                                <h6 style="margin: auto">${oferta.profesional.nombre}</h6>
+                                                <c:if test="${!oferta.profesional.id.equals(actorAutenticado.id)}">
+                                                    <h6 style="margin: auto">${oferta.profesional.nombre}</h6>
+                                                </c:if>
+                                                <c:if test="${oferta.profesional.id.equals(actorAutenticado.id)}">
+                                                    <h6 style="margin: auto"><spring:message code="peticion.tu"/></h6>
+                                                </c:if>
                                                 <input value="${oferta.profesional.getValoracionTotal()}"
                                                        class="rating-loading">
                                                 <br>

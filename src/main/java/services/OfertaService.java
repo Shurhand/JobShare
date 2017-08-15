@@ -2,6 +2,8 @@ package services;
 
 import domain.Estado;
 import domain.Oferta;
+import domain.Peticion;
+import domain.Profesional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.OfertaRepository;
@@ -64,5 +66,29 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
    @NotNull
    public Oferta findOne(@NotNull @Min(1) Integer ofertaID) {
       return ofertaRepository.findOne(ofertaID);
+   }
+   
+   public Collection<Oferta> getOfertasPorProfesional(Profesional profesional) {
+      return ofertaRepository.getOfertasPorProfesional(profesional);
+   }
+   
+   public Collection<Oferta> getOfertasContratadasPorProfesional(Profesional profesional) {
+      return ofertaRepository.getOfertasContratadasPorProfesional(profesional);
+   }
+   
+   public Collection<Oferta> getOfertasActivasPorProfesional(Profesional profesional) {
+      return ofertaRepository.getOfertasActivasPorProfesional(profesional);
+   }
+   
+   public Collection<Peticion> getPeticionesPorOfertasPorProfesional(Profesional profesional) {
+      return ofertaRepository.getPeticionesPorOfertasPorProfesional(profesional);
+   }
+   
+   public Collection<Peticion> getPeticionesPorOfertasContratadasPorProfesional(Profesional profesional) {
+      return ofertaRepository.getPeticionesPorOfertasContratadasPorProfesional(profesional);
+   }
+   
+   public Collection<Peticion> getPeticionesPorOfertasActivasPorProfesional(Profesional profesional) {
+      return ofertaRepository.getPeticionesPorOfertasActivasPorProfesional(profesional);
    }
 }

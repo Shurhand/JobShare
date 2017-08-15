@@ -513,6 +513,43 @@
         </dependency>
 
         <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.22.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>1.6.3.1</version>
+        </dependency>
+
+
+        <!--<dependency>-->
+        <!--<groupId>com.google.oauth-client</groupId>-->
+        <!--<artifactId>google-oauth-client-java6</artifactId>-->
+        <!--<version>1.22.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>com.google.http-client</groupId>-->
+        <!--<artifactId>google-http-client-jackson</artifactId>-->
+        <!--<version>1.22.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>com.google.http-client</groupId>-->
+        <!--<artifactId>google-http-client-appengine</artifactId>-->
+        <!--<version>1.22.0</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client-appengine</artifactId>
+            <version>1.20</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.0</version>
@@ -528,6 +565,12 @@
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>2.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
 

@@ -9,6 +9,10 @@
 @media (max-width: 767px) {
 }
 
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 /*iconos de font awesome*/
 .input-group-addon {
     width: 15%;
@@ -68,6 +72,72 @@ body {
     padding: 0 0 0 0;
 }
 
+/* Botón de Google
+------------------------------------------------------------*/
+#myGoogle {
+    display: inline-block;
+    white-space: nowrap;
+    /*min-height: 100%;*/
+    font-family: Roboto, arial, sans-serif;
+    /*font-size: px;*/
+    /*width: 10px;*/
+    /*height: 50px;*/
+}
+
+/*.abcRioButtonBlue {*/
+/*background-color: #4285f4;*/
+/*border: none;*/
+/*color: #fff;*/
+/*}*/
+/*.abcRioButton {*/
+/*-webkit-border-radius: 1px;*/
+/*border-radius: 1px;*/
+/*box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);*/
+/*-webkit-box-sizing: border-box;*/
+/*box-sizing: border-box;*/
+/*-webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;*/
+/*transition: background-color .218s,border-color .218s,box-shadow .218s;*/
+/*-webkit-user-select: none;*/
+/*-webkit-appearance: none;*/
+/*background-color: #fff;*/
+/*background-image: none;*/
+/*color: #262626;*/
+/*cursor: pointer;*/
+/*outline: none;*/
+/*overflow: hidden;*/
+/*position: relative;*/
+/*text-align: center;*/
+/*vertical-align: middle;*/
+/*white-space: nowrap;*/
+/*width: auto;*/
+/*}*/
+
+/*.abcRioButtonContentWrapper {*/
+/*height: 100%;*/
+/*width: 100%;*/
+/*}*/
+
+/*.abcRioButtonBlue .abcRioButtonContentWrapper {*/
+/*border: 1px solid transparent;*/
+/*}*/
+/*.abcRioButtonIcon {*/
+/*float: left;*/
+/*}*/
+/*.abcRioButtonBlue .abcRioButtonIcon {*/
+/*background-color: #fff;*/
+/*-webkit-border-radius: 1px;*/
+/*border-radius: 1px;*/
+/*}*/
+
+/*.abcRioButtonContents {*/
+/*font-family: Roboto,arial,sans-serif;*/
+/*font-size: 14px;*/
+/*font-weight: 500;*/
+/*letter-spacing: .21px;*/
+/*margin-left: 6px;*/
+/*margin-right: 6px;*/
+/*vertical-align: top;*/
+/*}*/
 /* Footer
 ------------------------------------------------------------*/
 footer {

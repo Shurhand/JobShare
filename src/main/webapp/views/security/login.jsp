@@ -7,46 +7,90 @@
 <%@taglib prefix="security"
           uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+<script type="text/javascript">
+
+    function renderButton() {
+        gapi.signin2.render('myGoogle', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+        });
+    }
+
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log(id_token);
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', 'http://localhost:8080/usuario/googleToken.do');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            console.log('Signed in as: ' + xhr.responseText);
+        };
+        xhr.send('idTokenString=' + id_token);
+    }
+
+</script>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-6 col-md-offset-4 col-sm-8 col-sm-offset-2 col-lg-4">
             <h2 style="text-align: center"><spring:message code="login.iniciarSesion"/></h2>
             <div class="well">
-                <c:if test="${showError == true}">
-                    <div class="alert alert-danger alert-dismissable alert-link oaerror danger-conjunto">
-                        <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
-                        <spring:message code="security.login.failed"/>
-                    </div>
-                </c:if>
-                <form:form action="login" modelAttribute="credenciales" acceptCharset="UTF-8">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div id="myGoogle">
+                            <div class="g-signin2" data-onsuccess="onSignIn">
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <c:if test="${showError == true}">
+                            <div class="alert alert-danger alert-dismissable alert-link oaerror danger-conjunto">
+                                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+                                <spring:message code="security.login.failed"/>
+                            </div>
+                        </c:if>
+                        <form:form action="login" modelAttribute="credenciales" acceptCharset="UTF-8">
 
-                    <div
-                        class="form-group ${errores.contains('username') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.usuario" var="usuario"/>
-                        <form:label class="control-label" path="username">${usuario}</form:label>
-                        <form:input class="form-control" path="username" placeholder="${usuario}"/>
-                        <form:errors class="help-block" path="username"/>
-                    </div>
-                    <div
-                        class="form-group ${errores.contains('password') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="usuario.contraseña" var="contraseña"/>
-                        <form:label class="control-label" path="password">${contraseña}</form:label>
-                        <form:password class="form-control" path="password" placeholder="${contraseña}"/>
-                        <form:errors class="help-block" path="password"/>
-                    </div>
+                            <div
+                                class="form-group ${errores.contains('username') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
+                                <spring:message code="usuario.usuario" var="usuario"/>
+                                <form:label class="control-label" path="username">${usuario}</form:label>
+                                <form:input class="form-control" path="username" placeholder="${usuario}"/>
+                                <form:errors class="help-block" path="username"/>
+                            </div>
+                            <div
+                                class="form-group ${errores.contains('password') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
+                                <spring:message code="usuario.contraseña" var="contraseña"/>
+                                <form:label class="control-label" path="password">${contraseña}</form:label>
+                                <form:password class="form-control" path="password" placeholder="${contraseña}"/>
+                                <form:errors class="help-block" path="password"/>
+                            </div>
 
-                    <div class="form-group text-center">
-                        <br>
-                        <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message
-                            code="volver"/></a>
-                        <button type="submit" name="login" class="btn btn-primary"><i class="fa fa-check"></i>
-                            <spring:message code="login.iniciarSesion"/>
-                        </button>
+                            <div class="form-group text-center">
+                                <br>
+                                <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left"></i> <spring:message
+                                    code="volver"/></a>
+                                <button type="submit" name="login" class="btn btn-primary"><i class="fa fa-check"></i>
+                                    <spring:message code="login.iniciarSesion"/>
+                                </button>
+                            </div>
+                        </form:form>
                     </div>
-                </form:form>
-            </div>
-        </div>
+                </div>
     </div>
 </div>
 

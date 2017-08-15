@@ -8,6 +8,8 @@
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="styles/custom.css" type="text/css">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 <!DOCTYPE html>
 
@@ -162,5 +164,15 @@
         </div>
     </div>
 </header>
+<a href="#" onclick="signOut();">SALIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIR</a>
+
+<script type="text/javascript">
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+</script>
 
 

@@ -121,4 +121,5 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
       profesional.getCuenta().setPassword(password);
       this.save(profesional);
    }
+   
 }

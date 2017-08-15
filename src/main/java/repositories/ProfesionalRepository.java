@@ -10,4 +10,5 @@ import security.Cuenta;
 public interface ProfesionalRepository extends JpaRepository<Profesional, Integer> {
    @Query("select u from Profesional u where u.cuenta = ?1")
    Profesional findProfesional(Cuenta cuenta);
+   
 }

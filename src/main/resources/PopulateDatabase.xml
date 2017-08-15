@@ -99,6 +99,7 @@
         <property name="email" value="equecrates@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta2"/>
+        <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
         <property name="peticiones">
             <list>
                 <!--<ref bean="peticion1"/>-->
@@ -143,7 +144,7 @@
         <property name="DNI" value="17883990H"/>
         <property name="email" value="BruceLee@gmail.com"/>
         <property name="telefono" value="675048498"/>
-        <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
+        <property name="foto" value="http://www.lamarihuana.com/wp-content/uploads/2015/06/Conscience-copy.jpg"/>
         <property name="descripcion"
                   value="Experto en montaje de ordenadores y sistemas, muchos años de cacharreo entre ordenadores"/>
         <property name="cuenta" ref="cuenta4"/>
@@ -461,7 +462,7 @@
         <property name="peticion" ref="peticion2"/>
         <property name="ofertas">
             <list>
-
+                <ref bean="oferta7"/>
             </list>
         </property>
     </bean>
@@ -518,8 +519,7 @@
         <constructor-arg index="1" name="comentario"
                          value="Tengo mucha experiencia en el tema, mira mi perfil si quieres"/>
         <constructor-arg index="2" name="fechaCreacion" value="13/07/2017"/>
-        <constructor-arg index="3" name="fechaCaducidad" value="25/08/2017"/>
-        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional1"/>
         <property name="item" ref="item4"/>
         <property name="valoracion" ref="valoracion1"/>
@@ -529,8 +529,7 @@
         <constructor-arg index="0" name="precio" value="32.5"/>
         <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
         <constructor-arg index="2" name="fechaCreacion" value="18/07/2017"/>
-        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
-        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
         <property name="item" ref="item4"/>
         <property name="valoracion" ref="valoracion2"/>
@@ -542,8 +541,7 @@
         <constructor-arg index="1" name="comentario"
                          value="Tengo mucha experiencia en el tema, mira mi perfil si quieres"/>
         <constructor-arg index="2" name="fechaCreacion" value="15/07/2017"/>
-        <constructor-arg index="3" name="fechaCaducidad" value="25/08/2017"/>
-        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional1"/>
         <property name="item" ref="item5"/>
         <property name="valoracion" ref="valoracion3"/>
@@ -553,8 +551,7 @@
         <constructor-arg index="0" name="precio" value="10"/>
         <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
         <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
-        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
-        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
         <property name="item" ref="item5"/>
     </bean>
@@ -563,8 +560,7 @@
         <constructor-arg index="0" name="precio" value="15"/>
         <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
         <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
-        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
-        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
         <property name="item" ref="item1"/>
     </bean>
@@ -573,10 +569,19 @@
         <constructor-arg index="0" name="precio" value="25"/>
         <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
         <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
-        <constructor-arg index="3" name="fechaCaducidad" value="30/08/2017"/>
-        <constructor-arg index="4" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
         <property name="item" ref="item2"/>
+    </bean>
+
+    <bean id="oferta7" class="domain.Oferta">
+        <constructor-arg index="0" name="precio" value="26"/>
+        <constructor-arg index="1" name="comentario"
+                         value="Tengo mucha experiencia en este tipo de trabajos, contrátame y los comprobarás ;)"/>
+        <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
+        <constructor-arg index="3" name="estado" value="CONTRATADA"/>
+        <property name="profesional" ref="profesional1"/>
+        <property name="item" ref="item6"/>
     </bean>
 
     <!-- ****************** Valoraciones ************* -->
