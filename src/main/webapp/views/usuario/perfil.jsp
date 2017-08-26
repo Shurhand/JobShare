@@ -20,7 +20,7 @@
         <div class="col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
             <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
                 <security:authorize access="hasAuthority('USUARIO')">
-                    <c:if test="${actorAutenticado.id.equals(usuario.id)}">
+                    <c:if test="${actorAutenticado.cuenta.id.equals(usuario.cuenta.id)}">
                         <a href="usuario/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
                             code="actor.modificarPerfil"/> </a>
                     </c:if>

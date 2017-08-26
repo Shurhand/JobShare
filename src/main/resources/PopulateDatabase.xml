@@ -12,6 +12,7 @@
         <property name="username" value="admin"/>
         <property name="password" value="21232f297a57a5a743894a0e4a801fc3"/>
         <property name="isActivated" value="true"/>
+        <property name="isGoogle" value="false"/>
         <property name="authorities">
             <list>
                 <bean class="security.Autoridad">
@@ -26,6 +27,7 @@
         <property name="username" value="usuario1"/>
         <property name="password" value="122b738600a0f74f7c331c0ef59bc34c"/>
         <property name="isActivated" value="true"/>
+        <property name="isGoogle" value="false"/>
         <property name="authorities">
             <list>
                 <bean class="security.Autoridad">
@@ -38,7 +40,8 @@
     <bean id="cuenta3" class="security.Cuenta">
         <property name="username" value="usuario2"/>
         <property name="password" value="2fb6c8d2f3842a5ceaa9bf320e649ff0"/>
-        <property name="isActivated" value="false"/>
+        <property name="isActivated" value="true"/>
+        <property name="isGoogle" value="false"/>
         <property name="authorities">
             <list>
                 <bean class="security.Autoridad">
@@ -53,6 +56,7 @@
         <property name="username" value="profesional1"/>
         <property name="password" value="473deb90997d416b6af80aa585e128af"/>
         <property name="isActivated" value="true"/>
+        <property name="isGoogle" value="false"/>
         <property name="authorities">
             <list>
                 <bean class="security.Autoridad">
@@ -66,6 +70,7 @@
         <property name="username" value="profesional2"/>
         <property name="password" value="e16f47b31979684fa31e74f594404d5c"/>
         <property name="isActivated" value="true"/>
+        <property name="isGoogle" value="false"/>
         <property name="authorities">
             <list>
                 <bean class="security.Autoridad">

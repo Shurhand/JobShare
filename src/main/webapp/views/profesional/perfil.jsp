@@ -149,6 +149,26 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var idiomas = ["<spring:message code="dataTable.sProcessing"/>",
+            "<spring:message code="dataTable.sLengthMenu"/>",
+            "<spring:message code="dataTable.sZeroRecords"/>",
+            "<spring:message code="dataTable.sEmptyTable"/>",
+            "<spring:message code="dataTable.sInfo"/>",
+            "<spring:message code="dataTable.sInfoEmpty"/>",
+            "<spring:message code="dataTable.sInfoFiltered"/>",
+            "<spring:message code="dataTable.sInfoPostFix"/>",
+            "<spring:message code="dataTable.sSearch"/>",
+            "<spring:message code="dataTable.sUrl"/>",
+            "<spring:message code="dataTable.sInfoThousands"/>",
+            "<spring:message code="dataTable.sLoadingRecords"/>",
+            "<spring:message code="dataTable.sFirst"/>",
+            "<spring:message code="dataTable.sLast"/>",
+            "<spring:message code="dataTable.sNext"/>",
+            "<spring:message code="dataTable.sPrevious"/>",
+            "<spring:message code="dataTable.sSortAscending"/>",
+            "<spring:message code="dataTable.sSortDescending"/>"
+        ];
+
         // Tabla de estudios
         var data = ${estudios};
         $('#estudios').DataTable({
@@ -179,7 +199,31 @@
 
                         return editar + borrar;
                     }
-                }]
+                }],
+            "language": {
+                "sProcessing": idiomas[0],
+                "sLengthMenu": idiomas[1],
+                "sZeroRecords": idiomas[2],
+                "sEmptyTable": idiomas[3],
+                "sInfo": idiomas[4],
+                "sInfoEmpty": idiomas[5],
+                "sInfoFiltered": idiomas[6],
+                "sInfoPostFix": idiomas[7],
+                "sSearch": idiomas[8],
+                "sUrl": idiomas[9],
+                "sInfoThousands": idiomas[10],
+                "sLoadingRecords": idiomas[11],
+                "oPaginate": {
+                    "sFirst": idiomas[12],
+                    "sLast": idiomas[13],
+                    "sNext": idiomas[14],
+                    "sPrevious": idiomas[15],
+                },
+                "oAria": {
+                    "sSortAscending": idiomas[16],
+                    "sSortDescending": idiomas[17]
+                }
+            }
 
         });
         // Rating de estrellas
@@ -228,7 +272,31 @@
 
                         return editar + borrar;
                     }
-                }]
+                }],
+            "language": {
+                "sProcessing": idiomas[0],
+                "sLengthMenu": idiomas[1],
+                "sZeroRecords": idiomas[2],
+                "sEmptyTable": idiomas[3],
+                "sInfo": idiomas[4],
+                "sInfoEmpty": idiomas[5],
+                "sInfoFiltered": idiomas[6],
+                "sInfoPostFix": idiomas[7],
+                "sSearch": idiomas[8],
+                "sUrl": idiomas[9],
+                "sInfoThousands": idiomas[10],
+                "sLoadingRecords": idiomas[11],
+                "oPaginate": {
+                    "sFirst": idiomas[12],
+                    "sLast": idiomas[13],
+                    "sNext": idiomas[14],
+                    "sPrevious": idiomas[15],
+                },
+                "oAria": {
+                    "sSortAscending": idiomas[16],
+                    "sSortDescending": idiomas[17]
+                }
+            }
         })
     });
 </script>

@@ -28,7 +28,6 @@
 
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
-    <script type="text/javascript" src="scripts/jmenu.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/tooltip.js"></script>
     <script type="text/javascript" src="scripts/bootstrap-timepicker.js"></script>
@@ -41,15 +40,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="styles/common.css" type="text/css">
     <link rel="stylesheet" href="styles/star-rating.css" type="text/css">
     <link rel="stylesheet" href="styles/bootstrap-duallistbox.css" type="text/css">
-    <link rel="stylesheet" href="styles/carousel.css" type="text/css">
     <link rel="stylesheet" href="styles/bootstrap-timepicker.css" type="text/css">
-    <link rel="stylesheet" href="styles/navbar-static-top.css" type="text/css">
-    <link rel="stylesheet" href="styles/about.css" type="text/css">
-    <link rel="stylesheet" href="styles/jmenu.css" media="screen"
-          type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet"

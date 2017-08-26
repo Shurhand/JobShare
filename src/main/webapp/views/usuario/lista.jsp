@@ -30,6 +30,7 @@
                 <th><spring:message code="usuario.provincia"/></th>
                 <th><spring:message code="usuario.usuario"/></th>
                 <th><spring:message code="usuario.cuentaActiva"/></th>
+                <th><spring:message code="usuario.cuentaGoogle"/></th>
                 <th><spring:message code="usuario.bloquear"/></th>
                 <th><spring:message code="usuario.verPerfil"/></th>
             </tr>
@@ -75,11 +76,12 @@
                 {"mData": "email"},
                 {"mData": "provincia"},
                 {"mData": "cuenta.username"},
-                {"mData": "cuenta.isActivated"}
+                {"mData": "cuenta.isActivated"},
+                {"mData": "cuenta.isGoogle"}
 
             ],
             'columnDefs': [{
-                'targets': 8,
+                'targets': 9,
                 'searchable': false,
                 'orderable': false,
                 'className': 'dt-body-center',
@@ -91,7 +93,7 @@
                 }
             },
                 {
-                    'targets': 9,
+                    'targets': 10,
                     'searchable': false,
                     'orderable': false,
                     'className': 'dt-body-center',

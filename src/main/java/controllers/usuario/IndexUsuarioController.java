@@ -6,6 +6,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Usuario;
 import forms.GoogleForm;
 import forms.UsuarioForm;
@@ -44,15 +45,21 @@ public class IndexUsuarioController extends AbstractController {
    @GetMapping("/perfil")
    public ModelAndView verPerfil() {
       ModelAndView res;
-      
+   
+      Actor actorAutenticado = null;
       Usuario usuario = usuarioService.findUsuario();
       Collection<String> provincias = usuarioService.getListaProvincias();
       Credenciales credenciales = new Credenciales();
+   
+      if (! actorService.isAnonimo()) {
+         actorAutenticado = actorService.findPrincipal();
+      }
       
       res = new ModelAndView("usuario/perfil");
       res.addObject("usuario", usuario);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      res.addObject("actorAutenticado", actorAutenticado);
       
       return res;
       
@@ -72,6 +79,7 @@ public class IndexUsuarioController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      res.addObject("usuario", usuario);
       
       return res;
    }
@@ -335,12 +343,13 @@ public class IndexUsuarioController extends AbstractController {
    
       Collection<String> provincias = usuarioService.getListaProvincias();
       Credenciales credenciales = new Credenciales();
+      Usuario usuario = usuarioService.findUsuario();
    
       res = new ModelAndView("usuario/modificarPerfil");
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
- 
+      res.addObject("usuario", usuario);
       
       return res;
    }
@@ -350,12 +359,14 @@ public class IndexUsuarioController extends AbstractController {
       
       Collection<String> provincias = usuarioService.getListaProvincias();
       Credenciales credenciales = new Credenciales();
-      
+   
+   
       res = new ModelAndView("usuario/create");
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
-      
+   
+   
       return res;
    }
    

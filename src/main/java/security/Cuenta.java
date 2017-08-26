@@ -23,6 +23,7 @@ public class Cuenta extends DomainEntity implements UserDetails {
    private String password;
    private Collection<Autoridad> authorities;
    private boolean isActivated;
+   private boolean isGoogle;
    
    public Cuenta() {
       super();
@@ -109,10 +110,12 @@ public class Cuenta extends DomainEntity implements UserDetails {
    public void setIsActivated(boolean isActivated) {
       this.isActivated = isActivated;
    }
-
-//   @Transient
-//   public String nombreUsuarioFormateado(){
-//
-//   }
    
+   public boolean getIsGoogle() {
+      return isGoogle;
+   }
+   
+   public void setIsGoogle(boolean google) {
+      isGoogle = google;
+   }
 }

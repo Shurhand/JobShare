@@ -121,3 +121,17 @@
         form.submit();
     }
 </script>
+
+<%--<script type="text/javascript">--%>
+<%--$(document).ready(function () {--%>
+<%--//        alert($(".abcRioButtonContents span").html());--%>
+<%--//        var idioma = document.getElementById('idioma').innerHTML;--%>
+<%--if (idioma == 'es') {--%>
+<%--var pepe = $("[id^=not_signed_]").html();--%>
+<%--console.log(pepe);--%>
+<%--} else {--%>
+<%--document.body.innerHTML = document.body.innerHTML.replace(/Acceder/g, 'asdadsaada');--%>
+<%--}--%>
+<%--document.body.innerHTML = document.body.innerHTML.replace(/Acceder/g, 'asdadsaada');--%>
+<%--});--%>
+<%--</script>--%>

@@ -77,11 +77,15 @@ body {
 .botonGoogle {
     display: inline-block;
     white-space: nowrap;
-    /*min-height: 100%;*/
+    width: 100%;
     font-family: Roboto, arial, sans-serif;
-    /*font-size: px;*/
-    /*width: 10px;*/
-    /*height: 50px;*/
+}
+
+.botonGoogle > div {
+    display: inline-block;
+    white-space: nowrap;
+    width: 80% !important;
+    height: 100% !important;
 }
 
 /*.abcRioButtonBlue {*/

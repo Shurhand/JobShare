@@ -23,6 +23,7 @@
                 <form:form action="usuario/modificarPerfil.do" modelAttribute="usuarioForm" acceptCharset="UTF-8">
                     <form:hidden path="DNI"/>
                     <form:hidden path="checkTerminos"/>
+
                     <div
                         class="form-group ${errores.contains('username') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.usuario" var="usuario"/>
@@ -65,6 +66,7 @@
                         <form:input type="email" class="form-control" path="email" placeholder="${email}"/>
                         <form:errors class="help-block" path="email"/>
                     </div>
+
                     <div
                         class="form-group ${errores.contains('provincia') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.provincia" var="provincia"/>
@@ -86,12 +88,14 @@
                         <form:input class="form-control" path="telefono" placeholder="${telefono}"/>
                         <form:errors class="help-block" path="telefono"/>
                     </div>
+
                     <div class="form-group ${errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="urlFotografia" var="urlFotografia"/>
                         <form:label class="control-label" path="foto">${urlFotografia}</form:label>
                         <form:input type="URL" class="form-control" path="foto" placeholder="URL"/>
                         <form:errors class="help-block" path="foto"/>
                     </div>
+
                     <div
                         class="form-group ${errores.contains('descripcion') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.descripcion" var="descripcion"/>

@@ -57,6 +57,13 @@
                         <form:input class="form-control" path="telefono" placeholder="${telefono}"/>
                         <form:errors class="help-block" path="telefono"/>
                     </div>
+                    <div
+                        class="form-group ${errores.contains('descripcion') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
+                        <spring:message code="usuario.descripcion" var="descripcion"/>
+                        <form:label class="control-label" path="descripcion">${descripcion}</form:label>
+                        <form:input class="form-control" path="descripcion" placeholder="${descripcion}"/>
+                        <form:errors class="help-block" path="descripcion"/>
+                    </div>
 
                     <div class="form-group text-center">
                         <br>

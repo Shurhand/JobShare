@@ -31,6 +31,8 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    private ActorService actorService;
    @Autowired
    private LoginService loginService;
+   @Autowired
+   private ProfesionalService profesionalService;
    
    @Override
    public Usuario create() {
@@ -113,6 +115,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       usuario.setDescripcion(usuarioForm.getDescripcion());
       
       cuenta.setIsActivated(true);
+      cuenta.setIsGoogle(false);
       cuenta.setUsername(usuarioForm.getUsername());
       String password = md5PassWordEncoder.encodePassword(usuarioForm.getPassword(), null);
       cuenta.setPassword(password);
@@ -174,6 +177,10 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    
    public void convertirse() {
       this.checkIfUsuario();
+      Collection<Trabajo> trabajos = new ArrayList<>();
+      Collection<Estudio> estudios = new ArrayList<>();
+      Collection<Oferta> ofertas = new ArrayList<>();
+      
       Collection<Autoridad> res = new ArrayList<>();
       Autoridad autoridad = new Autoridad();
       autoridad.setAuthority("PROFESIONAL");
@@ -186,6 +193,11 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       
       logOFF();
       logON();
+   
+      Profesional profesional = profesionalService.findProfesional();
+      profesional.setTrabajos(trabajos);
+      profesional.setEstudios(estudios);
+      profesional.setOfertas(ofertas);
       
    }
    
@@ -237,8 +249,12 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
          usuario.setEmail(email);
          usuario.setFoto(pictureUrl);
          usuario.setDNI(googleForm.getDNI());
+         usuario.setProvincia(googleForm.getProvincia());
+         usuario.setCp(googleForm.getCp());
+         usuario.setDescripcion(googleForm.getDescripcion());
          
          cuenta.setIsActivated(true);
+         cuenta.setIsGoogle(true);
          cuenta.setUsername(userId);
          String password = md5PassWordEncoder.encodePassword(idTokenString, null);
          cuenta.setPassword(password);
