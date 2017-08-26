@@ -9,6 +9,9 @@
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
+<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
+
+
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
@@ -19,7 +22,7 @@
 <div class="container">
     <div class="row well white">
         <div class="col-md-10 col-md-offset-1">
-            <h2 class="col-md-push-2" style="text-align: center">${peticion.titulo}
+            <h2 class="col-md-push-2" style="text-align: center">${fn.titulo}
                 <security:authorize access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
 
                     <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
@@ -133,7 +136,7 @@
                             <h3 class="text-center" ;><spring:message code="item.ofertasDisponibles"/>
                                 <security:authorize access="hasAuthority('PROFESIONAL')">
                                 <c:if test="${!profesionalAutenticado.peticiones.contains(peticion)}">
-                                <c:if test="${Collections.disjoint(profesionalAutenticado.ofertas, item.ofertas)}">
+                                <c:if test="${fn.(profesionalAutenticado.ofertas, item.ofertas)}">
                                 <a href="oferta/profesional/crear.do?itemID=${item.id}">
                                     class="btn btn-info btn-sm" role="button"><spring:message
                                     code="oferta.nuevaOferta"/></a></h3>

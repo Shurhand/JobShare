@@ -57,7 +57,7 @@
                                 class="form-group ${errores.contains('etiquetas') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                                 <spring:message code="buscaForm.etiquetas" var="etiquetas"/>
                                 <form:label class="control-label blanco" path="etiquetas">${etiquetas}</form:label>
-                                <form:select path="etiquetas" class="form-control js-example-basic-multiple"
+                                <form:select id="barraEtiquetas" path="etiquetas" class="js-example-basic-multiple"
                                              multiple="multiple">
                                     <form:options items="${todasEtiquetas}" itemLabel="nombre" itemValue="id"/>
                                 </form:select>
@@ -113,8 +113,12 @@
 </script>
 
 <script type="text/javascript">
-    $('.js-example-basic-multiple').select2(
-        {width: '100%'})
-    ;
+    var idiomas = ["<spring:message code="etiqueta.etiquetas"/>"];
+    $('.js-example-basic-multiple').select2({
+        width: '100%',
+        placeholder: idiomas[0],
+        allowClear: true
+    })
+
 </script>
 
