@@ -191,7 +191,7 @@ footer a:hover {
 /* Nav bar
 -----------------------------------------------------------*/
 .navbar-custom {
-
+    background-color: #337ab7;
     width: 100%;
     margin: 0 0px 0 0;
     /*border-bottom-color: #5a74a0;*/
@@ -200,18 +200,18 @@ footer a:hover {
 }
 
 .navbar-custom .navbar-toggle {
-    border-color: #337ab7;
+    border-color: white;
 }
 
 .navbar-custom .navbar-toggle .icon-bar {
-    background-color: #337ab7;
+    background-color: white;
 }
 
 .navbar-custom .nav > li > a,
 .navbar-custom .nav .open > a {
     line-height: 28px;
     background-color: transparent;
-    color: #337ab7;
+    color: white;
 }
 
 .navbar-custom .nav > li > a:hover,
@@ -219,7 +219,7 @@ footer a:hover {
 .navbar-custom .nav .open > a:hover,
 .navbar-custom .nav .open > a:focus {
     background-color: transparent;
-    color: #337ab7;
+    color: white;
     text-decoration: none;
     opacity: 0.85;
 }

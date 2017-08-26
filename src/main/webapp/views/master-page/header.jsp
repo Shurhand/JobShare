@@ -26,7 +26,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="title" href="/"> <img src="images/Logo.png" height="45px"/></a>
+                    <a class="title" href="/"> <img src="images/logoSinFondo.png" height="50px"/></a>
                 </div>
                 <ul class="nav navbar-nav navbar-left ">
                     <security:authorize access="hasAuthority('USUARIO')">
