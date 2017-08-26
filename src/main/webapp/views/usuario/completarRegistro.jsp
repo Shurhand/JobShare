@@ -20,7 +20,7 @@
                         </c:forEach>
                     </div>
                 </c:if>
-                <form:form action="usuario/registro.do" modelAttribute="googleForm" acceptCharset="UTF-8">
+                <form:form action="usuario/registroGoogle.do" modelAttribute="googleForm" acceptCharset="UTF-8">
                     <form:hidden path="payload"/>
                     <form:hidden path="idTokenString"/>
 

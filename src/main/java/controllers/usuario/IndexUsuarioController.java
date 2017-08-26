@@ -227,7 +227,7 @@ public class IndexUsuarioController extends AbstractController {
    }
    
    @PostMapping("/googleToken")
-   public String googleLogin(@RequestParam String idTokenString) throws GeneralSecurityException, IOException {
+   public ModelAndView googleLogin(@RequestParam String idTokenString) throws GeneralSecurityException, IOException {
       ModelAndView res = null;
       GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory).setAudience(Collections.singletonList("48702837365-ji2jahi3jk0c1ug8472ri0ljesoc461h.apps.googleusercontent.com")).build();
       
@@ -240,8 +240,11 @@ public class IndexUsuarioController extends AbstractController {
             usuarioService.logUsuarioGoogleOn(usuario);
             res = new ModelAndView("redirect:/");
          } else {
-//            res = completarRegistroGoogleCreacion(payload, idTokenString);
-            res = new ModelAndView("redirect:/usuario/registroGoogle");
+            GoogleForm googleForm = new GoogleForm();
+            googleForm.setPayload(payload);
+            googleForm.setIdTokenString(idTokenString);
+            res = completarRegistroGoogleCreacion(googleForm);
+//            res = new ModelAndView("redirect:/usuario/registroGoogle.do");
 //            redireccion = "redirect:/usuario/completarRegistroGoogle";
 //            usuario = usuarioService.registrarUsuarioGoogle(payload, idTokenString);
 //            if(usuario != null){
@@ -251,16 +254,16 @@ public class IndexUsuarioController extends AbstractController {
       
          }
       }
-      return "redirect:/usuario/registroGoogle";
+      return res;
    }
    
    @GetMapping("/registroGoogle")
-   public ModelAndView completarRegistroGoogleCreacion(Payload payload, String idTokenString) {
+   public ModelAndView completarRegistroGoogleCreacion(GoogleForm googleForm) {
       ModelAndView res;
       System.out.println("ASDDSSADASDADDADA");
-      GoogleForm googleForm = new GoogleForm();
-      googleForm.setIdTokenString(idTokenString);
-      googleForm.setPayload(payload);
+//      googleForm.setIdTokenString(idTokenString);
+//      googleForm.setPayload(payload);
+//      res = crearEditarModeloGoogle(googleForm);
       res = crearEditarModeloGoogle(googleForm);
       
       return res;

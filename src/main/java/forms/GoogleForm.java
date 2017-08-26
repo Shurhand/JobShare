@@ -13,25 +13,13 @@ public class GoogleForm {
       super();
    }
    
-   private String nombre;
    private String telefono;
-   private String apellidos;
    private String DNI;
    private String cp;
    private String provincia;
    private String descripcion;
    private Payload payload;
    private String idTokenString;
-   
-   @NotBlank(message = "{error.notblank}")
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-   public String getNombre() {
-      return nombre;
-   }
-   
-   public void setNombre(String nombre) {
-      this.nombre = nombre;
-   }
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getTelefono() {
@@ -40,16 +28,6 @@ public class GoogleForm {
    
    public void setTelefono(String telefono) {
       this.telefono = telefono;
-   }
-   
-   @NotBlank(message = "{error.notblank}")
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-   public String getApellidos() {
-      return apellidos;
-   }
-   
-   public void setApellidos(String apellidos) {
-      this.apellidos = apellidos;
    }
    
    @NotBlank(message = "{error.notblank}")

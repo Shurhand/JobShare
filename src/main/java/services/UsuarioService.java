@@ -235,9 +235,9 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
          usuario = this.create();
          Cuenta cuenta = new Cuenta();
          Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
-         
-         usuario.setNombre(name);
-         usuario.setApellidos(givenName);
+   
+         usuario.setNombre(givenName);
+         usuario.setApellidos(familyName);
          usuario.setEmail(email);
          usuario.setFoto(pictureUrl);
          
