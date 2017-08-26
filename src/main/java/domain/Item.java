@@ -114,4 +114,9 @@ public class Item extends DomainEntity {
    public void setOfertas(Collection<Oferta> ofertas) {
       this.ofertas = ofertas;
    }
+   
+   @Transient
+   public boolean estaContratado() {
+      return this.getOfertas().stream().anyMatch(x -> x.getEstado().equals(Estado.CONTRATADA));
+   }
 }

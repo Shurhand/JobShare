@@ -502,7 +502,7 @@
         <property name="nombre" value="Alemán avanzado"/>
         <property name="descripcion" value="Se necesita alguien con dominio nativo de Alemán"/>
         <property name="presupuesto" value="80"/>
-        <property name="foto" value="https://cdn.pixabay.com/photo/2013/07/12/12/51/german-146401_960_720.png"/>
+        <property name="foto" value="https://www.mapsofworld.com/images/world-countries-flags/germany-flag.gif"/>
         <property name="estado" value="ACTIVA"/>
         <property name="peticion" ref="peticion3"/>
         <property name="ofertas">

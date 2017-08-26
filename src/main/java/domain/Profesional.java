@@ -52,9 +52,21 @@ public class Profesional extends Usuario {
       this.estudios = estudios;
    }
    
-   
    @Transient
    public Double getValoracionTotal() {
       return getOfertas().stream().filter(x -> x.getValoracion() != null).mapToDouble(x -> x.getValoracion().getPuntuacion()).average().orElse(0.0);
+   }
+   
+   @Transient
+   public int getIDOfertaDelItem(Collection<Oferta> ofertas) {
+      int id = 0;
+      for (Oferta o : ofertas) {
+         if (this.getOfertas().contains(o)) {
+            id = o.getId();
+            break;
+         }
+         
+      }
+      return id;
    }
 }

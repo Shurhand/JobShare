@@ -1,21 +1,22 @@
 package controllers.profesional;
 
 import controllers.AbstractController;
-import domain.Etiqueta;
-import domain.Oferta;
-import domain.Peticion;
-import domain.Profesional;
+import domain.*;
 import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import services.EtiquetaService;
+import services.ItemService;
 import services.OfertaService;
 import services.ProfesionalService;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.SortedSet;
 
 @Controller
@@ -28,13 +29,15 @@ public class OfertaProfesionalController extends AbstractController {
    private OfertaService ofertaService;
    @Autowired
    private EtiquetaService etiquetaService;
+   @Autowired
+   private ItemService itemService;
    
    @GetMapping("/misOfertas")
    public ModelAndView misOfertas() {
       ModelAndView res;
       Profesional profesional = profesionalService.findProfesional();
       BuscaForm buscaForm = new BuscaForm();
-      Collection<Peticion> peticiones = ofertaService.getPeticionesPorOfertasPorProfesional(profesional);
+      Collection<Peticion> peticiones = ofertaService.getPeticionesPorOfertasActivasPorProfesional(profesional);
       
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
@@ -72,12 +75,10 @@ public class OfertaProfesionalController extends AbstractController {
 //      Collection<Oferta> ofertas = ofertaService.getMisofertasBuscadas(buscaForm);
 //      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
 //
-//      String action = "oferta/profesional/buscarMisofertas.do";
-//
-//      res = new ModelAndView("oferta/profesional/buscar");
+//         res = new ModelAndView("oferta/profesional/misOfertas");
 //      res.addObject("ofertas", ofertas);
 //      res.addObject("todasEtiquetas", todasEtiquetas);
-//      res.addObject("action", action);
+//
 //
 //      return res;
 //   }
@@ -89,101 +90,93 @@ public class OfertaProfesionalController extends AbstractController {
 //      Collection<Oferta> ofertas = ofertaService.getMisofertasBuscadasCaducadas(buscaForm);
 //      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
 //
-//      String action = "oferta/profesional/buscarMisofertasCaducadas.do";
-//
-//      res = new ModelAndView("oferta/profesional/buscarCaducadas");
+//           res = new ModelAndView("oferta/profesional/misOfertasContratadas");
 //      res.addObject("ofertas", ofertas);
 //      res.addObject("todasEtiquetas", todasEtiquetas);
-//      res.addObject("action", action);
 //
 //
 //      return res;
 //   }
-   
-   
-   // =========== Edition =============
 
-//   @GetMapping("/crear")
-//   public ModelAndView crear() {
-//
-//      ModelAndView res;
-//
-//      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
-//
-//      Oferta oferta = ofertaService.create();
-//
-//      res = new ModelAndView("oferta/profesional/crear");
-//      res.addObject("oferta", oferta);
-//      res.addObject("todasEtiquetas", todasEtiquetas);
-//
-//      return res;
-//   }
-//
-//   @GetMapping("/editar")
-//   public ModelAndView editar(@RequestParam int ofertaID) {
-//
-//      ModelAndView result;
-//      Oferta oferta = ofertaService.findOne(ofertaID);
-//
-//      result = crearEditarModelo(oferta);
-//      return result;
-//   }
-//
-//   @PostMapping(value = "/editar", params = "save")
-//   public ModelAndView save(@Valid @ModelAttribute Oferta oferta, BindingResult binding) {
-//
-//      ModelAndView result = null;
-//      List<String> errores = new ArrayList<>();
-//      List<String> erroresCheck = new ArrayList<>();
-//      boolean hayError = false;
-//
-//      if (binding.hasErrors()) {
-//         result = crearEditarModelo(oferta);
-//         errores = ofertaService.getListaErrores(binding);
-//         result.addObject("errores", errores);
-//      } else {
-//         try {
-//            if (! ofertaService.checkFechaCaducidad(oferta.getFechaCaducidad())) {
-//               hayError = true;
-//               erroresCheck.add("oferta.error.fechaCaducidad");
-//               errores.add("fechaCaducidad");
-//            }
-//            if (! hayError) {
-//               ofertaService.save(oferta);
-//               result = new ModelAndView("redirect:/oferta/ver.do?ofertaID=" + oferta.getId());
-//            }
-//         } catch (Throwable oops) {
-//            result = crearEditarModelo(oferta);
-//         } finally {
-//            result.addObject("errores", errores);
-//            result.addObject("erroresCheck", erroresCheck);
-//         }
-//      }
-//      return result;
-//
-//   }
-//
-//   @GetMapping("/borrar")
-//   public ModelAndView delete(@RequestParam int ofertaID) {
-//      ModelAndView result;
-//
-//      Oferta oferta = ofertaService.findOne(ofertaID);
-//      ofertaService.delete(oferta);
-//
-//      result = new ModelAndView("redirect:/oferta/profesional/misOfertas.do");
-//
-//      return result;
-//   }
+
+//    =========== Edition =============
+   
+   @GetMapping("/crear")
+   public ModelAndView crear(@RequestParam int itemID) {
+      
+      ModelAndView res;
+      Item item = itemService.findOne(itemID);
+      Oferta oferta = ofertaService.create();
+      oferta.setItem(item);
+      
+      res = new ModelAndView("oferta/profesional/crear");
+      res.addObject("oferta", oferta);
+      res.addObject("item", item);
+      
+      return res;
+   }
+   
+   @GetMapping("/editar")
+   public ModelAndView editar(@RequestParam int ofertaID) {
+      
+      ModelAndView result;
+      Oferta oferta = ofertaService.findOne(ofertaID);
+      Item item = oferta.getItem();
+      
+      result = crearEditarModelo(oferta);
+      result.addObject("item", item);
+      return result;
+   }
+   
+   @PostMapping(value = "/editar", params = "save")
+   public ModelAndView save(@Valid @ModelAttribute Oferta oferta, BindingResult binding) {
+      
+      ModelAndView result = null;
+      List<String> errores = new ArrayList<>();
+      List<String> erroresCheck = new ArrayList<>();
+      boolean hayError = false;
+      
+      if (binding.hasErrors()) {
+         result = crearEditarModelo(oferta);
+         errores = ofertaService.getListaErrores(binding);
+         result.addObject("errores", errores);
+      } else {
+         try {
+            if (! hayError) {
+               ofertaService.save(oferta);
+               result = new ModelAndView("redirect:/peticion/ver.do?peticionID=" + oferta.getItem().getPeticion().getId());
+            }
+         } catch (Throwable oops) {
+            result = crearEditarModelo(oferta);
+         } finally {
+            result.addObject("errores", errores);
+            result.addObject("erroresCheck", erroresCheck);
+         }
+      }
+      return result;
+      
+   }
+   
+   @GetMapping("/borrar")
+   public ModelAndView delete(@RequestParam int ofertaID) {
+      ModelAndView result;
+      
+      Oferta oferta = ofertaService.findOne(ofertaID);
+      ofertaService.delete(oferta);
+      
+      result = new ModelAndView("redirect:/peticion/ver.do?peticionID=" + oferta.getItem().getPeticion().getId());
+      return result;
+   }
    
    private ModelAndView crearEditarModelo(Oferta oferta) {
       ModelAndView res;
-      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       String vista = oferta.getId() != 0 ? "oferta/profesional/editar" : "oferta/profesional/crear";
       
       res = new ModelAndView(vista);
       res.addObject("oferta", oferta);
-      res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("item", oferta.getItem());
+
       
       return res;
    }

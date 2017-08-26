@@ -19,7 +19,7 @@
 <br><br>
 <div class="container">
 
-    <form:form action="peticion/usuario/buscarMisPeticionesCaducadas.do" method="get" modelAttribute="buscaForm"
+    <form:form action="peticion/profesional/buscarMisOfertasCaducadas.do" method="get" modelAttribute="buscaForm"
                acceptCharset="UTF-8">
         <div class="row">
             <div class="col-md-3 search-filter" id="sidebar">
@@ -122,14 +122,10 @@
                               </button>
                             </span>
                         </div>
-                        <a href="/peticion/usuario/misPeticiones.do"> <spring:message
-                            code="peticiones.activas"/> </a>|
-                        <a href="/peticion/usuario/misPeticionesCaducadas.do"> <spring:message
-                            code="peticiones.caducadas"/> </a>
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <a href="/peticion/usuario/crear.do" class="btn btn-primary" role="button"> <spring:message
-                            code="peticion.nueva"/> </a>
+                        <a href="oferta/profesional/misOfertas.do"> <spring:message
+                            code="ofertas.activas"/> </a>|
+                        <a href="oferta/profesional/misOfertasContratadas.do"> <spring:message
+                            code="ofertas.contratadas"/> </a>
                     </div>
                 </div>
 

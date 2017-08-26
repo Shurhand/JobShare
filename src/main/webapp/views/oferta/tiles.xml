@@ -17,6 +17,15 @@
         <put-attribute name="body" value="/views/oferta/misOfertasContratadas.jsp"/>
     </definition>
 
+    <definition name="oferta/profesional/crear" extends="master.page">
+        <put-attribute name="title" value="New offer"/>
+        <put-attribute name="body" value="/views/oferta/editar.jsp"/>
+    </definition>
+
+    <definition name="oferta/profesional/editar" extends="master.page">
+        <put-attribute name="title" value="Edit offer"/>
+        <put-attribute name="body" value="/views/oferta/editar.jsp"/>
+    </definition>
 
 
 </tiles-definitions>

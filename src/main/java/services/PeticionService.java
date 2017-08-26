@@ -191,7 +191,7 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       return peticionesOrdenadas;
    }
    
-   private Comparator<Peticion> setComparators(BuscaForm buscaForm) {
+   public Comparator<Peticion> setComparators(BuscaForm buscaForm) {
       Comparator<Peticion> peticionComparator = Comparator.comparing(x -> x.getId());
       if (buscaForm.getOpcionRadio() != null) {
          if (buscaForm.getOpcionRadio().equals(1)) {

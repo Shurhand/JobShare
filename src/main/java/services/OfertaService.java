@@ -19,13 +19,20 @@ import java.util.Collection;
 public class OfertaService extends AbstractServiceImpl implements AbstractService<Oferta> {
    @Autowired
    private OfertaRepository ofertaRepository;
+   @Autowired
+   private ProfesionalService profesionalService;
+   @Autowired
+   private ActorService actorService;
    
    @Override
    public Oferta create() {
+      profesionalService.checkIfProfesional();
+      Profesional profesional = profesionalService.findProfesional();
       LocalDate fechaCreacion = LocalDate.now();
       Estado estado = Estado.ACTIVA;
       Oferta oferta = new Oferta();
-      
+   
+      oferta.setProfesional(profesional);
       oferta.setEstado(estado);
       oferta.setFechaCreacion(fechaCreacion);
       
@@ -34,26 +41,36 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
    
    @Override
    public void save(@NotNull Oferta oferta) {
+      profesionalService.checkIfProfesional();
+     
+
       ofertaRepository.save(oferta);
    }
    
    @Override
    public void saveAll(@NotNull Iterable<Oferta> ofertas) {
+      profesionalService.checkIfProfesional();
+
       ofertaRepository.save(ofertas);
    }
    
    @Override
    public Oferta saveWithReturn(@NotNull Oferta oferta) {
+      profesionalService.checkIfProfesional();
+
       return ofertaRepository.save(oferta);
    }
    
    @Override
    public void delete(@NotNull Oferta oferta) {
+      profesionalService.checkIfProfesional();
+
       ofertaRepository.delete(oferta);
    }
    
    @Override
    public void deleteAll(@NotNull Iterable<Oferta> ofertas) {
+      profesionalService.checkIfProfesional();
       ofertaRepository.delete(ofertas);
    }
    
@@ -91,4 +108,6 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
    public Collection<Peticion> getPeticionesPorOfertasActivasPorProfesional(Profesional profesional) {
       return ofertaRepository.getPeticionesPorOfertasActivasPorProfesional(profesional);
    }
+   
+   
 }

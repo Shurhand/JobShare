@@ -9,8 +9,6 @@
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<%@ taglib prefix='fn' uri='http://java.sun.com/jsp/jstl/functions' %>
-
 
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
@@ -136,84 +134,94 @@
                             <h3 class="text-center" ;><spring:message code="item.ofertasDisponibles"/>
                                 <security:authorize access="hasAuthority('PROFESIONAL')">
                                 <c:if test="${!profesionalAutenticado.peticiones.contains(peticion)}">
-                                <c:if test="${fn.(profesionalAutenticado.ofertas, item.ofertas)}">
-                                <a href="oferta/profesional/crear.do?itemID=${item.id}">
-                                    class="btn btn-info btn-sm" role="button"><spring:message
+                                <c:if
+                                    test="${profesionalAutenticado.tieneYaOfertas(profesionalAutenticado.ofertas, item.ofertas)}">
+                                <a href="oferta/profesional/crear.do?itemID=${item.id}"
+                                   class="btn btn-info btn-sm" role="button"><spring:message
                                     code="oferta.nuevaOferta"/></a></h3>
                             </c:if>
-                            <c:if test="${!Collections.disjoint(profesionalAutenticado.ofertas, item.ofertas)}">
-                                <a href="oferta/profesional/borrar.do?peticionID=${peticion.id}&itemID=${item.id}"
+                            <c:if
+                                test="${!profesionalAutenticado.tieneYaOfertas(profesionalAutenticado.ofertas, item.ofertas)}">
+                                <c:set value="${profesionalAutenticado.getIDOfertaDelItem(item.ofertas)}"
+                                       var="IDOferta"/>
+                                <a href="oferta/profesional/editar.do?ofertaID=${IDOferta}"
+                                   class="btn btn-info btn-sm" role="button"><spring:message
+                                    code="editar"/></a>
+                                <a href="oferta/profesional/borrar.do?ofertaID=${IDOferta}"
                                    class="btn btn-danger btn-sm" role="button"><spring:message
-                                    code="borrar"/></a>
-                                <a href="oferta/profesional/editar.do?ofertaID=${oferta.id}">
-                                    class="btn btn-info btn-sm" role="button"><spring:message
-                                    code="editar"/></a></h3>
+                                    code="borrar"/></a></h3>
                             </c:if>
                             </c:if>
                             </security:authorize>
                             </h3>
                             <br>
                             <c:if test="${!item.ofertas.isEmpty()}">
-                                <c:forEach var="oferta" items="${item.ofertas}">
-                                    <div class="row">
-                                        <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
-                                            <c:if test="${oferta.profesional.foto != null}">
-                                                <a href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><img
-                                                    alt="" height="50px" width="50px"
-                                                    class="img-circle center-block"
-                                                    src="${oferta.profesional.foto}"></a>
-                                            </c:if>
-                                            <c:if test="${oferta.profesional.foto == null}">
+                                <c:if test="${!item.estaContratado()}">
+                                    <c:forEach var="oferta" items="${item.ofertas}">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
+                                                <c:if test="${oferta.profesional.foto != null}">
+                                                    <a href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><img
+                                                        alt="" height="50px" width="50px"
+                                                        class="img-circle center-block"
+                                                        src="${oferta.profesional.foto}"></a>
+                                                </c:if>
+                                                <c:if test="${oferta.profesional.foto == null}">
+                                                    <br>
+                                                    <h2><a
+                                                        href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><spring:message
+                                                        code="peticion.sinFoto"/></a></h2>
+                                                </c:if>
+                                                <c:if test="${!oferta.profesional.id.equals(actorAutenticado.id)}">
+                                                    <h6 style="margin: auto">${oferta.profesional.nombre}</h6>
+                                                </c:if>
+                                                <c:if test="${oferta.profesional.id.equals(actorAutenticado.id)}">
+                                                    <h6 style="margin: auto"><spring:message code="peticion.tu"/></h6>
+                                                </c:if>
+                                                <input value="${oferta.profesional.getValoracionTotal()}"
+                                                       class="rating-loading">
                                                 <br>
-                                                <h2><a
-                                                    href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><spring:message
-                                                    code="peticion.sinFoto"/></a></h2>
-                                            </c:if>
-                                            <c:if test="${!oferta.profesional.id.equals(actorAutenticado.id)}">
-                                                <h6 style="margin: auto">${oferta.profesional.nombre}</h6>
-                                            </c:if>
-                                            <c:if test="${oferta.profesional.id.equals(actorAutenticado.id)}">
-                                                <h6 style="margin: auto"><spring:message code="peticion.tu"/></h6>
-                                            </c:if>
-                                            <input value="${oferta.profesional.getValoracionTotal()}"
-                                                   class="rating-loading">
-                                            <br>
-                                        </div>
-                                        <div class="col-xs-2 col-md-2">
-                                            <br>
-                                            <c:set var="precioString" value="${String.valueOf(oferta.precio)}"/>
-                                            <c:if test="${precioString.endsWith('0')}">
-                                                <c:set
-                                                    value="${precioString.substring(0, precioString.length() - 2)}"
-                                                    var="precio"/>
-                                            </c:if>
-                                            <c:if test="${!precioString.endsWith('0')}">
-                                                <c:set value="${oferta.precio}" var="precio"/>
-                                            </c:if>
-                                            <h4 style="font-size: 2rem; ">${precio} €</h4>
-                                        </div>
-
-                                        <div class="col-xs-6 col-md-6">
-                                            <br>
-                                            <div class="justificar-texto">
-                                                <h5>${oferta.comentario}</h5>
                                             </div>
-                                        </div>
-
-                                        <div class="col-xs-2 col-md-2">
-                                            <br>
-                                            <spring:message code="item.marcarOferta"/>
-                                            <div class="">
-                                                    <%--<form action="pago/usuario/conjunto.do" method="post">--%>
-                                                    <%--<input type="radio" id="radioOferta${oferta.id}"/>--%>
-
-                                                    <%--</form>--%>
+                                            <div class="col-xs-2 col-md-2">
+                                                <br>
+                                                <c:set var="precioString" value="${String.valueOf(oferta.precio)}"/>
+                                                <c:if test="${precioString.endsWith('0')}">
+                                                    <c:set
+                                                        value="${precioString.substring(0, precioString.length() - 2)}"
+                                                        var="precio"/>
+                                                </c:if>
+                                                <c:if test="${!precioString.endsWith('0')}">
+                                                    <c:set value="${oferta.precio}" var="precio"/>
+                                                </c:if>
+                                                <h4 style="font-size: 2rem; ">${precio} €</h4>
                                             </div>
+
+                                            <div class="col-xs-6 col-md-6">
+                                                <br>
+                                                <div class="justificar-texto">
+                                                    <h5>${oferta.comentario}</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-2 col-md-2">
+                                                <br>
+                                                <spring:message code="item.marcarOferta"/>
+                                                <div class="">
+                                                        <%--<form action="pago/usuario/conjunto.do" method="post">--%>
+                                                        <%--<input type="radio" id="radioOferta${oferta.id}"/>--%>
+
+                                                        <%--</form>--%>
+                                                </div>
+                                            </div>
+
                                         </div>
 
-                                    </div>
-
-                                </c:forEach>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${item.estaContratado()}">
+                                    <p>
+                                    <h4 style="text-align: center"><spring:message code="item.itemContratado"/></h4></p>
+                                </c:if>
                             </c:if>
                             <c:if test="${item.ofertas.isEmpty()}">
                                 <p>

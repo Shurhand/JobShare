@@ -61,13 +61,12 @@ public class PeticionUsuarioController extends AbstractController {
       Collection<Peticion> peticiones = peticionService.getMisPeticionesBuscadas(buscaForm);
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
    
-      String action = "peticion/usuario/buscarMisPeticiones.do";
-      
+   
       res = new ModelAndView("peticion/usuario/buscar");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
-      res.addObject("action", action);
-      
+   
+   
       return res;
    }
    
@@ -78,14 +77,12 @@ public class PeticionUsuarioController extends AbstractController {
       Collection<Peticion> peticiones = peticionService.getMisPeticionesBuscadasCaducadas(buscaForm);
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
    
-      String action = "peticion/usuario/buscarMisPeticionesCaducadas.do";
    
       res = new ModelAndView("peticion/usuario/buscarCaducadas");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
-      res.addObject("action", action);
-      
-      
+   
+   
       return res;
    }
    

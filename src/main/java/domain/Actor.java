@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -137,4 +139,12 @@ public class Actor extends DomainEntity {
    public void setCuenta(Cuenta cuenta) {
       this.cuenta = cuenta;
    }
+   
+   @Transient
+   public boolean tieneYaOfertas(Collection<Oferta> ofertasPropias, Collection<Oferta> ofertasAComparar) {
+      return Collections.disjoint(ofertasPropias, ofertasAComparar);
+      
+   }
+   
+
 }
