@@ -14,10 +14,7 @@ import services.OfertaService;
 import services.ProfesionalService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.SortedSet;
+import java.util.*;
 
 @Controller
 @RequestMapping("/oferta/profesional")
@@ -37,7 +34,7 @@ public class OfertaProfesionalController extends AbstractController {
       ModelAndView res;
       Profesional profesional = profesionalService.findProfesional();
       BuscaForm buscaForm = new BuscaForm();
-      Collection<Peticion> peticiones = ofertaService.getPeticionesPorOfertasActivasPorProfesional(profesional);
+      Set<Peticion> peticiones = ofertaService.getPeticionesPorOfertasActivasPorProfesional();
       
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
@@ -55,7 +52,7 @@ public class OfertaProfesionalController extends AbstractController {
       ModelAndView res;
       Profesional profesional = profesionalService.findProfesional();
       BuscaForm buscaForm = new BuscaForm();
-      Collection<Peticion> peticiones = ofertaService.getPeticionesPorOfertasContratadasPorProfesional(profesional);
+      Set<Peticion> peticiones = ofertaService.getPeticionesPorOfertasContratadasPorProfesional();
       
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
@@ -67,43 +64,43 @@ public class OfertaProfesionalController extends AbstractController {
       
       return res;
    }
-
-//   @GetMapping("/buscarMisofertas")
-//   public ModelAndView buscarMisofertas(@Valid @ModelAttribute BuscaForm buscaForm) {
-//      ModelAndView res;
-//
-//      Collection<Oferta> ofertas = ofertaService.getMisofertasBuscadas(buscaForm);
-//      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
-//
-//         res = new ModelAndView("oferta/profesional/misOfertas");
-//      res.addObject("ofertas", ofertas);
-//      res.addObject("todasEtiquetas", todasEtiquetas);
-//
-//
-//      return res;
-//   }
-//
-//   @GetMapping("/buscarMisofertasCaducadas")
-//   public ModelAndView buscarMisofertasCaducadas(@Valid @ModelAttribute BuscaForm buscaForm) {
-//      ModelAndView res;
-//
-//      Collection<Oferta> ofertas = ofertaService.getMisofertasBuscadasCaducadas(buscaForm);
-//      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
-//
-//           res = new ModelAndView("oferta/profesional/misOfertasContratadas");
-//      res.addObject("ofertas", ofertas);
-//      res.addObject("todasEtiquetas", todasEtiquetas);
-//
-//
-//      return res;
-//   }
+   
+   @GetMapping("/buscarMisOfertas")
+   public ModelAndView buscarMisofertas(@Valid @ModelAttribute BuscaForm buscaForm) {
+      ModelAndView res;
+      
+      Collection<Peticion> ofertas = ofertaService.getMisOfertasActivas(buscaForm);
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+      
+      res = new ModelAndView("oferta/profesional/misOfertas");
+      res.addObject("peticiones", ofertas);
+      res.addObject("todasEtiquetas", todasEtiquetas);
+      
+      
+      return res;
+   }
+   
+   @GetMapping("/buscarMisOfertasContratadas")
+   public ModelAndView buscarMisofertasContratadas(@Valid @ModelAttribute BuscaForm buscaForm) {
+      ModelAndView res;
+      
+      Collection<Peticion> ofertas = ofertaService.getMisOfertasContratadas(buscaForm);
+      SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+      
+      res = new ModelAndView("oferta/profesional/misOfertasContratadas");
+      res.addObject("peticiones", ofertas);
+      res.addObject("todasEtiquetas", todasEtiquetas);
+      
+      
+      return res;
+   }
 
 
 //    =========== Edition =============
-   
+
    @GetMapping("/crear")
    public ModelAndView crear(@RequestParam int itemID) {
-      
+   
       ModelAndView res;
       Item item = itemService.findOne(itemID);
       Oferta oferta = ofertaService.create();
@@ -112,7 +109,7 @@ public class OfertaProfesionalController extends AbstractController {
       res = new ModelAndView("oferta/profesional/crear");
       res.addObject("oferta", oferta);
       res.addObject("item", item);
-      
+   
       return res;
    }
    

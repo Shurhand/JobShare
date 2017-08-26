@@ -8,24 +8,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Repository
 public interface OfertaRepository extends JpaRepository<Oferta, Integer> {
    @Query("select o from Oferta o where o.profesional = ?1")
-   Collection<Oferta> getOfertasPorProfesional(Profesional u);
+   Collection<Oferta> getOfertasPorProfesional(Profesional profesional);
    
    @Query("select o from Oferta o where o.profesional = ?1 and o.estado = 'CONTRATADA'")
-   Collection<Oferta> getOfertasContratadasPorProfesional(Profesional u);
+   Collection<Oferta> getOfertasContratadasPorProfesional(Profesional profesional);
    
    @Query("select o from Oferta o where o.profesional = ?1 and o.estado = 'ACTIVA'")
-   Collection<Oferta> getOfertasActivasPorProfesional(Profesional u);
+   Collection<Oferta> getOfertasActivasPorProfesional(Profesional profesional);
    
    @Query("select o.item.peticion from Oferta o where o.profesional = ?1")
-   Collection<Peticion> getPeticionesPorOfertasPorProfesional(Profesional u);
+   Set<Peticion> getPeticionesPorOfertasPorProfesional(Profesional profesional);
    
    @Query("select o.item.peticion from Oferta o where o.profesional = ?1 and o.estado = 'CONTRATADA'")
-   Collection<Peticion> getPeticionesPorOfertasContratadasPorProfesional(Profesional u);
+   Set<Peticion> getPeticionesPorOfertasContratadasPorProfesional(Profesional profesional);
    
    @Query("select o.item.peticion from Oferta o where o.profesional = ?1 and o.estado = 'ACTIVA'")
-   Collection<Peticion> getPeticionesPorOfertasActivasPorProfesional(Profesional u);
+   Set<Peticion> getPeticionesPorOfertasActivasPorProfesional(Profesional profesional);
 }

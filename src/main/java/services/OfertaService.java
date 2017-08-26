@@ -4,6 +4,7 @@ import domain.Estado;
 import domain.Oferta;
 import domain.Peticion;
 import domain.Profesional;
+import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.OfertaRepository;
@@ -12,7 +13,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.*;
 
 @Service
 @Transactional
@@ -22,7 +23,7 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
    @Autowired
    private ProfesionalService profesionalService;
    @Autowired
-   private ActorService actorService;
+   private PeticionService peticionService;
    
    @Override
    public Oferta create() {
@@ -97,17 +98,52 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
       return ofertaRepository.getOfertasActivasPorProfesional(profesional);
    }
    
-   public Collection<Peticion> getPeticionesPorOfertasPorProfesional(Profesional profesional) {
+   public Set<Peticion> getPeticionesPorOfertasPorProfesional(Profesional profesional) {
       return ofertaRepository.getPeticionesPorOfertasPorProfesional(profesional);
    }
    
-   public Collection<Peticion> getPeticionesPorOfertasContratadasPorProfesional(Profesional profesional) {
-      return ofertaRepository.getPeticionesPorOfertasContratadasPorProfesional(profesional);
+   public Set<Peticion> getPeticionesPorOfertasContratadasPorProfesional() {
+      
+      Set<Peticion> res = new HashSet<>();
+      for (Oferta o : findAll()) {
+         if (o.getProfesional().equals(profesionalService.findProfesional()) && o.getEstado().equals(Estado.CONTRATADA)) {
+            res.add(o.getItem().getPeticion());
+         }
+      }
+      return res;
    }
    
-   public Collection<Peticion> getPeticionesPorOfertasActivasPorProfesional(Profesional profesional) {
-      return ofertaRepository.getPeticionesPorOfertasActivasPorProfesional(profesional);
+   public Set<Peticion> getPeticionesPorOfertasActivasPorProfesional() {
+      Set<Peticion> res = new HashSet<>();
+      for (Oferta o : findAll()) {
+         if (o.getProfesional().equals(profesionalService.findProfesional()) && o.getEstado().equals(Estado.ACTIVA)) {
+            res.add(o.getItem().getPeticion());
+         }
+      }
+      return res;
    }
    
+   public Collection<Peticion> getMisOfertasActivas(BuscaForm buscaForm) {
+      Collection<Peticion> res = peticionService.resetPeticiones(buscaForm);
+      
+      Comparator<Peticion> peticionComparator = peticionService.setComparators(buscaForm);
+      
+      SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
+      peticionesOrdenadas.addAll(res);
+      peticionesOrdenadas.retainAll(getPeticionesPorOfertasActivasPorProfesional());
+      
+      return peticionesOrdenadas;
+   }
    
+   public Collection<Peticion> getMisOfertasContratadas(BuscaForm buscaForm) {
+      Collection<Peticion> res = peticionService.resetPeticiones(buscaForm);
+      
+      Comparator<Peticion> peticionComparator = peticionService.setComparators(buscaForm);
+      
+      SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
+      peticionesOrdenadas.addAll(res);
+      peticionesOrdenadas.retainAll(getPeticionesPorOfertasContratadasPorProfesional());
+      
+      return peticionesOrdenadas;
+   }
 }
