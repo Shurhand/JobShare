@@ -61,6 +61,9 @@
         <security:intercept-url pattern="/usuario/googleToken.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/usuario/registroGoogle.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 

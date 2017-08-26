@@ -10,4 +10,7 @@ import security.Cuenta;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
    @Query("select u from Usuario u where u.cuenta = ?1")
    Usuario findUsuario(Cuenta cuenta);
+   
+   @Query("select u from Usuario u where u.cuenta.username = ?1")
+   Usuario findUsuarioDeGoogle(String usuario);
 }

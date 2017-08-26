@@ -11,6 +11,11 @@
         <put-attribute name="body" value="/views/usuario/crear.jsp"/>
     </definition>
 
+    <definition name="usuario/createGoogle" extends="master.page">
+        <put-attribute name="title" value="Completar registro Google"/>
+        <put-attribute name="body" value="/views/usuario/completarRegistro.jsp"/>
+    </definition>
+
     <definition name="usuario/admin/listaUsuarios" extends="master.page">
         <put-attribute name="title" value="Lista usuarios"/>
         <put-attribute name="body" value="/views/usuario/lista.jsp"/>

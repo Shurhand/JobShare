@@ -1,9 +1,11 @@
 package services;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import domain.Actor;
 import domain.Pago;
 import domain.Peticion;
 import domain.Usuario;
+import forms.GoogleForm;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -196,13 +198,67 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       SecurityContextHolder.getContext().setAuthentication(authentication);
    }
    
-   private void logOFF() {
+   public void logOFF() {
       SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
+   }
+   
+   public void logUsuarioGoogleOn(Usuario u) {
+      Cuenta cuenta = (Cuenta) loginService.loadUserByUsername(u.getCuenta().getUsername());
+      Authentication authentication = new UsernamePasswordAuthenticationToken(cuenta, null, cuenta.getAuthorities());
+      SecurityContextHolder.getContext().setAuthentication(authentication);
    }
    
    public Collection<String> getListaProvincias() {
       return Arrays.asList("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
 
+   }
+   
+   public Usuario findUsuarioDeGoogle(String usuario) {
+      return usuarioRepository.findUsuarioDeGoogle(usuario);
+   }
+   
+   public Usuario registrarUsuarioGoogle(GoogleForm googleForm) {
+      Payload payload = googleForm.getPayload();
+      String idTokenString = googleForm.getIdTokenString();
+      Usuario usuario = null;
+      String userId = payload.getSubject();
+      String email = payload.getEmail();
+      boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+      String name = (String) payload.get("name");
+      String pictureUrl = (String) payload.get("picture");
+      String locale = (String) payload.get("locale");
+      String familyName = (String) payload.get("family_name");
+      String givenName = (String) payload.get("given_name");
+      
+      if (emailVerified) {
+         
+         usuario = this.create();
+         Cuenta cuenta = new Cuenta();
+         Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+         
+         usuario.setNombre(name);
+         usuario.setApellidos(givenName);
+         usuario.setEmail(email);
+         usuario.setFoto(pictureUrl);
+         
+         cuenta.setIsActivated(true);
+         cuenta.setUsername(userId);
+         String password = md5PassWordEncoder.encodePassword(idTokenString, null);
+         cuenta.setPassword(password);
+         
+         Collection<Autoridad> auths = new ArrayList<>();
+         Autoridad auth = new Autoridad();
+         auth.setAuthority("USUARIO");
+         auths.add(auth);
+         
+         cuenta.setAuthorities(auths);
+         
+         usuario.setCuenta(cuenta);
+         
+         usuario = this.saveWithReturn(usuario);
+         
+      }
+      return usuario;
    }
    
    

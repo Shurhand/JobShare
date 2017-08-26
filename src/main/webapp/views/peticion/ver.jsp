@@ -132,7 +132,18 @@
                             </div>
                             <hr>
                             <h3 class="text-center" ;><spring:message code="item.ofertasDisponibles"/>
+                                <c:if test="${item.estaContratado()}">
+                                    <c:if test="${!actorAutenticado.peticiones.contains(peticion)}">
+                                        <p><h4 style="text-align: center"><spring:message
+                                        code="item.itemContratado"/></h4></p>
+                                    </c:if>
+                                    <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
+                                        <p><h4 style="text-align: center"><spring:message
+                                        code="item.tuContrato"/></h4></p>
+                                    </c:if>
+                                </c:if>
                                 <security:authorize access="hasAuthority('PROFESIONAL')">
+                                <c:if test="${!item.estaContratado()}">
                                 <c:if test="${!profesionalAutenticado.peticiones.contains(peticion)}">
                                 <c:if
                                     test="${profesionalAutenticado.tieneYaOfertas(profesionalAutenticado.ofertas, item.ofertas)}">
@@ -152,11 +163,11 @@
                                     code="borrar"/></a></h3>
                             </c:if>
                             </c:if>
+                            </c:if>
                             </security:authorize>
                             </h3>
                             <br>
                             <c:if test="${!item.ofertas.isEmpty()}">
-                                <c:if test="${!item.estaContratado()}">
                                     <c:forEach var="oferta" items="${item.ofertas}">
                                         <div class="row">
                                             <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
@@ -217,11 +228,7 @@
                                         </div>
 
                                     </c:forEach>
-                                </c:if>
-                                <c:if test="${item.estaContratado()}">
-                                    <p>
-                                    <h4 style="text-align: center"><spring:message code="item.itemContratado"/></h4></p>
-                                </c:if>
+
                             </c:if>
                             <c:if test="${item.ofertas.isEmpty()}">
                                 <p>

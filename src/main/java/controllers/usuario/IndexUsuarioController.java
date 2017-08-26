@@ -7,6 +7,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import controllers.AbstractController;
 import domain.Usuario;
+import forms.GoogleForm;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -225,58 +226,82 @@ public class IndexUsuarioController extends AbstractController {
       
    }
    
-   @GetMapping(value = "/convertirse")
-   public ModelAndView convertirse() {
-      ModelAndView res;
-      usuarioService.convertirse();
-      
-      res = new ModelAndView("redirect:/");
-      return res;
-   }
-   
-   //
    @PostMapping("/googleToken")
    public String googleLogin(@RequestParam String idTokenString) throws GeneralSecurityException, IOException {
-      
+      ModelAndView res = null;
       GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), jacksonFactory).setAudience(Collections.singletonList("48702837365-ji2jahi3jk0c1ug8472ri0ljesoc461h.apps.googleusercontent.com")).build();
-      
       
       GoogleIdToken idToken = verifier.verify(idTokenString);
       if (idToken != null) {
          Payload payload = idToken.getPayload();
-         
-         // Print user identifier
-         String userId = payload.getSubject();
-         System.out.println("User ID: " + userId);
-         
-         // Get profile information from payload
-         String email = payload.getEmail();
-         boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-         String name = (String) payload.get("name");
-         String pictureUrl = (String) payload.get("picture");
-         String locale = (String) payload.get("locale");
-         String familyName = (String) payload.get("family_name");
-         String givenName = (String) payload.get("given_name");
-         
-         
-         // Use or store profile information
-         // ...
-         
-      } else {
-         System.out.println("Invalid ID token.");
+         Usuario usuario = usuarioService.findUsuarioDeGoogle(payload.getSubject().toString());
+   
+         if (usuario != null) {
+            usuarioService.logUsuarioGoogleOn(usuario);
+            res = new ModelAndView("redirect:/");
+         } else {
+//            res = completarRegistroGoogleCreacion(payload, idTokenString);
+            res = new ModelAndView("redirect:/usuario/registroGoogle");
+//            redireccion = "redirect:/usuario/completarRegistroGoogle";
+//            usuario = usuarioService.registrarUsuarioGoogle(payload, idTokenString);
+//            if(usuario != null){
+//               usuarioService.logUsuarioGoogleOn(usuario);
+//
+//            }
+      
+         }
       }
       return "redirect:/usuario/registroGoogle";
    }
-
-//   @PostMapping("/registroGoogle")
-//   public String doPost2(HttpServletRequest request, HttpServletResponse response) {
-//      System.out.println("He entrado");
-//      System.out.println("He entrado");
-//      System.out.println("He entrado");
-//      System.out.println("He entrado");
-//
-//      return "redirect:/usuario/registroGoogle";
-//   }
+   
+   @GetMapping("/registroGoogle")
+   public ModelAndView completarRegistroGoogleCreacion(Payload payload, String idTokenString) {
+      ModelAndView res;
+      System.out.println("ASDDSSADASDADDADA");
+      GoogleForm googleForm = new GoogleForm();
+      googleForm.setIdTokenString(idTokenString);
+      googleForm.setPayload(payload);
+      res = crearEditarModeloGoogle(googleForm);
+      
+      return res;
+   }
+   
+   @PostMapping(value = "/registroGoogle", params = "googleForm")
+   public ModelAndView completarRegistroGoogle(@Valid @ModelAttribute GoogleForm googleForm, BindingResult binding) {
+      System.out.println("ASDDSSADASDADDADA22222222222222222");
+      ModelAndView res = null;
+      List<String> errores = new ArrayList<>();
+      List<String> erroresCheck = new ArrayList<>();
+      boolean hayError = false;
+      
+      if (binding.hasErrors()) {
+         res = crearEditarModeloGoogle(googleForm);
+         errores = usuarioService.getListaErrores(binding);
+         res.addObject("errores", errores);
+      } else {
+         try {
+            if (actorService.findActorPorDNI(googleForm.getDNI()) != null) {
+               hayError = true;
+               erroresCheck.add("usuario.error.dniDuplicado");
+               errores.add("DNI");
+            }
+            if (! hayError) {
+               usuarioService.registrarUsuarioGoogle(googleForm);
+               res = new ModelAndView("redirect:/");
+            } else {
+               res = crearEditarModeloGoogle(googleForm);
+            }
+         } catch (Throwable oops) {
+            res = crearEditarModeloGoogle(googleForm);
+            erroresCheck.add("errorInesperado");
+         } finally {
+            res.addObject("errores", errores);
+            res.addObject("erroresCheck", erroresCheck);
+         }
+      }
+      return res;
+      
+   }
    
    
    // =========== Ancillary Methods ===========
@@ -297,7 +322,7 @@ public class IndexUsuarioController extends AbstractController {
    
    protected ModelAndView crearEditarModelo(UsuarioForm usuarioForm) {
       ModelAndView res;
-   
+      
       Collection<String> provincias = usuarioService.getListaProvincias();
       Credenciales credenciales = new Credenciales();
       
@@ -305,6 +330,16 @@ public class IndexUsuarioController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      
+      return res;
+   }
+   
+   protected ModelAndView crearEditarModeloGoogle(GoogleForm googleForm) {
+      ModelAndView res;
+      
+      res = new ModelAndView("usuario/createGoogle");
+      res.addObject("googleForm", googleForm);
+      
       
       return res;
    }
