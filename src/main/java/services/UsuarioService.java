@@ -1,10 +1,6 @@
 package services;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import domain.Actor;
-import domain.Pago;
-import domain.Peticion;
-import domain.Usuario;
+import domain.*;
 import forms.GoogleForm;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +35,12 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    @Override
    public Usuario create() {
       Collection<Peticion> peticiones = new ArrayList<>();
+      Collection<Valoracion> valoraciones = new ArrayList<>();
       Collection<Pago> pagos = new ArrayList<>();
       Usuario usuario = new Usuario();
       
       usuario.setPagos(pagos);
+      usuario.setValoraciones(valoraciones);
       usuario.setPeticiones(peticiones);
       
       return usuario;
@@ -218,17 +216,15 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
    }
    
    public Usuario registrarUsuarioGoogle(GoogleForm googleForm) {
-      Payload payload = googleForm.getPayload();
+   
       String idTokenString = googleForm.getIdTokenString();
       Usuario usuario = null;
-      String userId = payload.getSubject();
-      String email = payload.getEmail();
-      boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-      String name = (String) payload.get("name");
-      String pictureUrl = (String) payload.get("picture");
-      String locale = (String) payload.get("locale");
-      String familyName = (String) payload.get("family_name");
-      String givenName = (String) payload.get("given_name");
+      String userId = googleForm.getSubject();
+      String email = googleForm.getEmail();
+      boolean emailVerified = googleForm.isEmailVerified();
+      String pictureUrl = googleForm.getPictureUrl();
+      String familyName = googleForm.getFamilyName();
+      String givenName = googleForm.getGivenName();
       
       if (emailVerified) {
          
@@ -240,6 +236,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
          usuario.setApellidos(familyName);
          usuario.setEmail(email);
          usuario.setFoto(pictureUrl);
+         usuario.setDNI(googleForm.getDNI());
          
          cuenta.setIsActivated(true);
          cuenta.setUsername(userId);

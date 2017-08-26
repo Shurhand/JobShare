@@ -74,7 +74,7 @@ body {
 
 /* Botón de Google
 ------------------------------------------------------------*/
-#myGoogle {
+.botonGoogle {
     display: inline-block;
     white-space: nowrap;
     /*min-height: 100%;*/

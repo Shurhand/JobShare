@@ -109,5 +109,10 @@ public class Cuenta extends DomainEntity implements UserDetails {
    public void setIsActivated(boolean isActivated) {
       this.isActivated = isActivated;
    }
+
+//   @Transient
+//   public String nombreUsuarioFormateado(){
+//
+//   }
    
 }

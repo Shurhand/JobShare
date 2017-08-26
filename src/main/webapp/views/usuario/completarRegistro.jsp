@@ -21,7 +21,12 @@
                     </div>
                 </c:if>
                 <form:form action="usuario/registroGoogle.do" modelAttribute="googleForm" acceptCharset="UTF-8">
-                    <form:hidden path="payload"/>
+                    <form:hidden path="subject"/>
+                    <form:hidden path="givenName"/>
+                    <form:hidden path="familyName"/>
+                    <form:hidden path="pictureUrl"/>
+                    <form:hidden path="email"/>
+                    <form:hidden path="emailVerified"/>
                     <form:hidden path="idTokenString"/>
 
                     <div

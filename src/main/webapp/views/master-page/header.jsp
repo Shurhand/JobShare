@@ -151,7 +151,8 @@
                                         </li>
                                     </security:authorize>
                                     <li>
-                                        <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                        <a href="logout" onclick="signOut()"><i class="fa fa-sign-out"
+                                                                                aria-hidden="true"></i>
                                             <spring:message code="master.page.salir"/></a>
                                     </li>
                                 </ul>
@@ -164,13 +165,11 @@
         </div>
     </div>
 </header>
-<a href="#" onclick="signOut();">SALIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIR</a>
 
 <script type="text/javascript">
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-            console.log('User signed out.');
         });
     }
 </script>

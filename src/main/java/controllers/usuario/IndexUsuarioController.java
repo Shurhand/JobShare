@@ -147,6 +147,15 @@ public class IndexUsuarioController extends AbstractController {
       
    }
    
+   @GetMapping(value = "/convertirse")
+   public ModelAndView convertirse() {
+      ModelAndView res;
+      usuarioService.convertirse();
+      
+      res = new ModelAndView("redirect:/");
+      return res;
+   }
+   
    // =========== Creación ===========
    
    @GetMapping("/registro")
@@ -240,8 +249,17 @@ public class IndexUsuarioController extends AbstractController {
             usuarioService.logUsuarioGoogleOn(usuario);
             res = new ModelAndView("redirect:/");
          } else {
+            String pictureUrl = (String) payload.get("picture");
+            String familyName = (String) payload.get("family_name");
+            String givenName = (String) payload.get("given_name");
+            
             GoogleForm googleForm = new GoogleForm();
-            googleForm.setPayload(payload);
+            googleForm.setSubject(payload.getSubject());
+            googleForm.setEmailVerified(payload.getEmailVerified());
+            googleForm.setEmail(payload.getEmail());
+            googleForm.setPictureUrl(pictureUrl);
+            googleForm.setFamilyName(familyName);
+            googleForm.setGivenName(givenName);
             googleForm.setIdTokenString(idTokenString);
             res = completarRegistroGoogleCreacion(googleForm);
 //            res = new ModelAndView("redirect:/usuario/registroGoogle.do");
@@ -273,6 +291,7 @@ public class IndexUsuarioController extends AbstractController {
    public ModelAndView completarRegistroGoogle(@Valid @ModelAttribute GoogleForm googleForm, BindingResult binding) {
       System.out.println("ASDDSSADASDADDADA22222222222222222");
       ModelAndView res = null;
+      Usuario usuario;
       List<String> errores = new ArrayList<>();
       List<String> erroresCheck = new ArrayList<>();
       boolean hayError = false;
@@ -289,8 +308,11 @@ public class IndexUsuarioController extends AbstractController {
                errores.add("DNI");
             }
             if (! hayError) {
-               usuarioService.registrarUsuarioGoogle(googleForm);
-               res = new ModelAndView("redirect:/");
+               usuario = usuarioService.registrarUsuarioGoogle(googleForm);
+               if (usuario != null) {
+                  usuarioService.logUsuarioGoogleOn(usuario);
+                  res = new ModelAndView("redirect:/");
+               }
             } else {
                res = crearEditarModeloGoogle(googleForm);
             }

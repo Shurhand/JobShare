@@ -23,6 +23,10 @@
     //    }
 
     function onSignIn(googleUser) {
+        window.onbeforeunload = function (e) {
+            gapi.auth2.getAuthInstance().signOut();
+        };
+
         var profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
@@ -51,7 +55,7 @@
             <div class="well">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <div class="g-signin2 botonGoogle" data-onsuccess="onSignIn"></div>
                         <br><br>
                         <c:if test="${showError == true}">
                             <div class="alert alert-danger alert-dismissable alert-link oaerror danger-conjunto">
@@ -117,53 +121,3 @@
         form.submit();
     }
 </script>
-
-<%--<div class="container"/>--%>
-<%--<div class="row">--%>
-<%--<div class="col-md-6 col-md-offset-3 ">--%>
-<%--<form:form action="login" modelAttribute="credenciales">--%>
-<%--<div class="input-group">--%>
-<%--<span class="input-group-addon"><i--%>
-<%--class="fa fa-user fa"--%>
-<%--aria-hidden="true"></i></span>--%>
-<%--<form:input placeholder="Usuario" path="username"--%>
-<%--class="form-control"/>--%>
-<%--<form:errors class="error2" path="username"/>--%>
-<%--</div>--%>
-<%--<div class="input-group">--%>
-<%--<span class="input-group-addon"><i--%>
-<%--class="fa fa-lock fa"--%>
-<%--aria-hidden="true"></i></span>--%>
-<%--<form:password placeholder="Contraseña"--%>
-<%--path="password"--%>
-<%--class="form-control"/>--%>
-<%--<form:errors class="error2" path="password"/>--%>
-<%--</div>--%>
-<%--<div class="form-group">--%>
-<%--<jstl:if test="${showError == true}">--%>
-<%--<div class="error2">--%>
-<%--<spring:message--%>
-<%--code="security.login.failed"/>--%>
-<%--</div>--%>
-<%--</jstl:if>--%>
-<%--</div>--%>
-<%--<div id="remember" class="checkbox">--%>
-<%--<label>--%>
-<%--<input type="checkbox" name="remember-me">--%>
-<%--<spring:message code="master.page.rememberMe"/>--%>
-<%--</label>--%>
-<%--</div>--%>
-<%--<div class="form-group">--%>
-<%--<input type="submit"--%>
-<%--class="btn btn-primary btn-block"--%>
-<%--style="margin-bottom: 2%"--%>
-<%--value="<spring:message code="master.page.login" />"/>--%>
-<%--</div>--%>
-<%--<a href="#" class="forgot-password">--%>
-<%--<spring:message--%>
-<%--code="master.page.passwordOlvidado"/>--%>
-<%--</a>--%>
-<%--</form:form>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>

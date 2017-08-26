@@ -1,9 +1,6 @@
 package forms;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -18,8 +15,15 @@ public class GoogleForm {
    private String cp;
    private String provincia;
    private String descripcion;
-   private Payload payload;
    private String idTokenString;
+   // Del payload
+   private boolean emailVerified;
+   private String email;
+   private String subject;
+   private String pictureUrl;
+   private String givenName;
+   private String familyName;
+   
    
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getTelefono() {
@@ -70,14 +74,6 @@ public class GoogleForm {
       this.descripcion = descripcion;
    }
    
-   @NotNull
-   public Payload getPayload() {
-      return payload;
-   }
-   
-   public void setPayload(Payload payload) {
-      this.payload = payload;
-   }
    
    @NotNull
    public String getIdTokenString() {
@@ -86,5 +82,65 @@ public class GoogleForm {
    
    public void setIdTokenString(String idTokenString) {
       this.idTokenString = idTokenString;
+   }
+   
+   public boolean isEmailVerified() {
+      return emailVerified;
+   }
+   
+   public void setEmailVerified(boolean emailVerified) {
+      this.emailVerified = emailVerified;
+   }
+   
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @Email
+   public String getEmail() {
+      return email;
+   }
+   
+   public void setEmail(String email) {
+      this.email = email;
+   }
+   
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   public String getSubject() {
+      return subject;
+   }
+   
+   public void setSubject(String subject) {
+      this.subject = subject;
+   }
+   
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   @URL
+   public String getPictureUrl() {
+      return pictureUrl;
+   }
+   
+   public void setPictureUrl(String pictureUrl) {
+      this.pictureUrl = pictureUrl;
+   }
+   
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   public String getGivenName() {
+      return givenName;
+   }
+   
+   public void setGivenName(String givenName) {
+      this.givenName = givenName;
+   }
+   
+   @NotBlank(message = "{error.notblank}")
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   public String getFamilyName() {
+      return familyName;
+   }
+   
+   public void setFamilyName(String familyName) {
+      this.familyName = familyName;
    }
 }

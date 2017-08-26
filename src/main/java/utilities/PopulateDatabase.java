@@ -17,7 +17,7 @@ public class PopulateDatabase {
       databaseUtil = null;
       
       try {
-         System.out.printf("PopulateDatabase 1.3%n");
+         System.out.printf("PopulateDatabase Hibernate 5.0%n");
          System.out.printf("--------------------%n%n");
          
          System.out.printf("Initialising persistence context `%s'...%n", DatabaseConfig.PersistenceUnit);
