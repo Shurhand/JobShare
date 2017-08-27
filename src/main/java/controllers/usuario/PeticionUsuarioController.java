@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.ActorService;
 import services.EtiquetaService;
 import services.PeticionService;
 import services.UsuarioService;
@@ -35,6 +36,8 @@ public class PeticionUsuarioController extends AbstractController {
    private PeticionService peticionService;
    @Autowired
    private EtiquetaService etiquetaService;
+   @Autowired
+   private ActorService actorService;
    
    @GetMapping("/misPeticiones")
    public ModelAndView misPeticiones() {
@@ -50,6 +53,7 @@ public class PeticionUsuarioController extends AbstractController {
       res.addObject("buscaForm", buscaForm);
       res.addObject("usuario", usuario);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -65,6 +69,7 @@ public class PeticionUsuarioController extends AbstractController {
       res = new ModelAndView("peticion/usuario/buscar");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
    
    
       return res;
@@ -81,6 +86,7 @@ public class PeticionUsuarioController extends AbstractController {
       res = new ModelAndView("peticion/usuario/buscarCaducadas");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
    
    
       return res;
@@ -99,6 +105,7 @@ public class PeticionUsuarioController extends AbstractController {
       res.addObject("buscaForm", buscaForm);
       res.addObject("usuario", usuario);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -117,6 +124,7 @@ public class PeticionUsuarioController extends AbstractController {
       res = new ModelAndView("peticion/usuario/crear");
       res.addObject("peticion", peticion);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
    
       return res;
    }
@@ -188,6 +196,7 @@ public class PeticionUsuarioController extends AbstractController {
       res.addObject("peticion", peticion);
       res.addObject("credenciales", credenciales);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       return res;
    }

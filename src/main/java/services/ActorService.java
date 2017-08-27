@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
 import repositories.ActorRepository;
 import security.Autoridad;
 import security.Cuenta;
@@ -194,5 +195,12 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
    
    public Collection<String> getAllEmails() {
       return actorRepository.getAllEmails();
+   }
+   
+   public void addNombre(ModelAndView vista) {
+      if (! isAnonimo()) {
+         Actor actorAutenticado = findPrincipal();
+         vista.addObject("actorAutenticado", actorAutenticado);
+      }
    }
 }

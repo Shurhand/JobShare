@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import services.EtiquetaService;
-import services.ItemService;
-import services.OfertaService;
-import services.ProfesionalService;
+import services.*;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -28,6 +25,8 @@ public class OfertaProfesionalController extends AbstractController {
    private EtiquetaService etiquetaService;
    @Autowired
    private ItemService itemService;
+   @Autowired
+   private ActorService actorService;
    
    @GetMapping("/misOfertas")
    public ModelAndView misOfertas() {
@@ -43,6 +42,7 @@ public class OfertaProfesionalController extends AbstractController {
       res.addObject("buscaForm", buscaForm);
       res.addObject("profesional", profesional);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -61,6 +61,7 @@ public class OfertaProfesionalController extends AbstractController {
       res.addObject("buscaForm", buscaForm);
       res.addObject("profesional", profesional);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -75,6 +76,7 @@ public class OfertaProfesionalController extends AbstractController {
       res = new ModelAndView("oferta/profesional/misOfertas");
       res.addObject("peticiones", ofertas);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       
       return res;
@@ -90,6 +92,7 @@ public class OfertaProfesionalController extends AbstractController {
       res = new ModelAndView("oferta/profesional/misOfertasContratadas");
       res.addObject("peticiones", ofertas);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      actorService.addNombre(res);
       
       
       return res;
@@ -109,6 +112,7 @@ public class OfertaProfesionalController extends AbstractController {
       res = new ModelAndView("oferta/profesional/crear");
       res.addObject("oferta", oferta);
       res.addObject("item", item);
+      actorService.addNombre(res);
    
       return res;
    }
@@ -173,6 +177,7 @@ public class OfertaProfesionalController extends AbstractController {
       res = new ModelAndView(vista);
       res.addObject("oferta", oferta);
       res.addObject("item", oferta.getItem());
+      actorService.addNombre(res);
 
       
       return res;

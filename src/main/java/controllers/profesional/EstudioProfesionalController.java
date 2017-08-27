@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.ActorService;
 import services.EstudioService;
 
 import javax.validation.Valid;
@@ -19,7 +20,8 @@ import java.util.List;
 public class EstudioProfesionalController extends AbstractController {
    @Autowired
    private EstudioService estudioService;
-   
+   @Autowired
+   private ActorService actorService;
    // =========== Edition =============
    
    @GetMapping("/crear")
@@ -107,6 +109,7 @@ public class EstudioProfesionalController extends AbstractController {
       res = new ModelAndView(vista);
       res.addObject("estudio", estudio);
       res.addObject("credenciales", credenciales);
+      actorService.addNombre(res);
       
       return res;
    }

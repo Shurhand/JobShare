@@ -46,6 +46,7 @@ public class IndexAdminController extends AbstractController {
       res.addObject("admin", admin);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      actorService.addNombre(res);
       
       return res;
       
@@ -65,6 +66,7 @@ public class IndexAdminController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -151,7 +153,7 @@ public class IndexAdminController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
-   
+      actorService.addNombre(res);
    
       return res;
    }

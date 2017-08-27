@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.ActorService;
 import services.EtiquetaService;
 
 import java.util.Collection;
@@ -20,6 +21,8 @@ import java.util.Collection;
 public class EtiquetaAdminController extends AbstractController {
    @Autowired
    private EtiquetaService etiquetaService;
+   @Autowired
+   private ActorService actorService;
    
    @GetMapping("/activar")
    public ModelAndView activar(@RequestParam int etiquetaID) {
@@ -44,6 +47,7 @@ public class EtiquetaAdminController extends AbstractController {
       res = new ModelAndView("etiqueta/admin/lista");
       res.addObject("etiquetas", mapper.writeValueAsString(etiquetas));
       res.addObject("credenciales", credenciales);
+      actorService.addNombre(res);
       return res;
    }
 }

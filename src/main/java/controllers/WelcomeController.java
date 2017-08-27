@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
+import services.ActorService;
 import services.EtiquetaService;
 
 import javax.validation.Valid;
@@ -28,6 +29,8 @@ public class WelcomeController extends AbstractController {
    private LoginService loginService;
    @Autowired
    private EtiquetaService etiquetaService;
+   @Autowired
+   private ActorService actorService;
    // Constructors -----------------------------------------------------------
    
    public WelcomeController() {
@@ -57,6 +60,7 @@ public class WelcomeController extends AbstractController {
       result.addObject("moment", moment);
       result.addObject("buscaForm", buscaForm);
       result.addObject("showError", showError);
+      actorService.addNombre(result);
       
       return result;
    }
@@ -72,6 +76,7 @@ public class WelcomeController extends AbstractController {
       
       result = new ModelAndView("welcome/index/about");
       result.addObject("moment", moment);
+      actorService.addNombre(result);
       
       
       return result;
@@ -88,39 +93,10 @@ public class WelcomeController extends AbstractController {
       
       result = new ModelAndView("welcome/index/tips");
       result.addObject("moment", moment);
+      actorService.addNombre(result);
       
       
       return result;
    }
    
-   
 }
-
-//	@RequestMapping("/index")
-//	public ModelAndView login(
-//			@Valid @ModelAttribute Credenciales credenciales,
-//			BindingResult bindingResult,
-//			@RequestParam(required = false) boolean showError) {
-//		Assert.notNull(credenciales);
-//		Assert.notNull(bindingResult);
-//		
-//		ModelAndView result;
-//
-//		result = new ModelAndView("security/login");
-//		result.addObject("credenciales", credenciales);
-//		result.addObject("showError", showError);
-//
-//		return result;
-//	}
-//	
-//	// LoginFailure -----------------------------------------------------------
-//
-//	@RequestMapping("/loginFailure")
-//	public ModelAndView failure() {
-//		ModelAndView result;
-//
-//		result = new ModelAndView("redirect:login.do?showError=true");
-//
-//		return result;
-//	}
-//}

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import services.ActorService;
 import services.EtiquetaService;
 
 import javax.validation.Valid;
@@ -21,6 +22,8 @@ import java.util.List;
 public class EtiquetaActorController extends AbstractController {
    @Autowired
    private EtiquetaService etiquetaService;
+   @Autowired
+   private ActorService actorService;
    
    @GetMapping("/crear")
    public ModelAndView crear() {
@@ -29,6 +32,7 @@ public class EtiquetaActorController extends AbstractController {
       
       res = new ModelAndView("etiqueta/actor/crear");
       res.addObject("etiqueta", etiqueta);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -77,6 +81,7 @@ public class EtiquetaActorController extends AbstractController {
       
       res = new ModelAndView("etiqueta/actor/crear");
       res.addObject("etiqueta", etiqueta);
+      actorService.addNombre(res);
       
       return res;
    }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
 import services.ActorService;
-import services.AdminService;
 import services.ProfesionalService;
 import services.UsuarioService;
 
@@ -35,8 +34,6 @@ import java.util.stream.Collectors;
 public class IndexProfesionalController extends AbstractController {
    @Autowired
    private ActorService actorService;
-   @Autowired
-   private AdminService adminService;
    @Autowired
    private ProfesionalService profesionalService;
    @Autowired
@@ -64,6 +61,7 @@ public class IndexProfesionalController extends AbstractController {
       res.addObject("estudios", mapper.writeValueAsString(estudios));
       res.addObject("trabajos", mapper.writeValueAsString(trabajos));
       res.addObject("valoraciones", valoraciones);
+      actorService.addNombre(res);
       
       
       return res;
@@ -84,6 +82,7 @@ public class IndexProfesionalController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      actorService.addNombre(res);
       
       return res;
    }
@@ -170,7 +169,7 @@ public class IndexProfesionalController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
-   
+      actorService.addNombre(res);
    
       return res;
    }

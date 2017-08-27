@@ -48,6 +48,7 @@ public class UsuarioAdminController extends AbstractController {
       res = new ModelAndView("usuario/admin/listaUsuarios");
       res.addObject("usuarios", mapper.writeValueAsString(usuarios));
       res.addObject("requestURI", "usuario/admin/listaUsuarios.do");
+      actorService.addNombre(res);
       return res;
    }
    

@@ -42,14 +42,12 @@ public class PeticionController extends AbstractController {
       Collection<Peticion> peticiones = peticionService.getPeticionesBuscadas(buscaForm);
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
    
-      if (! actorService.isAnonimo()) {
-         actorAutenticado = actorService.findPrincipal();
-      }
       
       res = new ModelAndView("peticion/buscar");
       res.addObject("peticiones", peticiones);
       res.addObject("todasEtiquetas", todasEtiquetas);
-      res.addObject("actorAutenticado", actorAutenticado);
+   
+      actorService.addNombre(res);
       
       return res;
    }
@@ -64,9 +62,7 @@ public class PeticionController extends AbstractController {
       Profesional profesionalAutenticado = null;
       
       Peticion peticion = peticionService.findOne(peticionID);
-      if (! actorService.isAnonimo()) {
-         actorAutenticado = actorService.findPrincipal();
-      }
+   
       if (actorService.isProfesional()) {
          profesionalAutenticado = profesionalService.findProfesional();
       }
@@ -81,9 +77,9 @@ public class PeticionController extends AbstractController {
       res.addObject("usuario", peticion.getUsuario());
       res.addObject("credenciales", credenciales);
       res.addObject("todasOfertas", todasOfertas);
-      res.addObject("actorAutenticado", actorAutenticado);
       res.addObject("profesional", profesional);
       res.addObject("profesionalAutenticado", profesionalAutenticado);
+      actorService.addNombre(res);
       
       return res;
    }

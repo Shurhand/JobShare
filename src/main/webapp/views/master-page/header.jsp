@@ -130,7 +130,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                     class="fa fa-user-circle-o" aria-hidden="true"></i>
                                     <spring:message code="master.page.salute"/>
-                                    <security:authentication property="principal.username"/>!</a>
+                                        ${actorAutenticado.nombre}!</a>
                                 <ul class="dropdown-menu box main-dp">
                                     <security:authorize access="hasAuthority('ADMIN')">
                                         <li>

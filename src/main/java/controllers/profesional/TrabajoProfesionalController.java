@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
+import services.ActorService;
 import services.TrabajoService;
 
 import javax.validation.Valid;
@@ -19,6 +20,8 @@ import java.util.List;
 public class TrabajoProfesionalController extends AbstractController {
    @Autowired
    private TrabajoService trabajoService;
+   @Autowired
+   private ActorService actorService;
    
    // =========== Edition =============
    
@@ -107,6 +110,7 @@ public class TrabajoProfesionalController extends AbstractController {
       res = new ModelAndView(vista);
       res.addObject("trabajo", trabajo);
       res.addObject("credenciales", credenciales);
+      actorService.addNombre(res);
       
       return res;
    }
