@@ -602,7 +602,7 @@
 
     <bean id="valoracion2" class="domain.Valoracion">
         <constructor-arg index="0" name="puntuacion" value="2"/>
-        <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
+        <constructor-arg index="1" name="comentario" value="Horrible trato, no lo recomiendo"/>
         <constructor-arg index="2" name="fechaCreacion" value="21/03/2016"/>
         <property name="usuario" ref="usuario1"/>
         <property name="oferta" ref="oferta2"/>
@@ -610,7 +610,7 @@
 
     <bean id="valoracion3" class="domain.Valoracion">
         <constructor-arg index="0" name="puntuacion" value="1"/>
-        <constructor-arg index="1" name="comentario" value="Muy buen trabajo, muy simpático"/>
+        <constructor-arg index="1" name="comentario" value="¡Vaya estafador!"/>
         <constructor-arg index="2" name="fechaCreacion" value="04/06/2017"/>
         <property name="usuario" ref="profesional2"/>
         <property name="oferta" ref="oferta3"/>

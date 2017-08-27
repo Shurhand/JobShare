@@ -6,9 +6,9 @@
 
 <tiles-definitions>
 
-    <definition name="welcome/index" extends="master.page">
-        <put-attribute name="title" value="¡Bienvenidos!"/>
-        <put-attribute name="body" value="/views/welcome/index.jsp"/>
+    <definition name="valoracion/usuario/valorar" extends="master.page">
+        <put-attribute name="title" value="Valorar"/>
+        <put-attribute name="body" value="/views/valoracion/valorar.jsp"/>
     </definition>
 
 </tiles-definitions>

@@ -62,11 +62,15 @@ public class PeticionController extends AbstractController {
       PagoForm pagoForm = new PagoForm();
       Profesional profesional;
       Profesional profesionalAutenticado = null;
+      Usuario usuarioAutenticado = null;
       
       Peticion peticion = peticionService.findOne(peticionID);
    
       if (actorService.isProfesional()) {
          profesionalAutenticado = profesionalService.findProfesional();
+      }
+      if (actorService.isUsuario()) {
+         usuarioAutenticado = usuarioService.findUsuario();
       }
       Collection<Oferta> todasOfertas = ofertaService.findAll();
    
@@ -82,6 +86,7 @@ public class PeticionController extends AbstractController {
       res.addObject("pagoForm", pagoForm);
       res.addObject("profesional", profesional);
       res.addObject("profesionalAutenticado", profesionalAutenticado);
+      res.addObject("usuarioAutenticado", usuarioAutenticado);
       actorService.addNombre(res);
       
       return res;

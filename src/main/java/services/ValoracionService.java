@@ -1,6 +1,7 @@
 package services;
 
 import domain.Oferta;
+import domain.Usuario;
 import domain.Valoracion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +22,20 @@ public class ValoracionService extends AbstractServiceImpl implements AbstractSe
    private AdminService adminService;
    @Autowired
    private ActorService actorService;
+   @Autowired
+   private UsuarioService usuarioService;
    
    @Override
    public Valoracion create() {
       actorService.checkIfUsuarioOProfesional();
+      Usuario usuario = usuarioService.findUsuario();
       
       Valoracion valoracion = new Valoracion();
       LocalDate fechaCreacion = LocalDate.now();
       
       valoracion.setFechaCreacion(fechaCreacion);
+      valoracion.setUsuario(usuario);
+      
       
       return valoracion;
    }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -52,4 +53,8 @@ public class Usuario extends Actor {
       this.valoraciones = valoraciones;
    }
    
+   @Transient
+   public boolean puedeValorarAProfesional(Profesional profesional) {
+      return ! this.valoraciones.contains(profesional.getOfertas().stream().filter(x -> x.getEstado().equals(Estado.CONTRATADA)).map(x -> x.getValoracion()).collect(Collectors.toList()));
+   }
 }

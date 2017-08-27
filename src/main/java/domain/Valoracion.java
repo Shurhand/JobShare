@@ -48,7 +48,6 @@ public class Valoracion extends DomainEntity {
    }
    
    @NotNull
-   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    @Range(min = 1, max = 5)
    public Double getPuntuacion() {
       return puntuacion;

@@ -223,6 +223,12 @@
                                                                value="${oferta.id}"/>
                                                     </div>
                                                 </c:if>
+                                                <c:if
+                                                    test="${item.estaContratado() && usuarioAutenticado.puedeValorarAProfesional(oferta.profesional)}">
+                                                    <a href="valoracion/usuario/valorar.do?ofertaID=${oferta.id}"
+                                                       class="btn btn-warning btn" role="button"><spring:message
+                                                        code="valoracion.valorar"/></a>
+                                                </c:if>
                                             </div>
 
                                         </div>
