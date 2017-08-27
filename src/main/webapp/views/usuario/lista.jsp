@@ -76,11 +76,36 @@
                 {"mData": "email"},
                 {"mData": "provincia"},
                 {"mData": "cuenta.username"},
-                {"mData": "cuenta.isActivated"},
-                {"mData": "cuenta.isGoogle"}
+                {
+                    "mData": "cuenta.isActivated",
+                    "mRender": function (data, type, full) {
+                        var texto;
+                        if (full.cuenta.isActivated == true) {
+                            texto = '<spring:message code="frase.si"/>';
+                        }
+                        else {
+                            texto = '<spring:message code="frase.no"/>';
+                        }
+                        return texto;
+                    }
+                },
+                {
+                    "mData": "cuenta.isGoogle",
+                    "mRender": function (data, type, full) {
+                        var texto;
+                        if (full.cuenta.isGoogle == true) {
+                            texto = '<spring:message code="frase.si"/>';
+                        }
+                        else {
+                            texto = '<spring:message code="frase.no"/>';
+                        }
+                        return texto;
+                    }
+                }
 
             ],
-            'columnDefs': [{
+            'columnDefs': [{"className": "dt-body-center", "targets": [7, 8]},
+                {
                 'targets': 9,
                 'searchable': false,
                 'orderable': false,
