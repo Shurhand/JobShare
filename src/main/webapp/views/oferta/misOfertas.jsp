@@ -167,6 +167,53 @@
 
                                     </div>
                                 </div>
+                                <hr>
+                                <c:forEach var="item" items="${peticion.items}">
+                                    <c:forEach var="oferta" items="${item.ofertas}">
+                                        <c:if
+                                            test="${profesional.ofertas.contains(oferta) && oferta.estado == 'ACTIVA'}">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
+                                                    <c:if test="${item.foto != null}">
+                                                        <img alt="" height="50px" width="50px"
+                                                             class="img-circle center-block"
+                                                             src="${item.foto}">
+                                                    </c:if>
+                                                    <c:if test="${item.foto == null}">
+                                                        <br>
+                                                        <h2><spring:message
+                                                            code="peticion.sinFoto"/></h2>
+                                                    </c:if>
+
+                                                    <br>
+                                                </div>
+                                                <div class="col-xs-2 col-md-2">
+                                                    <br>
+                                                    <c:set var="precioString" value="${String.valueOf(oferta.precio)}"/>
+                                                    <c:if test="${precioString.endsWith('0')}">
+                                                        <c:set
+                                                            value="${precioString.substring(0, precioString.length() - 2)}"
+                                                            var="precio"/>
+                                                    </c:if>
+                                                    <c:if test="${!precioString.endsWith('0')}">
+                                                        <c:set value="${oferta.precio}" var="precio"/>
+                                                    </c:if>
+                                                    <h4 style="font-size: 2rem; ">${precio} €</h4>
+                                                </div>
+
+                                                <div class="col-xs-6 col-md-6">
+                                                    <br>
+                                                    <div class="justificar-texto">
+                                                        <h5>${oferta.comentario}</h5>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

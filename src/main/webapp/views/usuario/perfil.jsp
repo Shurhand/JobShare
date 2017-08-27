@@ -51,7 +51,12 @@
                 <div class="col-md-6 col-sm-6">
                     <p>${usuario.nombre} ${usuario.apellidos} - ${usuario.email}</p>
                     <p>${usuario.cp} ${usuario.provincia}</p>
-                    <p>${usuario.DNI} - ${usuario.telefono}</p>
+                    <c:if test="${usuario.telefono == ''}">
+                        <p>${usuario.DNI} - <spring:message code="usuario.sinTelefono"/></p>
+                    </c:if>
+                    <c:if test="${usuario.telefono != ''}">
+                        <p>${usuario.DNI} - ${usuario.telefono}</p>
+                    </c:if>
                     <p><spring:message code="usuario.peticionesRealizadas"/> ${usuarios.peticiones.size()}<p>
                 </div>
             </div>

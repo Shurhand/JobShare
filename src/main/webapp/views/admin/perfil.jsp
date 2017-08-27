@@ -40,7 +40,12 @@
                 <div class="col-md-6 col-sm-6">
                     <p>${admin.nombre} ${admin.apellidos} - ${admin.email}</p>
                     <p>${admin.cp} ${admin.provincia}</p>
-                    <p>${admin.DNI} - ${admin.telefono}</p>
+                    <c:if test="${admin.telefono == ''}">
+                        <p>${admin.DNI} - <spring:message code="usuario.sinTelefono"/></p>
+                    </c:if>
+                    <c:if test="${admin.telefono != ''}">
+                        <p>${admin.DNI} - ${admin.telefono}</p>
+                    </c:if>
                 </div>
             </div>
             <div class="row">

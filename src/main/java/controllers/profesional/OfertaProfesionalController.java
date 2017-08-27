@@ -69,13 +69,14 @@ public class OfertaProfesionalController extends AbstractController {
    @GetMapping("/buscarMisOfertas")
    public ModelAndView buscarMisofertas(@Valid @ModelAttribute BuscaForm buscaForm) {
       ModelAndView res;
-      
+      Profesional profesional = profesionalService.findProfesional();
       Collection<Peticion> ofertas = ofertaService.getMisOfertasActivas(buscaForm);
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       res = new ModelAndView("oferta/profesional/misOfertas");
       res.addObject("peticiones", ofertas);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("profesional", profesional);
       actorService.addNombre(res);
       
       
@@ -85,13 +86,15 @@ public class OfertaProfesionalController extends AbstractController {
    @GetMapping("/buscarMisOfertasContratadas")
    public ModelAndView buscarMisofertasContratadas(@Valid @ModelAttribute BuscaForm buscaForm) {
       ModelAndView res;
-      
+   
+      Profesional profesional = profesionalService.findProfesional();
       Collection<Peticion> ofertas = ofertaService.getMisOfertasContratadas(buscaForm);
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
       res = new ModelAndView("oferta/profesional/misOfertasContratadas");
       res.addObject("peticiones", ofertas);
       res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("profesional", profesional);
       actorService.addNombre(res);
       
       
