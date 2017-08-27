@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2 style="text-align: center"><spring:message code="usuario.nuevo"/></h2>
+            <h2 style="text-align: center"><spring:message code="actor.modificarPerfil"/></h2>
             <div class="well">
                 <c:if test="${!erroresCheck.isEmpty() && erroresCheck != null}">
                     <div class="alert alert-danger alert-dismissable alert-link oaerror danger-conjunto">
@@ -100,7 +100,8 @@
                         class="form-group ${errores.contains('descripcion') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.descripcion" var="descripcion"/>
                         <form:label class="control-label" path="descripcion">${descripcion}</form:label>
-                        <form:input class="form-control" path="descripcion" placeholder="${descripcion}"/>
+                        <form:textarea class="form-control limitar-textarea" path="descripcion"
+                                       placeholder="${descripcion}"/>
                         <form:errors class="help-block" path="descripcion"/>
                     </div>
 

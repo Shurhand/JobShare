@@ -243,6 +243,73 @@ public class IndexUsuarioController extends AbstractController {
       
    }
    
+   // Perfil de Google
+   
+   @GetMapping("/modificarPerfilGoogle")
+   public ModelAndView modificarPerfilGoogle() {
+      ModelAndView res;
+      Usuario usuario = usuarioService.findUsuario();
+      GoogleForm googleForm = actorService.convertirActorGoogle(usuario);
+      
+      
+      res = new ModelAndView("usuario/modificarPerfilGoogle");
+      res.addObject("googleForm", googleForm);
+      res.addObject("usuario", usuario);
+      
+      actorService.addNombre(res);
+      
+      return res;
+   }
+   
+   @PostMapping(value = "/modificarPerfilGoogle", params = "googleForm")
+   public ModelAndView savePerfilGoogle(@Valid @ModelAttribute GoogleForm googleForm, BindingResult binding) {
+      
+      ModelAndView result = null;
+      List<String> errores = new ArrayList<>();
+      List<String> erroresCheck = new ArrayList<>();
+      boolean hayError = false;
+      Usuario usuario = usuarioService.findUsuario();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allDNIs.remove(usuario.getDNI());
+      
+      if (binding.hasErrors()) {
+         result = crearEditarModeloPerfilGoogle(googleForm);
+         errores = usuarioService.getListaErrores(binding);
+         result.addObject("errores", errores);
+      } else {
+         try {
+            if (! actorService.checkDni(googleForm.getDNI())) {
+               hayError = true;
+               erroresCheck.add("usuario.error.dniIncorrecto");
+               errores.add("DNI");
+            }
+            if (allDNIs.contains(googleForm.getDNI())) {
+               hayError = true;
+               erroresCheck.add("usuario.error.dniDuplicado");
+               errores.add("DNI");
+            }
+            if (! hayError) {
+               usuarioService.modificarPerfilGoogle(googleForm);
+               result = new ModelAndView("redirect:/usuario/perfil.do");
+            } else {
+               result = crearEditarModeloPerfilGoogle(googleForm);
+            }
+         } catch (Throwable oops) {
+            result = crearEditarModeloPerfilGoogle(googleForm);
+            erroresCheck.add("errorInesperado");
+         } finally {
+            result.addObject("errores", errores);
+            result.addObject("erroresCheck", erroresCheck);
+         }
+      }
+      return result;
+      
+   }
+   
+   
+   
+   
    @PostMapping("/googleToken")
    public ModelAndView googleLogin(@RequestParam String idTokenString) throws GeneralSecurityException, IOException {
       ModelAndView res = null;
@@ -310,10 +377,20 @@ public class IndexUsuarioController extends AbstractController {
          res.addObject("errores", errores);
       } else {
          try {
+            if (! actorService.checkDni(googleForm.getDNI())) {
+               hayError = true;
+               erroresCheck.add("usuario.error.dniIncorrecto");
+               errores.add("DNI");
+            }
             if (actorService.findActorPorDNI(googleForm.getDNI()) != null) {
                hayError = true;
                erroresCheck.add("usuario.error.dniDuplicado");
                errores.add("DNI");
+            }
+            if (actorService.findActorPorEmail(googleForm.getEmail()) != null) {
+               hayError = true;
+               erroresCheck.add("usuario.error.emailDuplicado");
+               errores.add("email");
             }
             if (! hayError) {
                usuario = usuarioService.registrarUsuarioGoogle(googleForm);
@@ -349,6 +426,19 @@ public class IndexUsuarioController extends AbstractController {
       res.addObject("usuarioForm", usuarioForm);
       res.addObject("credenciales", credenciales);
       res.addObject("provincias", provincias);
+      res.addObject("usuario", usuario);
+      actorService.addNombre(res);
+   
+      return res;
+   }
+   
+   protected ModelAndView crearEditarModeloPerfilGoogle(GoogleForm googleForm) {
+      ModelAndView res;
+      
+      Usuario usuario = usuarioService.findUsuario();
+      
+      res = new ModelAndView("usuario/modificarPerfilGoogle");
+      res.addObject("googleForm", googleForm);
       res.addObject("usuario", usuario);
       actorService.addNombre(res);
       

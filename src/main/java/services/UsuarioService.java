@@ -158,6 +158,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       usuario.setEmail(usuarioForm.getEmail());
       usuario.setFoto(usuarioForm.getFoto());
       usuario.setProvincia(usuarioForm.getProvincia());
+      usuario.setDescripcion(usuarioForm.getDescripcion());
       
       usuario.getCuenta().setUsername(usuarioForm.getUsername());
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
@@ -165,6 +166,31 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       usuario.getCuenta().setPassword(password);
       this.save(usuario);
    }
+   
+   public void modificarPerfilGoogle(GoogleForm googleForm) {
+      Usuario usuario = this.findUsuario();
+      
+      Collection<String> allEmails = actorService.getAllEmails();
+      Collection<String> allDNIs = actorService.getAllDNIs();
+      
+      allEmails.remove(usuario.getEmail());
+      allDNIs.remove(usuario.getDNI());
+      
+      Assert.isTrue(actorService.checkDni(googleForm.getDNI()));
+      Assert.isTrue(! googleForm.getProvincia().equals("-----"));
+      Assert.isTrue(! allDNIs.contains(googleForm.getDNI()));
+      Assert.isTrue(! allEmails.contains(googleForm.getEmail()));
+      
+      usuario.setCp(googleForm.getCp());
+      usuario.setTelefono(googleForm.getTelefono());
+      usuario.setEmail(googleForm.getEmail());
+      usuario.setProvincia(googleForm.getProvincia());
+      usuario.setDescripcion(googleForm.getDescripcion());
+      
+      this.save(usuario);
+   }
+   
+   
    
    public Usuario findUsuario() {
       Actor a = actorService.findPrincipal();

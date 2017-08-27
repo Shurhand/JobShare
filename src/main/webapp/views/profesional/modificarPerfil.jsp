@@ -97,7 +97,8 @@
                         class="form-group ${errores.contains('descripcion') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
                         <spring:message code="usuario.descripcion" var="descripcion"/>
                         <form:label class="control-label" path="descripcion">${descripcion}</form:label>
-                        <form:input class="form-control" path="descripcion" placeholder="${descripcion}"/>
+                        <form:textarea class="form-control limitar-textarea" path="descripcion"
+                                       placeholder="${descripcion}"/>
                         <form:errors class="help-block" path="descripcion"/>
                     </div>
 

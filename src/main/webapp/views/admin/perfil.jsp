@@ -40,7 +40,7 @@
                 <div class="col-md-6 col-sm-6">
                     <p>${admin.nombre} ${admin.apellidos} - ${admin.email}</p>
                     <p>${admin.cp} ${admin.provincia}</p>
-                    <p>${admin.DNI}</p>
+                    <p>${admin.DNI} - ${admin.telefono}</p>
                 </div>
             </div>
             <div class="row">

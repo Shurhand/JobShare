@@ -43,7 +43,7 @@
                 <div class="col-md-6 col-sm-6">
                     <p>${profesional.nombre} ${profesional.apellidos} - ${profesional.email}</p>
                     <p>${profesional.cp} ${profesional.provincia}</p>
-                    <p>${profesional.DNI}</p>
+                    <p>${profesional.DNI} - ${profesional.telefono}</p>
                     <p><spring:message code="usuario.peticionesRealizadas"/> ${profesional.peticiones.size()}<p>
                     <p><spring:message code="profesional.ofertasRealizadas"/> ${profesional.ofertas.size()}<p>
                 </div>

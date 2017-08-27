@@ -1,6 +1,7 @@
 package services;
 
 import domain.Actor;
+import forms.GoogleForm;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -181,8 +182,25 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       usuarioForm.setFoto(a.getFoto());
       usuarioForm.setUsername(a.getCuenta().getUsername());
       usuarioForm.setCheckTerminos(true);
+      usuarioForm.setDescripcion(a.getDescripcion());
       
       return usuarioForm;
+   }
+   
+   public GoogleForm convertirActorGoogle(Actor a) {
+      GoogleForm googleForm = new GoogleForm();
+      googleForm.setDNI(a.getDNI());
+      googleForm.setCp(a.getCp());
+      googleForm.setTelefono(a.getTelefono());
+      googleForm.setEmail(a.getEmail());
+      googleForm.setProvincia(a.getProvincia());
+      googleForm.setSubject(a.getCuenta().getUsername());
+      googleForm.setGivenName(a.getNombre());
+      googleForm.setFamilyName(a.getApellidos());
+      googleForm.setPictureUrl(a.getFoto());
+      googleForm.setDescripcion(a.getDescripcion());
+      
+      return googleForm;
    }
    
    public Collection<String> getAllUsernames() {
