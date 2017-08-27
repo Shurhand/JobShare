@@ -86,7 +86,10 @@
                                 access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')"/>
         <security:intercept-url pattern="/item/usuario/*"
                                 access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')"/>
-        <security:intercept-url pattern="/usuario/*" access="hasAuthority('USUARIO')"/>
+        <security:intercept-url pattern="/usuario/*"
+                                access="hasAuthority('USUARIO')"/>
+        <security:intercept-url pattern="/pago/usuario/*"
+                                access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')"/>
 
         <!-- ******************** PROFESIONAL ************************************** -->
 

@@ -20,7 +20,7 @@
 <div class="container">
     <div class="row well white">
         <div class="col-md-10 col-md-offset-1">
-            <h2 class="col-md-push-2" style="text-align: center">${fn.titulo}
+            <h2 class="col-md-push-2" style="text-align: center">${peticion.titulo}
                 <security:authorize access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
 
                     <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
@@ -83,8 +83,8 @@
             </div>
             <br>
             <br>
-
-            <c:forEach var="item" items="${peticion.items}">
+            <form:form modelAttribute="pagoForm" action="pago/usuario/pagar.do" method="post">
+                <c:forEach var="item" items="${peticion.items}" varStatus="it">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -168,7 +168,7 @@
                             </h3>
                             <br>
                             <c:if test="${!item.ofertas.isEmpty()}">
-                                    <c:forEach var="oferta" items="${item.ofertas}">
+                                <c:forEach var="oferta" items="${item.ofertas}" varStatus="ofer">
                                         <div class="row">
                                             <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
                                                 <c:if test="${oferta.profesional.foto != null}">
@@ -214,15 +214,15 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-xs-2 col-md-2">
+                                            <div class="col-xs-2 col-md-2 text-center">
                                                 <br>
-                                                <spring:message code="item.marcarOferta"/>
-                                                <div class="">
-                                                        <%--<form action="pago/usuario/conjunto.do" method="post">--%>
-                                                        <%--<input type="radio" id="radioOferta${oferta.id}"/>--%>
-
-                                                        <%--</form>--%>
-                                                </div>
+                                                <c:if test="${!item.estaContratado()}">
+                                                    <spring:message code="item.marcarOferta"/>
+                                                    <div class="">
+                                                        <input type="radio" name="items[${it.index}]"
+                                                               value="${oferta.id}"/>
+                                                    </div>
+                                                </c:if>
                                             </div>
 
                                         </div>
@@ -239,6 +239,11 @@
                     </div>
                 </div>
             </c:forEach>
+                <div class="text-center">
+                    <button type="submit" name="saveForm" class="btn btn-primary btn-lg"><i class="fa fa-paypal"></i>
+                            <spring:message code="pago.contratar"/>
+                </div>
+            </form:form>
         </div>
     </div>
 </div>

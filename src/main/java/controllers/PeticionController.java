@@ -2,6 +2,7 @@ package controllers;
 
 import domain.*;
 import forms.BuscaForm;
+import forms.PagoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +59,7 @@ public class PeticionController extends AbstractController {
       ModelAndView res;
       Credenciales credenciales = new Credenciales();
       Actor actorAutenticado = null;
+      PagoForm pagoForm = new PagoForm();
       Profesional profesional;
       Profesional profesionalAutenticado = null;
       
@@ -77,6 +79,7 @@ public class PeticionController extends AbstractController {
       res.addObject("usuario", peticion.getUsuario());
       res.addObject("credenciales", credenciales);
       res.addObject("todasOfertas", todasOfertas);
+      res.addObject("pagoForm", pagoForm);
       res.addObject("profesional", profesional);
       res.addObject("profesionalAutenticado", profesionalAutenticado);
       actorService.addNombre(res);
