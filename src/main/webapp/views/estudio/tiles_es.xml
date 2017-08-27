@@ -8,12 +8,12 @@
 
     <definition name="estudio/profesional/crear" extends="master.page">
         <put-attribute name="title" value="Nueva experiencia académica"/>
-        <put-attribute name="body" value="/views/estudio/edit.jsp"/>
+        <put-attribute name="body" value="/views/estudio/editar.jsp"/>
     </definition>
 
     <definition name="estudio/profesional/editar" extends="master.page">
         <put-attribute name="title" value="Editar experiencia académica"/>
-        <put-attribute name="body" value="/views/estudio/edit.jsp"/>
+        <put-attribute name="body" value="/views/estudio/editar.jsp"/>
     </definition>
 
 </tiles-definitions>

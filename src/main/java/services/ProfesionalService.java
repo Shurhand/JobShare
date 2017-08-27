@@ -1,7 +1,6 @@
 package services;
 
-import domain.Actor;
-import domain.Profesional;
+import domain.*;
 import forms.UsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -15,6 +14,7 @@ import security.LoginService;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -27,7 +27,16 @@ public class ProfesionalService extends AbstractServiceImpl implements AbstractS
    
    @Override
    public Profesional create() {
-      return null;
+      Profesional profesional = new Profesional();
+      Collection<Trabajo> trabajos = new ArrayList<>();
+      Collection<Estudio> estudios = new ArrayList<>();
+      Collection<Oferta> ofertas = new ArrayList<>();
+   
+      profesional.setTrabajos(trabajos);
+      profesional.setEstudios(estudios);
+      profesional.setOfertas(ofertas);
+   
+      return profesional;
    }
    
    @Override

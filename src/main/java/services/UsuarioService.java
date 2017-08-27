@@ -201,29 +201,45 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       return usuarioRepository.findUsuario(cuenta);
    }
    
-   public void convertirse() {
+   public void convertirse(Usuario usuario) {
       this.checkIfUsuario();
-      Collection<Trabajo> trabajos = new ArrayList<>();
-      Collection<Estudio> estudios = new ArrayList<>();
-      Collection<Oferta> ofertas = new ArrayList<>();
+      Profesional profesional = profesionalService.create();
+      Cuenta cuenta = new Cuenta();
+      Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();
+      
+      profesional.setNombre(usuario.getNombre());
+      profesional.setApellidos(usuario.getApellidos());
+      profesional.setDescripcion(usuario.getDescripcion());
+      profesional.setPagos(usuario.getPagos());
+      profesional.setPeticiones(usuario.getPeticiones());
+      profesional.setValoraciones(usuario.getValoraciones());
+      profesional.setCp(usuario.getCp());
+      profesional.setDNI(usuario.getDNI());
+      profesional.setEmail(usuario.getEmail());
+      profesional.setFoto(usuario.getFoto());
+      profesional.setId(usuario.getId());
+      profesional.setProvincia(usuario.getProvincia());
+      profesional.setTelefono(usuario.getTelefono());
+      profesional.setVersion(usuario.getVersion());
+      
+      cuenta.setIsActivated(true);
+      cuenta.setIsGoogle(true);
+      cuenta.setUsername(usuario.getCuenta().getUsername());
+      String password = md5PassWordEncoder.encodePassword(usuario.getCuenta().getPassword(), null);
+      cuenta.setPassword(password);
       
       Collection<Autoridad> res = new ArrayList<>();
       Autoridad autoridad = new Autoridad();
       autoridad.setAuthority("PROFESIONAL");
       res.add(autoridad);
       
-      Actor actor = actorService.findPrincipal();
-      Cuenta miCuenta = actor.getCuenta();
-      miCuenta.getAuthorities().clear();
-      miCuenta.setAuthorities(res);
-      
-      logOFF();
-      logON();
+      profesional.setCuenta(cuenta);
+      profesional.getCuenta().setAuthorities(res);
    
-      Profesional profesional = profesionalService.findProfesional();
-      profesional.setTrabajos(trabajos);
-      profesional.setEstudios(estudios);
-      profesional.setOfertas(ofertas);
+      logOFF();
+//      this.delete(usuario);
+      profesionalService.save(profesional);
+      logUsuario(profesional);
       
    }
    
@@ -238,7 +254,7 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
    }
    
-   public void logUsuarioGoogleOn(Usuario u) {
+   public void logUsuario(Usuario u) {
       Cuenta cuenta = (Cuenta) loginService.loadUserByUsername(u.getCuenta().getUsername());
       Authentication authentication = new UsernamePasswordAuthenticationToken(cuenta, null, cuenta.getAuthorities());
       SecurityContextHolder.getContext().setAuthentication(authentication);

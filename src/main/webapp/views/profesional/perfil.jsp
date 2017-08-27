@@ -19,9 +19,14 @@
     <div class="row well white ">
         <div class="col-md-10 col-sm-12 col-sx-12 col-md-offset-1">
             <h2 class="col-md-push-2" style="text-align: center"><spring:message code="actor.perfil"/>
-                <a href="/profesional/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
+                <c:if test="${!profesional.cuenta.isGoogle}">
+                <a href="profesional/modificarPerfil.do" class="btn btn-info" role="button"> <spring:message
                     code="actor.modificarPerfil"/> </a></h2>
-
+            </c:if>
+            <c:if test="${profesional.cuenta.isGoogle}">
+                <a href="profesional/modificarPerfilGoogle.do" class="btn btn-info" role="button"> <spring:message
+                    code="actor.modificarPerfil"/> </a></h2>
+            </c:if>
             <br>
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-md-offset-2">
@@ -47,7 +52,12 @@
                 <div class="col-md-6 col-sm-6">
                     <p>${profesional.nombre} ${profesional.apellidos} - ${profesional.email}</p>
                     <p>${profesional.cp} ${profesional.provincia}</p>
-                    <p>${profesional.DNI} - ${profesional.telefono}</p>
+                    <c:if test="${profesional.telefono == ''}">
+                        <p>${profesional.DNI} - <spring:message code="usuario.sinTelefono"/></p>
+                    </c:if>
+                    <c:if test="${profesional.telefono != ''}">
+                        <p>${profesional.DNI} - ${profesional.telefono}</p>
+                    </c:if>
                     <p><spring:message code="usuario.peticionesRealizadas"/> ${profesional.peticiones.size()}<p>
                     <p><spring:message code="profesional.ofertasRealizadas"/> ${profesional.ofertas.size()}<p>
                 </div>
@@ -61,7 +71,7 @@
             </div>
             <br>
             <h4 style="text-align: center"><spring:message code="profesional.estudios"/>
-                <a href="/estudio/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
+                <a href="estudio/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
                     code="estudio.nuevo"/> </a></h4>
             <table id="estudios" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
                    width="100%">
@@ -79,7 +89,7 @@
             </table>
             <br>
             <h4 style="text-align: center"><spring:message code="profesional.trabajos"/>
-                <a href="/trabajo/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
+                <a href="trabajo/profesional/crear.do" class="btn btn-info" role="button"> <spring:message
                     code="trabajo.nuevo"/> </a>
             </h4>
             <table id="trabajos" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"

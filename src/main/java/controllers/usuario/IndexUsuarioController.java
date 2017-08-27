@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import security.Credenciales;
 import services.ActorService;
+import services.ProfesionalService;
 import services.UsuarioService;
 
 import javax.validation.Valid;
@@ -40,6 +41,8 @@ public class IndexUsuarioController extends AbstractController {
    private UsuarioService usuarioService;
    @Autowired
    private ActorService actorService;
+   @Autowired
+   private ProfesionalService profesionalService;
    
    @GetMapping("/perfil")
    public ModelAndView verPerfil() {
@@ -158,9 +161,16 @@ public class IndexUsuarioController extends AbstractController {
    @GetMapping(value = "/convertirse")
    public ModelAndView convertirse() {
       ModelAndView res;
-      usuarioService.convertirse();
-      
-      res = new ModelAndView("redirect:/");
+      try {
+         Usuario usuario = usuarioService.findUsuario();
+         Usuario copiaUsuario = usuarioService.findUsuario();
+         usuarioService.delete(usuario);
+         usuarioService.convertirse(copiaUsuario);
+         res = new ModelAndView("redirect:/");
+      } catch (Throwable oops) {
+         throw new IllegalArgumentException(oops.getLocalizedMessage());
+      }
+
       return res;
    }
    
@@ -321,7 +331,7 @@ public class IndexUsuarioController extends AbstractController {
          Usuario usuario = usuarioService.findUsuarioDeGoogle(payload.getSubject().toString());
    
          if (usuario != null) {
-            usuarioService.logUsuarioGoogleOn(usuario);
+            usuarioService.logUsuario(usuario);
             res = new ModelAndView("redirect:/");
          } else {
             String pictureUrl = (String) payload.get("picture");
@@ -337,14 +347,7 @@ public class IndexUsuarioController extends AbstractController {
             googleForm.setGivenName(givenName);
             googleForm.setIdTokenString(idTokenString);
             res = completarRegistroGoogleCreacion(googleForm);
-//            res = new ModelAndView("redirect:/usuario/registroGoogle.do");
-//            redireccion = "redirect:/usuario/completarRegistroGoogle";
-//            usuario = usuarioService.registrarUsuarioGoogle(payload, idTokenString);
-//            if(usuario != null){
-//               usuarioService.logUsuarioGoogleOn(usuario);
-//
-//            }
-      
+   
          }
       }
       return res;
@@ -353,10 +356,6 @@ public class IndexUsuarioController extends AbstractController {
    @GetMapping("/registroGoogle")
    public ModelAndView completarRegistroGoogleCreacion(GoogleForm googleForm) {
       ModelAndView res;
-      System.out.println("ASDDSSADASDADDADA");
-//      googleForm.setIdTokenString(idTokenString);
-//      googleForm.setPayload(payload);
-//      res = crearEditarModeloGoogle(googleForm);
       res = crearEditarModeloGoogle(googleForm);
       
       return res;
@@ -364,7 +363,6 @@ public class IndexUsuarioController extends AbstractController {
    
    @PostMapping(value = "/registroGoogle", params = "googleForm")
    public ModelAndView completarRegistroGoogle(@Valid @ModelAttribute GoogleForm googleForm, BindingResult binding) {
-      System.out.println("ASDDSSADASDADDADA22222222222222222");
       ModelAndView res = null;
       Usuario usuario;
       List<String> errores = new ArrayList<>();
@@ -395,7 +393,7 @@ public class IndexUsuarioController extends AbstractController {
             if (! hayError) {
                usuario = usuarioService.registrarUsuarioGoogle(googleForm);
                if (usuario != null) {
-                  usuarioService.logUsuarioGoogleOn(usuario);
+                  usuarioService.logUsuario(usuario);
                   res = new ModelAndView("redirect:/");
                }
             } else {

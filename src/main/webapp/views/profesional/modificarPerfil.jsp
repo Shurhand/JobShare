@@ -104,7 +104,7 @@
 
                     <div class="form-group text-center">
                         <br>
-                        <a href="/profesional/perfil.do" class="btn btn-primary"><i class="fa fa-arrow-left"></i>
+                        <a href="profesional/perfil.do" class="btn btn-primary"><i class="fa fa-arrow-left"></i>
                             <spring:message
                             code="volver"/></a>
                         <button type="submit" name="saveForm" class="btn btn-primary"><i class="fa fa-check"></i>

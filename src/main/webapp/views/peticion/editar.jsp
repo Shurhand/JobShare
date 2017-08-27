@@ -96,7 +96,7 @@
                     </div>
                     <div class="form-group text-center">
                         <br>
-                        <a href="peticion/ver.do?peticionID=${peticion.id}" class="btn btn-primary"><i
+                        <a href="peticion/usuario/misPeticiones.do" class="btn btn-primary"><i
                             class="fa fa-arrow-left"></i> <spring:message code="volver"/></a>
                         <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i>
                             <spring:message code="guardar" />
