@@ -386,7 +386,7 @@
         <property name="presupuesto" value="35"/>
         <property name="foto"
                   value="https://t1.uc.ltmcdn.com/images/5/1/2/img_que_hacer_con_mi_ordenador_viejo_24215_600.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion1"/>
         <property name="ofertas">
             <list>
@@ -400,7 +400,7 @@
         <property name="descripcion" value="Necesito reparar un store que se ha rasgado"/>
         <property name="presupuesto" value="50"/>
         <property name="foto" value="http://www.toldoscano.com/wp-content/uploads/2014/09/STOR.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion1"/>
         <property name="ofertas">
             <list>
@@ -414,7 +414,7 @@
         <property name="descripcion" value="Necesito cambiar unas lámparas viejas que ya no funcionan"/>
         <property name="presupuesto" value="45"/>
         <property name="foto" value="http://mm.decoralis.es/uploads/ILUMINACI__N/lampredo2.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion1"/>
         <property name="ofertas">
             <list>
@@ -431,7 +431,7 @@
         <property name="presupuesto" value="16"/>
         <property name="foto"
                   value="https://www.turismosevilla.com/content/1-guia/2-lugares-de-interes-en-sevilla/20160622-la-catedral-de-sevilla/thumbs/la-catedral-de-sevilla-1000.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion2"/>
         <property name="ofertas">
             <list>
@@ -446,7 +446,7 @@
         <property name="descripcion" value="Busco alguien que me lleve al safari del castillo de las guardas"/>
         <property name="presupuesto" value="35"/>
         <property name="foto" value="http://www.esp.andalucia.com/provincia/image/MVC090900041elcastilloguard.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion2"/>
         <property name="ofertas">
             <list>
@@ -463,7 +463,7 @@
         <property name="presupuesto" value="35"/>
         <property name="foto"
                   value="http://estaticos.sevillaciudad.abc.es/wp-content/uploads/2013/09/centro-sevilla-casco-antiguo.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion2"/>
         <property name="ofertas">
             <list>
@@ -480,7 +480,7 @@
         <property name="descripcion" value="Necesito clases de inglés básico"/>
         <property name="presupuesto" value="30"/>
         <property name="foto" value="https://www.flaginstitute.org/wp/wp-content/uploads/2012/10/UK-Union-Flag.png"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion3"/>
         <property name="ofertas">
             <list>
@@ -494,7 +494,7 @@
         <property name="descripcion" value="Francés medio, que haya vivido en Francia algunos años al menos"/>
         <property name="presupuesto" value="50"/>
         <property name="foto" value="http://www.limerickpost.ie/site/wp-content/uploads/france-flag.jpg"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion3"/>
         <property name="ofertas">
             <list>
@@ -508,7 +508,7 @@
         <property name="descripcion" value="Se necesita alguien con dominio nativo de Alemán"/>
         <property name="presupuesto" value="80"/>
         <property name="foto" value="https://www.mapsofworld.com/images/world-countries-flags/germany-flag.gif"/>
-        <property name="estado" value="ACTIVA"/>
+
         <property name="peticion" ref="peticion3"/>
         <property name="ofertas">
             <list>
@@ -524,7 +524,7 @@
         <constructor-arg index="1" name="comentario"
                          value="Tengo mucha experiencia en el tema, mira mi perfil si quieres"/>
         <constructor-arg index="2" name="fechaCreacion" value="13/07/2017"/>
-        <constructor-arg index="3" name="estado" value="ACTIVA"/>
+        <constructor-arg index="3" name="estado" value="CONTRATADA"/>
         <property name="profesional" ref="profesional1"/>
         <property name="item" ref="item4"/>
         <property name="valoracion" ref="valoracion1"/>
@@ -537,7 +537,6 @@
         <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
         <property name="item" ref="item4"/>
-        <property name="valoracion" ref="valoracion2"/>
 
     </bean>
 
@@ -549,7 +548,6 @@
         <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional1"/>
         <property name="item" ref="item5"/>
-        <property name="valoracion" ref="valoracion3"/>
     </bean>
 
     <bean id="oferta4" class="domain.Oferta">
@@ -600,21 +598,21 @@
 
     </bean>
 
-    <bean id="valoracion2" class="domain.Valoracion">
-        <constructor-arg index="0" name="puntuacion" value="2"/>
-        <constructor-arg index="1" name="comentario" value="Horrible trato, no lo recomiendo"/>
-        <constructor-arg index="2" name="fechaCreacion" value="21/03/2016"/>
-        <property name="usuario" ref="usuario1"/>
-        <property name="oferta" ref="oferta2"/>
-    </bean>
+    <!--<bean id="valoracion2" class="domain.Valoracion">-->
+    <!--<constructor-arg index="0" name="puntuacion" value="2"/>-->
+    <!--<constructor-arg index="1" name="comentario" value="Horrible trato, no lo recomiendo"/>-->
+    <!--<constructor-arg index="2" name="fechaCreacion" value="21/03/2016"/>-->
+    <!--<property name="usuario" ref="usuario1"/>-->
+    <!--<property name="oferta" ref="oferta2"/>-->
+    <!--</bean>-->
 
-    <bean id="valoracion3" class="domain.Valoracion">
-        <constructor-arg index="0" name="puntuacion" value="1"/>
-        <constructor-arg index="1" name="comentario" value="¡Vaya estafador!"/>
-        <constructor-arg index="2" name="fechaCreacion" value="04/06/2017"/>
-        <property name="usuario" ref="profesional2"/>
-        <property name="oferta" ref="oferta3"/>
-    </bean>
+    <!--<bean id="valoracion3" class="domain.Valoracion">-->
+    <!--<constructor-arg index="0" name="puntuacion" value="1"/>-->
+    <!--<constructor-arg index="1" name="comentario" value="¡Vaya estafador!"/>-->
+    <!--<constructor-arg index="2" name="fechaCreacion" value="04/06/2017"/>-->
+    <!--<property name="usuario" ref="profesional2"/>-->
+    <!--<property name="oferta" ref="oferta3"/>-->
+    <!--</bean>-->
 
     <!-- ****************** Etiquetas ************* -->
 

@@ -83,7 +83,7 @@
             </div>
             <br>
             <br>
-            <form:form modelAttribute="pagoForm" action="pago/usuario/pagar.do" method="post">
+            <form:form modelAttribute="pagoForm" action="pago/usuario/pagar.do?peticionID=${peticion.id}" method="post">
                 <c:forEach var="item" items="${peticion.items}" varStatus="it">
 
                 <div class="row">
@@ -117,6 +117,7 @@
                                         <c:set value="${item.presupuesto}" var="prep"/>
                                     </c:if>
                                     <p>${prep} €</p>
+
                                     <br>
                                     <security:authorize access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
                                         <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
@@ -132,16 +133,18 @@
                             </div>
                             <hr>
                             <h3 class="text-center" ;><spring:message code="item.ofertasDisponibles"/>
-                                <c:if test="${item.estaContratado()}">
-                                    <c:if test="${!actorAutenticado.peticiones.contains(peticion)}">
-                                        <p><h4 style="text-align: center"><spring:message
-                                        code="item.itemContratado"/></h4></p>
+                                <security:authorize access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
+                                    <c:if test="${item.estaContratado()}">
+                                        <c:if test="${!actorAutenticado.peticiones.contains(peticion)}">
+                                            <p><h4 style="text-align: center"><spring:message
+                                            code="item.itemContratado"/></h4></p>
+                                        </c:if>
+                                        <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
+                                            <p><h4 style="text-align: center"><spring:message
+                                            code="item.tuContrato"/></h4></p>
+                                        </c:if>
                                     </c:if>
-                                    <c:if test="${actorAutenticado.peticiones.contains(peticion)}">
-                                        <p><h4 style="text-align: center"><spring:message
-                                        code="item.tuContrato"/></h4></p>
-                                    </c:if>
-                                </c:if>
+                                </security:authorize>
                                 <security:authorize access="hasAuthority('PROFESIONAL')">
                                 <c:if test="${!item.estaContratado()}">
                                 <c:if test="${!profesionalAutenticado.peticiones.contains(peticion)}">
@@ -204,7 +207,15 @@
                                                 <c:if test="${!precioString.endsWith('0')}">
                                                     <c:set value="${oferta.precio}" var="precio"/>
                                                 </c:if>
-                                                <h4 style="font-size: 2rem; ">${precio} €</h4>
+                                                <h4 style="font-size: 2rem; ">${precio} €
+                                                        <%--<c:if test="${oferta.estado == 'CONTRATADA'}">--%>
+                                                        <%--<div class="error-notice">--%>
+                                                        <%--<div class="oaerror-small warning">--%>
+                                                        <%--<spring:message code="oferta.yaContratada"/>--%>
+                                                        <%--</div>--%>
+                                                        <%--</div>--%>
+                                                        <%--</c:if>--%>
+                                                </h4>
                                             </div>
 
                                             <div class="col-xs-6 col-md-6">
@@ -216,19 +227,23 @@
 
                                             <div class="col-xs-2 col-md-2 text-center">
                                                 <br>
-                                                <c:if test="${!item.estaContratado()}">
+                                                <security:authorize
+                                                    access="hasAuthority('USUARIO') || hasAuthority('PROFESIONAL')">
+                                                    <c:if
+                                                        test="${!item.estaContratado() && actorAutenticado.peticiones.contains(oferta.item.peticion)}">
                                                     <spring:message code="item.marcarOferta"/>
                                                     <div class="">
-                                                        <input type="radio" name="items[${it.index}]"
+                                                        <input type="radio" name="ofertas[${it.index}]"
                                                                value="${oferta.id}"/>
                                                     </div>
                                                 </c:if>
                                                 <c:if
-                                                    test="${item.estaContratado() && usuarioAutenticado.puedeValorarAProfesional(oferta.profesional)}">
+                                                    test="${item.estaContratado() && usuarioAutenticado.puedeValorarAProfesional(oferta)}">
                                                     <a href="valoracion/usuario/valorar.do?ofertaID=${oferta.id}"
                                                        class="btn btn-warning btn" role="button"><spring:message
                                                         code="valoracion.valorar"/></a>
                                                 </c:if>
+                                                </security:authorize>
                                             </div>
 
                                         </div>
@@ -250,6 +265,7 @@
                             <spring:message code="pago.contratar"/>
                 </div>
             </form:form>
+
         </div>
     </div>
 </div>

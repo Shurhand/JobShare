@@ -134,10 +134,18 @@
                         <br><br>
                         <input value="${valoracion.getPuntuacion()}" class="rating-loading rating-xs"/>
                     </div>
-                    <div class="col-xs-7 col-md-7 ">
+                    <div class="col-xs-5 col-md-5 ">
                             <br>
                         <div class="text-left">
                             <h5>${valoracion.comentario}</h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-md-2 ">
+                        <br>
+                        <div class="text-left">
+                            <h5><a href="peticion/ver.do?peticionID=${valoracion.oferta.item.peticion.id}">
+                                <spring:message code="peticion.ver"/>
+                            </a></h5>
                         </div>
                     </div>
                     <security:authorize access="hasAuthority('ADMIN')">

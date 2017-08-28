@@ -16,7 +16,6 @@ public class Item extends DomainEntity {
    private String descripcion;
    private Double presupuesto;
    private String foto;
-   private Estado estado;
    
    public Item() {
       super();
@@ -25,7 +24,7 @@ public class Item extends DomainEntity {
    
    @NotBlank(message = "{error.notblank}")
    @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
-   @Length(max = 30)
+   @Length(max = 50)
    public String getNombre() {
       return nombre;
    }
@@ -53,17 +52,6 @@ public class Item extends DomainEntity {
    
    public void setPresupuesto(Double presupuesto) {
       this.presupuesto = presupuesto;
-   }
-   
-   @Enumerated
-   @NotNull
-//   @Pattern(regexp = "^" + "ACTIVA" + "|" + "INACTIVA" + "$")
-   public Estado getEstado() {
-      return estado;
-   }
-   
-   public void setEstado(Estado estado) {
-      this.estado = estado;
    }
    
    @SafeHtml

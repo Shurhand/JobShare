@@ -6,24 +6,9 @@
 
 <tiles-definitions>
 
-    <definition name="welcome/index" extends="master.page">
-        <put-attribute name="title" value="¡Bienvenidos!"/>
-        <put-attribute name="body" value="/views/welcome/index.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/about" extends="master.page">
-        <put-attribute name="title" value="Sobre nosotros"/>
-        <put-attribute name="body" value="/views/welcome/about.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/contact" extends="master.page">
-        <put-attribute name="title" value="Contactános"/>
-        <put-attribute name="body" value="/views/welcome/contact.jsp"/>
-    </definition>
-
-    <definition name="welcome/index/tips" extends="master.page">
-        <put-attribute name="title" value="Consejos"/>
-        <put-attribute name="body" value="/views/welcome/tips.jsp"/>
+    <definition name="pago/usuario/pagar" extends="master.page">
+        <put-attribute name="title" value="Pagar"/>
+        <put-attribute name="body" value="/views/pago/pagar.jsp"/>
     </definition>
 
 </tiles-definitions>

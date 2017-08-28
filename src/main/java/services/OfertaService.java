@@ -24,6 +24,8 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
    private ProfesionalService profesionalService;
    @Autowired
    private PeticionService peticionService;
+   @Autowired
+   private ActorService actorService;
    
    @Override
    public Oferta create() {
@@ -42,9 +44,6 @@ public class OfertaService extends AbstractServiceImpl implements AbstractServic
    
    @Override
    public void save(@NotNull Oferta oferta) {
-      profesionalService.checkIfProfesional();
-     
-
       ofertaRepository.save(oferta);
    }
    

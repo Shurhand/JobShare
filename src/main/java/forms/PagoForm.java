@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class PagoForm {
-   private Collection<String> items;
+   private Collection<String> ofertas;
    
    public PagoForm() {
       super();
-      items = new ArrayList<>();
+      ofertas = new ArrayList<>();
    }
    
    @ElementCollection
-   public Collection<String> getItems() {
-      return items;
+   public Collection<String> getOfertas() {
+      return ofertas;
    }
    
-   public void setItems(Collection<String> items) {
-      this.items = items;
+   public void setOfertas(Collection<String> ofertas) {
+      this.ofertas = ofertas;
    }
 }

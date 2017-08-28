@@ -122,13 +122,13 @@
                               </button>
                             </span>
                         </div>
-                        <a href="/peticion/usuario/misPeticiones.do"> <spring:message
+                        <a href="peticion/usuario/misPeticiones.do"> <spring:message
                             code="peticiones.activas"/> </a>|
-                        <a href="/peticion/usuario/misPeticionesCaducadas.do"> <spring:message
+                        <a href="peticion/usuario/misPeticionesCaducadas.do"> <spring:message
                             code="peticiones.caducadas"/> </a>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a href="/peticion/usuario/crear.do" class="btn btn-primary" role="button"> <spring:message
+                        <a href="peticion/usuario/crear.do" class="btn btn-primary" role="button"> <spring:message
                             code="peticion.nueva"/> </a>
                     </div>
                 </div>

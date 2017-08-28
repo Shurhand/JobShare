@@ -64,6 +64,9 @@
         <security:intercept-url pattern="/usuario/registroGoogle.do"
                                 access="permitAll()"/>
 
+        <security:intercept-url pattern="/pago/usuario/pagoCorrecto.do"
+                                access="permitAll()"/>
+
         <!-- ******************* ANÓNIMO ************************************ -->
         <security:intercept-url pattern="/usuario/registro.do" access="isAnonymous()"/>
 

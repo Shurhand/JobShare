@@ -1,6 +1,5 @@
 package services;
 
-import domain.Estado;
 import domain.Item;
 import domain.Oferta;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,9 @@ public class ItemService extends AbstractServiceImpl implements AbstractService<
    @Override
    public Item create() {
       actorService.checkIfUsuarioOProfesional();
-      Estado estado = Estado.ACTIVA;
       Item item = new Item();
       Collection<Oferta> ofertas = new ArrayList<>();
    
-      item.setEstado(estado);
       item.setOfertas(ofertas);
       
       return item;
