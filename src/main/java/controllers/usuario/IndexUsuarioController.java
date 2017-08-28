@@ -210,7 +210,7 @@ public class IndexUsuarioController extends AbstractController {
                errores.add("password");
                errores.add("confirmarPassword");
             }
-            if (actorService.checkDni(usuarioForm.getDNI())) {
+            if (! actorService.checkDni(usuarioForm.getDNI())) {
                hayError = true;
                erroresCheck.add("usuario.error.dniIncorrecto");
                errores.add("DNI");
@@ -230,7 +230,9 @@ public class IndexUsuarioController extends AbstractController {
                erroresCheck.add("usuario.error.emailDuplicado");
                errores.add("email");
             }
+   
             if (actorService.findActorPorDNI(usuarioForm.getDNI()) != null) {
+      
                hayError = true;
                erroresCheck.add("usuario.error.dniDuplicado");
                errores.add("DNI");

@@ -3,10 +3,16 @@
 }
 
 @media (max-width: 960px) {
+    .dropdown-menu > li > a {
+        color: white;
+    }
 
 }
 
 @media (max-width: 767px) {
+    .dropdown-menu > li > a {
+        color: white;
+    }
 }
 
 * {

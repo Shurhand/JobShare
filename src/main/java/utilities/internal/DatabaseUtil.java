@@ -10,7 +10,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.internal.util.ReflectHelper;
-import org.hibernate.jdbc.Work;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
@@ -20,8 +19,6 @@ import javax.persistence.*;
 import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
@@ -41,13 +38,10 @@ public class DatabaseUtil {
    private MetadataSources metadataSources;
 
    public DatabaseUtil() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-      // Due to a bug in Hibernate 4.3.0.Final, the old Hibernate persistence provider's selected
-      // by default, which causes a deprecation warning to be output to the console. That means that
-      // we shouldn't use Persistence to create the entity manager factory.
-      // entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceUnit);
+   
       entityManagerFactory = Persistence.createEntityManagerFactory(DatabaseConfig.PersistenceUnit);
       persistenceProvider = new HibernatePersistenceProvider();
-//		entityManagerFactory = persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit, null);
+
       entityManager = entityManagerFactory.createEntityManager();
       entityTransaction = entityManager.getTransaction();
    
@@ -57,7 +51,6 @@ public class DatabaseUtil {
       databaseDialectName = findProperty("hibernate.dialect");
       databaseDialect = (Dialect) ReflectHelper.classForName(databaseDialectName).newInstance();
 
-//		configuration = buildConfiguration();
       metadataSources = buildMetadata();
    
    }
@@ -104,13 +97,11 @@ public class DatabaseUtil {
    
    public void recreateDatabase() throws Throwable {
       List<String> databaseScript;
-      List<String> schemaScript;
-      String[] statements;
       
       databaseScript = new ArrayList<String>();
       databaseScript.add(String.format("drop database `JobShare`"));
       databaseScript.add(String.format("create database `JobShare`"));
-      databaseScript.add(String.format("use `JobShare`"));
+   
       executeScript(databaseScript);
       
       SchemaExport schemaExport = new SchemaExport();
@@ -121,29 +112,19 @@ public class DatabaseUtil {
       schemaExport.setOutputFile("D:\\Script.sql");
       schemaExport.create(EnumSet.of(TargetType.DATABASE), metadataSources.buildMetadata());
 
-
-//		schemaScript = new ArrayList<String>();
-//		schemaScript.add(String.format("use `%s`", databaseName));
-////		statements = configuration.generateSchemaCreationScript(databaseDialect);
-//		schemaScript.addAll(Arrays.asList(statements));
-//		System.out.println("la lista de es: " + schemaScript);
-//		executeScript(schemaScript);
    }
    
    private void executeScript(final List<String> script) {
       Session session;
       session = entityManager.unwrap(Session.class);
-      session.doWork(new Work() {
-         @Override
-         public void execute(Connection connection) throws SQLException {
-            Statement statement;
-   
-            statement = connection.createStatement();
-            for (String line : script) {
-               statement.execute(line);
-            }
-            connection.commit();
+      session.doWork(connection -> {
+         Statement statement;
+      
+         statement = connection.createStatement();
+         for (String line : script) {
+            statement.execute(line);
          }
+         connection.commit();
       });
    }
    
@@ -179,16 +160,10 @@ public class DatabaseUtil {
       Collection<EntityType<?>> entities;
       Collection<EmbeddableType<?>> embeddables;
       
-      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/JobShare", "newuser", "pepe");
       StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
       builder.applySettings(properties);
       StandardServiceRegistry standar = builder.build();
 
-//		metadataSources = new MetadataSources(
-//			new StandardServiceRegistryBuilder()
-//					.applySetting("hibernate.dialect", databaseDialect)
-//					.applySetting("javax.persistence.schema-generation-connection", connection)
-//					.build());
       metadataSources = new MetadataSources(standar);
       
       metamodel = entityManagerFactory.getMetamodel();
