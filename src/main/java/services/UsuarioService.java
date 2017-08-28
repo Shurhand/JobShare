@@ -237,7 +237,6 @@ public class UsuarioService extends AbstractServiceImpl implements AbstractServi
       profesional.getCuenta().setAuthorities(res);
    
       logOFF();
-//      this.delete(usuario);
       profesionalService.save(profesional);
       logUsuario(profesional);
       

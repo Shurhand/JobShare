@@ -110,21 +110,8 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    }
    
    public Collection<Peticion> getPeticionesBuscadas(BuscaForm buscaForm) {
-      Locale espanyol = new Locale("es", "ES");
-      Double presupuestoForm = buscaForm.getPresupuesto() != null ? buscaForm.getPresupuesto() : 10000.0;
-      LocalDate fechaCaducidadForm = buscaForm.getFechaCaducidad() != null ? buscaForm.getFechaCaducidad() : LocalDate.MAX;
-      Collection<Etiqueta> etiquetasForm = buscaForm.getEtiquetas() == null || buscaForm.getEtiquetas().isEmpty() ? etiquetaService.getEtiquetasActivas() : buscaForm.getEtiquetas();
-      String provinciaForm = buscaForm.getProvincia() != null ? buscaForm.getProvincia().toLowerCase(espanyol) : "".toLowerCase(espanyol);
-      String palabraClaveForm = buscaForm.getPalabraClave() != null ? buscaForm.getPalabraClave() : "";
-      
-      
-      Collection<Peticion> res = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
-      Collection<Peticion> todasPorClave = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
-      for (Peticion peticion : todasPorClave) {
-         if (peticion.getMenorPresupuestoItem() > presupuestoForm || peticion.getFechaCaducidad().isAfter(fechaCaducidadForm) || Collections.disjoint(peticion.getEtiquetas(), etiquetasForm) || ! peticion.getProvincia().toLowerCase(espanyol).contains(provinciaForm)) {
-            res.remove(peticion);
-         }
-      }
+   
+      Collection<Peticion> res = resetPeticiones(buscaForm);
    
       Comparator<Peticion> peticionComparator = this.setComparators(buscaForm);
       
@@ -168,16 +155,16 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       if (buscaForm.getOpcionRadio() != null) {
          if (buscaForm.getOpcionRadio().equals(1)) {
             peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
-            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
+            peticionComparator = peticionComparator.reversed().thenComparing(Comparator.comparingInt(x -> x.getId()));
          } else if (buscaForm.getOpcionRadio().equals(2)) {
             peticionComparator = Comparator.comparingDouble(x -> Double.valueOf(x.getPresupuestoTotal()));
-            peticionComparator = peticionComparator.thenComparing(peticionComparator);
+            peticionComparator = peticionComparator.thenComparing(Comparator.comparingInt(x -> x.getId()));
          } else if (buscaForm.getOpcionRadio().equals(3)) {
             peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
-            peticionComparator = peticionComparator.reversed().thenComparing(peticionComparator);
+            peticionComparator = peticionComparator.reversed().thenComparing(Comparator.comparingInt(x -> x.getId()));
          } else if (buscaForm.getOpcionRadio().equals(4)) {
             peticionComparator = Comparator.comparing(x -> x.getFechaCaducidad());
-            peticionComparator = peticionComparator.thenComparing(peticionComparator);
+            peticionComparator = peticionComparator.thenComparing(Comparator.comparingInt(x -> x.getId()));
          }
       }
       return peticionComparator;
