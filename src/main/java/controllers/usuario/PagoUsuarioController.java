@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import services.ItemService;
+import services.ActorService;
 import services.OfertaService;
 import services.UsuarioService;
 
@@ -27,7 +27,7 @@ public class PagoUsuarioController extends AbstractController {
    @Autowired
    private UsuarioService usuarioService;
    @Autowired
-   private ItemService itemService;
+   private ActorService actorService;
    @Autowired
    private OfertaService ofertaService;
    
@@ -52,31 +52,34 @@ public class PagoUsuarioController extends AbstractController {
       res.addObject("precioTotal", precioTotalString);
       res.addObject("peticionID", peticionID);
       res.addObject("urlReturn", urlReturn);
+      actorService.addNombre(res);
  
       return res;
    }
    
    @GetMapping("/pagoCorrecto")
    public ModelAndView procesarIPN(@RequestParam("ofertaID") List<Integer> ofertasID, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      ModelAndView vista;
-      Usuario usuario = usuarioService.findUsuario();
-
-//      Map<String, String> res = nvp(req);
-//      Set<String> ofertasString = res.entrySet().stream().filter(entry -> entry.getKey().startsWith("item_name")).map(Map.Entry::getValue).collect(Collectors.toSet());
-//
-      Collection<Oferta> ofertas = this.getOfertasDeIntegers(ofertasID);
-      for (Oferta o : ofertas) {
-         if (usuario.getPeticiones().contains(o.getItem().getPeticion())) {
-            o.setEstado(Estado.CONTRATADA);
-            ofertaService.save(o);
+      ModelAndView res;
+      Boolean hayError = Boolean.TRUE;
+   
+      if (actorService.isUsuario() || actorService.isProfesional()) {
+         Usuario usuario = usuarioService.findUsuario();
+         Collection<Oferta> ofertas = this.getOfertasDeIntegers(ofertasID);
+         for (Oferta o : ofertas) {
+            if (usuario.getPeticiones().contains(o.getItem().getPeticion())) {
+               o.setEstado(Estado.CONTRATADA);
+               ofertaService.save(o);
+               hayError = Boolean.FALSE;
+            }
          }
+      
       }
-//      ofertas.forEach(x -> x.setEstado(Estado.CONTRATADA));
-//      ofertas.forEach(x -> ofertaService.save(x));
-      
-      vista = new ModelAndView("pago/usuario/pagoCorrecto");
-      
-      return vista;
+   
+      res = new ModelAndView("pago/usuario/pagoCorrecto");
+      res.addObject("hayError", hayError);
+      actorService.addNombre(res);
+   
+      return res;
    }
    
    private Collection<Oferta> getOfertasDeString(Collection<String> strings) {

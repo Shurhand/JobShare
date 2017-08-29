@@ -110,8 +110,8 @@
                             <li><a href="peticion/usuario/buscarMisPeticiones.do"><i class="fa fa-book"
                                                                                      aria-hidden="true"></i>
                                 <spring:message code="master.page.misPeticiones"/></a></li>
-                            <li><a href="oferta/profesional/misOfertas.do"><i class="fa fa-briefcase"
-                                                                              aria-hidden="true"></i>
+                            <li><a href="oferta/profesional/buscarMisOfertas.do"><i class="fa fa-briefcase"
+                                                                                    aria-hidden="true"></i>
                                 <spring:message code="master.page.misOfertas"/></a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('ADMIN')">

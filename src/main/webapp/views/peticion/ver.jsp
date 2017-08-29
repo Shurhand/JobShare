@@ -182,9 +182,9 @@
                                                 </c:if>
                                                 <c:if test="${oferta.profesional.foto == null}">
                                                     <br>
-                                                    <h2><a
+                                                    <h5><a
                                                         href="actor/verPerfil.do?actorID=${oferta.profesional.id}"><spring:message
-                                                        code="peticion.sinFoto"/></a></h2>
+                                                        code="peticion.sinFoto"/></a></h5>
                                                 </c:if>
                                                 <c:if test="${!oferta.profesional.id.equals(actorAutenticado.id)}">
                                                     <h6 style="margin: auto">${oferta.profesional.nombre}</h6>
@@ -208,13 +208,7 @@
                                                     <c:set value="${oferta.precio}" var="precio"/>
                                                 </c:if>
                                                 <h4 style="font-size: 2rem; ">${precio} €
-                                                        <%--<c:if test="${oferta.estado == 'CONTRATADA'}">--%>
-                                                        <%--<div class="error-notice">--%>
-                                                        <%--<div class="oaerror-small warning">--%>
-                                                        <%--<spring:message code="oferta.yaContratada"/>--%>
-                                                        <%--</div>--%>
-                                                        <%--</div>--%>
-                                                        <%--</c:if>--%>
+
                                                 </h4>
                                             </div>
 
@@ -238,13 +232,13 @@
                                                     </div>
                                                 </c:if>
                                                 <c:if
-                                                    test="${item.estaContratado() && usuarioAutenticado.puedeValorarAProfesional(oferta)}">
+                                                    test="${item.estaContratado() && (usuarioAutenticado.puedeValorarAProfesional(oferta) || profesionalAutenticado.puedeValorarAProfesional(oferta))}">
                                                     <a href="valoracion/usuario/valorar.do?ofertaID=${oferta.id}"
                                                        class="btn btn-warning btn" role="button"><spring:message
                                                         code="valoracion.valorar"/></a>
                                                 </c:if>
                                                     <c:if
-                                                        test="${item.estaContratado() && usuarioAutenticado.yaHaValoradoAProfesional(oferta)}">
+                                                        test="${item.estaContratado() && (usuarioAutenticado.yaHaValoradoAProfesional(oferta) || profesionalAutenticado.yaHaValoradoAProfesional(oferta))}">
                                                         <spring:message code="valoracion.profesionalYaValorado"/>
                                                     </c:if>
                                                 </security:authorize>

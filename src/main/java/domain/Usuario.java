@@ -55,7 +55,6 @@ public class Usuario extends Actor {
    @Transient
    public boolean puedeValorarAProfesional(Oferta oferta) {
       boolean res = false;
-      Collection<Valoracion> valoraciones = this.valoraciones;
       if (oferta.getEstado().equals(Estado.CONTRATADA) && this.getPeticiones().contains(oferta.getItem().getPeticion())) {
          if (oferta.getValoracion() != null) {
             if (! this.getValoraciones().contains(oferta.getValoracion())) {

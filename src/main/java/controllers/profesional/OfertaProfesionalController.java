@@ -67,37 +67,58 @@ public class OfertaProfesionalController extends AbstractController {
    }
    
    @GetMapping("/buscarMisOfertas")
-   public ModelAndView buscarMisofertas(@Valid @ModelAttribute BuscaForm buscaForm) {
+   public ModelAndView buscarMisofertas(@Valid @ModelAttribute BuscaForm buscaForm, BindingResult bindingResult) {
+      this.limpiarComas(buscaForm);
       ModelAndView res;
+      Collection<Peticion> peticiones = new ArrayList<>();
       Profesional profesional = profesionalService.findProfesional();
-      Collection<Peticion> ofertas = ofertaService.getMisOfertasActivas(buscaForm);
+   
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+   
+      if (bindingResult.hasErrors()) {
+         res = new ModelAndView("oferta/profesional/misOfertas");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
       
-      res = new ModelAndView("oferta/profesional/misOfertas");
-      res.addObject("peticiones", ofertas);
-      res.addObject("todasEtiquetas", todasEtiquetas);
-      res.addObject("profesional", profesional);
+      } else {
+         peticiones = ofertaService.getMisOfertasActivas(buscaForm);
+         res = new ModelAndView("oferta/profesional/misOfertas");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      
+      }
+      
       actorService.addNombre(res);
-      
+      res.addObject("profesional", profesional);
       
       return res;
    }
    
    @GetMapping("/buscarMisOfertasContratadas")
-   public ModelAndView buscarMisofertasContratadas(@Valid @ModelAttribute BuscaForm buscaForm) {
+   public ModelAndView buscarMisofertasContratadas(@Valid @ModelAttribute BuscaForm buscaForm, BindingResult bindingResult) {
+      this.limpiarComas(buscaForm);
       ModelAndView res;
-   
+      Collection<Peticion> peticiones = new ArrayList<>();
       Profesional profesional = profesionalService.findProfesional();
-      Collection<Peticion> ofertas = ofertaService.getMisOfertasContratadas(buscaForm);
+   
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
+   
+      if (bindingResult.hasErrors()) {
+         res = new ModelAndView("oferta/profesional/misOfertasContratadas");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
       
-      res = new ModelAndView("oferta/profesional/misOfertasContratadas");
-      res.addObject("peticiones", ofertas);
-      res.addObject("todasEtiquetas", todasEtiquetas);
-      res.addObject("profesional", profesional);
+      } else {
+         peticiones = ofertaService.getMisOfertasContratadas(buscaForm);
+         res = new ModelAndView("oferta/profesional/misOfertasContratadas");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      
+      }
+   
       actorService.addNombre(res);
-      
-      
+      res.addObject("profesional", profesional);
+   
       return res;
    }
 

@@ -131,95 +131,93 @@
 
                 </div>
 
-                <c:forEach var="peticion" items="${peticiones}">
+            <c:forEach var="peticion" items="${peticiones}">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="item-search well white">
-                                <div class="row">
-                                    <div class="col-xs-4 col-md-2 avatar-wrapper text-center">
-                                        <c:if test="${peticion.foto != null}">
-                                            <img alt="" height="100px" width="100px" class="img-circle center-block"
-                                                 src="${peticion.foto}">
-                                        </c:if>
-                                        <c:if test="${peticion.foto == null}">
-                                            <br>
-                                            <h2><spring:message code="peticion.sinFoto"/></h2>
-                                        </c:if>
-                                        <c:if test="${peticion.items.isEmpty()}">
-                                            <div class="error-notice">
-                                                <div class="oaerror-small warning">
-                                                    <spring:message code="peticion.sinItems"/>
-                                                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="item-search well white">
+                            <div class="row">
+                                <div class="col-xs-4 col-md-2 avatar-wrapper text-center">
+                                    <c:if test="${peticion.foto != null}">
+                                        <img alt="" height="100px" width="100px" class="img-circle center-block"
+                                             src="${peticion.foto}">
+                                    </c:if>
+                                    <c:if test="${peticion.foto == null}">
+                                        <br>
+                                        <h2><spring:message code="peticion.sinFoto"/></h2>
+                                    </c:if>
+                                    <c:if test="${peticion.items.isEmpty()}">
+                                        <div class="error-notice">
+                                            <div class="oaerror-small warning">
+                                                <spring:message code="peticion.sinItems"/>
                                             </div>
-                                        </c:if>
-                                    </div>
-
-                                    <div class="col-xs-8 col-md-8 info-wrapper">
-                                        <a href="peticion/ver.do?peticionID=${peticion.id}"> <b><h4>${peticion.titulo}
-                                            &nbsp;-&nbsp; ${peticion.provincia} </h4></b></a>
-                                        <h5>${peticion.descripcion}</h5>
-                                    </div>
-                                    <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
-                                        <spring:message code="peticion.fechaCaducidad"/>
-                                        <tags:localDate date="${peticion.fechaCaducidad}" pattern="dd/MM/yyyy"/>
-                                        <h4><spring:message code="peticion.presupuesto"/></h4>
-                                        <p>${peticion.getPresupuestoTotal()} €</p>
-
-                                    </div>
+                                        </div>
+                                    </c:if>
                                 </div>
-                                <hr>
-                                <c:forEach var="item" items="${peticion.items}">
-                                    <c:forEach var="oferta" items="${item.ofertas}">
-                                        <c:if
-                                            test="${profesional.ofertas.contains(oferta) && oferta.estado == 'ACTIVA'}">
-                                            <div class="row">
-                                                <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
-                                                    <c:if test="${item.foto != null}">
-                                                        <img alt="" height="50px" width="50px"
-                                                             class="img-circle center-block"
-                                                             src="${item.foto}">
-                                                    </c:if>
-                                                    <c:if test="${item.foto == null}">
-                                                        <br>
-                                                        <h2><spring:message
-                                                            code="peticion.sinFoto"/></h2>
-                                                    </c:if>
 
-                                                    <br>
-                                                </div>
-                                                <div class="col-xs-2 col-md-2">
-                                                    <br>
-                                                    <c:set var="precioString" value="${String.valueOf(oferta.precio)}"/>
-                                                    <c:if test="${precioString.endsWith('0')}">
-                                                        <c:set
-                                                            value="${precioString.substring(0, precioString.length() - 2)}"
-                                                            var="precio"/>
-                                                    </c:if>
-                                                    <c:if test="${!precioString.endsWith('0')}">
-                                                        <c:set value="${oferta.precio}" var="precio"/>
-                                                    </c:if>
-                                                    <h4 style="font-size: 2rem; ">${precio} €</h4>
-                                                </div>
+                                <div class="col-xs-8 col-md-8 info-wrapper">
+                                    <a href="peticion/ver.do?peticionID=${peticion.id}"> <b><h4>${peticion.titulo}
+                                        &nbsp;-&nbsp; ${peticion.provincia} </h4></b></a>
+                                    <h5>${peticion.descripcion}</h5>
+                                </div>
+                                <div class="col-md-2 col-xs-12 buttons-wrapper text-center">
+                                    <spring:message code="peticion.fechaCaducidad"/>
+                                    <tags:localDate date="${peticion.fechaCaducidad}" pattern="dd/MM/yyyy"/>
+                                    <h4><spring:message code="peticion.presupuesto"/></h4>
+                                    <p>${peticion.getPresupuestoTotal()} €</p>
 
-                                                <div class="col-xs-6 col-md-6">
-                                                    <br>
-                                                    <div class="justificar-texto">
-                                                        <h5>${oferta.comentario}</h5>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:forEach>
-                                    </div>
                                 </div>
                             </div>
+                            <hr>
+                            <c:forEach var="item" items="${peticion.items}">
+                                <c:forEach var="oferta" items="${item.ofertas}">
+                                    <c:if
+                                        test="${profesional.ofertas.contains(oferta) && oferta.estado == 'ACTIVA'}">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-2 avatar-wrapper text-center">
+                                                <c:if test="${item.foto != null}">
+                                                    <img alt="" height="50px" width="50px"
+                                                         class="img-circle center-block"
+                                                         src="${item.foto}">
+                                                </c:if>
+                                                <c:if test="${item.foto == null}">
+                                                    <br>
+                                                    <h5><spring:message
+                                                        code="peticion.sinFoto"/></h5>
+                                                </c:if>
 
+                                                <br>
+                                            </div>
+                                            <div class="col-xs-2 col-md-2">
+                                                <br>
+                                                <c:set var="precioString" value="${String.valueOf(oferta.precio)}"/>
+                                                <c:if test="${precioString.endsWith('0')}">
+                                                    <c:set
+                                                        value="${precioString.substring(0, precioString.length() - 2)}"
+                                                        var="precio"/>
+                                                </c:if>
+                                                <c:if test="${!precioString.endsWith('0')}">
+                                                    <c:set value="${oferta.precio}" var="precio"/>
+                                                </c:if>
+                                                <h4 style="font-size: 2rem; ">${precio} €</h4>
+                                            </div>
+
+                                            <div class="col-xs-6 col-md-6">
+                                                <br>
+                                                <div class="justificar-texto">
+                                                    <h5>${oferta.comentario}</h5>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </c:forEach>
                         </div>
+
                     </div>
-                </c:forEach>
+                </div>
+            </c:forEach>
             </div>
         </div>
     </form:form>
@@ -261,3 +259,4 @@
         });
     }
 </script>
+
