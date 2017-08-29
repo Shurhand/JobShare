@@ -18,8 +18,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 <br><br>
 <div class="container">
-
-    <form:form action="peticion/usuario/buscarMisPeticionesCaducadas.do" method="get" modelAttribute="buscaForm"
+    <form:form action="peticion/buscarMisPeticionesCaducadas.do" method="get" modelAttribute="buscaForm"
                acceptCharset="UTF-8">
         <div class="row">
             <div class="col-md-3 search-filter" id="sidebar">
@@ -30,25 +29,25 @@
                     <h4><spring:message code="peticion.ordernarPor"/></h4>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="1"/>
+                            <form:radiobutton onchange="mySubmit(this.form)" path="opcionRadio" value="1"/>
                             <spring:message code="peticion.mayorPresupuesto"/>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="2"/>
+                            <form:radiobutton onchange="mySubmit(this.form)" path="opcionRadio" value="2"/>
                             <spring:message code="peticion.menorPresupuesto"/>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="3"/>
+                            <form:radiobutton onchange="mySubmit(this.form)" path="opcionRadio" value="3"/>
                             <spring:message code="peticion.mayorFechaCaducidad"/>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <form:radiobutton onchange="this.form.submit();" path="opcionRadio" value="4"/>
+                            <form:radiobutton onchange="mySubmit(this.form)" path="opcionRadio" value="4"/>
                             <spring:message code="peticion.menorFechaCaducidad"/>
                         </label>
                     </div>
@@ -59,7 +58,7 @@
                         <spring:message code="buscaForm.etiquetas" var="etiquetas"/>
 
                         <form:select path="etiquetas" class="form-control js-example-basic-multiple"
-                                     multiple="multiple" onchange="this.form.submit();">
+                                     multiple="multiple" onchange="mySubmit(this.form)">
                             <form:options items="${todasEtiquetas}" itemLabel="nombre" itemValue="id"/>
                         </form:select>
                         <form:errors class="help-block" path="etiquetas"/>
@@ -71,9 +70,9 @@
                         <spring:message code="buscaForm.fechaCaducidad" var="fechaCaducidad"/>
 
                         <div class="input-group date" id="datepicker1">
-                            <form:input pattern="\d{1,2}/\d{1,2}/\d{4}" class="form-control"
+                            <form:input class="form-control"
                                         path="fechaCaducidad"
-                                        placeholder="dd/MM/yyyy" onchange="this.form.submit();"/>
+                                        placeholder="dd/MM/yyyy" onchange="mySubmit(this.form)"/>
                             <div class="input-group-addon">
                                 <span class="fa fa-calendar"></span>
                             </div>
@@ -84,10 +83,9 @@
                     <h4><spring:message code="buscaForm.presupuestoMaximoPorItem"/></h4>
                     <div
                         class="form-group ${errores.contains('presupuesto') ? 'has-error has-feedback' : errores != null ? 'has-success has-feedback' : ''}">
-                        <spring:message code="buscaForm.presupuesto" var="presupuesto"/>
 
                         <form:input type="number" min="1.0" max="10000.0" step="0.5" class="form-control"
-                                    path="presupuesto" placeholder="${presupuesto}" onchange="this.form.submit();"/>
+                                    path="presupuesto" placeholder="${presupuesto}" onchange="mySubmit(this.form)"/>
                         <form:errors class="help-block" path="presupuesto"/>
                     </div>
                     <hr/>
@@ -97,24 +95,23 @@
                         <spring:message code="buscaForm.provincia" var="provincia"/>
 
                         <form:input class="form-control"
-                                    path="provincia" placeholder="${provincia}"/>
+                                    path="provincia" placeholder="${provincia}" onchange="mySubmit(this.form)"/>
                         <form:errors class="help-block" path="provincia"/>
                     </div>
                     <br>
                     <button onclick="clearRadio()" class="form-control"><span
                         class="glyphicon glyphicon-refresh"></span> <spring:message code="peticion.limpiarRadio"/>
                     </button>
-
                 </div>
             </div>
-                <%--<h4>${peticiones.size()} <spring:message code="peticion.peticionesRealizadas"/></h4>--%>
 
-            <div class="col-md-9">
+            <div id="peticiones" class="col-md-9">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="input-group">
                             <spring:message code="buscaForm.search" var="search"/>
-                            <form:input path="palabraClave" class="form-control input" placeholder="${search}"/>
+                            <form:input path="palabraClave" class="form-control input" placeholder="${search}"
+                                        onchange="mySubmit(this.form)"/>
                             <span class="input-group-btn">
                                 <button type="submit" name="buscar" class="btn btn btn-primary"><i
                                     class="fa fa-search"></i>
@@ -122,13 +119,13 @@
                               </button>
                             </span>
                         </div>
-                        <a href="/peticion/usuario/misPeticiones.do"> <spring:message
+                        <a href="peticion/usuario/buscarMisPeticiones.do"> <spring:message
                             code="peticiones.activas"/> </a>|
-                        <a href="/peticion/usuario/misPeticionesCaducadas.do"> <spring:message
+                        <a href="peticion/usuario/buscarMisPeticionesCaducadas.do"> <spring:message
                             code="peticiones.caducadas"/> </a>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a href="/peticion/usuario/crear.do" class="btn btn-primary" role="button"> <spring:message
+                        <a href="peticion/usuario/crear.do" class="btn btn-primary" role="button"> <spring:message
                             code="peticion.nueva"/> </a>
                     </div>
                 </div>
@@ -200,12 +197,22 @@
 </script>
 
 <script type="text/javascript">
-    $('form input').change(function () {
-        $(this).closest('form').submit();
-    });
-</script>
-<script type="text/javascript">
     function clearRadio() {
         $('input[type=radio]').prop('checked', false);
     }
 </script>
+
+<script type="text/javascript">
+    function mySubmit(theForm) {
+        $.ajax({
+            data: $(theForm).serialize(),
+            type: $(theForm).attr('get'),
+            url: $(theForm).attr('peticion/buscarMisPeticionesCaducadas.do'),
+            success: function (data) {
+                console.log(data);
+                $('#peticiones').replaceWith($(data).find(" #peticiones"));
+            }
+        });
+    }
+</script>
+

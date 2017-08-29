@@ -82,9 +82,9 @@
                         <c:set var="indice" value="${indice + 1}"/>
                     </c:forEach>
 
-                    <input type="hidden" name="return" value="http://localhost/peticion/usuario/misPeticiones.do">
+                    <input type="hidden" name="return" value="http://localhost/peticion/usuario/buscarMisPeticiones.do">
                     <input type="hidden" name="cancel_return"
-                           value="http://localhost/peticion/usuario/misPeticiones.do">
+                           value="http://localhost/peticion/usuario/buscarMisPeticiones.do">
                     <input type="hidden" name="notify_url"
                            value="http://c97b44e2.ngrok.io/pago/usuario/pagoCorrecto.do"/>
 

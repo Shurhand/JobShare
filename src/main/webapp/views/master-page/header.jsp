@@ -102,13 +102,13 @@
                             </li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('USUARIO')">
-                            <li><a href="peticion/usuario/misPeticiones.do"><i class="fa fa-book"
-                                                                               aria-hidden="true"></i>
+                            <li><a href="peticion/usuario/buscarMisPeticiones.do"><i class="fa fa-book"
+                                                                                     aria-hidden="true"></i>
                                 <spring:message code="master.page.misPeticiones"/></a></li>
                         </security:authorize>
                         <security:authorize access="hasAuthority('PROFESIONAL')">
-                            <li><a href="peticion/usuario/misPeticiones.do"><i class="fa fa-book"
-                                                                               aria-hidden="true"></i>
+                            <li><a href="peticion/usuario/buscarMisPeticiones.do"><i class="fa fa-book"
+                                                                                     aria-hidden="true"></i>
                                 <spring:message code="master.page.misPeticiones"/></a></li>
                             <li><a href="oferta/profesional/misOfertas.do"><i class="fa fa-briefcase"
                                                                               aria-hidden="true"></i>

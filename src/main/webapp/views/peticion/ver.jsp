@@ -34,7 +34,7 @@
                     </c:if></security:authorize></h2>
             <br>
             <div class="row">
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 col-xs-6 text-center">
 
                     <c:if test="${usuario.foto == null}">
                         <br>
@@ -49,7 +49,7 @@
                     </c:if>
                     <input id="ratingPersonal" value="${profesional.getValoracionTotal()}" class="rating-animate"/>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-xs-6">
                     <c:if test="${peticion.foto == null}">
                         <br>
                         <h2><spring:message code="actor.sinFoto"/></h2>
@@ -62,7 +62,7 @@
                     </c:if>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-12">
                     <c:forEach var="etiqueta" items="${peticion.etiquetas}">
                         <b class="etiquetas">#<c:out value="${etiqueta.nombre}"/></b>
                     </c:forEach>

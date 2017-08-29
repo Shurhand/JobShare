@@ -1,5 +1,6 @@
 package services;
 
+import com.google.common.base.Strings;
 import domain.*;
 import forms.BuscaForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -171,10 +173,12 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    }
    
    public Collection<Peticion> resetPeticiones(BuscaForm buscaForm) {
-      
+   
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
       Locale espanyol = new Locale("es", "ES");
-      Double presupuestoForm = buscaForm.getPresupuesto() != null ? buscaForm.getPresupuesto() : 10000.0;
-      LocalDate fechaCaducidadForm = buscaForm.getFechaCaducidad() != null ? buscaForm.getFechaCaducidad() : LocalDate.MAX;
+      formatter = formatter.withLocale(espanyol);
+      Double presupuestoForm = ! Strings.isNullOrEmpty(buscaForm.getPresupuesto()) ? Double.valueOf(buscaForm.getPresupuesto()) : 10000.0;
+      LocalDate fechaCaducidadForm = ! Strings.isNullOrEmpty(buscaForm.getFechaCaducidad()) ? LocalDate.parse(buscaForm.getFechaCaducidad(), formatter) : LocalDate.MAX;
       Collection<Etiqueta> etiquetasForm = buscaForm.getEtiquetas() == null || buscaForm.getEtiquetas().isEmpty() ? etiquetaService.getEtiquetasActivas() : buscaForm.getEtiquetas();
       String provinciaForm = buscaForm.getProvincia() != null ? buscaForm.getProvincia().toLowerCase(espanyol) : "".toLowerCase(espanyol);
       String palabraClaveForm = buscaForm.getPalabraClave() != null ? buscaForm.getPalabraClave() : "";

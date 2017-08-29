@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import security.Credenciales;
 import services.ActorService;
 import services.EtiquetaService;
 import services.PeticionService;
@@ -59,35 +58,51 @@ public class PeticionUsuarioController extends AbstractController {
    }
    
    @GetMapping("/buscarMisPeticiones")
-   public ModelAndView buscarMisPeticiones(@Valid @ModelAttribute BuscaForm buscaForm) {
+   public ModelAndView buscarMisPeticiones(@Valid @ModelAttribute BuscaForm buscaForm, BindingResult bindingResult) {
+      this.limpiarComas(buscaForm);
       ModelAndView res;
-      
-      Collection<Peticion> peticiones = peticionService.getMisPeticionesBuscadas(buscaForm);
+   
+      Usuario usuario = usuarioService.findUsuario();
+      Collection<Peticion> peticiones = new ArrayList<>();
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
    
+      if (bindingResult.hasErrors()) {
+         res = new ModelAndView("peticion/usuario/misPeticiones");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      } else {
+         peticiones = peticionService.getMisPeticionesBuscadas(buscaForm);
+         res = new ModelAndView("peticion/usuario/misPeticiones");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      }
    
-      res = new ModelAndView("peticion/usuario/buscar");
-      res.addObject("peticiones", peticiones);
-      res.addObject("todasEtiquetas", todasEtiquetas);
+      res.addObject("usuario", usuario);
       actorService.addNombre(res);
-   
    
       return res;
    }
    
    @GetMapping("/buscarMisPeticionesCaducadas")
-   public ModelAndView buscarMisPeticionesCaducadas(@Valid @ModelAttribute BuscaForm buscaForm) {
+   public ModelAndView buscarMisPeticionesCaducadas(@Valid @ModelAttribute BuscaForm buscaForm, BindingResult bindingResult) {
+      this.limpiarComas(buscaForm);
       ModelAndView res;
-      
-      Collection<Peticion> peticiones = peticionService.getMisPeticionesBuscadasCaducadas(buscaForm);
+      Usuario usuario = usuarioService.findUsuario();
+      Collection<Peticion> peticiones = new ArrayList<>();
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
    
-   
-      res = new ModelAndView("peticion/usuario/buscarCaducadas");
-      res.addObject("peticiones", peticiones);
-      res.addObject("todasEtiquetas", todasEtiquetas);
+      if (bindingResult.hasErrors()) {
+         res = new ModelAndView("peticion/usuario/misPeticionesCaducadas");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      } else {
+         peticiones = peticionService.getMisPeticionesBuscadasCaducadas(buscaForm);
+         res = new ModelAndView("peticion/usuario/misPeticionesCaducadas");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      }
+      res.addObject("usuario", usuario);
       actorService.addNombre(res);
-   
    
       return res;
    }
@@ -180,7 +195,7 @@ public class PeticionUsuarioController extends AbstractController {
        Peticion peticion = peticionService.findOne(peticionID);
        peticionService.delete(peticion);
    
-       result = new ModelAndView("redirect:/peticion/usuario/misPeticiones.do");
+       result = new ModelAndView("redirect:/peticion/usuario/buscarMisPeticiones.do");
 
         return result;
    }
@@ -189,12 +204,10 @@ public class PeticionUsuarioController extends AbstractController {
       ModelAndView res;
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
       
-      Credenciales credenciales = new Credenciales();
       String vista = peticion.getId() != 0 ? "peticion/usuario/editar" : "peticion/usuario/crear";
    
       res = new ModelAndView(vista);
       res.addObject("peticion", peticion);
-      res.addObject("credenciales", credenciales);
       res.addObject("todasEtiquetas", todasEtiquetas);
       actorService.addNombre(res);
       

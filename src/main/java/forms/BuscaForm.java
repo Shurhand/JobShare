@@ -2,11 +2,9 @@ package forms;
 
 import domain.Etiqueta;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.Collection;
 
 public class BuscaForm {
@@ -15,8 +13,8 @@ public class BuscaForm {
    }
    
    private String palabraClave;
-   private LocalDate fechaCaducidad;
-   private Double presupuesto;
+   private String fechaCaducidad;
+   private String presupuesto;
    private String provincia;
    private Collection<Etiqueta> etiquetas;
    private Integer opcionRadio;
@@ -33,24 +31,26 @@ public class BuscaForm {
    }
    
    @DateTimeFormat(pattern = "dd/MM/yyyy")
-   public LocalDate getFechaCaducidad() {
+   public String getFechaCaducidad() {
       return fechaCaducidad;
    }
    
-   public void setFechaCaducidad(LocalDate fechaCaducidad) {
+   public void setFechaCaducidad(String fechaCaducidad) {
       this.fechaCaducidad = fechaCaducidad;
    }
    
-   @Range(min = 1, max = 10000)
-   public Double getPresupuesto() {
+   @Length(max = 5)
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
+   public String getPresupuesto() {
       return presupuesto;
    }
    
-   public void setPresupuesto(Double presupuesto) {
+   public void setPresupuesto(String presupuesto) {
       this.presupuesto = presupuesto;
    }
    
    @Length(max = 50)
+   @SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
    public String getProvincia() {
       return provincia;
    }

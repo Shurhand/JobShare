@@ -97,10 +97,11 @@ public class DatabaseUtil {
    
    public void recreateDatabase() throws Throwable {
       List<String> databaseScript;
-      
-      databaseScript = new ArrayList<String>();
+   
+      databaseScript = new ArrayList<>();
       databaseScript.add(String.format("drop database `JobShare`"));
       databaseScript.add(String.format("create database `JobShare`"));
+      databaseScript.add(String.format("use `JobShare`"));
    
       executeScript(databaseScript);
       

@@ -5,6 +5,7 @@ import forms.BuscaForm;
 import forms.PagoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import security.Credenciales;
 import services.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.SortedSet;
 
@@ -35,22 +37,30 @@ public class PeticionController extends AbstractController {
    private EtiquetaService etiquetaService;
    
    @GetMapping("/buscar")
-   public ModelAndView buscar(@Valid @ModelAttribute BuscaForm buscaForm) {
+   public ModelAndView buscar(@Valid @ModelAttribute BuscaForm buscaForm, BindingResult bindingResult) {
       ModelAndView res;
    
-      Actor actorAutenticado = null;
-      
-      Collection<Peticion> peticiones = peticionService.getPeticionesBuscadas(buscaForm);
+      this.limpiarComas(buscaForm);
+   
+      Collection<Peticion> peticiones = new ArrayList<>();
       SortedSet<Etiqueta> todasEtiquetas = etiquetaService.getEtiquetasActivadasOrdenadas();
    
-      
-      res = new ModelAndView("peticion/buscar");
-      res.addObject("peticiones", peticiones);
-      res.addObject("todasEtiquetas", todasEtiquetas);
-   
+      if (bindingResult.hasErrors()) {
+         res = new ModelAndView("peticion/buscar");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      } else {
+         peticiones = peticionService.getPeticionesBuscadas(buscaForm);
+         res = new ModelAndView("peticion/buscar");
+         res.addObject("peticiones", peticiones);
+         res.addObject("todasEtiquetas", todasEtiquetas);
+      }
+
       actorService.addNombre(res);
-      
+
       return res;
+   
+   
    }
    
    
@@ -91,4 +101,5 @@ public class PeticionController extends AbstractController {
       
       return res;
    }
+   
 }
