@@ -243,6 +243,10 @@
                                                        class="btn btn-warning btn" role="button"><spring:message
                                                         code="valoracion.valorar"/></a>
                                                 </c:if>
+                                                    <c:if
+                                                        test="${item.estaContratado() && usuarioAutenticado.yaHaValoradoAProfesional(oferta)}">
+                                                        <spring:message code="valoracion.profesionalYaValorado"/>
+                                                    </c:if>
                                                 </security:authorize>
                                             </div>
 

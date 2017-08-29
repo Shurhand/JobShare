@@ -68,4 +68,9 @@ public class Usuario extends Actor {
    
       return res;
    }
+   
+   @Transient
+   public boolean yaHaValoradoAProfesional(Oferta oferta) {
+      return this.valoraciones.contains(oferta.getValoracion());
+   }
 }

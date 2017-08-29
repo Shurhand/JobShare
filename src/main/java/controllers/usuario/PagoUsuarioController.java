@@ -3,14 +3,12 @@ package controllers.usuario;
 import controllers.AbstractController;
 import domain.Estado;
 import domain.Oferta;
+import domain.Usuario;
 import forms.PagoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import services.ItemService;
 import services.OfertaService;
@@ -22,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("pago/usuario")
@@ -40,6 +37,12 @@ public class PagoUsuarioController extends AbstractController {
    
       Collection<Oferta> ofertas = this.getOfertasDeString(pagoForm.getOfertas());
    
+      String urlReturn = "http://localhost:8080/pago/usuario/pagoCorrecto.do?";
+      for (Oferta o : ofertas) {
+         urlReturn += "ofertaID=" + o.getId() + "&";
+      }
+      urlReturn = urlReturn.substring(0, urlReturn.length() - 1);
+   
       Double precioTotal = ofertas.stream().mapToDouble(x -> x.getPrecio()).sum();
       String precioTotalString = precioTotal.toString();
       precioTotalString = precioTotalString.endsWith("0") ? precioTotalString.substring(0, precioTotalString.length() - 2) : precioTotalString;
@@ -48,24 +51,32 @@ public class PagoUsuarioController extends AbstractController {
       res.addObject("ofertas", ofertas);
       res.addObject("precioTotal", precioTotalString);
       res.addObject("peticionID", peticionID);
+      res.addObject("urlReturn", urlReturn);
  
       return res;
    }
    
-   @PostMapping("/pagoCorrecto")
-   public void procesarIPN(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+   @GetMapping("/pagoCorrecto")
+   public ModelAndView procesarIPN(@RequestParam("ofertaID") List<Integer> ofertasID, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      ModelAndView vista;
+      Usuario usuario = usuarioService.findUsuario();
+
+//      Map<String, String> res = nvp(req);
+//      Set<String> ofertasString = res.entrySet().stream().filter(entry -> entry.getKey().startsWith("item_name")).map(Map.Entry::getValue).collect(Collectors.toSet());
+//
+      Collection<Oferta> ofertas = this.getOfertasDeIntegers(ofertasID);
+      for (Oferta o : ofertas) {
+         if (usuario.getPeticiones().contains(o.getItem().getPeticion())) {
+            o.setEstado(Estado.CONTRATADA);
+            ofertaService.save(o);
+         }
+      }
+//      ofertas.forEach(x -> x.setEstado(Estado.CONTRATADA));
+//      ofertas.forEach(x -> ofertaService.save(x));
       
-      System.out.println(req.toString());
+      vista = new ModelAndView("pago/usuario/pagoCorrecto");
       
-      Map<String, String> res = nvp(req);
-      Set<String> ofertasString = res.entrySet().stream().filter(entry -> entry.getKey().startsWith("item_name")).map(Map.Entry::getValue).collect(Collectors.toSet());
-      
-      Collection<Oferta> ofertas = this.getOfertasDeString(ofertasString);
-      
-      ofertas.forEach(x -> x.setEstado(Estado.CONTRATADA));
-      ofertas.forEach(x -> ofertaService.save(x));
-      
-      
+      return vista;
    }
    
    private Collection<Oferta> getOfertasDeString(Collection<String> strings) {
@@ -78,8 +89,17 @@ public class PagoUsuarioController extends AbstractController {
       return ofertas;
    }
    
+   private Collection<Oferta> getOfertasDeIntegers(Collection<Integer> integers) {
+      Collection<Oferta> ofertas = new ArrayList<>();
+      for (Integer i : integers) {
+         Oferta oferta = ofertaService.findOne(i);
+         ofertas.add(oferta);
+      }
+      
+      return ofertas;
+   }
+   
    // Creación del map de contenidos
-   @SuppressWarnings("unchecked")
    protected Map<String, String> nvp(HttpServletRequest req) {
       Map<String, String[]> params = req.getParameterMap();
       Map<String, String> nvp = new HashMap<>();

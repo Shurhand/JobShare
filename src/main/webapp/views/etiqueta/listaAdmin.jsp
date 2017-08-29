@@ -22,9 +22,9 @@
 
             <thead>
             <tr>
-                <th>Nombre</th>
+                <th class="text-center">Nombre</th>
                 <th>Activada</th>
-                <th>Activar/Desactivar</th>
+                <th class="text-center">Activar/Desactivar</th>
             </tr>
             </thead>
         </table>
@@ -74,16 +74,18 @@
                 }
 
             ],
-            'columnDefs': [{"className": "dt-body-center", "targets": [1, 2]},
+            'columnDefs': [
+                {"className": "dt-center", "targets": [1, 2]},
                 {
                 'targets': 2,
                 'searchable': false,
                 'orderable': false,
 
                 "mRender": function (data, type, full) {
+                    console.log(full);
                     var aux = full.id;
                     var elHTML = '<a href="etiqueta/admin/activar.do?etiquetaID=';
-                    var final = elHTML + aux + '"><spring:message code="etiqueta.bloquear"/> </a>';
+                    var final = elHTML + aux + '" class="btn btn-danger btn-xs" role="button"><spring:message code="etiqueta.activar"/> </a>';
                     return final;
                 }
 

@@ -113,7 +113,7 @@
                 "mRender": function (data, type, full) {
                     var aux = full.id;
                     var elHTML = '<a href="usuario/admin/bloquear.do?usuarioID=';
-                    var final = elHTML + aux + '"><spring:message code="usuario.bloquear"/> </a>';
+                    var final = elHTML + aux + '" class="btn btn-danger btn-xs" role="button"><spring:message code="usuario.bloquear"/> </a>';
                     return final;
                 }
             },
@@ -125,7 +125,7 @@
                     "mRender": function (data, type, full) {
                         var aux = full.id;
                         var elHTML = '<a href="actor/verPerfil.do?actorID=';
-                        var final = elHTML + aux + '"><spring:message code="usuario.ver"/> </a>';
+                        var final = elHTML + aux + '" class="btn btn-info btn-xs" role="button"><spring:message code="usuario.ver"/> </a>';
                         return final;
                     }
 

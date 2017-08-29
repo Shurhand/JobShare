@@ -76,17 +76,16 @@
                     <input type="hidden" name="cmd" value="_cart">
                     <input type="hidden" name="upload" value="1">
                     <c:set var="indice" value="1"/>
+                        <%--<c:set var="parametros" value="?"/>--%>
                     <c:forEach var="oferta" items="${ofertas}">
                         <input type="hidden" name="item_name_${indice}" value="${oferta.id}">
                         <input type="hidden" name="amount_${indice}" value="${oferta.precio}">
                         <c:set var="indice" value="${indice + 1}"/>
                     </c:forEach>
 
-                    <input type="hidden" name="return" value="http://localhost/peticion/usuario/buscarMisPeticiones.do">
+                    <input type="hidden" name="return" value="${urlReturn}"/>
                     <input type="hidden" name="cancel_return"
-                           value="http://localhost/peticion/usuario/buscarMisPeticiones.do">
-                    <input type="hidden" name="notify_url"
-                           value="http://c97b44e2.ngrok.io/pago/usuario/pagoCorrecto.do"/>
+                           value="http://localhost:8080/peticion/usuario/buscarMisPeticiones.do">
 
                     <!-- Display the payment button. -->
                     <input type="image" name="submit" border="0"

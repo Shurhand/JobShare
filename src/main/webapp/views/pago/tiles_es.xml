@@ -11,4 +11,8 @@
         <put-attribute name="body" value="/views/pago/pagar.jsp"/>
     </definition>
 
+    <definition name="pago/usuario/pagoCorrecto" extends="master.page">
+        <put-attribute name="title" value="Pago correcto"/>
+        <put-attribute name="body" value="/views/pago/pagoCorrecto.jsp"/>
+    </definition>
 </tiles-definitions>
