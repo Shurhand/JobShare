@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.util.Assert;
 import security.Autoridad;
 import security.Cuenta;
@@ -24,7 +24,7 @@ import java.util.Collection;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/datasource.xml", "classpath:spring/config/packages.xml"})
 @Transactional
-@TransactionConfiguration(defaultRollback = false)
+@Commit
 public class UsuarioTests extends AbstractTest {
    @Autowired
    private UsuarioService usuarioService;
@@ -51,7 +51,6 @@ public class UsuarioTests extends AbstractTest {
    //Test positivo registrándose correctamente
    @Test
    public void testRegistro1() {
-      
       Usuario usuario = usuarioService.create();
       Cuenta cuenta = new Cuenta();
       Md5PasswordEncoder md5PassWordEncoder = new Md5PasswordEncoder();

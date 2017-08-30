@@ -71,7 +71,9 @@ public class PeticionUsuarioController extends AbstractController {
          res.addObject("peticiones", peticiones);
          res.addObject("todasEtiquetas", todasEtiquetas);
       } else {
+   
          peticiones = peticionService.getMisPeticionesBuscadas(buscaForm);
+   
          res = new ModelAndView("peticion/usuario/misPeticiones");
          res.addObject("peticiones", peticiones);
          res.addObject("todasEtiquetas", todasEtiquetas);

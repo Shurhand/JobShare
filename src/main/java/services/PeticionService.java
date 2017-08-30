@@ -125,16 +125,18 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    }
    
    public Collection<Peticion> getMisPeticionesBuscadas(BuscaForm buscaForm) {
+   
       Usuario usuario = usuarioService.findUsuario();
       Collection<Peticion> res = resetPeticiones(buscaForm);
    
       Comparator<Peticion> peticionComparator = this.setComparators(buscaForm);
-      
+   
       SortedSet<Peticion> peticionesOrdenadas = new TreeSet<>(peticionComparator);
+   
       peticionesOrdenadas.addAll(res);
       peticionesOrdenadas.removeIf(x -> ! x.getUsuario().equals(usuario));
       peticionesOrdenadas.removeIf(x -> x.getFechaCaducidad().isBefore(LocalDate.now()));
-      
+   
       return peticionesOrdenadas;
    }
    
@@ -182,15 +184,18 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
       Collection<Etiqueta> etiquetasForm = buscaForm.getEtiquetas() == null || buscaForm.getEtiquetas().isEmpty() ? etiquetaService.getEtiquetasActivas() : buscaForm.getEtiquetas();
       String provinciaForm = buscaForm.getProvincia() != null ? buscaForm.getProvincia().toLowerCase(espanyol) : "".toLowerCase(espanyol);
       String palabraClaveForm = buscaForm.getPalabraClave() != null ? buscaForm.getPalabraClave() : "";
-      
-      
+   
+   
       Collection<Peticion> res = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
-      Collection<Peticion> todasPorClave = peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm);
+      Set<Peticion> todasPorClave = new HashSet<>(peticionRepository.getPeticionesPorPalabraClave(palabraClaveForm));
+     
       for (Peticion peticion : todasPorClave) {
          if (peticion.getMenorPresupuestoItem() > presupuestoForm || peticion.getFechaCaducidad().isAfter(fechaCaducidadForm) || Collections.disjoint(peticion.getEtiquetas(), etiquetasForm) || ! peticion.getProvincia().toLowerCase(espanyol).contains(provinciaForm)) {
+                
             res.remove(peticion);
          }
       }
+   
       return res;
    }
 }
