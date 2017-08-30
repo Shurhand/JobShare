@@ -22,8 +22,8 @@
 
             <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Activada</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Activada</th>
             </tr>
             </thead>
         </table>

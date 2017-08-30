@@ -30,8 +30,6 @@
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/tooltip.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap-timepicker.js"></script>
-    <script type="text/javascript" src="scripts/jquery.bootstrap-duallistbox.js"></script>
     <script type="text/javascript" src="scripts/star-rating.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>

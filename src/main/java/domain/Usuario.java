@@ -10,14 +10,15 @@ import java.util.Collection;
 @Access(AccessType.PROPERTY)
 
 public class Usuario extends Actor {
-   public Usuario() {
-      super();
-   }
    
    // Relaciones
    private Collection<Peticion> peticiones;
    private Collection<Pago> pagos;
    private Collection<Valoracion> valoraciones;
+   
+   public Usuario() {
+      super();
+   }
    
    @NotNull
    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")

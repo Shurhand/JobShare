@@ -17,6 +17,7 @@ public abstract class DomainEntity {
    }
    
    @Id
+   @Column(nullable = false, updatable = false, unique = true)
    @GeneratedValue(strategy = GenerationType.TABLE)
    public int getId() {
       return id;

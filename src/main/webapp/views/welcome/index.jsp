@@ -8,7 +8,7 @@
           uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="styles/custom.css" type="text/css">
 
-<div class="jumbotron jumbotron-fluid jumbo-custom" style="background-image: url(/images/Plaza-España.jpg);">
+<div class="jumbotron jumbotron-fluid jumbo-custom" style="background-image: url(/images/Plaza-Espana.jpg);">
 
     <div class="container text-center">
         <div class="col-md-10 col-md-offset-1">

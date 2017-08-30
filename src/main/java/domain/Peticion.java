@@ -125,10 +125,10 @@ public class Peticion extends DomainEntity {
    private Collection<Item> items;
    private Set<Etiqueta> etiquetas;
    
+   @JsonBackReference
    @NotNull
    @Valid
    @ManyToOne(optional = false)
-   @JsonBackReference
    public Usuario getUsuario() {
       return usuario;
    }
