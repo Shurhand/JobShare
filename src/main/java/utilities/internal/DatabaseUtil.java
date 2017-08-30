@@ -110,7 +110,7 @@ public class DatabaseUtil {
       schemaExport.setHaltOnError(false);
       schemaExport.setDelimiter(";");
       schemaExport.setFormat(true);
-      schemaExport.setOutputFile("D:\\Script.sql");
+      schemaExport.setOutputFile("D:\\Imagenes\\Script.sql");
       schemaExport.create(EnumSet.of(TargetType.DATABASE), metadataSources.buildMetadata());
 
    }

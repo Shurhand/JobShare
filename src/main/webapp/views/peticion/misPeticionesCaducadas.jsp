@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
 <br><br>
 <div class="container">
-    <form:form action="peticion/buscarMisPeticionesCaducadas.do" method="get" modelAttribute="buscaForm"
+    <form:form action="peticion/usuario/buscarMisPeticionesCaducadas.do" method="get" modelAttribute="buscaForm"
                acceptCharset="UTF-8">
         <div class="row">
             <div class="col-md-3 search-filter" id="sidebar">
@@ -207,7 +207,7 @@
         $.ajax({
             data: $(theForm).serialize(),
             type: $(theForm).attr('get'),
-            url: $(theForm).attr('peticion/buscarMisPeticionesCaducadas.do'),
+            url: $(theForm).attr('peticion/usuario/buscarMisPeticionesCaducadas.do'),
             success: function (data) {
                 console.log(data);
                 $('#peticiones').replaceWith($(data).find(" #peticiones"));
