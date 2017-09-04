@@ -1,9 +1,7 @@
 package controllers.usuario;
 
 import controllers.AbstractController;
-import domain.Estado;
-import domain.Oferta;
-import domain.Usuario;
+import domain.*;
 import forms.PagoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.OfertaService;
+import services.PagoService;
 import services.UsuarioService;
 
 import javax.servlet.ServletException;
@@ -30,6 +29,8 @@ public class PagoUsuarioController extends AbstractController {
    private ActorService actorService;
    @Autowired
    private OfertaService ofertaService;
+   @Autowired
+   private PagoService pagoService;
    
    @PostMapping("/pagar")
    public ModelAndView pagar(@RequestParam int peticionID, @Valid @ModelAttribute PagoForm pagoForm, BindingResult binding) {
@@ -72,7 +73,16 @@ public class PagoUsuarioController extends AbstractController {
                hayError = Boolean.FALSE;
             }
          }
-      
+   
+         Pago pago = pagoService.create();
+         Collection<Item> items = new ArrayList<>();
+         for (Oferta o : ofertas) {
+            items.add(o.getItem());
+         }
+         pago.setItems(items);
+   
+         pagoService.save(pago);
+       
       }
    
       res = new ModelAndView("pago/usuario/pagoCorrecto");
