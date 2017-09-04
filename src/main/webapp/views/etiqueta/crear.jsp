@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group text-center">
                         <br>
-                        <a href="/etiqueta/lista.do" class="btn btn-primary"><i class="fa fa-arrow-left"></i>
+                        <a href="etiqueta/lista.do" class="btn btn-primary"><i class="fa fa-arrow-left"></i>
                             <spring:message
                                 code="volver"/></a>
                         <button type="submit" name="save" class="btn btn-primary"><i class="fa fa-check"></i>

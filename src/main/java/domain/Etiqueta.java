@@ -14,7 +14,6 @@ import java.util.Set;
 public class Etiqueta extends DomainEntity {
    private String nombre;
    private boolean activada;
-   private String textoFormateado;
    
    public Etiqueta() {
       super();
@@ -44,7 +43,6 @@ public class Etiqueta extends DomainEntity {
    // Relaciones
    private Set<Peticion> peticiones;
    
-   
    @ManyToMany
    @JsonManagedReference
    public Set<Peticion> getPeticiones() {
@@ -55,16 +53,4 @@ public class Etiqueta extends DomainEntity {
       this.peticiones = peticiones;
    }
    
-   public String getTextoFormateado() {
-      return this.isActivada() ? "<spring:message code=\"frase.si\"/>" : "<spring:message code=\"frase.no\"/>";
-   }
-   
-   public void setTextoFormateado(String textoFormateado) {
-      this.textoFormateado = textoFormateado;
-   }
-   
-   @Transient
-   public String getEstadoFormateado() {
-      return this.isActivada() ? "{frase.si}" : "{frase.no}";
-   }
 }

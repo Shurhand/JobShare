@@ -56,6 +56,7 @@ public class Cuenta extends DomainEntity implements UserDetails {
    @Valid
    @ElementCollection
    @Override
+   @Size(max = 1)
    public Collection<Autoridad> getAuthorities() {
       // WARNING: Should return an unmodifiable copy, but it's not possible with hibernate!
       return authorities;

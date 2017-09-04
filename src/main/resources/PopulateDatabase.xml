@@ -83,10 +83,10 @@
     <!-- ****************** Admin ************* -->
 
     <bean id="admin1" class="domain.Admin">
-        <property name="nombre" value="Chuck"/>
-        <property name="apellidos" value="Norris"/>
+        <property name="nombre" value="Paul"/>
+        <property name="apellidos" value="Atreides"/>
         <property name="cp" value="41010"/>
-        <property name="provincia" value="Shangri-la"/>
+        <property name="provincia" value="Arrakis"/>
         <property name="DNI" value="51301302D"/>
         <property name="email" value="chuckNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
@@ -101,7 +101,7 @@
         <property name="cp" value="41010"/>
         <property name="provincia" value="Texas"/>
         <property name="DNI" value="48820088N"/>
-        <property name="email" value="equecrates@gmail.com"/>
+        <property name="email" value="chuckNorris@gmail.com"/>
         <property name="telefono" value="675048498"/>
         <property name="cuenta" ref="cuenta2"/>
         <property name="foto" value="http://cdn.business2community.com/wp-content/uploads/2016/03/Vd3MJo.jpg"/>
@@ -543,7 +543,7 @@
     <bean id="oferta3" class="domain.Oferta">
         <constructor-arg index="0" name="precio" value="23"/>
         <constructor-arg index="1" name="comentario"
-                         value="Tengo mucha experiencia en el tema, mira mi perfil si quieres"/>
+                         value="Ahí va una ofertilla"/>
         <constructor-arg index="2" name="fechaCreacion" value="15/07/2017"/>
         <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional1"/>
@@ -552,7 +552,8 @@
 
     <bean id="oferta4" class="domain.Oferta">
         <constructor-arg index="0" name="precio" value="10"/>
-        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="1" name="comentario"
+                         value="Echale un vistazo a mi perfil si quieres ver lo valorado que estoy"/>
         <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
         <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
@@ -561,7 +562,7 @@
 
     <bean id="oferta5" class="domain.Oferta">
         <constructor-arg index="0" name="precio" value="15"/>
-        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="1" name="comentario" value="Barato y rápido"/>
         <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
         <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>
@@ -570,7 +571,7 @@
 
     <bean id="oferta6" class="domain.Oferta">
         <constructor-arg index="0" name="precio" value="25"/>
-        <constructor-arg index="1" name="comentario" value="Seré mas caro pero no te arrepentirás"/>
+        <constructor-arg index="1" name="comentario" value="Conozco bien del tema ;)"/>
         <constructor-arg index="2" name="fechaCreacion" value="20/07/2017"/>
         <constructor-arg index="3" name="estado" value="ACTIVA"/>
         <property name="profesional" ref="profesional2"/>

@@ -2,6 +2,7 @@ package services;
 
 import domain.Item;
 import domain.Pago;
+import domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.PagoRepository;
@@ -17,12 +18,19 @@ import java.util.Collection;
 public class PagoService extends AbstractServiceImpl implements AbstractService<Pago> {
    @Autowired
    private PagoRepository pagoRepository;
+   @Autowired
+   private ActorService actorService;
+   @Autowired
+   private UsuarioService usuarioService;
    
    @Override
    public Pago create() {
+      actorService.checkIfUsuarioOProfesional();
+      Usuario usuario = usuarioService.findUsuario();
       Collection<Item> items = new ArrayList<>();
       Pago pago = new Pago();
       pago.setItems(items);
+      pago.setUsuario(usuario);
       return pago;
    }
    

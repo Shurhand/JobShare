@@ -70,6 +70,10 @@ public class PeticionService extends AbstractServiceImpl implements AbstractServ
    @Override
    public void delete(@NotNull Peticion peticion) {
       actorService.checkIfUsuarioOProfesional();
+      Assert.isTrue(usuarioService.findUsuario().equals(peticion.getUsuario()));
+      for (Etiqueta e : peticion.getEtiquetas()) {
+         e.getPeticiones().remove(peticion);
+      }
       peticionRepository.delete(peticion);
    }
    

@@ -148,6 +148,19 @@ public class ActorService extends AbstractServiceImpl implements AbstractService
       
    }
    
+   public void checkIfAdmin() {
+      boolean admin = false;
+      Collection<Autoridad> roles;
+      roles = LoginService.getPrincipal().getAuthorities();
+      for (Autoridad a : roles) {
+         if (a.getAuthority().equals(Autoridad.ADMIN)) {
+            admin = true;
+         }
+      }
+      Assert.isTrue(admin, "No es admin");
+      
+   }
+   
    public void checkIfAutenticado() {
       boolean autenticado;
       autenticado = SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
