@@ -10,6 +10,7 @@ import repositories.PagoRepository;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -27,9 +28,11 @@ public class PagoService extends AbstractServiceImpl implements AbstractService<
    public Pago create() {
       actorService.checkIfUsuarioOProfesional();
       Usuario usuario = usuarioService.findUsuario();
+      LocalDate fechaCreacion = LocalDate.now();
       Collection<Item> items = new ArrayList<>();
       Pago pago = new Pago();
       pago.setItems(items);
+      pago.setFechaCreacion(fechaCreacion);
       pago.setUsuario(usuario);
       return pago;
    }
